@@ -26,4 +26,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the evnets for the user.
+     */
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
 }
