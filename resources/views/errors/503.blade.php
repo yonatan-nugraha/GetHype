@@ -65,14 +65,21 @@
             }
 
             .stretch {
-                width:100%;
-                height:100%;
+                width: 100%;
+                height: 100%;
+            }
+
+            @media screen and (max-width: 480px) {
+                .bg-desktop {
+                    display:none;
+                }
             }
         </style>
     </head>
     <body>
         <div id="background">
-            <img src="/images/comingsoon_v1.jpg" class="stretch" alt="" />
+            <img src="/images/comingsoon_v1.jpg" class="bg-desktop stretch">
+            <img src="/images/comingsoon_v1_mobile.jpg" class="bg-mobile stretch">
         </div>
     </body>
 </html>
