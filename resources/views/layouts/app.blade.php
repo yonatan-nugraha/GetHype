@@ -16,19 +16,60 @@
     <link rel="stylesheet" href="{{ url('css/sticky-footer-navbar.css') }}">
 
     <style>
+        @media (min-width: 1200px) {
+            .container {
+                width: 1080px;
+            }
+        }
+
+        .navbar-default {
+            background-color: #0F3844;
+            border: none;
+            font-weight: normal;
+            letter-spacing: 2px;
+            font-weight: 300;
+            margin-bottom: 0;
+            height: 85px;
+        }
+
+        .navbar-default .navbar-brand {
+            color: #fff;
+        }
+
+        .navbar-default .navbar-nav>li>a {
+            color: #fff;
+        }
+
+        .navbar-default .navbar-brand img {
+            width: 60px;
+        }
+
+        .navbar-default .nav-bar-right {
+            vertical-align: text-top;
+        }
+
+        .navbar-nav > li > a {
+           line-height: 55px;
+        }
 
         .footer {
-            color: #000;
-            background-color: #fff;
+            color: #fff;
+            background-color: #0F3844;
+            font-size: 17px;
+        }
+
+        .footer .gethype-logo {
+            width: 100px;
         }
 
         .footer .footer-title {
-            font-weight: 400;
+            margin-bottom: 20px !important;
+            font-weight: 500;
         }
 
         .footer a {
-            color: #000;
-            background-color: #fff;
+            color: #fff;
+            font-weight: 100;
         }
 
         .footer a:hover {
@@ -36,9 +77,8 @@
             text-decoration: none;
         }
 
-        .footer .footer-main .footer-main-col {
-            padding: 0;
-            border-top: 1px solid #777;
+        .footer .footer-main {
+            margin-top: 30px;
         }
 
         .footer .footer-main ul {
@@ -54,9 +94,18 @@
             margin-bottom: 5px;
         }
 
-        .footer .footer-main i {
-            font-size: 25px;
-            margin-right: 5px;
+        .footer .gethype-logo {
+            width: 120px;
+        }
+
+        .footer .gethype-copyright {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: 100;
+        }
+
+        .gethype-line {
+            width: 100%;
         }
     </style>
 
@@ -82,7 +131,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <img src="{{ asset('images/logo.png') }}">
                 </a>
             </div>
 
@@ -130,45 +179,44 @@
         <div class="container">
             <div class="row footer-main">
                 <div class="col-xs-3 footer-main-col">
+                    <img class="gethype-logo" src="{{ asset('images/logo.png') }}">
+                </div>
+                <div class="col-xs-3 footer-main-col">
                     <ul>
-                        <li><span class="footer-title">© 2016 GetHype</span></li>
-                        <li><a>About GetHype</a></li>
-                        <li><a>Blog</a></li>
-                        <li><a>Help</a></li>
+                        <li class="footer-title">Gethype</li>
+                        <li><a>Home</a></li>
+                        <li><a>About Us</a></li>
+                        <li><a>Partners</a></li>
+                        <li><a>Journals</a></li>
                         <li><a>Careers</a></li>
+                        <li><a>Terms</a></li>
+                        <li><a>Support</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-3 footer-main-col">
                     <ul>
-                        <li><span class="footer-title">Celine</span></li>
-                        <li><a>Buy a gift</a></li>
-                        <li><a>Arrange a surprise</a></li>
-                        <li><a>Contact us</a></li>
+                        <li class="footer-title">Service</li>
+                        <li><a>Advertising</a></li>
+                        <li><a>Consultation</a></li>
+                        <li><a>Planner</a></li>
+                        <li><a>Ticketing</a></li>
+                        <li><a>Social Media</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-3 footer-main-col">
                     <ul>
-                        <li><span class="footer-title">Language</span></li>
-                        <li><a>Indonesia</a></li>
-                        <li><a>English</a></li>
+                        <li class="footer-title">Get in Touch</li>
+                        <li><a>Customer Support</a></li>
+                        <li><a>Contact Us</a></li>
+                        <li><a>Instagram</a></li>
+                        <li><a>Facebook</a></li>
+                        <li><a>Twitter</a></li>
                     </ul>
                 </div>
-                <div class="col-xs-3 footer-main-col">
-                    <ul>
-                        <li>
-                            <p class="footer-title">Download us</p>
-                            <a><i class="fa fa-android"></i></a>
-                            <a><i class="fa fa-apple"></i></a>
-                        </li>
-                        <li>
-                            <p class="footer-title">Follow us</p>
-                            <a><i class="fa fa-facebook-official"></i></a>
-                            <a><i class="fa fa-twitter"></i></a>
-                            <a><i class="fa fa-instagram"></i></a>
-                            <a><i class="fa fa-youtube"></i></a>
-                        </li>
-                    </ul>
-                </div>
+            </div>
+            <div class="row footer-secondary">
+                <img class="gethype-line" src="{{ asset('images/img-additional-2.png') }}">
+                <p class="gethype-copyright">2016 | Gethype.co.id</p>
             </div>
         </div>
     </footer>

@@ -44,16 +44,27 @@
                                     @if ($event->status == 2)
                                         <span class="label label-success">Approved</span>
                                     @elseif ($event->status == 1)
-                                        <span class="label label-danger">Cancelled</span>
+                                        <span class="label label-danger">Rejected</span>
                                     @else
                                         <span class="label label-warning">Pending</span>
                                     @endif
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o text-red"></i></button>
-                                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-edit text-blue"></i></button>
-                                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share text-yellow"></i></button>
+                                        <a href="{{ url('admin/events/'.$event->id.'/edit') }}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-edit text-blue"></i></button></a>
+
+                                        <a href="{{ url('events/'.$event->slug) }}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-share text-yellow"></i></button></a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <form action="{{ url('events/'.$event->id.'/updateStatus') }}" method="POST">
+                                            {!! csrf_field() !!}
+                                            {{ method_field('PATCH') }}
+                                            <select name="status" onchange="this.form.submit()">
+                                                <option value="0">Pending</option>
+                                                <option value="2">Approve</option>
+                                                <option value="1">Reject</option>
+                                            </select>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>

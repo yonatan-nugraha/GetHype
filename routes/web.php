@@ -11,13 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
 //home
+Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 
 //admin
@@ -25,11 +26,22 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('', 'AdminController@index');
 	Route::get('events', 'EventController@index');
     Route::get('events/create', 'EventController@create');
+    Route::get('events/{event}/edit', 'EventController@edit');
 });
 
-//event
+//events
 Route::group(['prefix' => 'events'], function () {
 	Route::post('', 'EventController@store');
 	Route::get('{event}', 'EventController@show');
 	Route::delete('{event}', 'EventController@destroy');
+	Route::patch('{event}', 'EventController@update');
+	Route::patch('{event}/updateStatus', 'EventController@updateStatus');
+	Route::patch('{event}/bookTicket', 'EventController@bookTicket');
+});
+
+//checkout
+Route::group(['prefix' => 'checkout'], function () {
+	Route::get('', 'CheckoutController@index');
+	Route::post('', 'CheckoutController@store');
+	Route::get('{order}/success', 'CheckoutController@success');
 });
