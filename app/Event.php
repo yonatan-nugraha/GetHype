@@ -12,7 +12,7 @@ class Event extends Model
      * @var array
      */
     protected $fillable = [
-    	'category_id', 'event_type_id', 'name', 'description', 'location', 'start_time', 'end_time', 'status', 'slug'
+    	'category_id', 'event_type_id', 'name', 'description', 'location', 'started_at', 'ended_at', 'status', 'slug'
     ];
 
     /**
@@ -29,5 +29,13 @@ class Event extends Model
     public function event_type()
     {
         return $this->belongsTo(EventType::class);
+    }
+
+    /**
+     * Get the ticket groups for the event.
+     */
+    public function ticket_groups()
+    {
+        return $this->hasMany(TicketGroup::class);
     }
 }

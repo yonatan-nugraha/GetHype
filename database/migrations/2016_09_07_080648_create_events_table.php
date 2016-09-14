@@ -20,10 +20,10 @@ class CreateEventsTable extends Migration
             $table->integer('user_id')->index();
             $table->string('name');
             $table->text('description');
-            $table->string('location');
-            $table->dateTime('start_time');
-            $table->dateTime('end_time');
             $table->integer('status');
+            $table->string('location');
+            $table->dateTime('started_at');
+            $table->dateTime('ended_at');
             $table->string('slug');
             $table->timestamps();
         });

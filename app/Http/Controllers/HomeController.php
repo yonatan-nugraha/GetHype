@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Event;
+use App\Category;
+use App\EventType;
 
 class HomeController extends Controller
 {
@@ -26,7 +28,11 @@ class HomeController extends Controller
     public function index()
     {
         return view('home', [
-            'events' => Event::orderByRaw('rand()')->take(4)->get(),
+            'events'        => Event::orderByRaw('rand()')->take(8)->get(),
+            'collections'   => Event::orderBy('id')->take(4)->get(),
+            'journals'      => Event::orderBy('id')->take(4)->get(),
+            'categories'    => Category::all(),
+            'event_types'   => EventType::all()
         ]);
     }
 }

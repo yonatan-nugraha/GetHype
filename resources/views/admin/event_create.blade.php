@@ -1,15 +1,16 @@
 @extends('admin.index')
 
 @section('content')
-<div class="row">
-    <div class="col-md-6">
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">Create Event</h3>
-            </div>
+<form action="{{ url('events') }}" method="POST">
+{!! csrf_field() !!}
 
-            <form action="{{ url('events') }}" method="POST">
-                {!! csrf_field() !!}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">1. Event Details</h3>
+                </div>
+
                 <div class="box-body">
                     <div class="form-group">
                         <label>Name</label>
@@ -20,7 +21,7 @@
                         <input type="text" class="form-control" name="location" placeholder="Location">
                     </div>
                     <div class="form-group">
-                        <label>Date and time range</label>
+                        <label>Date and Time</label>
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <i class="fa fa-clock-o"></i>
@@ -49,35 +50,35 @@
                         <textarea class="form-control" name="description" rows="4"></textarea>
                     </div>
                 </div>
-                <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">Create Ticket</h3>
             </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">2. Create Tickets</h3>
+                </div>
 
-            <form action="{{ url('events') }}" method="POST">
-                {!! csrf_field() !!}
                 <div class="box-body">
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Name">
-                    </div>
-                    <div class="form-group">
-                        <label>Location</label>
-                        <input type="text" class="form-control" name="location" placeholder="Location">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="ticket_name" placeholder="Name">
+                        </div>
+                        <div class="col-xs-3">
+                            <label>Quantity</label>
+                            <input type="number" class="form-control" name="ticket_quantity" placeholder="Quantity">
+                        </div>
+                        <div class="col-xs-3">
+                            <label>Price</label>
+                            <input type="number" class="form-control" name="ticket_price" placeholder="Price">
+                        </div>
                     </div>
                 </div>
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
+</form>
 @endsection

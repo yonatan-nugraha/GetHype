@@ -69,13 +69,9 @@
                 height: 100%;
             }
 
-            .bg-desktop {
-                display: none;
-            }
-
-            @media screen and (min-device-width: 480px) {
+            @media screen and (max-device-width: 480px), (max-width: 480px) {
                 .bg-desktop {
-                    display: inline;
+                    display: none;
                 }
             }
         </style>

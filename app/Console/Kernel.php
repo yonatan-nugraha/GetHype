@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        \App\Console\Commands\UnbookTickets::class,
     ];
 
     /**
@@ -26,6 +26,14 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
+        $schedule->command('tickets:unbook')
+        ->everyMinute()
+        ->appendOutputTo('log.txt');
+
+        // $schedule->command('queue:work')
+        // ->everyMinute()
+        // ->appendOutputTo('log.txt');
     }
 
     /**
