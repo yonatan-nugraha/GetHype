@@ -17,6 +17,8 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->index();
             $table->double('amount');
+            $table->string('payment_status');
+            $table->string('payment_type');
             $table->timestamps();
         });
     }
