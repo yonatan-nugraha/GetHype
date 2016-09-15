@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-<form action="{{ url('checkout') }}" method="POST">
+<form action="{{ url('checkout/pay') }}" method="POST">
     {!! csrf_field() !!}
 	@foreach ($order_details as $order_detail)
 	<p>{{ $order_detail->ticket_group->name }}</p>

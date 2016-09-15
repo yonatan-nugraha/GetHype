@@ -146,9 +146,13 @@ class EventController extends Controller
      */
     public function updateStatus(Request $request, Event $event)
     {
-        $event->status   = $request->status;
+        // $event->status   = $request->status;
         
-        $event->save();
+        // $event->save();
+
+        $event->update([
+            'status' => $request->status,
+        ]);
 
         return redirect('admin/events');
     }
@@ -203,6 +207,7 @@ class EventController extends Controller
                 $amount += $quantity * $ticket_group->price;
 
                 $order_detail = new OrderDetail;
+                $order_detail->event = $event;
                 $order_detail->ticket_group = $ticket_group;
                 $order_detail->quantity = $quantity;
                 $order_details[] = $order_detail;

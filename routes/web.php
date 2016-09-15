@@ -39,9 +39,16 @@ Route::group(['prefix' => 'events'], function () {
 	Route::patch('{event}/bookTicket', 'EventController@bookTicket');
 });
 
+//tickets
+Route::group(['prefix' => 'tickets'], function () {
+
+});
+
 //checkout
 Route::group(['prefix' => 'checkout'], function () {
 	Route::get('', 'CheckoutController@index');
-	Route::post('', 'CheckoutController@store');
-	Route::get('{order}/success', 'CheckoutController@success');
+	Route::post('pay', 'CheckoutController@pay');
+	Route::post('notify', 'CheckoutController@notify');
+	Route::get('success', 'CheckoutController@success');
+	Route::get('failed', 'CheckoutController@failed');
 });
