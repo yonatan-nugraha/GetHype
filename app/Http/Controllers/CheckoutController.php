@@ -63,7 +63,7 @@ class CheckoutController extends Controller
     	$order_id = Order::create([
     		'user_id'	=> $request->user()->id,
             'amount' 	=> $amount,
-            'payment_status' => 'pending',
+            'payment_status' => '',
             'payment_type' => '',
         ])->id;
 
@@ -128,14 +128,13 @@ class CheckoutController extends Controller
 
         if ($result) {
             $notif = $vt->status($result->order_id);
-            // $notif = $vt->status(1);
 
             $order_id           = $notif->order_id;
             $transaction_status = $notif->transaction_status;
             $payment_type       = $notif->payment_type;
             $fraud_status       = $notif->fraud_status;
 
-            $payment_status = '';
+            $payment_status = 'pending';
             if ($transaction_status == 'capture') {
                 if ($payment_type == 'credit_card'){
                     if ($fraud_status == 'challenge') {
@@ -149,9 +148,6 @@ class CheckoutController extends Controller
             else if ($transaction_status == 'settlement') {
                 $payment_status = 'settled';
             }
-            else if ($transaction_status == 'pending') {
-                $payment_status = 'pending';
-            }
             else if ($transaction_status == 'deny') {
                 $payment_status = 'denied';
             }
@@ -159,13 +155,22 @@ class CheckoutController extends Controller
                 $payment_status = 'cancelled';
             }
 
+            //update status
             $order = Order::find($order_id);
             $order->update([
                 'payment_status' => $payment_status,
                 'payment_type'  => $payment_type
-        ]);
+            ]);
+
+            //send email
+            Mail::queue('emails.send', ['title' => 'title', 'content' => 'content'], function ($message)
+            {
+
+                $message->from('admin@gethype.com', 'Yonatan Nugraha');
+                $message->to('chainfrostx@gmail.com');
+
+            });
         }
-        error_log(print_r($result,TRUE));
     }
 
     /**
@@ -182,14 +187,6 @@ class CheckoutController extends Controller
     	if ($order->user_id != $request->user()->id) {
     		return redirect('');
     	}
-
-    	Mail::queue('emails.send', ['title' => 'title', 'content' => 'content'], function ($message)
-        {
-
-            $message->from('admin@gethype.com', 'Yonatan Nugraha');
-            $message->to('chainfrostx@gmail.com');
-
-        });
 
     	$order_details = $order->order_details()->get();
 
