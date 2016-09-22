@@ -8,7 +8,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Gethype') }}</title>
+
+    <link rel="icon" href="{{ asset('images/logo.png') }}">
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
@@ -21,6 +23,10 @@
                 width: 1080px;
             }
         }
+
+        /**************************************/
+        /************** Header ****************/
+        /**************************************/
 
         .navbar-default {
             background-color: #0F3844;
@@ -50,7 +56,26 @@
 
         .navbar-nav > li > a {
            line-height: 55px;
+           font-size: 14px;
         }
+
+        .navbar-right li > ul {
+           border-radius: 0 !important;
+        }
+
+        .navbar-right li > ul > li > a {
+           font-size: 14px;
+           font-weight: 300;
+           letter-spacing: 0;
+        }
+
+        .user-image img {
+            max-width: 40px;
+        }
+
+        /**************************************/
+        /************** Footer ****************/
+        /**************************************/
 
         .footer {
             color: #fff;
@@ -150,10 +175,23 @@
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                <span>{{ Auth::user()->first_name }}</span>
+                                @if (Auth::user()->last_name)
+                                <span> {{ Auth::user()->last_name }}</span>
+                                @endif
+                                <span class="user-image">
+                                    <img src="{{ asset('/images/users/user-1.png') }}">
+                                </span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="{{ url('/tickets') }}">My Tickets</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('/account/settings') }}">Account Settings</a>
+                                </li>
+                                <li class="divider"></li>
                                 <li>
                                     <a href="{{ url('/logout') }}"
                                         onclick="event.preventDefault();
@@ -223,5 +261,6 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    <script src="/js/event.js"></script>
 </body>
 </html>

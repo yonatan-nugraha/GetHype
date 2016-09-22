@@ -1,7 +1,39 @@
+<style>
+.login {
+    margin-top: 50px;
+    padding-bottom: 50px !important;
+}
+
+.login .panel {
+    border-radius: 0;
+}
+
+.login .panel-heading {
+    background-color: #0F3844 !important;
+    border-radius: 0;
+    color: #fff !important;
+}
+
+.login input {
+    border-radius: 0;
+    border: 1px solid #0F3844;
+    font-size: 12px;
+}
+
+.login-submit {
+    border-radius: 0 !important;
+    background-color: red !important;
+    border-color: red !important;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 12px !important;
+}
+</style>
+
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container login">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -50,7 +82,7 @@
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary login-submit">
                                     Login
                                 </button>
 

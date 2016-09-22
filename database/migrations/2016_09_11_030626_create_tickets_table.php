@@ -16,8 +16,10 @@ class CreateTicketsTable extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('ticket_group_id')->index();
+            $table->integer('order_id')->index()->nullable();
             $table->string('code');
             $table->integer('status');
+            $table->integer('booked_by')->index()->nullable();
             $table->timestamps();
         });
     }

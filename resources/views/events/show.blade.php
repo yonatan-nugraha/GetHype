@@ -1,8 +1,16 @@
 <style>
+/**************************************/
+/*************** Banner ***************/
+/**************************************/
+
 .banner-event img {
 	width: 100%;
 	max-height: 450px;
 }
+
+/**************************************/
+/*********** Event Detail *************/
+/**************************************/
 
 .event-title {
 	margin-top: 40px;
@@ -57,13 +65,19 @@
     margin: 10px 0;
 }
 
-.event-date-end {
-	margin-bottom: 20px;
+.event-date-start, .event-date-end {
+	font-size: 22px;
+	font-weight: 400;
+}
+
+.event-date {
+	margin-bottom: 15px;
 }
 
 .event-time {
 	display: block;
 	line-height: 70%;
+	font-size: 17px;
 }
 
 .buy-ticket {
@@ -77,8 +91,12 @@
 	padding: 5px 10px;
 }
 
+/**************************************/
+/*********** Event Subject ************/
+/**************************************/
+
 .event-subject {
-    background: #D33E40 url("/images/banner-event.jpg");
+    background: #D33E40 url("/images/banners/banner-event.jpg");
     height: 450px;
     background-blend-mode: multiply;
     color: #fff;
@@ -91,6 +109,10 @@
 	font-weight: 200;
 	letter-spacing: 0.1em;
 }
+
+/**************************************/
+/*********** Event Guests *************/
+/**************************************/
 
 .event-guests {
 	color: #0F3844;
@@ -123,6 +145,69 @@
 	margin: 0;
 }
 
+/**************************************/
+/************ Buy Ticket **************/
+/**************************************/
+
+#buy-ticket .modal-header {
+	
+}
+
+#buy-ticket .modal-body {
+	color: #0F3844;
+	min-height: 200px;
+}
+
+#buy-ticket form {
+	margin: 0;
+}
+
+#buy-ticket .ticket-row {
+	margin: 10px 0;
+}
+
+#buy-ticket .modal-title {
+	text-align: center;
+	font-size: 17px;
+	font-weight: 400;
+}
+
+#buy-ticket .modal-footer {
+	background-color: #0F3844;
+	text-align: left;
+}
+
+.ticket-name {
+	font-size: 13px;
+	font-weight: 400;
+}
+
+.ticket-price {
+	font-size: 12px;
+	font-weight: 300;
+}
+
+.ticket-quantity {
+	font-size: 12px;
+}
+
+.ticket-total {
+	font-size: 12px;
+	font-weight: 300;
+}
+
+.ticket-grand-total {
+	color: #fff;
+	margin-top: 10px;
+}
+
+.ticket-submit {
+    border-radius: 0 !important;
+    background-color: #0F3844 !important;
+    border-color: #0F3844 !important;
+    color: #EBD38C !important;
+    font-size: 15px !important;
+}
 
 </style>
 
@@ -131,7 +216,7 @@
 @section('content')
 
 <div class="row banner-event">
-    <img src="{{ asset('/images/banner-event.jpg') }}">
+    <img src="{{ asset('/images/banners/banner-event.jpg') }}">
 </div>
 
 <div class="row event-main">
@@ -139,20 +224,25 @@
 	    <div class="col-xs-12 col-md-6">
 	    	<div class="event-share">
 		    	<p class="event-share-text">Share with People</p>
-		    	<img class="event-sosmed" src="{{ asset('/images/sosmed/bookmark.png') }}">
-		    	<img class="event-sosmed" src="{{ asset('/images/sosmed/facebook.png') }}">
-		    	<img class="event-sosmed" src="{{ asset('/images/sosmed/twitter.png') }}">
-		    	<img class="event-sosmed" src="{{ asset('/images/sosmed/instagram.png') }}">
-		    	<img class="event-sosmed" src="{{ asset('/images/sosmed/whatsapp.png') }}">
+		    	<img class="event-sosmed" src="{{ asset('/images/icons/bookmark.png') }}">
+		    	<img class="event-sosmed" src="{{ asset('/images/icons/facebook.png') }}">
+		    	<img class="event-sosmed" src="{{ asset('/images/icons/twitter.png') }}">
+		    	<img class="event-sosmed" src="{{ asset('/images/icons/instagram.png') }}">
 		    </div>
 		    <div class="event-time-venue">
-	    		<p class="event-date-start">{{ Carbon\Carbon::parse($event->started_at)->format('d // M') }}</p>
-	    		<hr class="event-date-line" align="left">
-	    		<p class="event-date-end">{{ Carbon\Carbon::parse($event->ended_at)->format('d // M') }}</p>
-	    		<span class="event-time">
-	    			{{ Carbon\Carbon::parse($event->started_at)->format('g:m A') }} -
-	    			{{ Carbon\Carbon::parse($event->ended_at)->format('g:m A') }}
-	    		</span>
+		    	<div class="event-date">
+		    		<p class="event-date-start">{{ Carbon\Carbon::parse($event->started_at)->format('d // M') }}</p>
+		    		@if (Carbon\Carbon::parse($event->started_at)->format('d // M') != Carbon\Carbon::parse($event->ended_at)->format('d // M'))
+		    		<hr class="event-date-line" align="left">
+		    		<p class="event-date-end">{{ Carbon\Carbon::parse($event->ended_at)->format('d // M') }}</p>
+		    		@endif
+		    	</div>
+	    		<div class="event-time">
+	    			<span>{{ Carbon\Carbon::parse($event->started_at)->format('g:m A') }} </span>
+	    			@if (Carbon\Carbon::parse($event->started_at)->format('g:m A') != Carbon\Carbon::parse($event->ended_at)->format('g:m A'))
+	    			<span> - {{ Carbon\Carbon::parse($event->ended_at)->format('g:m A') }}</span>
+	    			@endif
+	    		</div>
 	    		<span class="event-location">{{ $event->location }}</span>
 	    	</div>
 	    	<div class="buy-ticket">
@@ -215,33 +305,41 @@
       	<div class="modal-content">
         	<div class="modal-header">
           		<button type="button" class="close" data-dismiss="modal">&times;</button>
-          		<h4 class="modal-title">Select Tickets</h4>
+          		<h4 class="modal-title">{{ $event->name }}</h4>
         	</div>
         	<form action="{{ url('events/'.$event->id.'/bookTicket') }}" method="POST">
                 {!! csrf_field() !!}
                 {{ method_field('PATCH') }}
 	        	<div class="modal-body">
-	        		<div class="panel panel-default">
-					  	<div class="panel-body">
-					  		@foreach ($event->ticket_groups as $ticket_group)
-					  		<div class="col-xs-9">
-			         			<p>{{ $ticket_group->name }}</p>
-			         			<p>{{ 'Rp '. number_format($ticket_group->price) }}</p>
-			         			<p>{{ 'Quota: '.count($ticket_group->tickets) }}</p>
-		         			</div>
-		         			<div class="col-xs-3">
-			         			<select name="ticket_quantity_{{ $ticket_group->id }}">
-			         				@for ($i = 1; $i <= 10; $i++)
-			         					<option value="{{ $i }}">{{ $i }}</option>
-			         				@endfor
-			         			</select>
-		         			</div>
-		         			@endforeach
-					  	</div>
-					</div>
-	        	</div>
+			  		@foreach ($event->ticket_groups as $ticket_group)
+			  		<input type="hidden" id="ticket-price-{{ $ticket_group->id }}" value="{{ $ticket_group->price }}">
+			  		<div class="row ticket-row">
+				  		<div class="col-xs-3">
+		         			<p class="ticket-name">{{ $ticket_group->name }}</p>
+		         		</div>
+		         		<div class="col-xs-3">
+		         			<p class="ticket-price">{{ 'Rp '. number_format($ticket_group->price) }}</p>
+		         		</div>
+	         			<div class="col-xs-3">QTY 
+		         			<select class="ticket-quantity" id="{{ $ticket_group->id }}" name="ticket_quantity_{{ $ticket_group->id }}">
+		         				@for ($i = 1; $i <= 10; $i++)
+		         					<option value="{{ $i }}">{{ $i }}</option>
+		         				@endfor
+		         			</select>
+	         			</div>
+	         			<div class="col-xs-3">
+		         			<p class="ticket-total" id="ticket-total-{{ $ticket_group->id }}">{{ 'Rp '. number_format($ticket_group->price) }}</p>
+	         			</div>
+	         		</div>
+         			@endforeach
+			  	</div>
 	        	<div class="modal-footer">
-	          		<button type="submit" class="btn btn-primary">Checkout</button>
+	        		<div class="col-xs-9">
+	          			<button type="submit" class="btn btn-primary ticket-submit">Checkout</button>
+	          		</div>
+	          		<div class="col-xs-3">
+	          			<p class="ticket-grand-total"></p>
+	          		</div>
 	        	</div>
         	</form>
       	</div>

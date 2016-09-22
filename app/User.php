@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'last_name', 'email', 'phone', 'gender', 'birthdate', 'location', 'password',
     ];
 
     /**
@@ -28,10 +28,18 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the evnets for the user.
+     * Get the events for the user.
      */
     public function events()
     {
         return $this->hasMany(Event::class);
+    }
+
+    /**
+     * Get the orders for the user.
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class)->where('order_status', 2);
     }
 }

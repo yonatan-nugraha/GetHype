@@ -25,10 +25,10 @@ class CheckoutController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
 
-        Veritrans::$serverKey = 'VT-server-hDPL0IDkJCWQ44Sp5t3jvDyy';
-        Veritrans::$isProduction = false;
+        Veritrans::$serverKey = env('VERITRANS_SERVER', '');
+        Veritrans::$isProduction = env('APP_ENV', '') == 'production' ? true : false;
     }
 
     /**
@@ -40,16 +40,24 @@ class CheckoutController extends Controller
     public function index(Request $request)
     {
     	$order_details = json_decode(Redis::get('order_details:'.$request->user()->id));
-    	$amount = json_decode(Redis::get('amount:'.$request->user()->id));
+        $event         = json_decode(Redis::get('event:'.$request->user()->id));
+    	$amount        = json_decode(Redis::get('amount:'.$request->user()->id));
+        $total_quantity = json_decode(Redis::get('total_quantity:'.$request->user()->id));
+
+        if ($order_details == null) {
+            return redirect('');
+        }
 
         return view('checkout/index', [
         	'order_details' => $order_details,
-        	'amount' 		=> $amount
+            'event'         => $event,
+        	'amount' 		=> $amount,
+            'total_quantity' => $total_quantity
         ]);
     }
 
     /**
-     * Create order and go to payment page.
+     * Create order and go to veritrans payment page.
      *
      * @param  Request  $request
      * @return Response
@@ -57,14 +65,14 @@ class CheckoutController extends Controller
     public function pay(Request $request)
     {
     	$order_details 	= json_decode(Redis::get('order_details:'.$request->user()->id));
-    	$ticket_ids 	= json_decode(Redis::get('ticket_ids:'.$request->user()->id));
+        $event          = json_decode(Redis::get('event:'.$request->user()->id));
     	$amount 		= json_decode(Redis::get('amount:'.$request->user()->id));
 
     	$order_id = Order::create([
     		'user_id'	=> $request->user()->id,
+            'event_id'  => $event->id,
             'amount' 	=> $amount,
-            'payment_status' => '',
-            'payment_type' => '',
+            'order_status' => 0,
         ])->id;
 
         $items = array();
@@ -80,7 +88,6 @@ class CheckoutController extends Controller
                 'price'    => $order_detail->ticket_group->price,
                 'quantity' => $order_detail->quantity,
                 'name'     => $order_detail->ticket_group->name,
-                'merchant_name'    => $order_detail->event->name,
             );
 
             $items[] = $item;
@@ -95,9 +102,6 @@ class CheckoutController extends Controller
             'vtweb' => array(
                 'enabled_payments' => array('bca_klikpay'),
                 'credit_card_3d_secure' => true,
-                'finish_redirect_url' => 'http://gethype.dev',
-                'unfinish_redirect_url' => 'http://gethype.dev',
-                'error_redirect_url' => 'http://gethype.dev'
             ),
             'customer_details' => array(
                 'first_name' => $request->user()->name,
@@ -111,66 +115,6 @@ class CheckoutController extends Controller
         $vtweb_url = $vt->vtweb_charge($transaction_data);
 
         return redirect($vtweb_url);
-    }
-
-    /**
-     * Receive payment notification from veritrans.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function notify(Request $request)
-    {
-        $vt = new Veritrans;
-
-        $json_result = file_get_contents('php://input');
-        $result = json_decode($json_result);
-
-        if ($result) {
-            $notif = $vt->status($result->order_id);
-
-            $order_id           = $notif->order_id;
-            $transaction_status = $notif->transaction_status;
-            $payment_type       = $notif->payment_type;
-            $fraud_status       = $notif->fraud_status;
-
-            $payment_status = 'pending';
-            if ($transaction_status == 'capture') {
-                if ($payment_type == 'credit_card'){
-                    if ($fraud_status == 'challenge') {
-                        $payment_status = 'challenged';
-                    } 
-                    else {
-                        $payment_status = 'success';
-                    }
-                }
-            }
-            else if ($transaction_status == 'settlement') {
-                $payment_status = 'settled';
-            }
-            else if ($transaction_status == 'deny') {
-                $payment_status = 'denied';
-            }
-            else if ($transaction_status == 'cancel') {
-                $payment_status = 'cancelled';
-            }
-
-            //update status
-            $order = Order::find($order_id);
-            $order->update([
-                'payment_status' => $payment_status,
-                'payment_type'  => $payment_type
-            ]);
-
-            //send email
-            Mail::queue('emails.send', ['title' => 'title', 'content' => 'content'], function ($message)
-            {
-
-                $message->from('admin@gethype.com', 'Yonatan Nugraha');
-                $message->to('chainfrostx@gmail.com');
-
-            });
-        }
     }
 
     /**
@@ -203,6 +147,12 @@ class CheckoutController extends Controller
      */
     public function failed(Request $request)
     {
-
+        //send checkout success email
+        Mail::send('emails.send', ['title' => '', 'content' => ''], function ($message)
+        {
+            $message->from('yonatan.nugraha@gethype.co.id', 'Yonatan Nugraha');
+            $message->to('yonatan.nugraha@gethype.co.id');
+            $message->subject('Test Email');
+        });
     }
 }

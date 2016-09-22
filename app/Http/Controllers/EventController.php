@@ -182,12 +182,15 @@ class EventController extends Controller
      */
     public function bookTicket(Request $request, Event $event)
     {
-        $order_details = collect();
-        $ticket_ids = collect();
+
+        $order_details = array();
+        $ticket_ids = array();
         $amount = 0;
+        $total_quantity = 0;
 
         foreach ($event->ticket_groups as $ticket_group) {
             $quantity = $request->input('ticket_quantity_'.$ticket_group->id);
+            $total_quantity += $quantity;
 
             if ($quantity > 0) {
                 $tickets = Ticket::where('ticket_group_id', $ticket_group->id)
@@ -207,7 +210,6 @@ class EventController extends Controller
                 $amount += $quantity * $ticket_group->price;
 
                 $order_detail = new OrderDetail;
-                $order_detail->event = $event;
                 $order_detail->ticket_group = $ticket_group;
                 $order_detail->quantity = $quantity;
                 $order_details[] = $order_detail;
@@ -215,12 +217,54 @@ class EventController extends Controller
         }
 
         Ticket::whereIn('id', $ticket_ids)
-            ->update(['status' => 2]);
+            ->update([
+                'status' => 2,
+                'booked_by' => $request->user()->id,
+            ]);
 
         Redis::set('order_details:'.$request->user()->id, json_encode($order_details));
         Redis::set('ticket_ids:'.$request->user()->id, json_encode($ticket_ids));
+        Redis::set('event:'.$request->user()->id, json_encode($event));
         Redis::set('amount:'.$request->user()->id, json_encode($amount));
+        Redis::set('total_quantity:'.$request->user()->id, json_encode($total_quantity));
+
+        Redis::expire('order_details:'.$request->user()->id, 1000);
+        Redis::expire('ticket_ids:'.$request->user()->id, 1000);
+        Redis::expire('event:'.$request->user()->id, 1000);
+        Redis::expire('amount:'.$request->user()->id, 1000);
+        Redis::expire('total_quantity:'.$request->user()->id, 1000);
 
         return redirect('checkout');
+    }
+
+    /**
+     * Search for events.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function search(Request $request)
+    {
+        $category   = $request->category;
+        $event_type = $request->event_type;
+        $location   = $request->location;
+
+        $events = Event::where('status', 1);
+
+        if ($category != 'all') {
+            $events = $events::where('category_id', $category);
+        }
+
+        if ($event_type != 'all') {
+            $events = $events::where('event_type_id', $event_type);
+        }
+
+        $events = $events->get();
+
+        return view('events/search', [
+            'events'        => $events,
+            'categories'    => Category::all(),
+            'event_types'   => EventType::all()
+        ]);
     }
 }
