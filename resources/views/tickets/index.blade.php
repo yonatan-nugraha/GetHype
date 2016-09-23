@@ -31,7 +31,7 @@ body {
 }
 
 /**************************************/
-/********** Ticket Sidebar ************/
+/*********** Order Sidebar ************/
 /**************************************/
 
 .order-sidebar li {
@@ -63,17 +63,27 @@ body {
     background-color: #F1F2F2 !important;
 }
 
+.order-sidebar li a:hover {
+	color: #0F3844 !important;
+}
+
+/**************************************/
+/************ Order list **************/
+/**************************************/
+
 .order-list {
-	max-width: 77%;
+	max-width: 90%;
 	margin-left: 60px;
 }
 
-.order-row {
+.order-list-row {
 	border-left: 4px solid #EBD38C;
 	background-color: #fff;
+	margin-bottom: 10px;
+	cursor: pointer;
 }
 
-.order-row .thumbnail {
+.order-list-row .thumbnail {
 	border-radius: 0;
     border-style: none;
     margin-bottom: 0;
@@ -105,7 +115,7 @@ body {
 }
 
 .order-row-footer {
-	padding-top: 20px;
+	padding-top: 15px;
 	font-size: 11px;
 	margin-bottom: 0;
 }
@@ -132,12 +142,17 @@ body {
 	width: 11px;
 }
 
+.hide-image {
+	display: none;
+}
+
 /**************************************/
 /************ Order Detail ************/
 /**************************************/
 
 .order-detail-row {
-	margin-top: 10px;
+	margin-bottom: 10px;
+	display: none;
 }
 
 .order-detail {
@@ -161,10 +176,6 @@ body {
 	padding-left: 5px;
 }
 
-.ticket-detail-col {
-	border-right: 1px solid black;
-}
-
 .ticket-detail-row {
 	margin-bottom: 0;
 }
@@ -184,6 +195,7 @@ body {
 	padding-left: 40px !important;
 	font-size: 11px;
 	font-weight: 400;
+	border-left: 1px solid black;
 }
 </style>
 
@@ -199,69 +211,141 @@ body {
 	<div class="row order-body">
 		<div class="col-xs-2 order-sidebar">
 			<ul class="nav nav-pills nav-stacked">
-			  	<li class="active"><a href="#">Upcoming Events</a></li>
-			  	<li><a href="#">Past Events</a></li>
-			  	<li><a href="#">Bookmark Events</a></li>
+			  	<li class="active"><a data-toggle="tab" href="#upcoming-events">Upcoming Events</a></li>
+			  	<li><a data-toggle="tab" href="#past-events">Past Events</a></li>
+			  	<li><a data-toggle="tab" href="#bookmark-events">Bookmark Events</a></li>
 			</ul>
 		</div>
-		<div class="col-xs-10 order-list">
-			@foreach ($orders as $order)
-			<div class="row order-row">
-				<div class="col-xs-2 thumbnail">
-					<img src="{{ asset('/images/events/event-1.jpg') }}">
-				</div>
-				<div class="col-xs-10">
-			    	<p class="event-header">
-			    		<span class="event-name">{{ $order->event->name }}</span>
-			    		<span class="pull-right event-share">Share:
-			    			<img src="{{ asset('images/sosmed/facebook.png') }}">
-			    			<img src="{{ asset('images/sosmed/twitter.png') }}">
-			    			<img src="{{ asset('images/sosmed/instagram.png') }}">
-			    		</span>
-			    	</p>
-			    	<p class="event-time">{{ Carbon\Carbon::parse($order->event->started_at)->format('l, M d, Y | g.i A') }}</p>
-			    	<p class="order-row-footer">
-			    		<span class="order-invoice">
-			    			<img src="{{ asset('images/icons/invoice.png') }}"> Invoice
-			    		</span>
-			    		<span class="ticket-print"> 
-			    			<img src="{{ asset('images/icons/print-ticket.png') }}"> Print Ticket
-			    		</span>
-			    		<span class="order-number"> 
-			    			Order Number #{{ $order->id }}
-			    		</span>
-			    		<span class="show-hide pull-right"> 
-			    			Hide <img src="{{ asset('images/icons/hide.png') }}">
-			    		</span>
-			    	</p>
-			   </div>
-			</div>
-			<div class="row order-detail-row">
-				<div class="col-xs-10 col-xs-offset-2 order-detail">
-					<div class="row order-detail-title">
-			    		<p>Order Information</p>
-			    	</div>
-			    	<div class="row order-detail-body">
-				    	<div class="col-xs-4 ticket-detail-col">
-				    		@foreach ($order->order_details as $order_detail)
-				    		<p class="ticket-detail-row">
-				    			<span class="ticket-quantity">{{ $order_detail->quantity }}</span>
-				    			<span class="ticket-name">{{ $order_detail->ticket_group->name }} tickets</span>
-				    		</p>
-				    		@endforeach
-				    	</div>
+		<div class="col-xs-10">
+			<div class="tab-content">
+				<div class="tab-pane fade in active order-list" id="upcoming-events">
+					@foreach ($orders as $order)
+					@if (Carbon\Carbon::now() <= $order->event->ended_at)
+					<div class="row order-list-row" id="{{ $order->id }}">
+						<div class="col-xs-2 thumbnail">
+							<img src="{{ asset('/images/events/event-'.$order->event->id.'.jpg') }}">
+						</div>
+						<div class="col-xs-10">
+					    	<p class="event-header">
+					    		<span class="event-name">{{ $order->event->name }}</span>
+					    		<span class="pull-right event-share">Share:
+					    			<img src="{{ asset('images/icons/facebook.png') }}">
+					    			<img src="{{ asset('images/icons/twitter.png') }}">
+					    			<img src="{{ asset('images/icons/instagram.png') }}">
+					    		</span>
+					    	</p>
+					    	<p class="event-time">{{ Carbon\Carbon::parse($order->event->started_at)->format('l, M d, Y | g.i A') }}</p>
+					    	<p class="order-row-footer">
+					    		<span class="order-invoice">
+					    			<img src="{{ asset('images/icons/invoice.png') }}"> Invoice
+					    		</span>
+					    		<span class="ticket-print"> 
+					    			<img src="{{ asset('images/icons/print-ticket.png') }}"> Print Ticket
+					    		</span>
+					    		<span class="order-number"> 
+					    			Order Number #{{ $order->id }}
+					    		</span>
+					    		<span class="show-hide pull-right"> 
+					    			<span class="show-hide-text" id="show-hide-text-{{ $order->id }}">show </span> 
+					    			<img class="show-image" id="show-image-{{ $order->id }}" src="{{ asset('images/icons/show.png') }}">
+					    			<img class="hide-image" id="hide-image-{{ $order->id }}" src="{{ asset('images/icons/hide.png') }}">
+					    		</span>
+					    	</p>
+					   </div>
+					</div>
+					<div class="row order-detail-row" id="order-detail-{{ $order->id }}">
+						<div class="col-xs-10 col-xs-offset-2 order-detail">
+							<div class="row order-detail-title">
+					    		<p>Order Information</p>
+					    	</div>
+					    	<div class="row order-detail-body">
+						    	<div class="col-xs-4">
+						    		@foreach ($order->order_details as $order_detail)
+						    		<p class="ticket-detail-row">
+						    			<span class="ticket-quantity">{{ $order_detail->quantity }}</span>
+						    			<span class="ticket-name">{{ $order_detail->ticket_group->name }} 
+						    			@if ($order_detail->quantity > 1) tickets @else ticket @endif
+						    			</span>
+						    		</p>
+						    		@endforeach
+						    	</div>
 
-				    	<div class="col-xs-8 contact-details">
-				    		<p>Name: {{ Auth::user()->first_name }}</p>
-				    		<p>Email: {{ Auth::user()->email }}</p>
-				    		<p>Phone: {{ Auth::user()->phone }}</p>
-				    	</div>
-				    </div>
-			   </div>
+						    	<div class="col-xs-8 contact-details">
+						    		<p>Name: {{ Auth::user()->first_name }}</p>
+						    		<p>Email: {{ Auth::user()->email }}</p>
+						    		<p>Phone: {{ Auth::user()->phone }}</p>
+						    	</div>
+						    </div>
+					   </div>
+					</div>
+					@endif
+					@endforeach
+				</div>
+				<div class="tab-pane fade order-list" id="past-events">
+					@foreach ($orders as $order)
+					@if (Carbon\Carbon::now() > $order->event->ended_at)
+					<div class="row order-list-row" id="{{ $order->id }}">
+						<div class="col-xs-2 thumbnail">
+							<img src="{{ asset('/images/events/event-'.$order->event->id.'.jpg') }}">
+						</div>
+						<div class="col-xs-10">
+					    	<p class="event-header">
+					    		<span class="event-name">{{ $order->event->name }}</span>
+					    	</p>
+					    	<p class="event-time">{{ Carbon\Carbon::parse($order->event->started_at)->format('l, M d, Y | g.i A') }}</p>
+					    	<p class="order-row-footer">
+					    		<span class="order-invoice">
+					    			<img src="{{ asset('images/icons/invoice.png') }}"> Invoice
+					    		</span>
+					    		<span class="ticket-print"> 
+					    			<img src="{{ asset('images/icons/print-ticket.png') }}"> Print Ticket
+					    		</span>
+					    		<span class="order-number"> 
+					    			Order Number #{{ $order->id }}
+					    		</span>
+					    		<span class="show-hide pull-right"> 
+					    			<span class="show-hide-text" id="show-hide-text-{{ $order->id }}">show </span> 
+					    			<img class="show-image" id="show-image-{{ $order->id }}" src="{{ asset('images/icons/show.png') }}">
+					    			<img class="hide-image" id="hide-image-{{ $order->id }}" src="{{ asset('images/icons/hide.png') }}">
+					    		</span>
+					    	</p>
+					   </div>
+					</div>
+					<div class="row order-detail-row" id="order-detail-{{ $order->id }}">
+						<div class="col-xs-10 col-xs-offset-2 order-detail">
+							<div class="row order-detail-title">
+					    		<p>Order Information</p>
+					    	</div>
+					    	<div class="row order-detail-body">
+						    	<div class="col-xs-4">
+						    		@foreach ($order->order_details as $order_detail)
+						    		<p class="ticket-detail-row">
+						    			<span class="ticket-quantity">{{ $order_detail->quantity }}</span>
+						    			<span class="ticket-name">{{ $order_detail->ticket_group->name }} 
+						    			@if ($order_detail->quantity > 1) tickets @else ticket @endif
+						    			</span>
+						    		</p>
+						    		@endforeach
+						    	</div>
+
+						    	<div class="col-xs-8 contact-details">
+						    		<p>Name: {{ Auth::user()->first_name }}</p>
+						    		<p>Email: {{ Auth::user()->email }}</p>
+						    		<p>Phone: {{ Auth::user()->phone }}</p>
+						    	</div>
+						    </div>
+					   </div>
+					</div>
+					@endif
+					@endforeach
+				</div>
 			</div>
-			@endforeach
 		</div>
 	</div>
 </div>
 
+@endsection
+
+@section('scripts')
+<script type="text/javascript" src="{{ asset('js/ticket.js') }}"></script>
 @endsection

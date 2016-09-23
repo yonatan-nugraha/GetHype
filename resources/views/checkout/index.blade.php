@@ -53,6 +53,12 @@ body {
 	font-weight: 300;
 }
 
+.contact-details input {
+	border-radius: 0;
+	border: 1px solid #0F3844;
+	font-size: 12px;
+}
+
 /**************************************/
 /********** Payments Options **********/
 /**************************************/
@@ -155,7 +161,7 @@ body {
 	padding-bottom: 3px;
 }
 
-.ticket-name, .ticket-quantity, .ticket-total {
+.ticket-name, .ticket-quantity, .ticket-total-price {
 	font-weight: 400;
 	font-size: 12px;
 }
@@ -219,15 +225,14 @@ body {
 	padding-top: 10px;
 }
 
-.pay-submit {
+.checkout button {
 	background-color: red;
 	color: #fff;
-	border-radius: 7px !important;
-	min-width: 100px !important;
+	border-radius: 7px;
+	min-width: 100px;
 	-webkit-appearance: none;
 }
 </style>
-
 
 @extends('layouts.app')
 
@@ -243,27 +248,34 @@ body {
 				    	<h3 class="panel-title">Contact Details</h3>
 				  	</div>
 				  	<div class="panel-body">
-				    	<div class="form-group col-xs-4">
-						 	<label class="control-label">Email</label>
-						  	<input class="form-control" type="text" value="{{ Auth::user()->email }}" disabled>
+				    	<div class="form-group col-xs-5">
+						 	<label class="control-label">First Name</label>
+						  	<input class="form-control" type="text" value="{{ Auth::user()->first_name }}">
 						</div>
-
-						<div class="form-group col-xs-4">
+						<div class="form-group col-xs-5">
+						 	<label class="control-label">Last Name</label>
+						  	<input class="form-control" type="text" value="{{ Auth::user()->last_name }}">
+						</div>
+						<div class="form-group col-xs-5">
+						  	<label class="control-label">Email</label>
+						  	<input class="form-control" type="text" value="{{ Auth::user()->email }}">
+						</div>
+						<div class="form-group col-xs-5">
 						  	<label class="control-label">Mobile Phone</label>
-						  	<input class="form-control" type="text" value="{{ Auth::user()->name }}">
+						  	<input class="form-control" type="text" value="{{ Auth::user()->phone }}">
 						</div>
-						<div class="form-group col-xs-4 contact-alert">
-							<span>make sure you contact detail is correct</span>
+						<div class="col-xs-12">
+							<span class="contact-alert">* make sure you contact detail is correct</span>
 						</div>
 				  	</div>
 				</div>
 				<div class="panel payment-options">
-					<input type="hidden" class="payment" name="payment" value="">
+					<input type="hidden" class="payment-type" name="payment_type" value="">
 				  	<div class="panel-heading">
 				    	<h3 class="panel-title">Payment Options</h3>
 				  	</div>
 				  	<div class="panel-body">
-				    	<div class="thumbnail payment-box payment-selected" id="bank_transfer">
+				    	<div class="thumbnail payment-box" id="bank_transfer">
 				    		<img src="{{ asset('/images/payments/jcb.png') }}">
 				    	</div>
 				    	<div class="thumbnail payment-box" id="credit_card">
@@ -314,7 +326,7 @@ body {
 					<div class="row ticket-row">
 						<span class="col-xs-5 ticket-name">{{ $order_detail->ticket_group->name }}</span>
 						<span class="col-xs-3 ticket-quantity">{{ $order_detail->quantity }} @if ($order_detail->quantity > 1) tickets @else ticket @endif</span>
-						<span class="col-xs-4 ticket-total">{{ 'Rp '. number_format($order_detail->quantity * $order_detail->ticket_group->price) }}</span>
+						<span class="col-xs-4 ticket-total-price">{{ 'Rp '. number_format($order_detail->quantity * $order_detail->ticket_group->price) }}</span>
 					</div>
 					@endforeach
 				</div>
@@ -340,4 +352,10 @@ body {
 
 
 @endsection
+
+@section('scripts')
+<script type="text/javascript" src="{{ asset('js/checkout.js') }}"></script>
+@endsection
+
+
 

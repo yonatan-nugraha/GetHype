@@ -59,6 +59,7 @@ Route::group(['prefix' => 'checkout'], function () {
 	Route::post('pay', 'CheckoutController@pay');
 	Route::get('success', 'CheckoutController@success');
 	Route::get('failed', 'CheckoutController@failed');
+	Route::get('bypass', 'CheckoutController@bypass');
 });
 
 //notification

@@ -10,7 +10,7 @@
 
     <title>{{ config('app.name', 'Gethype') }}</title>
 
-    <link rel="icon" href="{{ asset('images/logo.png') }}">
+    <link rel="icon" href="{{ asset('images/logo_dark.png') }}">
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
@@ -261,6 +261,6 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
-    <script src="/js/event.js"></script>
+    @yield('scripts')
 </body>
 </html>

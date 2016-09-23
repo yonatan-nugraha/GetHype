@@ -68,11 +68,34 @@ class CheckoutController extends Controller
         $event          = json_decode(Redis::get('event:'.$request->user()->id));
     	$amount 		= json_decode(Redis::get('amount:'.$request->user()->id));
 
+        if ($order_details == null) {
+            return redirect('');
+        }
+
+        $payment_fees = array(
+            'bank_transfer'     => 4900,
+            'credit_card'       => 5000,
+            'bca_klikpay'       => 2000,
+            'mandiri_clickpay'  => 5000,
+            'cimb_clicks'       => 5000,
+            'epay_bri'          => 5000,
+            'mandiri_ecash'     => 4000,
+            'indosat_dompetku'  => 3000,
+            'telkomsel_cash'    => 3000,
+            'xl_tunai'          => 3000,
+        );
+
+        $payment_type = $request->payment_type;
+        if ($payment_type == '' || $payment_fees[$payment_type] == 0) {
+            return redirect('');
+        }
+
     	$order_id = Order::create([
     		'user_id'	=> $request->user()->id,
             'event_id'  => $event->id,
             'amount' 	=> $amount,
             'order_status' => 0,
+            'payment_type' => $payment_type,
         ])->id;
 
         $items = array();
@@ -154,5 +177,61 @@ class CheckoutController extends Controller
             $message->to('yonatan.nugraha@gethype.co.id');
             $message->subject('Test Email');
         });
+    }
+
+    /**
+     * Bypass payment success.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function bypass(Request $request)
+    {
+        $order_id           = $request->order_id;
+        $order              = Order::find($order_id);
+
+        $payment_status     = 'settled';
+        $order_status       = 0;
+
+        $ticket_ids     = json_decode(Redis::get('ticket_ids:'.$order->user_id));
+
+        if ($ticket_ids != null) {
+
+            //update ticket status
+            $tickets_updated = Ticket::whereIn('id', $ticket_ids)
+            ->where('status', 2)
+            ->where('booked_by', $order->user_id)
+            ->update([
+                'status'    => 3,
+                'order_id'  => $order->id,
+            ]);
+
+            if ($tickets_updated > 0) {
+                //send checkout success email
+                Mail::queue('emails.send', ['title' => '', 'content' => ''], function ($message)
+                {
+                    $message->from('yonatan.nugraha@gethype.co.id', 'Yonatan Nugraha');
+                    $message->to('yonatan.nugraha@gethype.co.id');
+                    $message->subject('Test Email');
+                });
+
+                //remove redis
+                Redis::del('order_details:'.$order->user_id);
+                Redis::del('ticket_ids:'.$order->user_id);
+                Redis::del('event:'.$order->user_id);
+                Redis::del('amount:'.$order->user_id);
+                Redis::del('total_quantity:'.$order->user_id);
+
+                $order_status = 2;
+            }
+
+            //update payment status
+            $order->update([
+                'order_status'   => $order_status,
+                'payment_status' => $payment_status,
+            ]);
+        }
+
+        return redirect('checkout/success?order_id='.$order_id);
     }
 }

@@ -14,11 +14,11 @@
                 <div class="box-body">
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Name">
+                        <input type="text" class="form-control" name="name" placeholder="Name" required pattern=".{3,50}">
                     </div>
                     <div class="form-group">
                         <label>Location</label>
-                        <input type="text" class="form-control" name="location" placeholder="Location">
+                        <input type="text" class="form-control" name="location" placeholder="Location" required pattern=".{5,80}">
                     </div>
                     <div class="form-group">
                         <label>Date and Time</label>
@@ -47,12 +47,13 @@
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea class="form-control" name="description" rows="4"></textarea>
+                        <textarea class="form-control" name="description" rows="5" required pattern=".{5,}"></textarea>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
+            <input type="hidden" class="ticket-group" name="ticket_group_quantity" value="0">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">2. Create Tickets</h3>
@@ -60,18 +61,23 @@
 
                 <div class="box-body">
                     <div class="row">
-                        <div class="col-xs-6">
+                        <div class="col-xs-12">
+                            <button type="button" class="btn btn-primary pull-right btn-xs add-ticket">+ Add Ticket</button>
+                        </div>
+                    </div>
+                    <div class="row" id="ticket-row-0">
+<!--                         <div class="col-xs-6">
                             <label>Name</label>
-                            <input type="text" class="form-control" name="ticket_name" placeholder="Name">
+                            <input type="text" class="form-control" name="ticket_name_1" placeholder="Name">
                         </div>
                         <div class="col-xs-3">
                             <label>Quantity</label>
-                            <input type="number" class="form-control" name="ticket_quantity" placeholder="Quantity">
+                            <input type="number" class="form-control" name="ticket_quantity_1" placeholder="Quantity">
                         </div>
                         <div class="col-xs-3">
                             <label>Price</label>
-                            <input type="number" class="form-control" name="ticket_price" placeholder="Price">
-                        </div>
+                            <input type="number" class="form-control" name="ticket_price_1" placeholder="Price">
+                        </div> -->
                     </div>
                 </div>
                 <div class="box-footer">

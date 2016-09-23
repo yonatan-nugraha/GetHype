@@ -23,17 +23,12 @@
     margin-bottom: 40px;
 }
 
-.search-category, .search-type, .search-price, .search-location, .search-date, .search-price {
+.search-bar select, .search-bar input {
     float: left;
     -webkit-appearance: none;
-    border: 2px solid #0F3844 !important;
-    border-radius: 0px !important;
-    color: #0F3844 !important;
-}
-
-.search-category option {
-    color: red !important;
-    -webkit-appearance: none;
+    border: 2px solid #0F3844;
+    border-radius: 0px;
+    color: #0F3844;
 }
 
 .search-category, .search-type {
@@ -44,24 +39,24 @@
     max-width: 15%;
 }
 
-.search-submit {
+.search-bar button {
     width: 15%;
-    border-radius: 0 !important;
-    background-color: red !important;
-    border-color: red !important;
+    border-radius: 0;
+    background-color: red;
+    border-color: red;
 }
 
 ::-webkit-input-placeholder {
-    color: #0F3844 !important;
+    color: #0F3844;
 }
 :-moz-placeholder {
-    color: #0F3844 !important;
+    color: #0F3844;
 }
 ::-moz-placeholder {
-    color: #0F3844 !important;
+    color: #0F3844;
 }
 :-ms-input-placeholder {
-    color: #0F3844 !important;
+    color: #0F3844;
 }
 
 /**************************************/
@@ -173,10 +168,10 @@
             </ol>
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
-                    <img src="{{ asset('images/banner-1.jpg') }}" alt="...">
+                    <img src="{{ asset('images/banners/banner-1.jpg') }}" alt="...">
                 </div>
                 <div class="item">
-                    <img src="{{ asset('images/banner-1.jpg') }}" alt="...">
+                    <img src="{{ asset('images/banners/banner-1.jpg') }}" alt="...">
                 </div>
             </div>
             <a class="left carousel-control" href="#big-carousel" role="button" data-slide="prev">
@@ -200,28 +195,31 @@
         
         <div class="row search-bar">
             <form action="{{ url('events/search') }}" method="GET">
-                <select class="form-control search-category" name=category>>
+                <select class="form-control search-category" name="category">
                     <option value="all">Event Category <span class="glyphicon glyphicon-menu-down"></span> </option>
                     @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    <option value="{{ $category->id }}" @if ($category_id == $category->id) selected @endif>{{ $category->name }}</option>
                     @endforeach
                 </select>
-                <select class="form-control search-type" name=event_type>
+                <select class="form-control search-type" name="event_type">
                     <option value="all">Event Type</option>
                     @foreach ($event_types as $event_type)
-                    <option value="{{ $event_type->id }}">{{ $event_type->name }}</option>
+                    <option value="{{ $event_type->id }}" @if ($event_type_id == $event_type->id) selected @endif>{{ $event_type->name }}</option>
                     @endforeach
                 </select>
-                <select class="form-control search-location" name=location>
+                <select class="form-control search-location" name="location">
                     <option value="all">Location</option>
-                    <option value="Jakarta">Jakarta</option>
+                    @foreach ($locations as $loc)
+                    <option value="{{ $loc }}" @if ($location == $loc) selected @endif>{{ $loc }}</option>
+                    @endforeach
                 </select>
                 <div>
-                    <input type="date" class="form-control search-date">
+                    <input type="date" class="form-control search-date" name="date">
                 </div>
-                <select class="form-control search-price">
-                    <option>Price</option>
-                    <option>$</option>
+                <select class="form-control search-price" name="price">
+                    <option value="all">Price</option>
+                    <option value="free" @if ($price == 'free') selected @endif>Free</option>
+                    <option value="paid" @if ($price == 'paid') selected @endif>Paid</option>
                 </select>
                 <button type="submit" class="btn btn-primary search-submit">Search</button>
             </form>
@@ -245,7 +243,7 @@
                 <div class="col-xs-12 col-md-3 event-box">
                     <div class="thumbnail">
                         <a href="{{ url('/events/'.$event->slug) }}">
-                            <img class="event-image" src="{{ asset('/images/whats-new-'.$event->id.'.jpg') }}">
+                            <img class="event-image" src="{{ asset('/images/events/event-'.$event->id.'.jpg') }}">
                             <div class="event-caption">
                                 <div class="event-caption-head">
                                     <span class="event-name">{{ $event->name }}</span>
@@ -267,14 +265,14 @@
 
 <div class="row banner-bottom">
     <div class="container">
-    	<div class="col-xs-6 no-padding-left">
+    	<div class="col-md-6 col-xs-12 no-padding-left">
     		<a class="thumbnail">
-    			<img src="{{ asset('images/banner-7.jpg') }}">
+    			<img src="{{ asset('images/banners/banner-7.jpg') }}">
     		</a>
     	</div>
-    	<div class="col-xs-6 no-padding-right">
+    	<div class="col-md-6 col-xs-12 no-padding-right">
     		<a class="thumbnail">
-    			<img src="{{ asset('images/banner-8.jpg') }}">
+    			<img src="{{ asset('images/banners/banner-8.jpg') }}">
     		</a>
     	</div>
     </div>

@@ -7,12 +7,12 @@ body {
 /************** Profile ***************/
 /**************************************/
 
-.profile {
+.account {
 	margin-top: 50px;
 	padding-bottom: 50px;
 }
 
-.profile .help-block {
+.account .help-block {
 	color: red;
 	font-size: 12px;
 }
@@ -116,14 +116,14 @@ body {
 	border-radius: 0;
 }
 
-.edit-submit {
-    border-radius: 0 !important;
-    background-color: red !important;
-    border-color: red !important;
+.account button {
+    border-radius: 0;
+    background-color: red;
+    border-color: red;
     color: #fff;
     text-transform: uppercase;
-    font-size: 12px !important;
-    margin: 20px 0 15px 0 !important;
+    font-size: 12px;
+    margin: 20px 0 15px 0;
 }
 
 ::-webkit-input-placeholder {
@@ -149,7 +149,7 @@ body {
 @section('content')
 
 <div class="container"> 
-	<div class="row profile">
+	<div class="row account">
 		<div class="col-xs-4 profile-information">
 			<div class="profile-header">
 				<img class="profile-image" src="{{ asset('/images/users/user-1.png') }}">
@@ -298,4 +298,8 @@ body {
 	</div>
 </div>
 
+@endsection
+
+@section('scripts')
+<script type="text/javascript" src="{{ asset('js/account.js') }}"></script>
 @endsection

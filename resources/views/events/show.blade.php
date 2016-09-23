@@ -196,17 +196,27 @@
 	font-weight: 300;
 }
 
-.ticket-grand-total {
+.ticket-grandtotal, .ticket-quantity-total {
 	color: #fff;
 	margin-top: 10px;
 }
 
-.ticket-submit {
-    border-radius: 0 !important;
-    background-color: #0F3844 !important;
-    border-color: #0F3844 !important;
-    color: #EBD38C !important;
-    font-size: 15px !important;
+#buy-ticket button {
+    border-radius: 0;
+    background-color: #0F3844;
+    border-color: #0F3844;
+    color: #EBD38C;
+    font-size: 15px;
+}
+
+#buy-ticket select {
+	-webkit-appearance: none;
+    border: 1px solid #0F3844;
+    border-radius: 0px;
+    color: #0F3844;
+    background-color: #fff;
+    width: 30px;
+    height: 20px;
 }
 
 </style>
@@ -320,12 +330,23 @@
 		         		<div class="col-xs-3">
 		         			<p class="ticket-price">{{ 'Rp '. number_format($ticket_group->price) }}</p>
 		         		</div>
-	         			<div class="col-xs-3">QTY 
+	         			<div class="col-xs-3">
+	         				@if (count($ticket_group->tickets_available) > 0)
+	         				<span>QTY </span> 
 		         			<select class="ticket-quantity" id="{{ $ticket_group->id }}" name="ticket_quantity_{{ $ticket_group->id }}">
-		         				@for ($i = 1; $i <= 10; $i++)
+		         				@if (count($ticket_group->tickets_available) > 5)
+		         				@for ($i = 0; $i <= 5; $i++)
 		         					<option value="{{ $i }}">{{ $i }}</option>
 		         				@endfor
+		         				@else
+		         				@for ($i = 0; $i <= count($ticket_group->tickets_available); $i++)
+		         					<option value="{{ $i }}">{{ $i }}</option>
+		         				@endfor
+		         				@endif
 		         			</select>
+		         			@else
+		         			<span>Sold Out</span>
+		         			@endif
 	         			</div>
 	         			<div class="col-xs-3">
 		         			<p class="ticket-total" id="ticket-total-{{ $ticket_group->id }}">{{ 'Rp '. number_format($ticket_group->price) }}</p>
@@ -334,11 +355,14 @@
          			@endforeach
 			  	</div>
 	        	<div class="modal-footer">
-	        		<div class="col-xs-9">
+	        		<div class="col-xs-6">
 	          			<button type="submit" class="btn btn-primary ticket-submit">Checkout</button>
 	          		</div>
 	          		<div class="col-xs-3">
-	          			<p class="ticket-grand-total"></p>
+	          			<p class="ticket-quantity-total">QTY: 0</p>
+	          		</div>
+	          		<div class="col-xs-3">
+	          			<p class="ticket-grandtotal">{{ 'Rp '. number_format(0) }}</p>
 	          		</div>
 	        	</div>
         	</form>
@@ -347,4 +371,8 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+<script type="text/javascript" src="{{ asset('js/event.js') }}"></script>
 @endsection

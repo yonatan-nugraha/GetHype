@@ -83,6 +83,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <script>
 $(function () {
+    
     //Date range picker with time picker
     $('#reservationtime').daterangepicker({
         timePicker: true, 
@@ -90,6 +91,17 @@ $(function () {
         locale: {
             format: 'YYYY-MM-DD hh:mm:ss'
         }
+    });
+
+    var i = -1;
+    var ticket_count = 0;
+    $(".add-ticket").click(function() {
+        i++;
+        ticket_count++;
+
+        $("#ticket-row-"+i).after('<div class="row" id="ticket-row-'+ticket_count+'"><div class="col-xs-6"><label>Name</label><input type="text" class="form-control" name="ticket_name_'+ticket_count+'" placeholder="Name" required pattern=".{3,20}"></div><div class="col-xs-3"><label>Quantity</label><input type="number" class="form-control" name="ticket_quantity_'+ticket_count+'" placeholder="Quantity" required min="1" max="500"></div><div class="col-xs-3"><label>Price</label><input type="number" class="form-control" name="ticket_price_'+ticket_count+'" placeholder="Price" required min="0" max="5000000"></div></div>');
+
+        $(".ticket-group").val(ticket_count);
     });
 });
 </script>

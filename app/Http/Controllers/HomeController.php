@@ -32,7 +32,8 @@ class HomeController extends Controller
             'collections'   => Event::orderBy('id')->take(4)->get(),
             'journals'      => Event::orderBy('id')->take(4)->get(),
             'categories'    => Category::all(),
-            'event_types'   => EventType::all()
+            'event_types'   => EventType::all(),
+            'locations'     => ['Jakarta', 'Bandung', 'Surabaya', 'Bali'],
         ]);
     }
 }

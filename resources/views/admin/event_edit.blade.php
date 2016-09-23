@@ -1,24 +1,24 @@
 @extends('admin.index')
 
 @section('content')
-<div class="row">
-    <div class="col-md-6">
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">Create Event</h3>
-            </div>
+<form action="{{ url('events/'.$event->id) }}" method="POST">
+    {!! csrf_field() !!}
+    {{ method_field('PATCH') }}
 
-            <form action="{{ url('events/'.$event->id) }}" method="POST">
-                {!! csrf_field() !!}
-                {{ method_field('PATCH') }}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Create Event</h3>
+                </div>
                 <div class="box-body">
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Name" value="{{ $event->name }}">
+                        <input type="text" class="form-control" name="name" placeholder="Name" value="{{ $event->name }}" required pattern=".{3,50}">
                     </div>
                     <div class="form-group">
                         <label>Location</label>
-                        <input type="text" class="form-control" name="location" placeholder="Location" value="{{ $event->location }}">
+                        <input type="text" class="form-control" name="location" placeholder="Location" value="{{ $event->location }}" required pattern=".{5,80}">
                     </div>
                     <div class="form-group">
                         <label>Date and Time</label>
@@ -47,38 +47,48 @@
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea class="form-control" name="description" rows="4">{{ $event->description }}</textarea>
+                        <textarea class="form-control" name="description" rows="5" required pattern=".{5,}">{{ $event->description }}</textarea>
                     </div>
-                </div>
-                <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">Create Ticket</h3>
+                </div>      
             </div>
+        </div>
+        <div class="col-md-6">
+            <input type="hidden" class="ticket-group" name="ticket_group_quantity" value="0">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">2. Create Tickets</h3>
+                </div>
 
-            <form action="{{ url('events') }}" method="POST">
-                {!! csrf_field() !!}
                 <div class="box-body">
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Name">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button type="button" class="btn btn-primary btn-xs pull-right add-ticket">+ Add Ticket</button>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Location</label>
-                        <input type="text" class="form-control" name="location" placeholder="Location">
+                    @foreach ($event->ticket_groups as $ticket_group)
+                    <div class="row" id="ticket-row">
+                        <div class="col-xs-6">
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="ticket_name_1" placeholder="Name" value="{{ $ticket_group->name }}" disabled="">
+                        </div>
+                        <div class="col-xs-3">
+                            <label>Quantity</label>
+                            <input type="number" class="form-control" name="ticket_quantity_1" placeholder="Quantity" value="{{ count($ticket_group->tickets) }}" disabled="">
+                        </div>
+                        <div class="col-xs-3">
+                            <label>Price</label>
+                            <input type="number" class="form-control" name="ticket_price_1" placeholder="Price" value="{{ $ticket_group->price }}" disabled="">
+                        </div>
+                    </div>
+                    @endforeach
+                    <div class="row" id="ticket-row-0">
                     </div>
                 </div>
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
+</form>
 @endsection

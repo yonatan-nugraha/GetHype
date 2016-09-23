@@ -15,6 +15,8 @@ use App\Ticket;
 use App\OrderDetail;
 use App\Order;
 
+use Validator, Input, Redirect;
+
 class EventController extends Controller
 {
     /**
@@ -65,34 +67,36 @@ class EventController extends Controller
     	$started_at = substr($request->event_time, 0, 19);
     	$ended_at   = substr($request->event_time, 22, 19);
 
-     //    $event_id = $request->user()->events()->create([
-     //    	'category_id'  	=> $request->category,
-     //    	'event_type_id' => $request->event_type,
-	    //     'name'         	=> $request->name,
-	    //     'description'  	=> $request->description,
-	    //     'location'		=> $request->location,
-	    //     'started_at' 	=> $started_at,
-	    //     'ended_at'		=> $ended_at,
-	    //     'status'		=> 0,
-     //        'slug'         	=> str_slug($request->name, "-")
-	    // ])->id;
+        $event_id = $request->user()->events()->create([
+        	'category_id'  	=> $request->category,
+        	'event_type_id' => $request->event_type,
+	        'name'         	=> $request->name,
+	        'description'  	=> $request->description,
+	        'location'		=> $request->location,
+	        'started_at' 	=> $started_at,
+	        'ended_at'		=> $ended_at,
+	        'status'		=> 0,
+            'slug'         	=> str_slug($request->name, "-")
+	    ])->id;
 
-        $event_id = 1;
+        // $event_id = 2;
 
-        $ticket_group_id = TicketGroup::create([
-            'event_id'      => $event_id,
-            'name'          => $request->ticket_name,
-            'price'         => $request->ticket_price,
-            'started_at'    => $started_at,
-            'ended_at'      => $ended_at,
-        ])->id;
+        for ($i = 1; $i <= $request->ticket_group_quantity; $i++) {
+            $ticket_group_id = TicketGroup::create([
+                'event_id'      => $event_id,
+                'name'          => $request['ticket_name_'.$i],
+                'price'         => $request['ticket_price_'.$i],
+                'started_at'    => $started_at,
+                'ended_at'      => $ended_at,
+            ])->id;
 
-        for ($i = 0; $i < $request->ticket_quantity; $i++) {
-            Ticket::create([
-                'ticket_group_id' => $ticket_group_id,
-                'code'      => sprintf("%s", mt_rand(1000000, 9999999)),
-                'status'    => 1,
-            ]);
+            for ($j = 0; $j < $request['ticket_quantity_'.$i]; $j++) {
+                Ticket::create([
+                    'ticket_group_id' => $ticket_group_id,
+                    'code'      => sprintf("%s", mt_rand(1000000, 9999999)),
+                    'status'    => 1,
+                ]);
+            }
         }
 
 	    return redirect('admin/events');
@@ -135,6 +139,24 @@ class EventController extends Controller
             'slug'           => str_slug($request->name, "-")
         ]);
 
+        for ($i = 1; $i <= $request->ticket_group_quantity; $i++) {
+            $ticket_group_id = TicketGroup::create([
+                'event_id'      => $event->id,
+                'name'          => $request['ticket_name_'.$i],
+                'price'         => $request['ticket_price_'.$i],
+                'started_at'    => $started_at,
+                'ended_at'      => $ended_at,
+            ])->id;
+
+            for ($j = 0; $j < $request['ticket_quantity_'.$i]; $j++) {
+                Ticket::create([
+                    'ticket_group_id' => $ticket_group_id,
+                    'code'      => sprintf("%s", mt_rand(1000000, 9999999)),
+                    'status'    => 1,
+                ]);
+            }
+        }
+
         return redirect('admin/events');
     }
 
@@ -146,10 +168,6 @@ class EventController extends Controller
      */
     public function updateStatus(Request $request, Event $event)
     {
-        // $event->status   = $request->status;
-        
-        // $event->save();
-
         $event->update([
             'status' => $request->status,
         ]);
@@ -182,7 +200,6 @@ class EventController extends Controller
      */
     public function bookTicket(Request $request, Event $event)
     {
-
         $order_details = array();
         $ticket_ids = array();
         $amount = 0;
@@ -200,7 +217,7 @@ class EventController extends Controller
                     ->get();
 
                 if (count($tickets) != $quantity) {
-                    return;
+                    return redirect()->back();
                 }
 
                 foreach ($tickets as $ticket) {
@@ -214,6 +231,10 @@ class EventController extends Controller
                 $order_detail->quantity = $quantity;
                 $order_details[] = $order_detail;
             }
+        }
+
+        if ($order_details == null) {
+            return redirect()->back();
         }
 
         Ticket::whereIn('id', $ticket_ids)
@@ -248,23 +269,49 @@ class EventController extends Controller
         $category   = $request->category;
         $event_type = $request->event_type;
         $location   = $request->location;
+        $date       = $request->date;
+        $price      = $request->price;
 
-        $events = Event::where('status', 1);
+        // $events = Event::join('ticket_groups', 'events.id', '=', 'ticket_groups.event_id')
+        //             ->whereIn('status', [1,2]);
+
+        $events = Event::whereIn('status', [1,2]);
 
         if ($category != 'all') {
-            $events = $events::where('category_id', $category);
+            $events = $events->where('category_id', $category);
         }
 
         if ($event_type != 'all') {
-            $events = $events::where('event_type_id', $event_type);
+            $events = $events->where('event_type_id', $event_type);
         }
+
+        if ($location != 'all') {
+            $events = $events->where('location', 'like', '%'.$location.'%');
+        }
+
+        if ($date != null && $date != '') {
+            $events = $events->whereDate('events.started_at', '<=', $date);
+            $events = $events->whereDate('events.ended_at', '>=', $date);
+        }
+
+        // if ($location != 'all') {
+        //     $events = $events->whereDate('events.started_at', '<=', $date);
+        // }
+
+        // dd($events->toSql());
 
         $events = $events->get();
 
         return view('events/search', [
             'events'        => $events,
             'categories'    => Category::all(),
-            'event_types'   => EventType::all()
+            'event_types'   => EventType::all(),
+            'locations'     => ['Jakarta', 'Bandung', 'Surabaya', 'Bali'],
+            'category_id'   => $category,
+            'event_type_id' => $event_type,
+            'location'      => $location,
+            'date'          => $date,
+            'price'         => $price
         ]);
     }
 }

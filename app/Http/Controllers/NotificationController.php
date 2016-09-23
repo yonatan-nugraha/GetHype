@@ -94,6 +94,7 @@ class NotificationController extends Controller
 		                Redis::del('ticket_ids:'.$order->user_id);
 		                Redis::del('event:'.$order->user_id);
 		                Redis::del('amount:'.$order->user_id);
+                        Redis::del('total_quantity:'.$order->user_id);
 
 		                $order_status = 2;
 		            }

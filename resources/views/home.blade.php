@@ -39,17 +39,12 @@
     margin-bottom: 40px;
 }
 
-.search-category, .search-type, .search-price, .search-location, .search-date, .search-price {
+.search-bar select, .search-bar input {
     float: left;
     -webkit-appearance: none;
-    border: 2px solid #0F3844 !important;
-    border-radius: 0px !important;
-    color: #0F3844 !important;
-}
-
-.search-category option {
-    color: red !important;
-    -webkit-appearance: none;
+    border: 2px solid #0F3844;
+    border-radius: 0px;
+    color: #0F3844;
 }
 
 .search-category, .search-type {
@@ -60,24 +55,29 @@
     max-width: 15%;
 }
 
-.search-submit {
+.search-bar button {
     width: 15%;
-    border-radius: 0 !important;
-    background-color: red !important;
-    border-color: red !important;
+    border-radius: 0;
+    background-color: red;
+    border-color: red;
+}
+
+.search-bar button:hover {
+    background-color: red;
+    border-color: red;
 }
 
 ::-webkit-input-placeholder {
-    color: #0F3844 !important;
+    color: #0F3844;
 }
 :-moz-placeholder {
-    color: #0F3844 !important;
+    color: #0F3844;
 }
 ::-moz-placeholder {
-    color: #0F3844 !important;
+    color: #0F3844;
 }
 :-ms-input-placeholder {
-    color: #0F3844 !important;
+    color: #0F3844;
 }
 
 /**************************************/
@@ -352,28 +352,31 @@
         
         <div class="row search-bar">
             <form action="{{ url('events/search') }}" method="GET">
-                <select class="form-control search-category" name=category>>
+                <select class="form-control search-category" name="category">
                     <option value="all">Event Category <span class="glyphicon glyphicon-menu-down"></span> </option>
                     @foreach ($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
-                <select class="form-control search-type" name=event_type>
+                <select class="form-control search-type" name="event_type">
                     <option value="all">Event Type</option>
                     @foreach ($event_types as $event_type)
                     <option value="{{ $event_type->id }}">{{ $event_type->name }}</option>
                     @endforeach
                 </select>
-                <select class="form-control search-location" name=location>
+                <select class="form-control search-location" name="location">
                     <option value="all">Location</option>
-                    <option value="Jakarta">Jakarta</option>
+                    @foreach ($locations as $loc)
+                    <option value="{{ $loc }}">{{ $loc }}</option>
+                    @endforeach
                 </select>
                 <div>
-                    <input type="date" class="form-control search-date">
+                    <input type="date" class="form-control search-date" name="date">
                 </div>
-                <select class="form-control search-price">
+                <select class="form-control search-price" name="price">
                     <option>Price</option>
-                    <option>$</option>
+                    <option>Free</option>
+                    <option>Paid</option>
                 </select>
                 <button type="submit" class="btn btn-primary search-submit">Search</button>
             </form>
