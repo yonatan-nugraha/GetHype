@@ -24,9 +24,17 @@ class TicketGroup extends Model
     }
 
     /**
-     * Get the tickets for the ticket group.
+     * Get the total tickets for the ticket group.
      */
     public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
+    /**
+     * Get the available tickets for the ticket group.
+     */
+    public function tickets_available()
     {
         return $this->hasMany(Ticket::class)->where('status', 1);
     }

@@ -18,6 +18,7 @@ class CreateEventTypesTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('slug');
+            $table->integer('weight')->default(10);
         });
     }
 

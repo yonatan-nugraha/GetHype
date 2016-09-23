@@ -22,4 +22,12 @@ class OrderDetail extends Model
     {
         return $this->belongsTo(Order::class);
     }
+
+    /**
+     * Get the ticket group that owns the order detail.
+     */
+    public function ticket_group()
+    {
+        return $this->belongsTo(TicketGroup::class);
+    }
 }

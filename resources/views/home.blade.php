@@ -1,7 +1,7 @@
 <style>
-/******************/
-/*** Banner Top ***/
-/******************/
+/**************************************/
+/************* Banner Top *************/
+/**************************************/
 
 .banner-1, .banner-2, .banner-3, .banner-4 {
     padding-left: 0 !important;
@@ -15,9 +15,9 @@
     padding: 0 !important;
 }
 
-/******************/
-/*** Home Title ***/
-/******************/
+/**************************************/
+/************* Home Title *************/
+/**************************************/
 
 .home-title {
     color: #0F3844;
@@ -27,9 +27,9 @@
     line-height: 120%;
 }
 
-/******************/
-/*** Search Bar ***/
-/******************/
+/**************************************/
+/************* Search Bar *************/
+/**************************************/
 
 .search {
     background-color: #F1F2F2;
@@ -39,17 +39,12 @@
     margin-bottom: 40px;
 }
 
-.search-category, .search-type, .search-price, .search-location, .search-date, .search-price {
+.search-bar select, .search-bar input {
     float: left;
     -webkit-appearance: none;
-    border: 2px solid #0F3844 !important;
-    border-radius: 0px !important;
-    color: #0F3844 !important;
-}
-
-.search-category option {
-    color: red !important;
-    -webkit-appearance: none;
+    border: 2px solid #0F3844;
+    border-radius: 0px;
+    color: #0F3844;
 }
 
 .search-category, .search-type {
@@ -60,29 +55,34 @@
     max-width: 15%;
 }
 
-.search-submit {
+.search-bar button {
     width: 15%;
-    border-radius: 0 !important;
-    background-color: red !important;
-    border-color: red !important;
+    border-radius: 0;
+    background-color: red;
+    border-color: red;
+}
+
+.search-bar button:hover {
+    background-color: red;
+    border-color: red;
 }
 
 ::-webkit-input-placeholder {
-    color: #0F3844 !important;
+    color: #0F3844;
 }
 :-moz-placeholder {
-    color: #0F3844 !important;
+    color: #0F3844;
 }
 ::-moz-placeholder {
-    color: #0F3844 !important;
+    color: #0F3844;
 }
 :-ms-input-placeholder {
-    color: #0F3844 !important;
+    color: #0F3844;
 }
 
-/******************/
-/*** What's New ***/
-/******************/
+/**************************************/
+/************* What's New *************/
+/**************************************/
 
 .whats-new {
     background-color: #F1F2F2;
@@ -144,9 +144,9 @@
 }
 
 
-/************************/
-/*** Event Collection ***/
-/************************/
+/**************************************/
+/*********** Event Collection *********/
+/**************************************/
 
 .event-collection {
     background-color: #fff;
@@ -175,9 +175,9 @@
     font-size: 20px;
 }
 
-/***************/
-/*** Journal ***/
-/***************/
+/**************************************/
+/************** Journal ***************/
+/**************************************/
 
 .journal{
     background-color: #F1F2F2;
@@ -229,9 +229,9 @@
     font-weight: 400;
 }
 
-/*********************/
-/*** Banner Bottom ***/
-/*********************/
+/**************************************/
+/************* Banner Bottom **********/
+/**************************************/
 
 .banner-bottom .banner-additional {
     z-index: 100;
@@ -282,10 +282,10 @@
                 </ol>
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
-                        <img src="{{ asset('images/banner-1.jpg') }}" alt="...">
+                        <img src="{{ asset('images/banners/banner-1.jpg') }}" alt="...">
                     </div>
                     <div class="item">
-                        <img src="{{ asset('images/banner-1.jpg') }}" alt="...">
+                        <img src="{{ asset('images/banners/banner-1.jpg') }}" alt="...">
                     </div>
                 </div>
                 <a class="left carousel-control" href="#big-carousel" role="button" data-slide="prev">
@@ -310,10 +310,10 @@
                 </ol>
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
-                        <img src="{{ asset('images/banner-2.jpg') }}" alt="...">
+                        <img src="{{ asset('images/banners/banner-2.jpg') }}" alt="...">
                     </div>
                     <div class="item">
-                        <img src="{{ asset('images/banner-2.jpg') }}" alt="...">
+                        <img src="{{ asset('images/banners/banner-2.jpg') }}" alt="...">
                     </div>
                 </div>
                 <a class="left carousel-control" href="#small-carousel" role="button" data-slide="prev">
@@ -328,16 +328,16 @@
         </div>
         <div class="col-xs-12 col-md-7 no-padding">
             <div class="col-xs-12 col-md-6 no-padding">
-                <img src="{{ asset('images/banner-3.jpg') }}" alt="...">
+                <img src="{{ asset('images/banners/banner-3.jpg') }}" alt="...">
             </div>
             <div class="col-xs-12 col-md-6 no-padding">
-                <img src="{{ asset('images/banner-4.jpg') }}" alt="...">
+                <img src="{{ asset('images/banners/banner-4.jpg') }}" alt="...">
             </div>
             <div class="col-xs-12 col-md-6 no-padding">
-                <img src="{{ asset('images/banner-5.jpg') }}" alt="...">
+                <img src="{{ asset('images/banners/banner-5.jpg') }}" alt="...">
             </div>
             <div class="col-xs-12 col-md-6 no-padding">
-                <img src="{{ asset('images/banner-6.jpg') }}" alt="...">
+                <img src="{{ asset('images/banners/banner-6.jpg') }}" alt="...">
             </div>
             </div>
         </div>
@@ -351,31 +351,35 @@
         </div>
         
         <div class="row search-bar">
-            <select class="form-control search-category">
-                <option>Event Category <span class="glyphicon glyphicon-menu-down"></span> </option>
-                @foreach ($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
-            <select class="form-control search-type">
-                <option>Event Type</option>
-                @foreach ($event_types as $event_type)
-                <option value="{{ $event_type->id }}">{{ $event_type->name }}</option>
-                @endforeach
-            </select>
-            <div>
-                <input type="text" class="form-control search-location" placeholder="Location">
-                <span class="glyphicon glyphicon-user1"></span>
-            </div>
-            <div>
-                <input type="text" class="form-control search-date" placeholder="Date">
-                <span class="glyphicon glyphicon-user1"></span>
-            </div>
-            <select class="form-control search-price">
-                <option>Price</option>
-                <option>$</option>
-            </select>
-            <button type="submit" class="btn btn-primary search-submit">Search</button>
+            <form action="{{ url('events/search') }}" method="GET">
+                <select class="form-control search-category" name="category">
+                    <option value="all">Event Category <span class="glyphicon glyphicon-menu-down"></span> </option>
+                    @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+                <select class="form-control search-type" name="event_type">
+                    <option value="all">Event Type</option>
+                    @foreach ($event_types as $event_type)
+                    <option value="{{ $event_type->id }}">{{ $event_type->name }}</option>
+                    @endforeach
+                </select>
+                <select class="form-control search-location" name="location">
+                    <option value="all">Location</option>
+                    @foreach ($locations as $loc)
+                    <option value="{{ $loc }}">{{ $loc }}</option>
+                    @endforeach
+                </select>
+                <div>
+                    <input type="date" class="form-control search-date" name="date">
+                </div>
+                <select class="form-control search-price" name="price">
+                    <option>Price</option>
+                    <option>Free</option>
+                    <option>Paid</option>
+                </select>
+                <button type="submit" class="btn btn-primary search-submit">Search</button>
+            </form>
         </div>
 
         <div class="row">
@@ -396,7 +400,7 @@
                 <div class="col-xs-12 col-md-3 event-box">
                     <div class="thumbnail">
                         <a href="{{ url('/events/'.$event->slug) }}">
-                            <img class="event-image" src="{{ asset('/images/whats-new-'.$event->id.'.jpg') }}">
+                            <img class="event-image" src="{{ asset('/images/events/event-'.$event->id.'.jpg') }}">
                             <div class="event-caption">
                                 <div class="event-caption-head">
                                     <span class="event-name">{{ $event->name }}</span>
@@ -428,7 +432,7 @@
                 <div class="col-xs-12 col-md-3 event-box">
                     <div class="thumbnail">
                         <a href="{{ url('/events/'.$collection->slug) }}">
-                            <img class="event-image" src="{{ asset('/images/collection-'.$collection->id.'.jpg') }}">
+                            <img class="event-image" src="{{ asset('/images/collections/collection-'.$collection->id.'.jpg') }}">
                         </a>
                     </div>
                     <div class="event-name">
@@ -462,7 +466,7 @@
                 <div class="col-xs-12 col-md-3 event-box">
                     <div class="thumbnail">
                         <a href="{{ url('/events/'.$journal->slug) }}">
-                            <img class="event-image" src="{{ asset('/images/journal-'.$journal->id.'.jpg') }}">
+                            <img class="event-image" src="{{ asset('/images/journals/journal-'.$journal->id.'.jpg') }}">
                             <div class="event-caption">
                                 <p class="event-name">What a Summer Festival in Jakarta</p>
                                 <span class="event-description">{{ $journal->description }}</span>

@@ -12,7 +12,7 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
-    	'user_id', 'amount', 'payment_status', 'payment_type'
+    	'user_id', 'event_id', 'amount', 'order_status', 'payment_status', 'payment_type'
     ];
 
     /**
@@ -21,5 +21,13 @@ class Order extends Model
     public function order_details()
     {
         return $this->hasMany(OrderDetail::class);
+    }
+
+    /**
+     * Get the event that owns the order.
+     */
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
     }
 }
