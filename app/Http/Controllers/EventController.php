@@ -15,7 +15,7 @@ use App\Ticket;
 use App\OrderDetail;
 use App\Order;
 
-use Validator, Input, Redirect;
+use DB, Validator, Input, Redirect;
 
 class EventController extends Controller
 {
@@ -272,35 +272,40 @@ class EventController extends Controller
         $date       = $request->date;
         $price      = $request->price;
 
-        // $events = Event::join('ticket_groups', 'events.id', '=', 'ticket_groups.event_id')
-        //             ->whereIn('status', [1,2]);
-
-        $events = Event::whereIn('status', [1,2]);
+        $events = Event::select(DB::raw('events.id, events.name, events.category_id, events.event_type_id, events.location, events.started_at, events.ended_at, events.slug, min(ticket_groups.price) as min_price, max(ticket_groups.price) as max_price'))
+                    ->leftJoin('ticket_groups', 'events.id', '=', 'ticket_groups.event_id')
+                    ->whereIn('status', [1,2])
+                    ->groupBy('events.id');
 
         if ($category != 'all') {
-            $events = $events->where('category_id', $category);
+            $events->where('category_id', $category);
         }
 
         if ($event_type != 'all') {
-            $events = $events->where('event_type_id', $event_type);
+            $events->where('event_type_id', $event_type);
         }
 
         if ($location != 'all') {
-            $events = $events->where('location', 'like', '%'.$location.'%');
+            $events->where('location', 'like', '%'.$location.'%');
         }
 
-        if ($date != null && $date != '') {
-            $events = $events->whereDate('events.started_at', '<=', $date);
-            $events = $events->whereDate('events.ended_at', '>=', $date);
+        if ($date != '') {
+            $events->whereDate('events.started_at', '<=', $date);
+            $events->whereDate('events.ended_at', '>=', $date);
         }
 
-        // if ($location != 'all') {
-        //     $events = $events->whereDate('events.started_at', '<=', $date);
-        // }
-
-        // dd($events->toSql());
+        if ($price != 'all') {
+            if ($price == 'free') {
+                $events->havingRaw('sum(ticket_groups.price) is null');
+            } 
+            else if ($price == 'paid') {
+                $events->havingRaw('sum(ticket_groups.price) > 0');
+            }
+        }
 
         $events = $events->get();
+
+        // dd($events);
 
         return view('events/search', [
             'events'        => $events,

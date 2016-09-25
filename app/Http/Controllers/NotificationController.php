@@ -11,6 +11,8 @@ use App\TicketGroup;
 use App\Order;
 use App\OrderDetail;
 
+use App\Mail\Register;
+
 use Mail;
 
 use App\Veritrans\Veritrans;
@@ -51,21 +53,21 @@ class NotificationController extends Controller
             $payment_type       = $notif->payment_type;
             $fraud_status       = $notif->fraud_status;
 
-            $payment_status = '';
+            $payment_status = 0;
             $order_status = 0;
 
             if ($transaction_status == 'capture') {
                 if ($payment_type == 'credit_card'){
                     if ($fraud_status == 'challenge') {
-                        $payment_status = 'challenged';
+                        $payment_status = 5;
                     } 
                     else {
-                        $payment_status = 'success';
+                        $payment_status = 3;
                     }
                 }
             }
             else if ($transaction_status == 'settlement') {
-                $payment_status = 'settled';
+                $payment_status = 4;
 
                 $ticket_ids     = json_decode(Redis::get('ticket_ids:'.$order->user_id));
 
@@ -82,12 +84,7 @@ class NotificationController extends Controller
 
 		            if ($tickets_updated > 0) {
 			            //send checkout success email
-		                Mail::queue('emails.send', ['title' => '', 'content' => ''], function ($message)
-				        {
-				            $message->from('yonatan.nugraha@gethype.co.id', 'Yonatan Nugraha');
-				            $message->to('yonatan.nugraha@gethype.co.id');
-				            $message->subject('Test Email');
-				        });
+		                Mail::to('yonatan.nugraha@gethype.co.id')->queue(new Register);
 
 		                //remove redis
 		                Redis::del('order_details:'.$order->user_id);
@@ -104,13 +101,13 @@ class NotificationController extends Controller
 		        }
             }
             else if ($transaction_status == 'deny') {
-                $payment_status = 'denied';
+                $payment_status = 2;
             }
             else if ($transaction_status == 'cancel') {
-                $payment_status = 'cancelled';
+                $payment_status = 1;
             }
             else {
-                $payment_status = $transaction_status;
+                $payment_status = 6;
             }
 
             //update payment status

@@ -12,6 +12,9 @@ use App\TicketGroup;
 use App\Order;
 use App\OrderDetail;
 
+use App\Mail\Welcome;
+use App\Mail\ActivateAccount;
+
 use Mail;
 
 use App\Veritrans\Veritrans;
@@ -95,6 +98,7 @@ class CheckoutController extends Controller
             'event_id'  => $event->id,
             'amount' 	=> $amount,
             'order_status' => 0,
+            'payment_status' => 0,
             'payment_type' => $payment_type,
         ])->id;
 
@@ -149,16 +153,17 @@ class CheckoutController extends Controller
     public function success(Request $request)
     {
         $order_id = $request->order_id;
-        $order = Order::find($order_id);
+        $order = Order::where('id', $order_id)
+                ->where('order_status', 2)
+                ->where('user_id', $request->user()->id)
+                ->first();
 
-    	if ($order->user_id != $request->user()->id) {
+    	if (count($order) == 0) {
     		return redirect('');
     	}
 
-    	$order_details = $order->order_details()->get();
-
         return view('checkout/success', [
-        	'order_details' => $order_details
+        	'order' => $order
         ]);
     }
 
@@ -170,13 +175,19 @@ class CheckoutController extends Controller
      */
     public function failed(Request $request)
     {
-        //send checkout success email
-        Mail::send('emails.send', ['title' => '', 'content' => ''], function ($message)
-        {
-            $message->from('yonatan.nugraha@gethype.co.id', 'Yonatan Nugraha');
-            $message->to('yonatan.nugraha@gethype.co.id');
-            $message->subject('Test Email');
-        });
+        $order_id = $request->order_id;
+        $order = Order::where('id', $order_id)
+                ->where('order_status', 1)
+                ->where('user_id', $request->user()->id)
+                ->first();
+
+        if (count($order) == 0) {
+            return redirect('');
+        }
+
+        return view('checkout/failed', [
+            'order' => $order
+        ]);
     }
 
     /**
@@ -230,8 +241,25 @@ class CheckoutController extends Controller
                 'order_status'   => $order_status,
                 'payment_status' => $payment_status,
             ]);
+
+            //send email
+            Mail::to('yonatan.nugraha@gethype.co.id')->queue(new Register);
         }
 
         return redirect('checkout/success?order_id='.$order_id);
+    }
+
+    /**
+     * Test send email.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function sendEmail(Request $request)
+    {
+        // send checkout success email
+        // Mail::to('yonatan.nugraha@gethype.co.id')->send(new ActivateAccount(auth()->user()));
+
+        return view('emails.activate_account');
     }
 }

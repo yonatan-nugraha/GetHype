@@ -14,10 +14,11 @@ body {
 
 .checkout .panel {
 	border-radius: 0;
+	border-color: #fff;
 }
 
 .checkout .panel-heading {
-	background-color: #0F3844 !important;
+	background-color: #0F3844;
 	border-radius: 0;
 	color: #fff;
 }
@@ -38,10 +39,6 @@ body {
 /**************************************/
 /*********** Contact Details **********/
 /**************************************/
-
-.contact-details .panel {
-	border-color: #fff !important;
-}
 
 .contact-details .panel-body {
 	padding: 20px 0;

@@ -89,6 +89,7 @@
 	border-radius: 5px;
 	border-color: #0F3844;
 	padding: 5px 10px;
+	min-width: 100px;
 }
 
 /**************************************/
@@ -146,12 +147,34 @@
 }
 
 /**************************************/
-/************ Buy Ticket **************/
+/************ Investments *************/
 /**************************************/
 
-#buy-ticket .modal-header {
-	
+.investments {
+	padding-bottom: 50px;
 }
+
+.investments ul {
+	margin-bottom: 25px;
+}
+
+.investments li {
+	margin-bottom: 8px;
+	font-weight: 300;
+}
+
+.investments button {
+	background-color: white;
+	border-radius: 5px;
+	border-color: red;
+	padding: 5px 10px;
+	color: red;
+	min-width: 100px;
+}
+
+/**************************************/
+/************ Buy Ticket **************/
+/**************************************/
 
 #buy-ticket .modal-body {
 	color: #0F3844;
@@ -201,7 +224,7 @@
 	margin-top: 10px;
 }
 
-#buy-ticket button {
+#buy-ticket .modal-footer button {
     border-radius: 0;
     background-color: #0F3844;
     border-color: #0F3844;
@@ -256,7 +279,11 @@
 	    		<span class="event-location">{{ $event->location }}</span>
 	    	</div>
 	    	<div class="buy-ticket">
+	    		@if (count($event->ticket_groups) > 0)
 	    		<button data-toggle="modal" data-target="#buy-ticket">Buy Ticket</button>
+	    		@else
+	    		<button>Free</button>
+	    		@endif
 	    	</div>
 	    </div>
 	    <div class="col-xs-12 col-md-6">
@@ -306,6 +333,24 @@
         </div>
     </div>
 </div>
+
+@if (count($event->ticket_groups) > 0)
+<div class="row investments">
+	<div class="container">
+	    <div class="col-xs-12 no-padding">
+	    	<p class="event-title">Investment</p>
+
+            <ul>
+            	@foreach ($event->ticket_groups as $ticket_group)
+                <li>Untuk tiket {{ $ticket_group->name }} dikenakan biaya {{ 'Rp '. number_format($ticket_group->price) }} per orang</li>
+                @endforeach
+            </ul>
+
+            <button data-toggle="modal" data-target="#buy-ticket">Buy Ticket</button>
+        </div>
+    </div>
+</div>
+@endif
 
 <!-- Modal -->
 <div class="modal fade" id="buy-ticket" role="dialog">

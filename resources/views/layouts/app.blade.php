@@ -10,12 +10,13 @@
 
     <title>{{ config('app.name', 'Gethype') }}</title>
 
+    <!-- Icon -->
     <link rel="icon" href="{{ asset('images/logo_dark.png') }}">
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url('css/sticky-footer-navbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('bootstrap-3.3.7-dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('font-awesome-4.6.3/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sticky-footer-navbar.css') }}">
 
     <style>
         @media (min-width: 1200px) {
@@ -260,7 +261,8 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="/js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="{{ asset('bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
     @yield('scripts')
 </body>
 </html>
