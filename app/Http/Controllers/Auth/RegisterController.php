@@ -74,7 +74,7 @@ class RegisterController extends Controller
         $user_id = $this->create($request->all())->id;
         $user = User::find($user_id);
 
-        Mail::to($user->email)->queue(new ActivateAccount($user));
+        Mail::to($user->email)->send(new ActivateAccount($user));
 
         return redirect('login')
             ->withErrors([ 'error' => 'Your account has been created. Please activate it by clicking the link that has been sent to your email.' ])
