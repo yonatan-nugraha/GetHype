@@ -31,7 +31,7 @@ class AccountController extends Controller
      */
     public function edit(Request $request)
     {
-        return view('accounts/edit', [
+        return view('account/edit', [
         	'categories' => Category::all(),
         	'event_types' => EventType::all()
         ]);

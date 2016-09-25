@@ -19,8 +19,8 @@ class CreateOrdersTable extends Migration
             $table->integer('event_id')->index();
             $table->double('amount');
             $table->integer('order_status');
-            $table->string('payment_status')->nullable();
-            $table->string('payment_type')->nullable();
+            $table->integer('payment_status');
+            $table->string('payment_type');
             $table->timestamps();
         });
     }

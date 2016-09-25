@@ -30,4 +30,12 @@ class Order extends Model
     {
         return $this->belongsTo(Event::class);
     }
+
+    /**
+     * Get the user that owns the order.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

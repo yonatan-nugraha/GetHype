@@ -95,6 +95,7 @@
 
 .whats-new .event-box {
     cursor: pointer;
+    padding-bottom: 15px;
 }
 
 .whats-new .event-box a {
@@ -117,7 +118,8 @@
 }
 
 .whats-new .event-caption-head {
-    margin-bottom: 7px;
+    margin-bottom: 10px;
+    height: 35px;
 }
 
 .whats-new .event-name {
@@ -125,7 +127,7 @@
 }
 
 .whats-new .event-price {
-    color: red;
+    color: #0F3844;
     font-size: 12px;
     font-weight: 500;
 }
@@ -140,7 +142,7 @@
     background-color: #E6E6E6;
     color: #000000;
     font-weight: 200;
-    font-size: 8px;
+    font-size: 10px;
 }
 
 
@@ -404,10 +406,11 @@
                             <div class="event-caption">
                                 <div class="event-caption-head">
                                     <span class="event-name">{{ $event->name }}</span>
-                                    <span class="event-price pull-right">Free</span>
                                 </div>
-
                                 <span class="event-time clearfix">{{ Carbon\Carbon::parse($event->started_at)->format('l, M d, Y | g.i A') }}</span>
+                                <p class="event-price">
+                                    @if ($event->min_price == '') Free @else IDR {{ $event->min_price/1000 . 'K' }} @endif
+                                    </p>
                                 <span class="label label-default event-tag">{{ $event->category->name }}</span>
                                 <span class="label label-default event-tag">{{ $event->event_type->name }}</span>
                             </div>
