@@ -258,7 +258,7 @@ class CheckoutController extends Controller
     public function sendEmail(Request $request)
     {
         // send checkout success email
-        // Mail::to('yonatan.nugraha@gethype.co.id')->send(new ActivateAccount(auth()->user()));
+        Mail::to('yonatan.nugraha@gethype.co.id')->queue(new ActivateAccount(auth()->user()));
 
         return view('emails.activate_account');
     }
