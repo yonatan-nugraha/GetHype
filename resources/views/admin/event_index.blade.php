@@ -56,7 +56,7 @@
                                         <a href="{{ url('events/'.$event->slug) }}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-share text-yellow"></i></button></a>
                                     </div>
                                     <div class="btn-group">
-                                        <form action="{{ url('events/'.$event->id.'/updateStatus') }}" method="POST">
+                                        <form action="{{ url('events/'.$event->id.'/update-status') }}" method="POST">
                                             {!! csrf_field() !!}
                                             {{ method_field('PATCH') }}
                                             <select name="status" onchange="this.form.submit()">

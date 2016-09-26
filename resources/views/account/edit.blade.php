@@ -193,7 +193,7 @@ body {
 
 			<div class="tab-content">
 			  	<div id="edit-profile" class="tab-pane fade in active">
-			    	<form action="{{ url('account/updateProfile') }}" method="POST">
+			    	<form action="{{ url('account/update-profile') }}" method="POST">
 						{!! csrf_field() !!}
 						{{ method_field('PATCH') }}
 						<div class="row">
@@ -257,7 +257,7 @@ body {
 					</form>
 			  	</div>
 			  	<div id="change-password" class="tab-pane fade">
-			    	<form action="{{ url('account/updatePassword') }}" method="POST">
+			    	<form action="{{ url('account/update-password') }}" method="POST">
 						{!! csrf_field() !!}
 						{{ method_field('PATCH') }}
 						<div class="row">

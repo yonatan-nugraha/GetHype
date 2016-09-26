@@ -23,6 +23,9 @@ Route::get('/activate/{user}', 'Auth\RegisterController@activate');
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 
+//statics
+Route::get('/services', 'HomeController@service');
+
 //admin
 Route::group(['prefix' => 'admin'], function () {
 	Route::get('', 'AdminController@index');
@@ -34,8 +37,8 @@ Route::group(['prefix' => 'admin'], function () {
 //accounts
 Route::group(['prefix' => 'account'], function () {
 	Route::get('settings', 'AccountController@edit');
-	Route::patch('updateProfile', 'AccountController@updateProfile');
-	Route::patch('updatePassword', 'AccountController@updatePassword');
+	Route::patch('update-profile', 'AccountController@updateProfile');
+	Route::patch('update-password', 'AccountController@updatePassword');
 });
 
 //events
@@ -45,8 +48,8 @@ Route::group(['prefix' => 'events'], function () {
 	Route::get('{event}', 'EventController@show');
 	Route::delete('{event}', 'EventController@destroy');
 	Route::patch('{event}', 'EventController@update');
-	Route::patch('{event}/updateStatus', 'EventController@updateStatus');
-	Route::patch('{event}/bookTicket', 'EventController@bookTicket');
+	Route::patch('{event}/update-status', 'EventController@updateStatus');
+	Route::patch('{event}/book-ticket', 'EventController@bookTicket');
 });
 
 //tickets and orders

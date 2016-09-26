@@ -44,4 +44,12 @@ class HomeController extends Controller
             'locations'     => ['Jakarta', 'Bandung', 'Surabaya', 'Bali'],
         ]);
     }
+
+    /**
+     * Display all services form.
+     */
+    public function service()
+    {
+        return view('statics/service');
+    }
 }

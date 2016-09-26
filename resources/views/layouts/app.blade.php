@@ -223,29 +223,26 @@
                 <div class="col-xs-3 footer-main-col">
                     <ul>
                         <li class="footer-title">Gethype</li>
-                        <li><a>Home</a></li>
                         <li><a>About Us</a></li>
                         <li><a>Partners</a></li>
                         <li><a>Journals</a></li>
                         <li><a>Careers</a></li>
                         <li><a>Terms</a></li>
-                        <li><a>Support</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-3 footer-main-col">
                     <ul>
-                        <li class="footer-title">Service</li>
+                        <li class="footer-title">Services</li>
                         <li><a>Advertising</a></li>
-                        <li><a>Consultation</a></li>
-                        <li><a>Planner</a></li>
+                        <li><a>Create Event</a></li>
                         <li><a>Ticketing</a></li>
-                        <li><a>Social Media</a></li>
+                        <li><a>Event Planner</a></li>
+                        <li><a>Journalistic</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-3 footer-main-col">
                     <ul>
                         <li class="footer-title">Get in Touch</li>
-                        <li><a>Customer Support</a></li>
                         <li><a>Contact Us</a></li>
                         <li><a>Instagram</a></li>
                         <li><a>Facebook</a></li>

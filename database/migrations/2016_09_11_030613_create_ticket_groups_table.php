@@ -15,9 +15,10 @@ class CreateTicketGroupsTable extends Migration
     {
         Schema::create('ticket_groups', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('event_id')->index();
+            $table->integer('event_id');
             $table->string('name');
             $table->double('price');
+            $table->integer('status');
             $table->dateTime('started_at');
             $table->dateTime('ended_at');
             $table->timestamps();
