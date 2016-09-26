@@ -409,8 +409,11 @@
                                 </div>
                                 <span class="event-time clearfix">{{ Carbon\Carbon::parse($event->started_at)->format('l, M d, Y | g.i A') }}</span>
                                 <p class="event-price">
-                                    @if ($event->min_price == '') Free @else IDR {{ $event->min_price/1000 . 'K' }} @endif
-                                    </p>
+                                    @if ($event->min_price == '' || ($event->min_price == 0 && $event->max_price == 0)) Free
+                                    @elseif ($event->min_price == 0 && $event->max_price > 0) {{ $event->max_price/1000 . 'K' }} 
+                                    @else IDR {{ $event->min_price/1000 . 'K' }} 
+                                    @endif
+                                </p>
                                 <span class="label label-default event-tag">{{ $event->category->name }}</span>
                                 <span class="label label-default event-tag">{{ $event->event_type->name }}</span>
                             </div>
@@ -452,7 +455,7 @@
     <div class="col-xs-12 no-padding">
         <img src="{{ asset('/images/img-event-planner.jpg') }}">
         <img class="banner-additional" src="{{ asset('/images/img-additional-1.png') }}">
-        <p class="banner-title">Create Your Event with Gethype</p>
+        <a href="{{ url('services') }}"><p class="banner-title">Create Your Event with Gethype</p></a>
         <span class="banner-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
     </div>
 </div>

@@ -201,7 +201,7 @@ class CheckoutController extends Controller
         $order_id           = $request->order_id;
         $order              = Order::find($order_id);
 
-        $payment_status     = 'settled';
+        $payment_status     = 5;
         $order_status       = 0;
 
         $ticket_ids     = json_decode(Redis::get('ticket_ids:'.$order->user_id));

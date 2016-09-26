@@ -362,7 +362,7 @@
           		<button type="button" class="close" data-dismiss="modal">&times;</button>
           		<h4 class="modal-title">{{ $event->name }}</h4>
         	</div>
-        	<form action="{{ url('events/'.$event->id.'/bookTicket') }}" method="POST">
+        	<form action="{{ url('events/'.$event->id.'/book-ticket') }}" method="POST">
                 {!! csrf_field() !!}
                 {{ method_field('PATCH') }}
 	        	<div class="modal-body">

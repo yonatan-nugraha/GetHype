@@ -15,8 +15,8 @@ class CreateOrderDetailsTable extends Migration
     {
         Schema::create('order_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('order_id')->index();
-            $table->integer('ticket_group_id')->index();
+            $table->integer('order_id');
+            $table->integer('ticket_group_id');
             $table->integer('quantity');
             $table->timestamps();
         });
