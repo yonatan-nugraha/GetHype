@@ -8,7 +8,7 @@ use App\Event;
 use App\Category;
 use App\EventType;
 
-use DB;
+use DB, Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -32,11 +32,14 @@ class HomeController extends Controller
 
     $events = Event::select(DB::raw('events.id, events.name, events.category_id, events.event_type_id, events.location, events.started_at, events.ended_at, events.slug, min(ticket_groups.price) as min_price, max(ticket_groups.price) as max_price'))
         ->leftJoin('ticket_groups', 'events.id', '=', 'ticket_groups.event_id')
-        ->whereIn('status', [1,2])
-        ->groupBy('events.id');
+        ->where('events.status', 1)
+        ->where('events.started_at', '<=', Carbon::now())
+        ->where('events.ended_at', '>=', Carbon::now())
+        ->groupBy('events.id')
+        ->orderBy('events.started_at', 'desc');
 
         return view('home', [
-            'events'        => $events->orderByRaw('rand()')->take(8)->get(),
+            'events'        => $events->take(8)->get(),
             'collections'   => Event::orderBy('id')->take(4)->get(),
             'journals'      => Event::orderBy('id')->take(4)->get(),
             'categories'    => Category::all(),

@@ -78,6 +78,12 @@
 	display: block;
 	line-height: 70%;
 	font-size: 17px;
+	margin-bottom: 10px;
+}
+
+.event-location {
+	line-height: 1;
+	font-size: 17px;
 }
 
 .buy-ticket {
@@ -90,6 +96,10 @@
 	border-color: #0F3844;
 	padding: 5px 10px;
 	min-width: 100px;
+}
+
+.add-bookmark {
+	cursor: pointer;
 }
 
 /**************************************/
@@ -257,7 +267,7 @@
 	    <div class="col-xs-12 col-md-6">
 	    	<div class="event-share">
 		    	<p class="event-share-text">Share with People</p>
-		    	<img class="event-sosmed" src="{{ asset('/images/icons/bookmark.png') }}">
+		    	<a class="add-bookmark" id="{{ $event->id }}"><img class="event-sosmed" src="{{ asset('/images/icons/bookmark.png') }}"></a>
 		    	<img class="event-sosmed" src="{{ asset('/images/icons/facebook.png') }}">
 		    	<img class="event-sosmed" src="{{ asset('/images/icons/twitter.png') }}">
 		    	<img class="event-sosmed" src="{{ asset('/images/icons/instagram.png') }}">
@@ -276,7 +286,7 @@
 	    			<span> - {{ Carbon\Carbon::parse($event->ended_at)->format('g:m A') }}</span>
 	    			@endif
 	    		</div>
-	    		<span class="event-location">{{ $event->location }}</span>
+	    		<span class="event-location">{!! nl2br(e($event->location)) !!}</span>
 	    	</div>
 	    	<div class="buy-ticket">
 	    		@if (count($event->ticket_groups) > 0)

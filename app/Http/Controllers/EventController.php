@@ -14,8 +14,9 @@ use App\TicketGroup;
 use App\Ticket;
 use App\OrderDetail;
 use App\Order;
+use App\Bookmark;
 
-use DB, Validator, Input, Redirect;
+use DB, Carbon\Carbon;
 
 class EventController extends Controller
 {
@@ -86,6 +87,7 @@ class EventController extends Controller
                 'event_id'      => $event_id,
                 'name'          => $request['ticket_name_'.$i],
                 'price'         => $request['ticket_price_'.$i],
+                'status'        => 1,
                 'started_at'    => $started_at,
                 'ended_at'      => $ended_at,
             ])->id;
@@ -144,6 +146,7 @@ class EventController extends Controller
                 'event_id'      => $event->id,
                 'name'          => $request['ticket_name_'.$i],
                 'price'         => $request['ticket_price_'.$i],
+                'status'        => 1,
                 'started_at'    => $started_at,
                 'ended_at'      => $ended_at,
             ])->id;
@@ -274,7 +277,9 @@ class EventController extends Controller
 
         $events = Event::select(DB::raw('events.id, events.name, events.category_id, events.event_type_id, events.location, events.started_at, events.ended_at, events.slug, min(ticket_groups.price) as min_price, max(ticket_groups.price) as max_price'))
                     ->leftJoin('ticket_groups', 'events.id', '=', 'ticket_groups.event_id')
-                    ->whereIn('status', [1,2])
+                    ->where('events.status', 1)
+                    ->where('events.started_at', '<=', Carbon::now())
+                    ->where('events.ended_at', '>=', Carbon::now())
                     ->groupBy('events.id');
 
         if ($category != 'all') {
@@ -318,5 +323,54 @@ class EventController extends Controller
             'date'          => $date,
             'price'         => $price
         ]);
+    }
+
+    /**
+     * Add bookmark.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function addBookmark(Request $request)
+    {   
+        $event_id   = $request->event_id;
+        $event      = Event::find($event_id);
+        $bookmark   = Bookmark::where('event_id', $event_id)
+                        ->where('user_id', auth()->user()->id)
+                        ->get();
+
+        if (count($event) > 0 && count($bookmark) == 0) {
+            Bookmark::create([
+                'user_id' => auth()->user()->id,
+                'event_id' => $event_id
+            ]);
+
+            return 1;
+        }
+
+        return 0;
+    }
+
+    /**
+     * Remove bookmark.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function removeBookmark(Request $request, Event $event)
+    {   
+        $bookmark   = Bookmark::where('event_id', $event->id)
+                        ->where('user_id', auth()->user()->id)
+                        ->get();
+
+        if (count($event) > 0 && count($bookmark) > 0) {
+            Bookmark::where('event_id', $event->id)
+                        ->where('user_id', auth()->user()->id)
+                        ->delete();
+
+            return 1;
+        }
+
+        return 0;
     }
 }

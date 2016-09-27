@@ -45,6 +45,6 @@ class ActivateAccount extends Mailable
                 'key'   => $this->key,
             ])
             ->from('admin@gethype.co.id', 'Gethype')
-            ->subject('Activate your Gethype Account!');
+            ->subject('Activate your Gethype Account');
     }
 }

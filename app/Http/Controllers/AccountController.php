@@ -8,6 +8,7 @@ use App\Http\Requests;
 
 use App\Category;
 use App\EventType;
+use App\Interest;
 
 use Validator, Input, Redirect;
 
@@ -29,11 +30,20 @@ class AccountController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function edit(Request $request)
+    public function index(Request $request)
     {
-        return view('account/edit', [
-        	'categories' => Category::all(),
-        	'event_types' => EventType::all()
+        $user_interests = array();
+        $user_interests_name = array();
+        foreach (auth()->user()->interests as $interest) {
+            $user_interests[] = $interest->category_id;
+            $user_interests_name[] = $interest->category->name;
+        }
+
+        return view('account/index', [
+        	'categories'   => Category::all(),
+            'interests'     => auth()->user()->interests,
+            'user_interests' => $user_interests,
+            'user_interests_name' => join(', ', $user_interests_name)
         ]);
     }
 
@@ -55,6 +65,38 @@ class AccountController extends Controller
             return redirect('/account/settings#edit-profile')
                 ->withErrors($validator)
                 ->withInput();
+        }
+
+        $interests = $request->interests;
+
+        if ($interests == '') {
+            auth()->user()->interests()->delete();
+        }
+        else {
+            $interests_array    = explode(',', $request->interests);
+            $user_interests     = array();
+
+            foreach (auth()->user()->interests as $interest) {
+                $user_interests[] = $interest->category_id;
+            }
+
+            $delete_interests = array_diff($user_interests, $interests_array);
+            $insert_interests = array_diff($interests_array, $user_interests);
+
+            foreach ($delete_interests as $interest) {     
+                Interest::where('user_id', auth()->user()->id)
+                    ->where('category_id', $interest)
+                    ->delete();
+            }
+
+            foreach ($insert_interests as $interest) {
+                if (count(Category::find($interest)) > 0) {
+                    Interest::create([
+                        'user_id' => auth()->user()->id,
+                        'category_id' => $interest
+                    ]);
+                }
+            }
         }
 
         $request->user()->update([
@@ -102,5 +144,20 @@ class AccountController extends Controller
         ]);
 
         return redirect('/account/settings#change-password');
+    }
+
+    /**
+     * Edit password.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function updatePicture(Request $request)
+    {   
+        if ($request->hasFile('photo') && $request->photo->isValid()) {
+            $request->photo->move(public_path('/images/users'), md5('user-'.auth()->user()->id).'.jpg');
+        }
+
+        return 1;
     }
 }

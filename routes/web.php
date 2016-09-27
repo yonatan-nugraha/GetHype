@@ -36,9 +36,10 @@ Route::group(['prefix' => 'admin'], function () {
 
 //accounts
 Route::group(['prefix' => 'account'], function () {
-	Route::get('settings', 'AccountController@edit');
+	Route::get('settings', 'AccountController@index');
 	Route::patch('update-profile', 'AccountController@updateProfile');
 	Route::patch('update-password', 'AccountController@updatePassword');
+	Route::post('update-picture', 'AccountController@updatePicture');
 });
 
 //events
@@ -50,12 +51,16 @@ Route::group(['prefix' => 'events'], function () {
 	Route::patch('{event}', 'EventController@update');
 	Route::patch('{event}/update-status', 'EventController@updateStatus');
 	Route::patch('{event}/book-ticket', 'EventController@bookTicket');
+	Route::post('add-bookmark', 'EventController@addBookmark');
+	Route::delete('{event}/remove-bookmark', 'EventController@removeBookmark');
 });
 
 //tickets and orders
 Route::group(['prefix' => 'tickets'], function () {
 	Route::get('', 'TicketController@index');
 	Route::get('{order}', 'TicketController@show');
+	Route::get('{order}/invoice', 'TicketController@invoice');
+	Route::get('{order}/ticket', 'TicketController@ticket');
 });
 
 //checkout

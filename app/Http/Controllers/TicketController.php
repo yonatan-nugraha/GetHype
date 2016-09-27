@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use PDF;
 use App\Order;
 use App\OrderDetail;
 use App\Ticket;
+use App\Bookmark;
 
 class TicketController extends Controller
 {
@@ -28,11 +30,44 @@ class TicketController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function index(Request $request) {
-    	$orders = $request->user()->orders()->get();
+    public function index() {
+    	$orders = auth()->user()->orders()->get();
 
         return view('tickets/index', [
         	'orders' => $orders,
+            'bookmarks' => auth()->user()->bookmarks
         ]);
+    }
+
+    /**
+     * Display order invoice.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function invoice(Request $request, Order $order) {
+        if ($order->user_id != auth()->user()->id) {
+            return redirect('');
+        }
+
+        $pdf = PDF::loadView('pdfs.invoice', ['order' => $order])->setPaper('a4');
+
+        return $pdf->stream();
+    }
+
+    /**
+     * Display order invoice.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function ticket(Request $request, Order $order) {
+        if ($order->user_id != auth()->user()->id) {
+            return redirect('');
+        }
+
+        $pdf = PDF::loadView('pdfs.ticket', ['order' => $order])->setPaper('a4');
+
+        return $pdf->stream();
     }
 }

@@ -12,7 +12,7 @@ class TicketGroup extends Model
      * @var array
      */
     protected $fillable = [
-    	'event_id', 'name', 'price', 'started_at', 'ended_at'
+    	'event_id', 'name', 'price', 'status', 'started_at', 'ended_at'
     ];
 
     /**

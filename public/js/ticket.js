@@ -19,4 +19,27 @@ $(document).ready(function() {
 			$(this).removeClass('hiden');
 		}
 	});
+
+	$(".remove-bookmark").click(function() {
+		var event_id = $(this).attr('id');
+
+	    $.ajaxSetup({
+		    headers: {
+		        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		    }
+		});
+
+    	$.ajax({
+    		url: '/events/'+event_id+'/remove-bookmark', 
+    		type: 'POST',
+	        data: {_method: 'delete'},
+    		success: function(result) {
+	        	if (result == 1) {
+		        	alert('This event has been succesfully removed from your bookmark list');
+		        } else {
+		        	alert('Unbookmark failed.');
+		        }
+	    	}
+	    });
+	});
 });

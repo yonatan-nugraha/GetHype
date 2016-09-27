@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Redis;
 
 use App\Http\Requests;
 
+use App\User;
 use App\Ticket;
 use App\TicketGroup;
 use App\Order;
@@ -14,6 +15,7 @@ use App\OrderDetail;
 
 use App\Mail\Welcome;
 use App\Mail\ActivateAccount;
+use App\Mail\CheckoutSuccess;
 
 use Mail;
 
@@ -200,9 +202,10 @@ class CheckoutController extends Controller
     {
         $order_id           = $request->order_id;
         $order              = Order::find($order_id);
+        $user               = User::find($order->user_id);
 
         $payment_status     = 5;
-        $order_status       = 0;
+        $order_status       = 1;
 
         $ticket_ids     = json_decode(Redis::get('ticket_ids:'.$order->user_id));
 
@@ -218,13 +221,10 @@ class CheckoutController extends Controller
             ]);
 
             if ($tickets_updated > 0) {
+                $order_status = 2;
+
                 //send checkout success email
-                Mail::queue('emails.send', ['title' => '', 'content' => ''], function ($message)
-                {
-                    $message->from('yonatan.nugraha@gethype.co.id', 'Yonatan Nugraha');
-                    $message->to('yonatan.nugraha@gethype.co.id');
-                    $message->subject('Test Email');
-                });
+                Mail::to($user->email)->queue(new CheckoutSuccess);
 
                 //remove redis
                 Redis::del('order_details:'.$order->user_id);
@@ -232,8 +232,6 @@ class CheckoutController extends Controller
                 Redis::del('event:'.$order->user_id);
                 Redis::del('amount:'.$order->user_id);
                 Redis::del('total_quantity:'.$order->user_id);
-
-                $order_status = 2;
             }
 
             //update payment status
@@ -241,9 +239,6 @@ class CheckoutController extends Controller
                 'order_status'   => $order_status,
                 'payment_status' => $payment_status,
             ]);
-
-            //send email
-            Mail::to('yonatan.nugraha@gethype.co.id')->queue(new Register);
         }
 
         return redirect('checkout/success?order_id='.$order_id);

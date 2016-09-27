@@ -18,7 +18,7 @@
                     </div>
                     <div class="form-group">
                         <label>Location</label>
-                        <input type="text" class="form-control" name="location" placeholder="Location" value="{{ $event->location }}" required pattern=".{5,80}">
+                        <textarea class="form-control" name="location" rows="3" required pattern=".{5,80}">{{ $event->location }}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Date and Time</label>

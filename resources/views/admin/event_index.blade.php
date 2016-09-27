@@ -36,17 +36,15 @@
                             <tr>
                                 <td>{{ $event->id }}</td>
                                 <td>{{ $event->name }}</td>
-                                <th>{{ Carbon\Carbon::parse($event->start_time)->format('M d, Y') }}</th>
+                                <th>{{ Carbon\Carbon::parse($event->started_at)->format('M d, Y') }}</th>
                                 <th>{{ $event->location }}</th>
                                 <th>{{ $event->category->name }}</th>
                                 <td>{{ $event->event_type->name }}</td>
                                 <td>
-                                    @if ($event->status == 2)
-                                        <span class="label label-success">Approved</span>
+                                    @if ($event->status == 0)
+                                        <span class="label label-warning">Inactive</span>
                                     @elseif ($event->status == 1)
-                                        <span class="label label-danger">Rejected</span>
-                                    @else
-                                        <span class="label label-warning">Pending</span>
+                                        <span class="label label-success">Active</span>
                                     @endif
                                 </td>
                                 <td>
@@ -60,9 +58,8 @@
                                             {!! csrf_field() !!}
                                             {{ method_field('PATCH') }}
                                             <select name="status" onchange="this.form.submit()">
-                                                <option value="0">Pending</option>
-                                                <option value="2">Approve</option>
-                                                <option value="1">Reject</option>
+                                                <option value="0">Inactive</option>
+                                                <option value="1">Active</option>
                                             </select>
                                         </form>
                                     </div>
