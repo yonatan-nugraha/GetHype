@@ -71,7 +71,9 @@
         }
 
         .user-image img {
-            max-width: 40px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
         }
 
         /**************************************/
@@ -181,7 +183,7 @@
                                 <span> {{ Auth::user()->last_name }}</span>
                                 @endif
                                 <span class="user-image">
-                                    <img src="{{ asset('/images/users/user-1.png') }}">
+                                    <img src="{{ asset('/images/users/'.Auth::user()->photo()) }}">
                                 </span>
                             </a>
 

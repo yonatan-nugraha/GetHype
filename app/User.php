@@ -28,6 +28,19 @@ class User extends Authenticatable
     ];
 
     /**
+     * Get the photo for the user.
+     */
+    public function photo()
+     {
+        $filename = md5('user-' . $this->id) . '.jpg';
+        if (file_exists(public_path() . '/images/users/'. $filename)) {
+            return $filename;
+        } else {
+            return 'default.png';
+        }     
+     }
+
+    /**
      * Get the events for the user.
      */
     public function events()
@@ -41,5 +54,21 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class)->where('order_status', 2);
+    }
+
+    /**
+     * Get the interests for the user.
+     */
+    public function interests()
+    {
+        return $this->hasMany(Interest::class);
+    }
+
+    /**
+     * Get the bookmarks for the user.
+     */
+    public function bookmarks()
+    {
+        return $this->hasMany(Bookmark::class);
     }
 }

@@ -21,7 +21,7 @@ class CreateEventsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->integer('status');
-            $table->string('location');
+            $table->text('location');
             $table->dateTime('started_at');
             $table->dateTime('ended_at');
             $table->string('slug');

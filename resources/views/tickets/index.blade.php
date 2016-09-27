@@ -132,6 +132,11 @@ body {
 	width: 13px;
 }
 
+#upcoming-events a, #past-events a {
+	text-decoration: none;
+	color: #0F3844;
+}
+
 .order-number {
 	margin-left: 20px;
 	padding-left: 20px;
@@ -197,6 +202,77 @@ body {
 	font-weight: 400;
 	border-left: 1px solid black;
 }
+
+/**************************************/
+/************* Bookmarks **************/
+/**************************************/
+
+.bookmarks {
+    background-color: #F1F2F2;
+    padding-bottom: 30px;
+}
+
+.bookmarks .events {
+    margin-bottom: 20px;
+}
+
+.bookmarks .event-box {
+    cursor: pointer;
+    padding-bottom: 15px;
+}
+
+.bookmarks .event-box a {
+    color: #000;
+}
+
+.bookmarks .event-box .thumbnail {
+    padding: 0;
+    border-radius: 0;
+    border-style: none;
+}
+
+.bookmarks .event-box a:hover {
+    text-decoration: none;
+}
+
+.bookmarks .event-caption {
+    margin: 10px 15px;
+    padding-bottom: 10px;
+}
+
+.bookmarks .event-caption-head {
+    margin-bottom: 10px;
+    height: 35px;
+}
+
+.bookmarks .event-name {
+    color: #0F3844;
+    font-size: 15px;
+    line-height: 1.3;
+}
+
+.bookmarks .event-price {
+    color: #0F3844;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.bookmarks .event-time {
+    margin-top: 10px !important;
+    font-weight: 100;
+    font-size: 12px;
+}
+
+.bookmarks .event-tag {
+    background-color: #E6E6E6;
+    color: #000000;
+    font-weight: 200;
+    font-size: 10px;
+}
+
+.bookmarks .remove-bookmark img {
+	width: 10px;
+}
 </style>
 
 @extends('layouts.app')
@@ -236,12 +312,16 @@ body {
 					    	</p>
 					    	<p class="event-time">{{ Carbon\Carbon::parse($order->event->started_at)->format('l, M d, Y | g.i A') }}</p>
 					    	<p class="order-row-footer">
-					    		<span class="order-invoice">
-					    			<img src="{{ asset('images/icons/invoice.png') }}"> Invoice
-					    		</span>
-					    		<span class="ticket-print"> 
-					    			<img src="{{ asset('images/icons/print-ticket.png') }}"> Print Ticket
-					    		</span>
+					    		<a href="{{ url('tickets/'.$order->id.'/invoice') }}" target="_blank">
+						    		<span class="order-invoice">
+						    			<img src="{{ asset('images/icons/invoice.png') }}"> Invoice
+						    		</span>
+					    		</a>
+					    		<a href="{{ url('tickets/'.$order->id.'/ticket') }}" target="_blank">
+						    		<span class="ticket-print"> 
+						    			<img src="{{ asset('images/icons/print-ticket.png') }}"> Print Ticket
+						    		</span>
+					    		</a>
 					    		<span class="order-number"> 
 					    			Order Number #{{ $order->id }}
 					    		</span>
@@ -294,12 +374,16 @@ body {
 					    	</p>
 					    	<p class="event-time">{{ Carbon\Carbon::parse($order->event->started_at)->format('l, M d, Y | g.i A') }}</p>
 					    	<p class="order-row-footer">
-					    		<span class="order-invoice">
-					    			<img src="{{ asset('images/icons/invoice.png') }}"> Invoice
-					    		</span>
-					    		<span class="ticket-print"> 
-					    			<img src="{{ asset('images/icons/print-ticket.png') }}"> Print Ticket
-					    		</span>
+					    		<a href="{{ url('tickets/'.$order->id.'/invoice') }}" target="_blank">
+						    		<span class="order-invoice">
+						    			<img src="{{ asset('images/icons/invoice.png') }}"> Invoice
+						    		</span>
+					    		</a>
+					    		<a href="{{ url('tickets/'.$order->id.'/ticket') }}" target="_blank">
+						    		<span class="ticket-print"> 
+						    			<img src="{{ asset('images/icons/print-ticket.png') }}"> Print Ticket
+						    		</span>
+					    		</a>
 					    		<span class="order-number"> 
 					    			Order Number #{{ $order->id }}
 					    		</span>
@@ -338,6 +422,32 @@ body {
 					</div>
 					@endif
 					@endforeach
+				</div>
+				<div class="tab-pane fade order-list bookmarks" id="bookmark-events">
+					@foreach ($bookmarks as $bookmark)
+	                <div class="col-xs-12 col-md-4 event-box">
+	                    <div class="thumbnail">
+	                        <a href="{{ url('/events/'.$bookmark->event->slug) }}" target="_blank">
+	                            <img class="event-image" src="{{ asset('/images/events/event-'.$bookmark->event->id.'.jpg') }}">
+	                            <div class="event-caption">
+	                                <div class="event-caption-head">
+	                                    <span class="event-name">{{ $bookmark->event->name }}</span>
+	                                </div>
+	                                <span class="event-time clearfix">{{ Carbon\Carbon::parse($bookmark->event->started_at)->format('l, M d, Y | g.i A') }}</span>
+	                                <p class="event-price">
+	                                </p>
+	                                <p>
+		                                <span class="label label-default event-tag">{{ $bookmark->event->category->name }}</span>
+		                                <span class="label label-default event-tag">{{ $bookmark->event->event_type->name }}</span>
+		                                <span class="pull-right remove-bookmark" id="{{ $bookmark->event->id }}">
+		                                	<img src="{{ asset('/images/icons/x-button.png') }}">
+		                                </span>
+	                                </p>
+	                            </div>
+	                        </a>
+	                    </div>      
+	                </div>
+	                @endforeach
 				</div>
 			</div>
 		</div>

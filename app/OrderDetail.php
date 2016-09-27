@@ -24,7 +24,7 @@ class OrderDetail extends Model
     }
 
     /**
-     * Get the ticket group that owns the order detail.
+     * Get the ticket group that is owned by the order detail.
      */
     public function ticket_group()
     {
