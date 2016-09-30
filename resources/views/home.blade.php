@@ -43,7 +43,7 @@
     float: left;
     -webkit-appearance: none;
     border: 2px solid #0F3844;
-    border-radius: 0px;
+    border-radius: 0;
     color: #0F3844;
 }
 
@@ -355,19 +355,19 @@
         <div class="row search-bar">
             <form action="{{ url('events/search') }}" method="GET">
                 <select class="form-control search-category" name="category">
-                    <option value="all">Event Category <span class="glyphicon glyphicon-menu-down"></span> </option>
+                    <option value="all">All Categories</option>
                     @foreach ($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
                 <select class="form-control search-type" name="event_type">
-                    <option value="all">Event Type</option>
+                    <option value="all">All Event Types</option>
                     @foreach ($event_types as $event_type)
                     <option value="{{ $event_type->id }}">{{ $event_type->name }}</option>
                     @endforeach
                 </select>
                 <select class="form-control search-location" name="location">
-                    <option value="all">Location</option>
+                    <option value="all">All Cities</option>
                     @foreach ($locations as $loc)
                     <option value="{{ $loc }}">{{ $loc }}</option>
                     @endforeach
@@ -376,9 +376,9 @@
                     <input type="date" class="form-control search-date" name="date">
                 </div>
                 <select class="form-control search-price" name="price">
-                    <option>Price</option>
-                    <option>Free</option>
-                    <option>Paid</option>
+                    <option value="all">All Budgets</option>
+                    <option value="free">Free</option>
+                    <option value="paid">Paid</option>
                 </select>
                 <button type="submit" class="btn btn-primary search-submit">Search</button>
             </form>

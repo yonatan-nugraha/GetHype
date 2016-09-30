@@ -15,6 +15,7 @@ use App\Ticket;
 use App\OrderDetail;
 use App\Order;
 use App\Bookmark;
+use App\View;
 
 use DB, Carbon\Carbon;
 
@@ -36,7 +37,7 @@ class EventController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function index() {
+    public function showList() {
         return view('admin/event_index', [
         	'page_title'	=> 'Event List',
         	'events'	=> Event::all(),
@@ -77,10 +78,8 @@ class EventController extends Controller
 	        'started_at' 	=> $started_at,
 	        'ended_at'		=> $ended_at,
 	        'status'		=> 0,
-            'slug'         	=> str_slug($request->name, "-")
+            'slug'         	=> str_slug($request->name, "-") . '-' . sprintf("%s", mt_rand(10000, 99999)),
 	    ])->id;
-
-        // $event_id = 2;
 
         for ($i = 1; $i <= $request->ticket_group_quantity; $i++) {
             $ticket_group_id = TicketGroup::create([
@@ -138,7 +137,6 @@ class EventController extends Controller
             'location'       => $request->location,
             'started_at'     => $started_at,
             'ended_at'       => $ended_at,
-            'slug'           => str_slug($request->name, "-")
         ]);
 
         for ($i = 1; $i <= $request->ticket_group_quantity; $i++) {
@@ -180,12 +178,12 @@ class EventController extends Controller
 
 
     /**
-     * Display an event
+     * Display an event detail
      *
      * @param  Request  $request
      * @return Response
      */
-    public function show(Request $request, $slug)
+    public function showDetail(Request $request, $slug)
     {
         $event = Event::where('slug', $slug)->first();
 
@@ -208,7 +206,7 @@ class EventController extends Controller
         $amount = 0;
         $total_quantity = 0;
 
-        foreach ($event->ticket_groups as $ticket_group) {
+        foreach ($event->ticket_groups_available as $ticket_group) {
             $quantity = $request->input('ticket_quantity_'.$ticket_group->id);
             $total_quantity += $quantity;
 
@@ -309,8 +307,6 @@ class EventController extends Controller
         }
 
         $events = $events->get();
-
-        // dd($events);
 
         return view('events/search', [
             'events'        => $events,

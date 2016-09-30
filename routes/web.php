@@ -29,9 +29,9 @@ Route::get('/services', 'HomeController@service');
 //admin
 Route::group(['prefix' => 'admin'], function () {
 	Route::get('', 'AdminController@index');
-	Route::get('events', 'EventController@index');
-    Route::get('events/create', 'EventController@create');
-    Route::get('events/{event}/edit', 'EventController@edit');
+	Route::get('events', 'EventController@showList')->middleware('auth');
+    Route::get('events/create', 'EventController@create')->middleware('auth');
+    Route::get('events/{event}/edit', 'EventController@edit')->middleware('auth');
 });
 
 //accounts
@@ -44,15 +44,38 @@ Route::group(['prefix' => 'account'], function () {
 
 //events
 Route::group(['prefix' => 'events'], function () {
-	Route::post('', 'EventController@store');
+	//create, update events for admin
+	Route::post('', 'EventController@store')->middleware('auth');
+	Route::patch('{event}', 'EventController@update')->middleware('auth');
+	Route::patch('{event}/update-status', 'EventController@updateStatus')->middleware('auth');
+
+	//book ticket
+	Route::patch('{event}/book-ticket', 'EventController@bookTicket')->middleware('auth');
+
+	//bookmark
+	Route::post('add-bookmark', 'EventController@addBookmark')->middleware('auth');
+	Route::delete('{event}/remove-bookmark', 'EventController@removeBookmark')->middleware('auth');
+
+	//search events
 	Route::get('search', 'EventController@search');
-	Route::get('{event}', 'EventController@show');
-	Route::delete('{event}', 'EventController@destroy');
-	Route::patch('{event}', 'EventController@update');
-	Route::patch('{event}/update-status', 'EventController@updateStatus');
-	Route::patch('{event}/book-ticket', 'EventController@bookTicket');
-	Route::post('add-bookmark', 'EventController@addBookmark');
-	Route::delete('{event}/remove-bookmark', 'EventController@removeBookmark');
+
+	//event detail
+	Route::get('{event}', 'EventController@showDetail');
+});
+
+//my events
+Route::group(['prefix' => 'myevents'], function () {
+	Route::get('', 'MyEventController@showList');
+	Route::get('{event}/statistic', 'MyEventController@showDetail');
+
+	Route::get('{event}/statistic/event', 'MyEventController@showEventViewStatistic');
+	Route::get('{event}/statistic/event/gender', 'MyEventController@showEventViewStatisticByGender');
+	Route::get('{event}/statistic/event/age', 'MyEventController@showEventViewStatisticByAge');
+
+	Route::get('{event}/statistic/ticket', 'MyEventController@showTicketStatistic');
+
+	Route::get('{event}/order-details', 'MyEventController@showOrderDetails');
+	Route::get('{event}/ticket-sales', 'MyEventController@showTicketSales');
 });
 
 //tickets and orders

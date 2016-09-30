@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ asset('bootstrap-3.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('font-awesome-4.6.3/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sticky-footer-navbar.css') }}">
+    
+    @yield('styles')
 
     <style>
         @media (min-width: 1200px) {
@@ -176,6 +178,10 @@
                         <li><a href="{{ url('/login') }}">Login</a></li>
                         <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
+                        @if (count(Auth::user()->events) > 0)
+                        <li><a href="{{ url('/myevents') }}">My Events</a></li>
+                        @endif
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 <span>{{ Auth::user()->first_name }}</span>
@@ -262,6 +268,9 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="{{ asset('bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bower_components/chart.js/dist/Chart.min.js') }}"></script>
+    <script src="{{ asset('js/date.js') }}"></script>
+    
     @yield('scripts')
 </body>
 </html>
