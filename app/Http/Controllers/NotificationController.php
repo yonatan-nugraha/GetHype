@@ -11,7 +11,7 @@ use App\TicketGroup;
 use App\Order;
 use App\OrderDetail;
 
-use App\Mail\Register;
+use App\Mail\CheckoutSuccess;
 
 use Mail;
 
@@ -48,6 +48,7 @@ class NotificationController extends Controller
 
             $order_id           = $notif->order_id;
             $order              = Order::find($order_id);
+            $user               = User::find($order->user_id);
 
             $transaction_status = $notif->transaction_status;
             $payment_type       = $notif->payment_type;
@@ -59,7 +60,7 @@ class NotificationController extends Controller
             if ($transaction_status == 'capture') {
                 if ($payment_type == 'credit_card'){
                     if ($fraud_status == 'challenge') {
-                        $payment_status = 5;
+                        $payment_status = 4;
                     } 
                     else {
                         $payment_status = 3;
@@ -67,12 +68,11 @@ class NotificationController extends Controller
                 }
             }
             else if ($transaction_status == 'settlement') {
-                $payment_status = 4;
+                $payment_status = 5;
 
-                $ticket_ids     = json_decode(Redis::get('ticket_ids:'.$order->user_id));
+                $ticket_ids     = json_decode(Redis::get('order:'.$order->user_id))->ticket_ids;
 
 		        if ($ticket_ids != null) {
-
 		        	//update ticket status
 		            $tickets_updated = Ticket::whereIn('id', $ticket_ids)
 		            ->where('status', 2)
@@ -83,17 +83,13 @@ class NotificationController extends Controller
 		            ]);
 
 		            if ($tickets_updated > 0) {
+                        $order_status = 2;
+
 			            //send checkout success email
-		                Mail::to('yonatan.nugraha@gethype.co.id')->queue(new Register);
+		                Mail::to($user->email)->queue(new CheckoutSuccess);
 
 		                //remove redis
-		                Redis::del('order_details:'.$order->user_id);
-		                Redis::del('ticket_ids:'.$order->user_id);
-		                Redis::del('event:'.$order->user_id);
-		                Redis::del('amount:'.$order->user_id);
-                        Redis::del('total_quantity:'.$order->user_id);
-
-		                $order_status = 2;
+		                Redis::del('order:'.$order->user_id);
 		            }
 		        }
 		        else {

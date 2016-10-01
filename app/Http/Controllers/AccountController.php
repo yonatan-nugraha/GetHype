@@ -32,10 +32,10 @@ class AccountController extends Controller
      */
     public function index(Request $request)
     {
-        $user_interests = array();
+        $user_interests = auth()->user()->interests->pluck('category_id')->toArray();
+        
         $user_interests_name = array();
         foreach (auth()->user()->interests as $interest) {
-            $user_interests[] = $interest->category_id;
             $user_interests_name[] = $interest->category->name;
         }
 
@@ -74,11 +74,7 @@ class AccountController extends Controller
         }
         else {
             $interests_array    = explode(',', $request->interests);
-            $user_interests     = array();
-
-            foreach (auth()->user()->interests as $interest) {
-                $user_interests[] = $interest->category_id;
-            }
+            $user_interests     = auth()->user()->interests->pluck('category_id')->toArray();
 
             $delete_interests = array_diff($user_interests, $interests_array);
             $insert_interests = array_diff($interests_array, $user_interests);

@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Carbon\Carbon;
+
 class Event extends Model
 {
 	/**
@@ -37,5 +39,16 @@ class Event extends Model
     public function ticket_groups()
     {
         return $this->hasMany(TicketGroup::class);
+    }
+
+    /**
+     * Get the available ticket groups for the ticket group.
+     */
+    public function ticket_groups_available()
+    {
+        return $this->hasMany(TicketGroup::class)
+            ->where('status', 1)
+            ->where('started_at', '<=', Carbon::now())
+            ->where('ended_at', '>=', Carbon::now());
     }
 }

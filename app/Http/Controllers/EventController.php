@@ -15,6 +15,9 @@ use App\Ticket;
 use App\OrderDetail;
 use App\Order;
 use App\Bookmark;
+use App\View;
+use App\Collection;
+use App\EventCollection;
 
 use DB, Carbon\Carbon;
 
@@ -28,33 +31,6 @@ class EventController extends Controller
     public function __construct()
     {
         // $this->middleware('auth');
-    }
-
-    /**
-     * Display a list of events.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function index() {
-        return view('admin/event_index', [
-        	'page_title'	=> 'Event List',
-        	'events'	=> Event::all(),
-        ]);
-    }
-
-    /**
-     * Display a form to create a new event.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function create() {
-        return view('admin/event_create', [
-        	'page_title'	=> 'Create Event',
-        	'categories' 	=> Category::all(),
-        	'event_types' 	=> EventType::all()
-        ]);
     }
 
     /**
@@ -77,10 +53,8 @@ class EventController extends Controller
 	        'started_at' 	=> $started_at,
 	        'ended_at'		=> $ended_at,
 	        'status'		=> 0,
-            'slug'         	=> str_slug($request->name, "-")
+            'slug'         	=> str_slug($request->name, '-') . '-' . sprintf("%s", mt_rand(10000, 99999)),
 	    ])->id;
-
-        // $event_id = 2;
 
         for ($i = 1; $i <= $request->ticket_group_quantity; $i++) {
             $ticket_group_id = TicketGroup::create([
@@ -105,21 +79,6 @@ class EventController extends Controller
     }
 
     /**
-     * Display a form to edit an event.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function edit(Request $request, Event $event) {
-        return view('admin/event_edit', [
-            'page_title'    => 'Edit Event',
-            'event'         => $event,
-            'categories'    => Category::all(),
-            'event_types'   => EventType::all()
-        ]);
-    }
-
-    /**
      * Edit an event.
      *
      * @param  Request  $request
@@ -138,7 +97,6 @@ class EventController extends Controller
             'location'       => $request->location,
             'started_at'     => $started_at,
             'ended_at'       => $ended_at,
-            'slug'           => str_slug($request->name, "-")
         ]);
 
         for ($i = 1; $i <= $request->ticket_group_quantity; $i++) {
@@ -171,8 +129,10 @@ class EventController extends Controller
      */
     public function updateStatus(Request $request, Event $event)
     {
+        $status = $request->status ? 1 : 0;
+
         $event->update([
-            'status' => $request->status,
+            'status' => $status,
         ]);
 
         return redirect('admin/events');
@@ -180,19 +140,38 @@ class EventController extends Controller
 
 
     /**
-     * Display an event
+     * Display an event detail
      *
      * @param  Request  $request
      * @return Response
      */
-    public function show(Request $request, $slug)
+    public function showDetail(Request $request, $slug)
     {
         $event = Event::where('slug', $slug)->first();
+        if (count($event) == 0) {
+            return redirect('');
+        }
 
-        return view('events/show', [
-        	'event' => $event,
+        $cookie_name   = 'views:' . $event->id;
+        $cookie_value  = $request->cookie($cookie_name);
+
+        $response = response()->view('events/show', [
+            'event' => $event,
             'guests' => ['Joko Widodo', 'Basuki Tjahaja Purnama', 'Mark Zuckerberg', 'Larry Page']
         ]);
+
+        if ($cookie_value == null) {
+            $user_id = auth()->check() ? auth()->id() : 0;
+
+            View::create([
+                'user_id'   => $user_id,
+                'event_id'  => $event->id
+            ]);
+
+            $response->cookie($cookie_name, md5($event->id), 180);
+        } 
+
+        return $response;
     }
 
     /**
@@ -208,7 +187,7 @@ class EventController extends Controller
         $amount = 0;
         $total_quantity = 0;
 
-        foreach ($event->ticket_groups as $ticket_group) {
+        foreach ($event->ticket_groups_available as $ticket_group) {
             $quantity = $request->input('ticket_quantity_'.$ticket_group->id);
             $total_quantity += $quantity;
 
@@ -243,20 +222,19 @@ class EventController extends Controller
         Ticket::whereIn('id', $ticket_ids)
             ->update([
                 'status' => 2,
-                'booked_by' => $request->user()->id,
+                'booked_by' => auth()->id(),
             ]);
 
-        Redis::set('order_details:'.$request->user()->id, json_encode($order_details));
-        Redis::set('ticket_ids:'.$request->user()->id, json_encode($ticket_ids));
-        Redis::set('event:'.$request->user()->id, json_encode($event));
-        Redis::set('amount:'.$request->user()->id, json_encode($amount));
-        Redis::set('total_quantity:'.$request->user()->id, json_encode($total_quantity));
+        $order = array(
+            'order_details' => $order_details,
+            'ticket_ids'    => $ticket_ids,
+            'event'         => $event,
+            'amount'        => $amount,
+            'total_quantity' => $total_quantity
+        );
 
-        Redis::expire('order_details:'.$request->user()->id, 1000);
-        Redis::expire('ticket_ids:'.$request->user()->id, 1000);
-        Redis::expire('event:'.$request->user()->id, 1000);
-        Redis::expire('amount:'.$request->user()->id, 1000);
-        Redis::expire('total_quantity:'.$request->user()->id, 1000);
+        Redis::set('order:'.auth()->id(), json_encode($order));
+        Redis::expire('order:'.auth()->id(), 1000);
 
         return redirect('checkout');
     }
@@ -310,8 +288,6 @@ class EventController extends Controller
 
         $events = $events->get();
 
-        // dd($events);
-
         return view('events/search', [
             'events'        => $events,
             'categories'    => Category::all(),
@@ -336,12 +312,12 @@ class EventController extends Controller
         $event_id   = $request->event_id;
         $event      = Event::find($event_id);
         $bookmark   = Bookmark::where('event_id', $event_id)
-                        ->where('user_id', auth()->user()->id)
+                        ->where('user_id', auth()->id())
                         ->get();
 
         if (count($event) > 0 && count($bookmark) == 0) {
             Bookmark::create([
-                'user_id' => auth()->user()->id,
+                'user_id' => auth()->id(),
                 'event_id' => $event_id
             ]);
 
@@ -360,17 +336,106 @@ class EventController extends Controller
     public function removeBookmark(Request $request, Event $event)
     {   
         $bookmark   = Bookmark::where('event_id', $event->id)
-                        ->where('user_id', auth()->user()->id)
+                        ->where('user_id', auth()->id())
                         ->get();
 
         if (count($event) > 0 && count($bookmark) > 0) {
             Bookmark::where('event_id', $event->id)
-                        ->where('user_id', auth()->user()->id)
+                        ->where('user_id', auth()->id())
                         ->delete();
 
             return 1;
         }
 
         return 0;
+    }
+
+    /**
+     * Create a new collection.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function storeEventCollection(Request $request)
+    {
+        EventCollection::create([
+            'collection_id'      => $request->collection_id,
+            'event_collection'  => $request->event_id,
+        ]);
+
+        return redirect('collections/'.$collection_slug);
+    }
+
+    /**
+     * Create a new collection.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function storeCollection(Request $request)
+    {
+        Collection::create([
+            'name'          => $request->name,
+            'description'   => $request->description,
+            'slug'          => str_slug($request->name, '-') . '-' . sprintf("%s", mt_rand(10000, 99999)),
+        ]);
+
+        return redirect('admin/collections');
+    }
+
+    /**
+     * Edit an event.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function updateCollection(Request $request, Collection $collection)
+    {
+        $collection->update([
+            'name'           => $request->name,
+            'description'    => $request->description,
+        ]);
+
+        return redirect('admin/collections');
+    }
+
+    /**
+     * Add an event to the collection.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function addEventCollection(Request $request)
+    {
+        $event_collection = EventCollection::where('collection_id', $request->collection_id)
+            ->where('event_id', $request->event_id)
+            ->get();
+
+        if (count($event_collection) == 0) {
+            EventCollection::create([
+                'collection_id' => $request->collection_id,
+                'event_id' => $request->event_id,
+            ]);
+        }
+
+        return redirect('admin/collections');
+    }
+
+    /**
+     * Display an event collection detail
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function showCollectionDetail(Request $request, $slug)
+    {
+        $collection = Collection::where('slug', $slug)->first();
+        if (count($collection) == 0) {
+            return redirect('');
+        }
+
+        return view('events/showCollection', [
+            'collection' => $collection,
+        ]);
     }
 }
