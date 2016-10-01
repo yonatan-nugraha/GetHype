@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'last_name', 'email', 'phone', 'gender', 'birthdate', 'location', 'password', 'status', 'last_login',
     ];
 
     /**
@@ -26,4 +26,49 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the photo for the user.
+     */
+    public function photo()
+     {
+        $filename = md5('user-' . $this->id) . '.jpg';
+        if (file_exists(public_path() . '/images/users/'. $filename)) {
+            return $filename;
+        } else {
+            return 'default.png';
+        }     
+     }
+
+    /**
+     * Get the events for the user.
+     */
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
+
+    /**
+     * Get the orders for the user.
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class)->where('order_status', 2);
+    }
+
+    /**
+     * Get the interests for the user.
+     */
+    public function interests()
+    {
+        return $this->hasMany(Interest::class);
+    }
+
+    /**
+     * Get the bookmarks for the user.
+     */
+    public function bookmarks()
+    {
+        return $this->hasMany(Bookmark::class);
+    }
 }

@@ -11,10 +11,115 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
+Route::get('/activate/{user}', 'Auth\RegisterController@activate');
+
+//home
+Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
+
+//statics
+Route::get('/services', 'HomeController@service');
+
+//admin
+Route::group(['prefix' => 'admin'], function () {
+	Route::get('', 'AdminController@index');
+
+	//events
+	Route::get('events', 'AdminController@showEventList');
+    Route::get('events/create', 'AdminController@createEvent');
+    Route::get('events/{event}/edit', 'AdminController@editEvent');
+
+    //collections
+    Route::get('collections', 'AdminController@showCollectionList');
+    Route::get('collections/create', 'AdminController@createCollection');
+    Route::get('collections/{collection}/edit', 'AdminController@editCollection');
+});
+
+//accounts
+Route::group(['prefix' => 'account'], function () {
+	Route::get('settings', 'AccountController@index');
+	Route::patch('update-profile', 'AccountController@updateProfile');
+	Route::patch('update-password', 'AccountController@updatePassword');
+	Route::post('update-picture', 'AccountController@updatePicture');
+});
+
+//events
+Route::group(['prefix' => 'events'], function () {
+	//create & update events for admin
+	Route::post('', 'EventController@store')->middleware('auth');
+	Route::patch('{event}', 'EventController@update')->middleware('auth');
+	Route::patch('{event}/update-status', 'EventController@updateStatus')->middleware('auth');
+
+	//book ticket
+	Route::patch('{event}/book-ticket', 'EventController@bookTicket')->middleware('auth');
+
+	//bookmark
+	Route::post('add-bookmark', 'EventController@addBookmark')->middleware('auth');
+	Route::delete('{event}/remove-bookmark', 'EventController@removeBookmark')->middleware('auth');
+
+	//search events
+	Route::get('search', 'EventController@search');
+
+	//event detail
+	Route::get('{event}', 'EventController@showDetail');
+});
+
+//collections
+Route::group(['prefix' => 'collections'], function () {
+	Route::get('add-event', 'EventController@addEventCollection')->middleware('auth');
+
+	Route::post('', 'EventController@storeCollection')->middleware('auth');
+	Route::patch('{collection}', 'EventController@updateCollection')->middleware('auth');
+	Route::get('{collection}', 'EventController@showCollectionDetail');
+});
+
+//journals
+Route::group(['prefix' => 'journals'], function () {
+	Route::get('', 'JournalController@showList');
+	Route::get('{journal}', 'JournalController@showDetail');
+});
+
+//my events
+Route::group(['prefix' => 'myevents'], function () {
+	Route::get('', 'MyEventController@showList');
+	Route::get('{event}/statistic', 'MyEventController@showDetail');
+
+	Route::get('{event}/statistic/event', 'MyEventController@showEventViewStatistic');
+	Route::get('{event}/statistic/event/gender', 'MyEventController@showEventViewStatisticByGender');
+	Route::get('{event}/statistic/event/age', 'MyEventController@showEventViewStatisticByAge');
+
+	Route::get('{event}/statistic/ticket', 'MyEventController@showTicketStatistic');
+
+	Route::get('{event}/order-details', 'MyEventController@showOrderDetails');
+	Route::get('{event}/ticket-sales', 'MyEventController@showTicketSales');
+});
+
+//tickets and orders
+Route::group(['prefix' => 'tickets'], function () {
+	Route::get('', 'TicketController@index');
+	Route::get('{order}', 'TicketController@show');
+	Route::get('{order}/invoice', 'TicketController@invoice');
+	Route::get('{order}/ticket', 'TicketController@ticket');
+});
+
+//checkout
+Route::group(['prefix' => 'checkout'], function () {
+	Route::get('', 'CheckoutController@index');
+	Route::post('pay', 'CheckoutController@pay');
+	Route::get('success', 'CheckoutController@success');
+	Route::get('failed', 'CheckoutController@failed');
+	Route::get('bypass', 'CheckoutController@bypass');
+	Route::get('email', 'CheckoutController@sendEmail');
+});
+
+//notification
+Route::group(['prefix' => 'notification'], function () {
+	Route::post('payment', 'NotificationController@payment');
+});
+
