@@ -187,7 +187,7 @@ function render_ticket_sales(event_id, start_date_s, end_date_s) {
 
 			if (result.ticket_sales.length > 0) {
 				for (i in result.ticket_sales) {
-					ticket_sales += '<tr><td>'+ result.ticket_sales[i].name +'</td><td>'+result.ticket_sales[i].tickets_sold+'</td><td>'+result.ticket_sales[i].email+'</td><td>Rp '+result.ticket_sales[i].price.toLocaleString()+'</td><td>Rp '+(result.ticket_sales[i].tickets_sold*result.ticket_sales[i].price).toLocaleString()+'</td></tr>';
+					ticket_sales += '<tr><td>'+ result.ticket_sales[i].name +'</td><td>'+result.ticket_sales[i].tickets_sold+'</td><td>'+(result.ticket_sales[i].total_tickets - result.ticket_sales[i].tickets_sold)+'</td><td>Rp '+result.ticket_sales[i].price.toLocaleString()+'</td><td>Rp '+(result.ticket_sales[i].tickets_sold*result.ticket_sales[i].price).toLocaleString()+'</td></tr>';
 				}
 			} else {
 				ticket_sales = '<tr align="center"><td colspan="6">No Orders Yet</td></tr>';

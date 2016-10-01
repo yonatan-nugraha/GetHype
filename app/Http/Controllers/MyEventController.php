@@ -79,7 +79,7 @@ class MyEventController extends Controller
 
         $total_orders = DB::select(DB::raw('select found_rows() as total_orders'));
 
-		$ticket_sales = TicketGroup::select(DB::raw('ticket_groups.name, sum(case orders.order_status when 2 then order_details.quantity else 0 end) as tickets_sold, ticket_groups.price'))
+		$ticket_sales = TicketGroup::select(DB::raw('ticket_groups.name, sum(case orders.order_status when 2 then order_details.quantity else 0 end) as tickets_sold, (select count(*) from tickets where tickets.ticket_group_id = ticket_groups.id) as total_tickets, ticket_groups.price'))
 		        ->leftJoin('order_details', 'ticket_groups.id', '=', 'order_details.ticket_group_id')
 		        ->leftJoin('orders', 'order_details.order_id', '=', 'orders.id')
 		        ->where('ticket_groups.event_id', $event->id)
@@ -156,7 +156,7 @@ class MyEventController extends Controller
     	}
 
         $views = View::select(DB::raw('(case users.gender when 1 then "male" else "female" end) as gender, count(*) as views'))
-        	->leftJoin('users', 'views.user_id', '=', 'users.id')
+        	->join('users', 'views.user_id', '=', 'users.id')
             ->where('views.event_id', $event->id)
             ->whereDate('views.created_at', '>=', $request->start_date)
             ->whereDate('views.created_at', '<=', $request->end_date)
@@ -186,7 +186,7 @@ class MyEventController extends Controller
 			when timestampdiff(year, users.birthdate, now()) between 35 and 44 then "35-44"
 			when timestampdiff(year, users.birthdate, now()) >= 45 then "45+"
 			end) as age_group, count(*) as views'))
-        	->leftJoin('users', 'views.user_id', '=', 'users.id')
+        	->join('users', 'views.user_id', '=', 'users.id')
             ->where('views.event_id', $event->id)
             ->whereDate('views.created_at', '>=', $request->start_date)
             ->whereDate('views.created_at', '<=', $request->end_date)
@@ -211,7 +211,6 @@ class MyEventController extends Controller
 
         $orders = Order::select(DB::raw('date(orders.created_at) as date, sum(order_details.quantity) as orders'))
         	->join('order_details', 'orders.id', '=', 'order_details.order_id')
-            ->where('orders.user_id', auth()->user()->id)
             ->where('orders.event_id', $event->id)
             ->whereDate('orders.created_at', '>=', $request->start_date)
             ->whereDate('orders.created_at', '<=', $request->end_date)
@@ -261,12 +260,11 @@ class MyEventController extends Controller
             return redirect('');
         }
 
-        $ticket_sales = TicketGroup::select(DB::raw('ticket_groups.name, sum(case orders.order_status when 2 then order_details.quantity else 0 end) as tickets_sold, ticket_groups.price'))
+        $ticket_sales = TicketGroup::select(DB::raw('ticket_groups.name, sum(case when orders.order_status = 2 and date(orders.created_at) between ? and ? then order_details.quantity else 0 end) as tickets_sold, (select count(*) from tickets where tickets.ticket_group_id = ticket_groups.id) as total_tickets, ticket_groups.price'))
+                ->setBindings([$request->start_date, $request->end_date])
                 ->leftJoin('order_details', 'ticket_groups.id', '=', 'order_details.ticket_group_id')
                 ->leftJoin('orders', 'order_details.order_id', '=', 'orders.id')
                 ->where('ticket_groups.event_id', $event->id)
-                ->whereDate('orders.created_at', '>=', $request->start_date)
-                ->whereDate('orders.created_at', '<=', $request->end_date)
                 ->groupBy('ticket_groups.id')
                 ->get();
 

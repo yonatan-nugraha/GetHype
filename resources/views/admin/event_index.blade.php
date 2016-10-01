@@ -36,16 +36,16 @@
                             <tr>
                                 <td>{{ $event->id }}</td>
                                 <td>{{ $event->name }}</td>
-                                <th>{{ Carbon\Carbon::parse($event->started_at)->format('M d, Y') }}</th>
+                                <th>{{ Carbon\Carbon::parse($event->started_at)->format('M d, Y | g.i A') }}</th>
                                 <th>{{ $event->location }}</th>
                                 <th>{{ $event->category->name }}</th>
                                 <td>{{ $event->event_type->name }}</td>
                                 <td>
-                                    @if ($event->status == 0)
-                                        <span class="label label-warning">Inactive</span>
-                                    @elseif ($event->status == 1)
-                                        <span class="label label-success">Active</span>
-                                    @endif
+                                    <form action="{{ url('events/'.$event->id.'/update-status') }}" method="POST">
+                                        {!! csrf_field() !!}
+                                        {{ method_field('PATCH') }}
+                                        <input type="checkbox" name="status" id="{{ $event->id }}" class="status" data-size="mini" @if ($event->status > 0) checked @endif ><br>
+                                    </form>
                                 </td>
                                 <td>
                                     <div class="btn-group">
@@ -53,15 +53,16 @@
 
                                         <a href="{{ url('events/'.$event->slug) }}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-share text-yellow"></i></button></a>
                                     </div>
-                                    <div class="btn-group">
-                                        <form action="{{ url('events/'.$event->id.'/update-status') }}" method="POST">
-                                            {!! csrf_field() !!}
-                                            {{ method_field('PATCH') }}
-                                            <select name="status" onchange="this.form.submit()">
-                                                <option value="0">Inactive</option>
-                                                <option value="1">Active</option>
-                                            </select>
-                                        </form>
+                                    <div class="btn-group dropdown">
+                                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+                                            <i class="fa fa-beer text-red"></i>
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            @foreach ($collections as $collection)
+                                            <li><a href="{{ url('collections/add-event?collection_id='.$collection->id.'&event_id='.$event->id) }}">{{ $collection->name }}</a></li>
+                                            @endforeach
+                                        </ul>
                                     </div>
                                 </td>
                             </tr>

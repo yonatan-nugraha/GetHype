@@ -44,20 +44,17 @@ class CheckoutController extends Controller
      */
     public function index(Request $request)
     {
-    	$order_details = json_decode(Redis::get('order_details:'.$request->user()->id));
-        $event         = json_decode(Redis::get('event:'.$request->user()->id));
-    	$amount        = json_decode(Redis::get('amount:'.$request->user()->id));
-        $total_quantity = json_decode(Redis::get('total_quantity:'.$request->user()->id));
+        $order = json_decode(Redis::get('order:'.auth()->id()));
 
-        if ($order_details == null) {
+        if ($order == null) {
             return redirect('');
         }
 
         return view('checkout/index', [
-        	'order_details' => $order_details,
-            'event'         => $event,
-        	'amount' 		=> $amount,
-            'total_quantity' => $total_quantity
+        	'order_details' => $order->order_details,
+            'event'         => $order->event,
+        	'amount' 		=> $order->amount,
+            'total_quantity' => $order->total_quantity
         ]);
     }
 
@@ -69,13 +66,14 @@ class CheckoutController extends Controller
      */
     public function pay(Request $request)
     {
-    	$order_details 	= json_decode(Redis::get('order_details:'.$request->user()->id));
-        $event          = json_decode(Redis::get('event:'.$request->user()->id));
-    	$amount 		= json_decode(Redis::get('amount:'.$request->user()->id));
+        $order = json_decode(Redis::get('order:'.auth()->id()));
 
-        if ($order_details == null) {
+        if ($order == null) {
             return redirect('');
         }
+
+        $event  = $order->event;
+        $amount = $order->amount;
 
         $payment_fees = array(
             'bank_transfer'     => 4900,
@@ -96,7 +94,7 @@ class CheckoutController extends Controller
         }
 
     	$order_id = Order::create([
-    		'user_id'	=> $request->user()->id,
+    		'user_id'	=> auth()->id(),
             'event_id'  => $event->id,
             'amount' 	=> $amount,
             'order_status' => 0,
@@ -105,7 +103,7 @@ class CheckoutController extends Controller
         ])->id;
 
         $items = array();
-    	foreach ($order_details as $order_detail) {
+    	foreach ($order->order_details as $order_detail) {
     		OrderDetail::create([
 	            'order_id' 			=> $order_id,
 	            'ticket_group_id' 	=> $order_detail->ticket_group->id,
@@ -133,8 +131,8 @@ class CheckoutController extends Controller
                 'credit_card_3d_secure' => true,
             ),
             'customer_details' => array(
-                'first_name' => $request->user()->name,
-                'email' => $request->user()->email,
+                'first_name' => auth()->user()->name,
+                'email' => auth()->user()->email,
                 'phone' => '081122334455',
             ),
             'item_details'  => $items,
@@ -157,7 +155,7 @@ class CheckoutController extends Controller
         $order_id = $request->order_id;
         $order = Order::where('id', $order_id)
                 ->where('order_status', 2)
-                ->where('user_id', $request->user()->id)
+                ->where('user_id', auth()->id())
                 ->first();
 
     	if (count($order) == 0) {
@@ -180,7 +178,7 @@ class CheckoutController extends Controller
         $order_id = $request->order_id;
         $order = Order::where('id', $order_id)
                 ->where('order_status', 1)
-                ->where('user_id', $request->user()->id)
+                ->where('user_id', auth()->id())
                 ->first();
 
         if (count($order) == 0) {
@@ -207,10 +205,9 @@ class CheckoutController extends Controller
         $payment_status     = 5;
         $order_status       = 1;
 
-        $ticket_ids     = json_decode(Redis::get('ticket_ids:'.$order->user_id));
+        $ticket_ids     = json_decode(Redis::get('order:'.$order->user_id))->ticket_ids;
 
         if ($ticket_ids != null) {
-
             //update ticket status
             $tickets_updated = Ticket::whereIn('id', $ticket_ids)
             ->where('status', 2)
@@ -227,11 +224,7 @@ class CheckoutController extends Controller
                 Mail::to($user->email)->queue(new CheckoutSuccess);
 
                 //remove redis
-                Redis::del('order_details:'.$order->user_id);
-                Redis::del('ticket_ids:'.$order->user_id);
-                Redis::del('event:'.$order->user_id);
-                Redis::del('amount:'.$order->user_id);
-                Redis::del('total_quantity:'.$order->user_id);
+                Redis::del('order:'.$order->user_id);
             }
 
             //update payment status

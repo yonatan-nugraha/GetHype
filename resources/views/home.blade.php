@@ -437,12 +437,12 @@
                 @foreach ($collections as $collection)
                 <div class="col-xs-12 col-md-3 event-box">
                     <div class="thumbnail">
-                        <a href="{{ url('/events/'.$collection->slug) }}">
+                        <a href="{{ url('/collections/'.$collection->slug) }}">
                             <img class="event-image" src="{{ asset('/images/collections/collection-'.$collection->id.'.jpg') }}">
                         </a>
                     </div>
                     <div class="event-name">
-                        <span>Body, Soul, & Spirit</span>
+                        <span>{{ $collection->name }}</span>
                     </div>    
                 </div>
                 @endforeach

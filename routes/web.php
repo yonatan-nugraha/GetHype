@@ -29,9 +29,16 @@ Route::get('/services', 'HomeController@service');
 //admin
 Route::group(['prefix' => 'admin'], function () {
 	Route::get('', 'AdminController@index');
-	Route::get('events', 'EventController@showList')->middleware('auth');
-    Route::get('events/create', 'EventController@create')->middleware('auth');
-    Route::get('events/{event}/edit', 'EventController@edit')->middleware('auth');
+
+	//events
+	Route::get('events', 'AdminController@showEventList');
+    Route::get('events/create', 'AdminController@createEvent');
+    Route::get('events/{event}/edit', 'AdminController@editEvent');
+
+    //collections
+    Route::get('collections', 'AdminController@showCollectionList');
+    Route::get('collections/create', 'AdminController@createCollection');
+    Route::get('collections/{collection}/edit', 'AdminController@editCollection');
 });
 
 //accounts
@@ -44,7 +51,7 @@ Route::group(['prefix' => 'account'], function () {
 
 //events
 Route::group(['prefix' => 'events'], function () {
-	//create, update events for admin
+	//create & update events for admin
 	Route::post('', 'EventController@store')->middleware('auth');
 	Route::patch('{event}', 'EventController@update')->middleware('auth');
 	Route::patch('{event}/update-status', 'EventController@updateStatus')->middleware('auth');
@@ -61,6 +68,21 @@ Route::group(['prefix' => 'events'], function () {
 
 	//event detail
 	Route::get('{event}', 'EventController@showDetail');
+});
+
+//collections
+Route::group(['prefix' => 'collections'], function () {
+	Route::get('add-event', 'EventController@addEventCollection')->middleware('auth');
+
+	Route::post('', 'EventController@storeCollection')->middleware('auth');
+	Route::patch('{collection}', 'EventController@updateCollection')->middleware('auth');
+	Route::get('{collection}', 'EventController@showCollectionDetail');
+});
+
+//journals
+Route::group(['prefix' => 'journals'], function () {
+	Route::get('', 'JournalController@showList');
+	Route::get('{journal}', 'JournalController@showDetail');
 });
 
 //my events

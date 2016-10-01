@@ -190,7 +190,7 @@ body {
 </style>
 
 @section('styles')
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+<link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css">
 @endsection
 
 @extends('layouts.app')
@@ -329,7 +329,7 @@ body {
 			    	<tr>
 			      		<td>{{ $ts->name }}</td>
 			      		<td>{{ $ts->tickets_sold }}</td>
-			      		<td>{{ $loop->iteration }}</td>
+			      		<td>{{ $ts->total_tickets - $ts->tickets_sold }}</td>
 			      		<td>{{ 'Rp '. number_format($ts->price) }}</td>
 			      		<td>{{ 'Rp '. number_format($ts->tickets_sold * $ts->price) }}</td>
 			    	</tr>
