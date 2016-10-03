@@ -41,17 +41,21 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone }}</td>
                                 <td>
-                                	@if ($user->gender == 1) male
-                                	@else female
+                                	@if ($user->gender == 1) Male
+                                	@else Female
                                 	@endif
                                 </td>
                                 <td>{{ Carbon\Carbon::parse($user->birthdate)->format('M d, Y') }}</td>
-                                <td><input type="checkbox" name="status" id="{{ $user->id }}" class="status" data-size="mini" @if ($user->status > 0) checked @endif ><br></td>
+                                <td>
+                                    <form action="{{ url('users/'.$user->id.'/update-status-user') }}" method="POST">
+                                        {!! csrf_field() !!}
+                                        {{ method_field('PATCH') }}
+                                        <input type="checkbox" name="status" id="{{ $user->id }}" class="status" data-size="mini" @if ($user->status > 0) checked @endif ><br>
+                                    </form>
+                                </td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{ url('admin/user/'.$user->id.'/edit') }}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-edit text-blue"></i></button></a>
-
-                                        <a href="{{ url('users/'.$user->slug) }}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-share text-yellow"></i></button></a>
+                                        <a href="{{ url('admin/users/'.$user->id.'/edit') }}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-edit text-blue"></i></button></a>
                                     </div>
                                 </td>
                             </tr>

@@ -12,6 +12,6 @@ class Journal extends Model
      * @var array
      */
     protected $fillable = [
-    	'title', 'content'
+    	'title', 'content', 'status', 'slug'
     ];
 }

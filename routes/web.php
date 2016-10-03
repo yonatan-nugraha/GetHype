@@ -26,12 +26,19 @@ Route::get('/home', 'HomeController@index');
 //statics
 Route::get('/services', 'HomeController@service');
 
+//users
+Route::group(['prefix' => 'users'], function () {
+	Route::patch('{user}', 'AdminController@updateUser');
+	Route::patch('{user}/update-status-user', 'AdminController@updateStatusUser');
+});
+
 //admin
 Route::group(['prefix' => 'admin'], function () {
 	Route::get('', 'AdminController@index');
 
 	//users
 	Route::get('users', 'AdminController@showUserList');
+	Route::get('users/{user}/edit', 'AdminController@editUser');
 
 	//events
 	Route::get('events', 'AdminController@showEventList');
@@ -62,7 +69,7 @@ Route::group(['prefix' => 'events'], function () {
 	//create & update events for admin
 	Route::post('', 'AdminController@storeEvent');
 	Route::patch('{event}', 'AdminController@updateEvent');
-	Route::patch('{event}/update-status', 'AdminController@updateStatusEvent');
+	Route::patch('{event}/update-status-event', 'AdminController@updateStatusEvent');
 
 	//book ticket
 	Route::patch('{event}/book-ticket', 'EventController@bookTicket')->middleware('auth');
@@ -94,6 +101,7 @@ Route::group(['prefix' => 'journals'], function () {
 
 	Route::post('', 'AdminController@storeJournal');
 	Route::patch('{journal}', 'AdminController@updateJournal');
+	Route::patch('{journal}/update-status-journal', 'AdminController@updateStatusJournal');
 });
 
 //my events

@@ -42,7 +42,7 @@ class HomeController extends Controller
         return view('home', [
             'events'        => $events->take(8)->get(),
             'collections'   => Collection::orderBy('id')->take(4)->get(),
-            'journals'      => Event::orderBy('id')->take(4)->get(),
+            'journals'      => Journal::where('status', 1)->orderBy('id')->take(4)->get(),
             'categories'    => Category::all(),
             'event_types'   => EventType::all(),
             'locations'     => ['Jakarta', 'Bandung', 'Surabaya', 'Bali'],

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Journal;
+
 class JournalController extends Controller
 {
     /**
@@ -24,9 +26,12 @@ class JournalController extends Controller
     	]);
     }
 
-    public function showDetail() 
+    public function showDetail(Request $request, $slug) 
     {
+        $journal = Journal::where('slug', $slug)->first();
+
     	return view('journals.show', [
+            'journal' => $journal
     	]);
     }
 }
