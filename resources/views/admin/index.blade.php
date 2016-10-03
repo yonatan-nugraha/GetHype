@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('plugins/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
 
 
-</head>
+</head> 
 <body class="skin-blue">
 <div class="wrapper">
 

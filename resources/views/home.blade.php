@@ -471,11 +471,11 @@
                 @foreach ($journals as $journal)
                 <div class="col-xs-12 col-md-3 event-box">
                     <div class="thumbnail">
-                        <a href="{{ url('/events/'.$journal->slug) }}">
+                        <a href="{{ url('/journals/'.$journal->slug) }}">
                             <img class="event-image" src="{{ asset('/images/journals/journal-'.$journal->id.'.jpg') }}">
                             <div class="event-caption">
-                                <p class="event-name">What a Summer Festival in Jakarta</p>
-                                <span class="event-description">{{ $journal->description }}</span>
+                                <p class="event-name">{{ $journal->title }}</p>
+                                <span class="event-description">{{ strip_tags($journal->content) }}</span>
                                 <span class="event-read pull-right">Read</span>
                             </div>
                         </a>

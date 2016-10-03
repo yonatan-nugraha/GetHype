@@ -23,6 +23,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Title</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -31,6 +32,13 @@
                             <tr>
                                 <td>{{ $journal->id }}</td>
                                 <td>{{ $journal->title }}</td>
+                                <td>
+                                    <form action="{{ url('journals/'.$journal->id.'/update-status-journal') }}" method="POST">
+                                        {!! csrf_field() !!}
+                                        {{ method_field('PATCH') }}
+                                        <input type="checkbox" name="status" id="{{ $journal->id }}" class="status" data-size="mini" @if ($journal->status > 0) checked @endif ><br>
+                                    </form>
+                                </td>
                                 <td>
                                     <div class="btn-group">
                                         <a href="{{ url('admin/journals/'.$journal->id.'/edit') }}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-edit text-blue"></i></button></a>
@@ -56,4 +64,16 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+$(function () {
+    // status switcher
+    $(".status").bootstrapSwitch();
+    $(".status").on('switchChange.bootstrapSwitch', function(event, state) {
+        $(this).closest('form').submit();
+    });
+});
+</script>
 @endsection

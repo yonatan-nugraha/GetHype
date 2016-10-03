@@ -41,7 +41,7 @@
                                 <td>{{ $event->category->name }}</td>
                                 <td>{{ $event->event_type->name }}</td>
                                 <td>
-                                    <form action="{{ url('events/'.$event->id.'/update-status') }}" method="POST">
+                                    <form action="{{ url('events/'.$event->id.'/update-status-event') }}" method="POST">
                                         {!! csrf_field() !!}
                                         {{ method_field('PATCH') }}
                                         <input type="checkbox" name="status" id="{{ $event->id }}" class="status" data-size="mini" @if ($event->status > 0) checked @endif ><br>

@@ -55,8 +55,59 @@ class AdminController extends Controller {
     {
         return view('admin/user_index', [
             'page_title'    => 'User List',
-            'users'     => User::all()
+            'users'         => User::all()
         ]);
+    }
+
+    /**
+     * Display a form to edit a user.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function editUser(Request $request, User $user) 
+    {
+        return view('admin/user_edit', [
+            'page_title'   => 'Edit User',
+            'user'         => $user,
+        ]);
+    }
+
+    /**
+     * Edit a user.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function updateUser(Request $request, User $user)
+    {
+        $user->update([
+            'first_name'    => $request->first_name,
+            'last_name'     => $request->last_name,
+            'email'         => $request->email,
+            'phone'         => $request->phone,
+            'gender'      => $request->gender,
+            'birthdate'    => $request->birthdate,
+        ]);
+
+        return redirect('admin/users');
+    }
+
+    /**
+     * Edit user's status.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function updateStatusUser(Request $request, User $user)
+    {
+        $status = $request->status ? 1 : 0;
+
+        $user->update([
+            'status' => $status,
+        ]);
+
+        return redirect('admin/users');
     }
 
     /**
@@ -199,7 +250,7 @@ class AdminController extends Controller {
      * @param  Request  $request
      * @return Response
      */
-    public function updateStatus(Request $request, Event $event)
+    public function updateStatusEvent(Request $request, Event $event)
     {
         $status = $request->status ? 1 : 0;
 
@@ -358,7 +409,7 @@ class AdminController extends Controller {
     public function editJournal(Request $request, Journal $journal) 
     {
         return view('admin/Journal_edit', [
-            'page_title'    => 'Edit Event',
+            'page_title'    => 'Edit Journal',
             'journal'         => $journal,
         ]);
     }
@@ -375,6 +426,7 @@ class AdminController extends Controller {
             'title'     => $request->title,
             'content'   => $request->content,
             'slug'      => str_slug($request->title, '-') . '-' . sprintf("%s", mt_rand(10000, 99999)),
+            'status'    => 0
         ]);
 
         return redirect('admin/journals');
@@ -391,6 +443,23 @@ class AdminController extends Controller {
         $journal->update([
             'title'     => $request->title,
             'content'   => $request->content,
+        ]);
+
+        return redirect('admin/journals');
+    }
+
+    /**
+     * Edit journal's status.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function updateStatusJournal(Request $request, Journal $journal)
+    {
+        $status = $request->status ? 1 : 0;
+
+        $journal->update([
+            'status' => $status,
         ]);
 
         return redirect('admin/journals');

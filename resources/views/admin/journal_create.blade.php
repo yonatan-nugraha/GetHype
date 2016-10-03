@@ -14,11 +14,11 @@
                 <div class="box-body">
                     <div class="form-group">
                         <label>Title</label>
-                        <input type="text" class="form-control" name="name" placeholder="Title" required pattern=".{3,50}">
+                        <input type="text" class="form-control" name="title" placeholder="Title" required pattern=".{3,50}">
                     </div>
                     <div class="form-group">
                         <label>Content</label>
-                        <textarea class="form-control" name="description" placeholder="Content" rows="5" required pattern=".{5,}"></textarea>
+                        <textarea class="form-control" name="content" placeholder="Content" rows="20" required pattern=".{5,}"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>      
@@ -31,7 +31,6 @@
 @section('scripts')
 <script>
 $(function () {
-    alert('asd');
     //bootstrap WYSIHTML5 - text editor
     $('textarea').wysihtml5();
 });
