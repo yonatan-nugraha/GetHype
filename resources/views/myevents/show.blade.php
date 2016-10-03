@@ -211,13 +211,16 @@ body {
 	</div>
 
 	<p class="filter-title">Filter by:</p>
-	<select class="filter-date">
-		<option value="week">This week</option>
-		<option value="month">This month</option>
-		<option value="all">Custom date range</option>
-	</select>
-	<input type="text" class="daterange" name="daterange" value="01/01/2015 - 01/31/2015" />
-
+	<div class="form-group">
+        <div class="input-group">
+          	<button type="button" class="btn btn-default pull-right" id="daterange">
+            	<span>
+              		<i class="fa fa-calendar"></i> Date Range
+            	</span>
+            	<i class="fa fa-caret-down"></i>
+          	</button>
+        </div>
+    </div>
 
 	<div class="panel page-views-panel">
 	  	<div class="panel-heading">
