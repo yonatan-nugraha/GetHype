@@ -36,9 +36,9 @@
                             <tr>
                                 <td>{{ $event->id }}</td>
                                 <td>{{ $event->name }}</td>
-                                <th>{{ Carbon\Carbon::parse($event->started_at)->format('M d, Y | g.i A') }}</th>
-                                <th>{{ $event->location }}</th>
-                                <th>{{ $event->category->name }}</th>
+                                <td>{{ Carbon\Carbon::parse($event->started_at)->format('M d, Y | g.i A') }}</td>
+                                <td>{{ $event->location }}</td>
+                                <td>{{ $event->category->name }}</td>
                                 <td>{{ $event->event_type->name }}</td>
                                 <td>
                                     <form action="{{ url('events/'.$event->id.'/update-status') }}" method="POST">
@@ -83,4 +83,16 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+$(function () {
+    // status switcher
+    $(".status").bootstrapSwitch();
+    $(".status").on('switchChange.bootstrapSwitch', function(event, state) {
+        $(this).closest('form').submit();
+    });
+});
+</script>
 @endsection

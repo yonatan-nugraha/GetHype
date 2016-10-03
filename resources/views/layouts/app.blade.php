@@ -14,8 +14,8 @@
     <link rel="icon" href="{{ asset('images/logo_dark.png') }}">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('bootstrap-3.3.7-dist/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('font-awesome-4.6.3/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/bootstrap-3.3.7-dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/font-awesome-4.6.3/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sticky-footer-navbar.css') }}">
     
     @yield('styles')
@@ -267,8 +267,8 @@
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="{{ asset('bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('bower_components/chart.js/dist/Chart.min.js') }}"></script>
+    <script src="{{ asset('plugins/bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('plugins/chart.js/dist/Chart.min.js') }}"></script>
     <script src="{{ asset('js/date.js') }}"></script>
     
     @yield('scripts')
