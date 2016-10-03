@@ -1,11 +1,19 @@
 function render_event_statistic(event_id, start_date_s, end_date_s) {
-	var ctx = $(".event-statistic");
+	var ctx = $('.event-statistic');
 
 	var now_date   = new Date(start_date_s);
 	var end_date   = new Date(end_date_s);
 
+	if (start_date_s == end_date_s) {
+		now_date.addDays(-1);
+	}
+
 	var days_range = Math.abs(end_date - now_date) / (1000 * 60 * 60 * 24);
 	var add_days = Math.ceil((days_range/10));
+
+	if (add_days == 0) {
+		add_days = 1;
+	}
 
 	$.ajax({
 		url: '/myevents/'+event_id+'/statistic/event?start_date='+start_date_s+'&end_date='+end_date_s, 
@@ -36,14 +44,14 @@ function render_event_statistic(event_id, start_date_s, end_date_s) {
 			    },
 			});
 
-			$(".total-views").html(result.total_views);
+			$('.total-views').html(result.total_views);
     	}
     });
 }
 
 
 function render_event_statistic_by_gender(event_id, start_date_s, end_date_s) {
-	var ctx = $(".event-statistic-gender");
+	var ctx = $('.event-statistic-gender');
 
 	$.ajax({
 		url: '/myevents/'+event_id+'/statistic/event/gender?start_date='+start_date_s+'&end_date='+end_date_s, 
@@ -79,7 +87,7 @@ function render_event_statistic_by_gender(event_id, start_date_s, end_date_s) {
 }
 
 function render_event_statistic_by_age(event_id, start_date_s, end_date_s) {
-	var ctx = $(".event-statistic-age");
+	var ctx = $('.event-statistic-age');
 
 	$.ajax({
 		url: '/myevents/'+event_id+'/statistic/event/age?start_date='+start_date_s+'&end_date='+end_date_s, 
@@ -116,13 +124,21 @@ function render_event_statistic_by_age(event_id, start_date_s, end_date_s) {
 }
 
 function render_ticket_statistic(event_id, start_date_s, end_date_s) {
-	var ctx = $(".ticket-statistic");
+	var ctx = $('.ticket-statistic');
 
 	var now_date   = new Date(start_date_s);
 	var end_date   = new Date(end_date_s);
 
 	var days_range  = Math.abs(end_date - now_date) / (1000 * 60 * 60 * 24);
 	var add_days 	= Math.ceil((days_range/10));
+
+	if (add_days == 0) {
+		add_days = 1;
+	}
+
+	if (start_date_s == end_date_s) {
+		now_date.addDays(-1);
+	}
 
 	$.ajax({
 		url: '/myevents/'+event_id+'/statistic/ticket?start_date='+start_date_s+'&end_date='+end_date_s, 
@@ -165,7 +181,7 @@ function render_order_details(event_id, start_date_s, end_date_s, page) {
 
 			if (result.length > 0) {
 				for (i in result) {
-					var date = (new Date(result[i].created_at)).toString("MMM d, yyyy | h.mm tt");
+					var date = (new Date(result[i].created_at)).toString('MMM d, yyyy | h.mm tt');
 
 					order_details += '<tr><td>'+ result[i].id +'</td><td>'+result[i].first_name+' '+result[i].last_name+'</td><td>'+result[i].email+'</td><td>'+result[i].name+'</td><td>'+result[i].quantity+'</td><td>'+date+'</td></tr>';
 				}
@@ -173,7 +189,7 @@ function render_order_details(event_id, start_date_s, end_date_s, page) {
 				order_details = '<tr align="center"><td colspan="6">No Orders Yet</td></tr>';
 			}
 
-			$(".order-details").html(order_details);
+			$('.order-details').html(order_details);
     	}
     });
 }
@@ -193,11 +209,11 @@ function render_ticket_sales(event_id, start_date_s, end_date_s) {
 				ticket_sales = '<tr align="center"><td colspan="6">No Orders Yet</td></tr>';
 			}
 
-			$(".ticket-sales").html(ticket_sales);
-			$(".total-tickets-sold").html(result.total_tickets_sold);
-			$(".total-revenue").html('Rp '+result.total_revenue.toLocaleString());
-			$(".total-cost").html('Rp '+result.total_cost.toLocaleString());
-			$(".total-profit").html('Rp '+result.total_profit.toLocaleString());
+			$('.ticket-sales').html(ticket_sales);
+			$('.total-tickets-sold').html(result.total_tickets_sold);
+			$('.total-revenue').html('Rp '+result.total_revenue.toLocaleString());
+			$('.total-cost').html('Rp '+result.total_cost.toLocaleString());
+			$('.total-profit').html('Rp '+result.total_profit.toLocaleString());
     	}
     });
 }
@@ -212,75 +228,57 @@ function render_all(event_id, start_date_s, end_date_s) {
 }
 
 $(document).ready(function() {
-	var event_id = $(".event-id").val();
+	var event_id = $('.event-id').val();
 
-	var start_date 	= Date.today().addDays(-7);
-	var end_date 	= Date.today();
+	var start_date 	= moment().subtract(6, 'days');
+	var end_date 	= moment();
 
-	var start_date_s = start_date.toString('yyyy-MM-dd');
-	var end_date_s 	 = end_date.toString('yyyy-MM-dd');
-
-	$(".daterange").daterangepicker({
-		locale: {
-	      	format: 'YYYY-MM-DD'
-	    },
-	    startDate: start_date_s,
-	    endDate: end_date_s
-	}); 
+	var start_date_s = start_date.format('YYYY-MM-DD');
+	var end_date_s 	 = end_date.format('YYYY-MM-DD');
 
 	render_all(event_id, start_date_s, end_date_s);
 
-	$(".filter-date").change(function() {
-		var filter_date = $(this).val();
-		if (filter_date == 'week') {
-			start_date = Date.today().addDays(-7);
-			start_date_s = start_date.toString('yyyy-MM-dd');
-			end_date_s 	 = end_date.toString('yyyy-MM-dd');
-			$(".daterange").hide();
-		} else if (filter_date == 'month') {
-			start_date = Date.today().addDays(-30);
-			start_date_s = start_date.toString('yyyy-MM-dd');
-			end_date_s 	 = end_date.toString('yyyy-MM-dd');
-			$(".daterange").hide();
-		} else {
-			$(".daterange").show();
-			$(".daterange").focus();
+    $('#daterange').daterangepicker(
+    	{
+        	startDate: start_date,
+          	endDate: end_date,
+	        ranges: {
+	        	'Today': [moment(), moment()],
+	            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+	            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+	            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+	            'This Month': [moment().startOf('month'), moment().endOf('month')],
+	            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+	        },
+        },
+        function (start, end) {
+          	$('#daterange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
 
-			start_date_s = $('.daterange').data('daterangepicker').startDate._i;
-			end_date_s 	 = $('.daterange').data('daterangepicker').endDate._i;
-		}
+          	start_date_s = start.format('YYYY-MM-DD');
+          	end_date_s 	 = end.format('YYYY-MM-DD');
 
-		render_all(event_id, start_date_s, end_date_s);
+          	render_all(event_id, start_date_s, end_date_s);
 
-		$(".pagination li").removeClass('active');
-		$(".pagination .first").addClass('active');
-	});
+          	$('.pagination li').removeClass('active');
+			$('.pagination .first').addClass('active');
+        }
+    );
 
-	$('.daterange').on('apply.daterangepicker', function(ev, picker) {
-		start_date_s = picker.startDate.format('YYYY-MM-DD');
-		end_date_s 	 = picker.endDate.format('YYYY-MM-DD');
-		
-	  	render_all(event_id, start_date_s, end_date_s);
-
-		$(".pagination li").removeClass('active');
-		$(".pagination .first").addClass('active');
-	});
-
-	$(".pagination li").click(function() {
+	$('.pagination li').click(function() {
 		var page = $(this).attr('id');
 		render_order_details(event_id, start_date_s, end_date_s, page);
 
-		$(".pagination li").removeClass('active');
+		$('.pagination li').removeClass('active');
 		if ($(this).hasClass('laquo')) {
-			$(".pagination .first").addClass('active');
+			$('.pagination .first').addClass('active');
 		} else if ($(this).hasClass('raquo')) {
-			$(".pagination .last").addClass('active');
+			$('.pagination .last').addClass('active');
 		} else {
 			$(this).addClass('active');
 		}
 	});
 
-	$(".show-hide").click(function() {
+	$('.show-hide').click(function() {
 		if ($(this).hasClass('shown')) {
 			$(this).parents('.panel').children('.panel-body').slideDown();
 			$(this).children('span').text('Hide');
@@ -297,4 +295,5 @@ $(document).ready(function() {
 			$(this).removeClass('hiden');
 		}
 	});
+
 });

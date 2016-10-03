@@ -290,7 +290,7 @@
 	    	</div>
 	    	<div class="buy-ticket">
 	    		@if (count($event->ticket_groups) > 0)
-	    		<button data-toggle="modal" data-target="#buy-ticket">Buy Ticket</button>
+	    		<button class="btn" data-toggle="modal" data-target="#buy-ticket">Buy Ticket</button>
 	    		@else
 	    		<button>Free</button>
 	    		@endif
@@ -386,7 +386,7 @@
 		         			<p class="ticket-price">{{ 'Rp '. number_format($ticket_group->price) }}</p>
 		         		</div>
 	         			<div class="col-xs-3">
-	         				@if (count($ticket_group->tickets_available) > 0)
+	         				@if (count($ticket_group->tickets_available) > 0 && Carbon\Carbon::now() >= $ticket_group->started_at && Carbon\Carbon::now() <= $ticket_group->ended_at)
 	         				<span>QTY </span> 
 		         			<select class="ticket-quantity" id="{{ $ticket_group->id }}" name="ticket_quantity_{{ $ticket_group->id }}">
 		         				@if (count($ticket_group->tickets_available) > 5)
@@ -411,7 +411,7 @@
 			  	</div>
 	        	<div class="modal-footer">
 	        		<div class="col-xs-6">
-	          			<button type="submit" class="btn btn-primary ticket-submit">Checkout</button>
+	          			<button type="submit" class="btn ticket-submit">Checkout</button>
 	          		</div>
 	          		<div class="col-xs-3">
 	          			<p class="ticket-quantity-total">QTY: 0</p>

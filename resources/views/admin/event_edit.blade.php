@@ -9,7 +9,7 @@
         <div class="col-md-6">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Create Event</h3>
+                    <h3 class="box-title">1. Edit Event</h3>
                 </div>
                 <div class="box-body">
                     <div class="form-group">
@@ -56,7 +56,7 @@
             <input type="hidden" class="ticket-group" name="ticket_group_quantity" value="0">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">2. Create Tickets</h3>
+                    <h3 class="box-title">2. Edit/Create Tickets</h3>
                 </div>
 
                 <div class="box-body">
@@ -69,16 +69,17 @@
                     <div class="row" id="ticket-row">
                         <div class="col-xs-6">
                             <label>Name</label>
-                            <input type="text" class="form-control" name="ticket_name_1" placeholder="Name" value="{{ $ticket_group->name }}" disabled="">
+                            <input type="text" class="form-control" placeholder="Name" value="{{ $ticket_group->name }}" disabled="">
                         </div>
                         <div class="col-xs-3">
                             <label>Quantity</label>
-                            <input type="number" class="form-control" name="ticket_quantity_1" placeholder="Quantity" value="{{ count($ticket_group->tickets) }}" disabled="">
+                            <input type="number" class="form-control" placeholder="Quantity" value="{{ count($ticket_group->tickets) }}" disabled="">
                         </div>
                         <div class="col-xs-3">
                             <label>Price</label>
-                            <input type="number" class="form-control" name="ticket_price_1" placeholder="Price" value="{{ $ticket_group->price }}" disabled="">
+                            <input type="number" class="form-control" placeholder="Price" value="{{ $ticket_group->price }}" disabled="">
                         </div>
+
                     </div>
                     @endforeach
                     <div class="row" id="ticket-row-0">

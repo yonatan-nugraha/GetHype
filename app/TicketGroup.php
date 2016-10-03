@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Carbon\Carbon;
+
 class TicketGroup extends Model
 {
     /**
@@ -36,6 +38,7 @@ class TicketGroup extends Model
      */
     public function tickets_available()
     {
-        return $this->hasMany(Ticket::class)->where('status', 1);
+        return $this->hasMany(Ticket::class)
+        ->where('status', 1);
     }
 }
