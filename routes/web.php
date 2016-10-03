@@ -91,6 +91,9 @@ Route::group(['prefix' => 'collections'], function () {
 Route::group(['prefix' => 'journals'], function () {
 	Route::get('', 'JournalController@showList');
 	Route::get('{journal}', 'JournalController@showDetail');
+
+	Route::post('', 'AdminController@storeJournal');
+	Route::patch('{journal}', 'AdminController@updateJournal');
 });
 
 //my events

@@ -363,4 +363,37 @@ class AdminController extends Controller {
         ]);
     }
 
+    /**
+     * Create a new journal.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function storeJournal(Request $request)
+    {
+        Journal::create([
+            'title'     => $request->title,
+            'content'   => $request->content,
+            'slug'      => str_slug($request->title, '-') . '-' . sprintf("%s", mt_rand(10000, 99999)),
+        ]);
+
+        return redirect('admin/journals');
+    }
+
+    /**
+     * Edit a journal.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function updateJournal(Request $request, Journal $journal)
+    {
+        $journal->update([
+            'title'     => $request->title,
+            'content'   => $request->content,
+        ]);
+
+        return redirect('admin/journals');
+    }
+
 }

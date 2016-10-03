@@ -22,8 +22,13 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Events</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Gender</th>
+                                <th>Birthdate</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -32,6 +37,16 @@
                             <tr>
                                 <td>{{ $user->id }}</td>
                                 <td>{{ $user->first_name }}</td>
+                                <td>{{ $user->last_name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->phone }}</td>
+                                <td>
+                                	@if ($user->gender == 1) male
+                                	@else female
+                                	@endif
+                                </td>
+                                <td>{{ Carbon\Carbon::parse($user->birthdate)->format('M d, Y') }}</td>
+                                <td><input type="checkbox" name="status" id="{{ $user->id }}" class="status" data-size="mini" @if ($user->status > 0) checked @endif ><br></td>
                                 <td>
                                     <div class="btn-group">
                                         <a href="{{ url('admin/user/'.$user->id.'/edit') }}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-edit text-blue"></i></button></a>
@@ -57,4 +72,16 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+$(function () {
+    // status switcher
+    $(".status").bootstrapSwitch();
+    $(".status").on('switchChange.bootstrapSwitch', function(event, state) {
+        $(this).closest('form').submit();
+    });
+});
+</script>
 @endsection

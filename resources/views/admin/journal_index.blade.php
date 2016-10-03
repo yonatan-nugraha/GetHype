@@ -22,8 +22,7 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Events</th>
+                                <th>Title</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -31,7 +30,7 @@
                             @foreach ($journals as $journal)
                             <tr>
                                 <td>{{ $journal->id }}</td>
-                                <td>{{ $journal->name }}</td>
+                                <td>{{ $journal->title }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <a href="{{ url('admin/journals/'.$journal->id.'/edit') }}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-edit text-blue"></i></button></a>
