@@ -30,6 +30,9 @@ Route::get('/services', 'HomeController@service');
 Route::group(['prefix' => 'admin'], function () {
 	Route::get('', 'AdminController@index');
 
+	//users
+	Route::get('users', 'AdminController@showUserList');
+
 	//events
 	Route::get('events', 'AdminController@showEventList');
     Route::get('events/create', 'AdminController@createEvent');
@@ -39,6 +42,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('collections', 'AdminController@showCollectionList');
     Route::get('collections/create', 'AdminController@createCollection');
     Route::get('collections/{collection}/edit', 'AdminController@editCollection');
+
+    //journals
+    Route::get('journals', 'AdminController@showJournalList');
+    Route::get('journals/create', 'AdminController@createJournal');
+    Route::get('journals/{journal}/edit', 'AdminController@editJournal');
 });
 
 //accounts
@@ -52,9 +60,9 @@ Route::group(['prefix' => 'account'], function () {
 //events
 Route::group(['prefix' => 'events'], function () {
 	//create & update events for admin
-	Route::post('', 'EventController@store')->middleware('auth');
-	Route::patch('{event}', 'EventController@update')->middleware('auth');
-	Route::patch('{event}/update-status', 'EventController@updateStatus')->middleware('auth');
+	Route::post('', 'AdminController@storeEvent');
+	Route::patch('{event}', 'AdminController@updateEvent');
+	Route::patch('{event}/update-status', 'AdminController@updateStatusEvent');
 
 	//book ticket
 	Route::patch('{event}/book-ticket', 'EventController@bookTicket')->middleware('auth');
@@ -72,10 +80,10 @@ Route::group(['prefix' => 'events'], function () {
 
 //collections
 Route::group(['prefix' => 'collections'], function () {
-	Route::get('add-event', 'EventController@addEventCollection')->middleware('auth');
+	Route::get('add-event', 'AdminController@addEventCollection');
+	Route::post('', 'AdminController@storeCollection');
+	Route::patch('{collection}', 'AdminController@updateCollection');
 
-	Route::post('', 'EventController@storeCollection')->middleware('auth');
-	Route::patch('{collection}', 'EventController@updateCollection')->middleware('auth');
 	Route::get('{collection}', 'EventController@showCollectionDetail');
 });
 
