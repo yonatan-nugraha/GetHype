@@ -409,8 +409,8 @@
                                 </div>
                                 <span class="event-time clearfix">{{ Carbon\Carbon::parse($event->started_at)->format('l, M d, Y | g.i A') }}</span>
                                 <p class="event-price">
-                                    @if ($event->min_price == '' || ($event->min_price == 0 && $event->max_price == 0)) Free
-                                    @elseif ($event->min_price == 0 && $event->max_price > 0) {{ $event->max_price/1000 . 'K' }} 
+                                    @if ($event->min_price == 0 && $event->max_price == 0) Free
+                                    @elseif ($event->min_price == 0 && $event->max_price > 0) IDR {{ $event->max_price/1000 . 'K' }} 
                                     @else IDR {{ $event->min_price/1000 . 'K' }} 
                                     @endif
                                 </p>
