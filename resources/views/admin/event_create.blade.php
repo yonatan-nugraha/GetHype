@@ -6,7 +6,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <div class="box box-primary">
+            <div class="box box-info">
                 <div class="box-header with-border">
                     <h3 class="box-title">1. Event Details</h3>
                 </div>
@@ -54,7 +54,7 @@
         </div>
         <div class="col-md-6">
             <input type="hidden" class="ticket-group" name="ticket_group_quantity" value="0">
-            <div class="box box-primary">
+            <div class="box box-success">
                 <div class="box-header with-border">
                     <h3 class="box-title">2. Create Tickets</h3>
                 </div>
@@ -108,7 +108,7 @@ $(function () {
         i++;
         ticket_count++;
 
-        $("#ticket-row-"+i).after('<div class="row" id="ticket-row-'+ticket_count+'"><div class="col-xs-6"><label>Name</label><input type="text" class="form-control" name="ticket_name_'+ticket_count+'" placeholder="Name" required pattern=".{3,20}"></div><div class="col-xs-3"><label>Quantity</label><input type="number" class="form-control" name="ticket_quantity_'+ticket_count+'" placeholder="Quantity" required min="1" max="500"></div><div class="col-xs-3"><label>Price</label><input type="number" class="form-control" name="ticket_price_'+ticket_count+'" placeholder="Price" required min="0" max="5000000"></div></div>');
+        $("#ticket-row-"+i).after('<div class="row" id="ticket-row-'+ticket_count+'"><div class="col-xs-7"><label>Name</label><input type="text" class="form-control" name="ticket_name_'+ticket_count+'" placeholder="Name" required pattern=".{3,20}"></div><div class="col-xs-2"><label>Quantity</label><input type="number" class="form-control" name="ticket_quantity_'+ticket_count+'" placeholder="Qty" required min="1" max="500"></div><div class="col-xs-3"><label>Price</label><input type="number" class="form-control" name="ticket_price_'+ticket_count+'" placeholder="Price" required min="0" max="5000000"></div></div>');
 
         $(".ticket-group").val(ticket_count);
     });

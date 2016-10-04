@@ -131,6 +131,7 @@ Route::group(['prefix' => 'tickets'], function () {
 Route::group(['prefix' => 'checkout'], function () {
 	Route::get('', 'CheckoutController@index');
 	Route::post('pay', 'CheckoutController@pay');
+	Route::post('proceed', 'CheckoutController@proceed');
 	Route::get('success', 'CheckoutController@success');
 	Route::get('failed', 'CheckoutController@failed');
 	Route::get('bypass', 'CheckoutController@bypass');

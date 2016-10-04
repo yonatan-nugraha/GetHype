@@ -68,10 +68,10 @@ class MyEventController extends Controller
             ->where('event_id', $event->id)
             ->pluck('total_views');
 
-		$order_details = Order::select(DB::raw('SQL_CALC_FOUND_ROWS *, orders.id, users.first_name, users.last_name, users.email, ticket_groups.name, order_details.quantity, orders.created_at, ticket_groups.price'))
+		$order_details = Order::select(DB::raw('SQL_CALC_FOUND_ROWS *, orders.id, contacts.first_name, contacts.last_name, contacts.email, ticket_groups.name, order_details.quantity, orders.created_at, ticket_groups.price'))
 		        ->join('order_details', 'orders.id', '=', 'order_details.order_id')
 		        ->join('ticket_groups', 'ticket_groups.id', '=', 'order_details.ticket_group_id')
-		        ->join('users', 'users.id', '=', 'orders.user_id')
+		        ->join('contacts', 'contacts.id', '=', 'orders.contact_id')
 		        ->where('orders.event_id', $event->id)
 				->where('orders.order_status', 2)
                 ->take($this->orders_limit)
@@ -234,10 +234,10 @@ class MyEventController extends Controller
             return redirect('');
         }
 
-        $order_details = Order::select(DB::raw('orders.id, users.first_name, users.last_name, users.email, ticket_groups.name, order_details.quantity, orders.created_at, ticket_groups.price'))
+        $order_details = Order::select(DB::raw('orders.id, contacts.first_name, contacts.last_name, contacts.email, ticket_groups.name, order_details.quantity, orders.created_at, ticket_groups.price'))
                 ->join('order_details', 'orders.id', '=', 'order_details.order_id')
                 ->join('ticket_groups', 'ticket_groups.id', '=', 'order_details.ticket_group_id')
-                ->join('users', 'users.id', '=', 'orders.user_id')
+                ->join('contacts', 'contacts.id', '=', 'orders.contact_id')
                 ->where('orders.event_id', $event->id)
                 ->where('orders.order_status', 2)
                 ->whereDate('orders.created_at', '>=', $request->start_date)

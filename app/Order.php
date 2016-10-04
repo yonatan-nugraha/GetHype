@@ -12,7 +12,7 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
-    	'user_id', 'event_id', 'amount', 'order_status', 'payment_status', 'payment_type'
+    	'user_id', 'event_id', 'contact_id', 'order_status', 'order_amount', 'administration_fee', 'payment_status', 'payment_type', 'payment_amount'
     ];
 
     /**
@@ -37,5 +37,13 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the contact that owns the order.
+     */
+    public function contact()
+    {
+        return $this->belongsTo(Contact::class);
     }
 }

@@ -35,6 +35,14 @@ class NotificationController extends Controller
      *
      * @param  Request  $request
      * @return Response
+     *
+     * $status
+     * 1 = cancelled
+     * 2 = denied
+     * 3 = success (for credit card)
+     * 4 = challenged
+     * 5 = settlement
+     * 6 = others
      */
     public function payment(Request $request)
     {
@@ -110,7 +118,6 @@ class NotificationController extends Controller
             $order->update([
             	'order_status'	 => $order_status,
                 'payment_status' => $payment_status,
-                'payment_type'   => $payment_type,
             ]);
         }
     }

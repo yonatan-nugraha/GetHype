@@ -89,8 +89,8 @@
 <script>
 $(function () {
     // status switcher
-    $(".status").bootstrapSwitch();
-    $(".status").on('switchChange.bootstrapSwitch', function(event, state) {
+    $('.status').bootstrapSwitch();
+    $('.status').on('switchChange.bootstrapSwitch', function(event, state) {
         $(this).closest('form').submit();
     });
 });

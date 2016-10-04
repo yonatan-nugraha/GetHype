@@ -95,6 +95,10 @@ body {
 	background-color: #F1F2F2 !important;
 }
 
+.payment-disabled {
+	background-color: #F1F2F2 !important;
+}
+
 /**************************************/
 /*********** Order Details ************/
 /**************************************/
@@ -229,17 +233,28 @@ body {
 	min-width: 100px;
 	-webkit-appearance: none;
 }
+
+.error-block {
+    color: red;
+    font-weight: 300;
+    font-size: 12px;
+}
 </style>
 
 @extends('layouts.app')
 
 @section('content')
 
-<form action="{{ url('checkout/pay') }}" method="POST">
+<form action="@if ($order_amount > 0) {{ url('checkout/pay') }} @else {{ url('checkout/proceed') }} @endif" method="POST">
 {!! csrf_field() !!}
 	<div class="container checkout">
 		<div class="row">
 			<div class="col-xs-8 checkout-input">
+				@if ($errors->has('error'))
+					<div class="alert alert-dismissible alert-danger">
+	                	<p>{{ $errors->first('error') }}</p>
+	              	</div>
+	            @endif
 				<div class="panel contact-details">
 				  	<div class="panel-heading">
 				    	<h3 class="panel-title">Contact Details</h3>
@@ -247,19 +262,42 @@ body {
 				  	<div class="panel-body">
 				    	<div class="form-group col-xs-5">
 						 	<label class="control-label">First Name</label>
-						  	<input class="form-control" type="text" value="{{ Auth::user()->first_name }}">
+						  	<input class="form-control" type="text" name="first_name" value="{{ Auth::user()->first_name }}">
+						  	@if ($errors->has('first_name'))
+	                        <span class="error-block">
+	                        	{{ $errors->first('first_name') }}
+	                        </span>
+	                        @endif
 						</div>
 						<div class="form-group col-xs-5">
 						 	<label class="control-label">Last Name</label>
-						  	<input class="form-control" type="text" value="{{ Auth::user()->last_name }}">
+						  	<input class="form-control" type="text" name="last_name" value="{{ Auth::user()->last_name }}">
+						  	@if ($errors->has('first_name'))
+	                        <span class="error-block">&nbsp;</span>
+	                        @endif
 						</div>
+
 						<div class="form-group col-xs-5">
 						  	<label class="control-label">Email</label>
-						  	<input class="form-control" type="text" value="{{ Auth::user()->email }}">
+						  	<input class="form-control" type="email" name="email" value="{{ Auth::user()->email }}">
+						  	@if ($errors->has('email'))
+	                        <span class="error-block">
+	                        	{{ $errors->first('email') }}
+	                        </span>
+	                        @elseif ($errors->has('phone'))
+	                        <span class="error-block">&nbsp;</span>
+	                        @endif
 						</div>
 						<div class="form-group col-xs-5">
 						  	<label class="control-label">Mobile Phone</label>
-						  	<input class="form-control" type="text" value="{{ Auth::user()->phone }}">
+						  	<input class="form-control" type="text" name="phone" value="{{ Auth::user()->phone }}">
+						  	@if ($errors->has('phone'))
+	                        <span class="error-block">
+	                        	{{ $errors->first('phone') }}
+	                        </span>
+	                        @elseif ($errors->has('email'))
+	                        <span class="error-block">&nbsp;</span>
+	                        @endif
 						</div>
 						<div class="col-xs-12">
 							<span class="contact-alert">* make sure you contact detail is correct</span>
@@ -272,39 +310,39 @@ body {
 				    	<h3 class="panel-title">Payment Options</h3>
 				  	</div>
 				  	<div class="panel-body">
-				    	<div class="thumbnail payment-box" id="bank_transfer">
+				    	<div class="thumbnail payment-box @if ($order_amount == 0) payment-disabled @endif" id="bank_transfer">
 				    		<img src="{{ asset('/images/payments/jcb.png') }}">
 				    	</div>
-				    	<div class="thumbnail payment-box" id="credit_card">
+				    	<div class="thumbnail payment-box @if ($order_amount == 0) payment-disabled @endif" id="credit_card">
 				    		<img src="{{ asset('/images/payments/visa.png') }}">
 				    	</div>
-				    	<div class="thumbnail payment-box" id="bca_klikpay">
+				    	<div class="thumbnail payment-box @if ($order_amount == 0) payment-disabled @endif" id="bca_klikpay">
 				    		<img src="{{ asset('/images/payments/bca_klikpay.png') }}">
 				    	</div>
-				    	<div class="thumbnail payment-box" id="mandiri_clickpay">
+				    	<div class="thumbnail payment-box @if ($order_amount == 0) payment-disabled @endif" id="mandiri_clickpay">
 				    		<img src="{{ asset('/images/payments/mandiri_clickpay.png') }}">
 				    	</div>
-				    	<div class="thumbnail payment-box" id="cimb_clicks">
+				    	<div class="thumbnail payment-box @if ($order_amount == 0) payment-disabled @endif" id="cimb_clicks">
 				    		<img src="{{ asset('/images/payments/cimb_clicks.png') }}">
 				    	</div>
-				    	<div class="thumbnail payment-box" id="epay_bri">
+				    	<div class="thumbnail payment-box @if ($order_amount == 0) payment-disabled @endif" id="epay_bri">
 				    		<img src="{{ asset('/images/payments/epay_bri.png') }}">
 				    	</div>
-				    	<div class="thumbnail payment-box" id="mandiri_ecash">
+				    	<div class="thumbnail payment-box @if ($order_amount == 0) payment-disabled @endif" id="mandiri_ecash">
 				    		<img src="{{ asset('/images/payments/mandiri_ecash.png') }}">
 				    	</div>
-				    	<div class="thumbnail payment-box" id="indosat_dompetku">
+				    	<div class="thumbnail payment-box @if ($order_amount == 0) payment-disabled @endif" id="indosat_dompetku">
 				    		<img src="{{ asset('/images/payments/indosat_dompetku.png') }}">
 				    	</div>
-				    	<div class="thumbnail payment-box" id="telkomsel_cash">
+				    	<div class="thumbnail payment-box @if ($order_amount == 0) payment-disabled @endif" id="telkomsel_cash">
 				    		<img src="{{ asset('/images/payments/telkomsel_cash.png') }}">
 				    	</div>
-				    	<div class="thumbnail payment-box" id="xl_tunai">
+				    	<div class="thumbnail payment-box @if ($order_amount == 0) payment-disabled @endif" id="xl_tunai">
 				    		<img src="{{ asset('/images/payments/xl_tunai.png') }}">
 				    	</div>
 				  	</div>
 				</div>
-				<button class="btn pay-submit pull-right" type="submit">Pay</button>
+				<button class="btn pay-submit pull-right" type="submit">@if ($order_amount > 0) Pay @else Proceed @endif</button>
 			</div>
 			<div class="col-xs-4 order-details">
 				<p class="order-summary">Order Summary</p>
@@ -328,9 +366,9 @@ body {
 					@endforeach
 				</div>
 				<div class="row subtotal">
-					<input type="hidden" class="subtotal-hidden" value="{{ $amount }}">
+					<input type="hidden" class="subtotal-hidden" value="{{ $order_amount }}">
 					<span class="col-xs-8 subtotal-title">Sub Total</span>
-					<span class="col-xs-4 subtotal-price">{{ 'Rp '. number_format($amount) }}</span>
+					<span class="col-xs-4 subtotal-price">{{ 'Rp '. number_format($order_amount) }}</span>
 				</div>
 				<div class="row adminfee">
 					<p class="adminfee-plus">(+)</p>
@@ -340,7 +378,7 @@ body {
 				</div>
 				<div class="row grandtotal">
 					<span class="col-xs-8 grandtotal-title">Total</span>
-					<span class="col-xs-4 grandtotal-price">{{ 'Rp '. number_format($amount) }}</span>
+					<span class="col-xs-4 grandtotal-price">{{ 'Rp '. number_format($order_amount) }}</span>
 				</div>
 			</div>
 		</div>

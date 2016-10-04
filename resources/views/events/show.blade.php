@@ -377,6 +377,7 @@
                 {{ method_field('PATCH') }}
 	        	<div class="modal-body">
 			  		@foreach ($event->ticket_groups as $ticket_group)
+			  		@if ($ticket_group->status == 1)
 			  		<input type="hidden" id="ticket-price-{{ $ticket_group->id }}" value="{{ $ticket_group->price }}">
 			  		<div class="row ticket-row">
 				  		<div class="col-xs-3">
@@ -407,6 +408,7 @@
 		         			<p class="ticket-total" id="ticket-total-{{ $ticket_group->id }}">{{ 'Rp '. number_format($ticket_group->price) }}</p>
 	         			</div>
 	         		</div>
+	         		@endif
          			@endforeach
 			  	</div>
 	        	<div class="modal-footer">
