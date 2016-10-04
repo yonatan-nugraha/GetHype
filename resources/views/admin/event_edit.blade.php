@@ -7,7 +7,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <div class="box box-primary">
+            <div class="box box-info">
                 <div class="box-header with-border">
                     <h3 class="box-title">1. Edit Event</h3>
                 </div>
@@ -26,7 +26,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-clock-o"></i>
                             </div>
-                            <input type="text" class="form-control pull-right" name="event_time" id="reservationtime" value="{{ $event->started_at . ' - ' . $event->ended_at }}">
+                            <input type="text" class="form-control pull-right event-time" name="event_time" value="{{ $event->started_at . ' - ' . $event->ended_at }}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -54,7 +54,7 @@
         </div>
         <div class="col-md-6">
             <input type="hidden" class="ticket-group" name="ticket_group_quantity" value="0">
-            <div class="box box-primary">
+            <div class="box box-success">
                 <div class="box-header with-border">
                     <h3 class="box-title">2. Edit/Create Tickets</h3>
                 </div>
@@ -67,11 +67,11 @@
                     </div>
                     @foreach ($event->ticket_groups as $ticket_group)
                     <div class="row" id="ticket-row">
-                        <div class="col-xs-6">
+                        <div class="col-xs-7" style="margin-bottom: 5px;">
                             <label>Name</label>
                             <input type="text" class="form-control" placeholder="Name" value="{{ $ticket_group->name }}" disabled="">
                         </div>
-                        <div class="col-xs-3">
+                        <div class="col-xs-2">
                             <label>Quantity</label>
                             <input type="number" class="form-control" placeholder="Quantity" value="{{ count($ticket_group->tickets) }}" disabled="">
                         </div>
@@ -79,8 +79,25 @@
                             <label>Price</label>
                             <input type="number" class="form-control" placeholder="Price" value="{{ $ticket_group->price }}" disabled="">
                         </div>
-
+                        <div class="col-xs-7">
+                            <label>Date and Time</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                                <input type="text" class="form-control ticket-time" name="ticket_time_{{ $ticket_group->id }}" value="{{ $ticket_group->started_at . ' - ' . $ticket_group->ended_at }}">
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <label>+ Qty</label>
+                            <input type="number" class="form-control" name="ticket_qty_{{ $ticket_group->id }}"placeholder="Qty">
+                        </div>
+                        <div class="col-xs-3">
+                            <label>Status</label>
+                            <input type="checkbox" name="ticket_status_{{ $ticket_group->id }}" class="status" data-size="small" @if ($ticket_group->status > 0) checked @endif ><br>
+                        </div>
                     </div>
+                    <hr>
                     @endforeach
                     <div class="row" id="ticket-row-0">
                     </div>
@@ -98,9 +115,15 @@
 <script>
 $(function () {
     // date range picker with time picker
-    $('#reservationtime').daterangepicker({
+    $('.event-time').daterangepicker({
         timePicker: true, 
-        timePickerIncrement: 30, 
+        locale: {
+            format: 'YYYY-MM-DD hh:mm:ss'
+        }
+    });
+
+    $('.ticket-time').daterangepicker({
+        timePicker: true, 
         locale: {
             format: 'YYYY-MM-DD hh:mm:ss'
         }
@@ -109,14 +132,17 @@ $(function () {
     // add ticket
     var i = -1;
     var ticket_count = 0;
-    $(".add-ticket").click(function() {
+    $('.add-ticket').click(function() {
         i++;
         ticket_count++;
 
-        $("#ticket-row-"+i).after('<div class="row" id="ticket-row-'+ticket_count+'"><div class="col-xs-6"><label>Name</label><input type="text" class="form-control" name="ticket_name_'+ticket_count+'" placeholder="Name" required pattern=".{3,20}"></div><div class="col-xs-3"><label>Quantity</label><input type="number" class="form-control" name="ticket_quantity_'+ticket_count+'" placeholder="Quantity" required min="1" max="500"></div><div class="col-xs-3"><label>Price</label><input type="number" class="form-control" name="ticket_price_'+ticket_count+'" placeholder="Price" required min="0" max="5000000"></div></div>');
+        $('#ticket-row-'+i).after('<div class="row" id="ticket-row-'+ticket_count+'"><div class="col-xs-7"><label>Name</label><input type="text" class="form-control" name="ticket_name_'+ticket_count+'" placeholder="Name" required pattern=".{3,20}"></div><div class="col-xs-2"><label>Quantity</label><input type="number" class="form-control" name="ticket_quantity_'+ticket_count+'" placeholder="Qty" required min="1" max="500"></div><div class="col-xs-3"><label>Price</label><input type="number" class="form-control" name="ticket_price_'+ticket_count+'" placeholder="Price" required min="0" max="5000000"></div></div>');
 
-        $(".ticket-group").val(ticket_count);
+        $('.ticket-group').val(ticket_count);
     });
+
+    // status switcher
+    $('.status').bootstrapSwitch();
 });
 </script>
 @endsection

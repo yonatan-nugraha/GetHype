@@ -12,12 +12,14 @@ use App\Ticket;
 use App\TicketGroup;
 use App\Order;
 use App\OrderDetail;
+use App\Contact;
 
 use App\Mail\Welcome;
 use App\Mail\ActivateAccount;
 use App\Mail\CheckoutSuccess;
 
 use Mail;
+use Validator, Input, Redirect;
 
 use App\Veritrans\Veritrans;
 
@@ -53,7 +55,7 @@ class CheckoutController extends Controller
         return view('checkout/index', [
         	'order_details' => $order->order_details,
             'event'         => $order->event,
-        	'amount' 		=> $order->amount,
+        	'order_amount'  => $order->order_amount,
             'total_quantity' => $order->total_quantity
         ]);
     }
@@ -68,13 +70,18 @@ class CheckoutController extends Controller
     {
         $order = json_decode(Redis::get('order:'.auth()->id()));
 
-        if ($order == null) {
+        if ($order == null || $order->order_amount == 0) {
             return redirect('');
         }
 
-        $event  = $order->event;
-        $amount = $order->amount;
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|alpha|min:2|max:30',
+            'last_name' => 'alpha|max:30',
+            'email'     => 'required|email|max:80',
+            'phone'     => 'required|min:6|max:20',
+        ]);
 
+        $payment_type = $request->payment_type;
         $payment_fees = array(
             'bank_transfer'     => 4900,
             'credit_card'       => 5000,
@@ -88,18 +95,40 @@ class CheckoutController extends Controller
             'xl_tunai'          => 3000,
         );
 
-        $payment_type = $request->payment_type;
-        if ($payment_type == '' || $payment_fees[$payment_type] == 0) {
-            return redirect('');
+        $validator->after(function($validator) use ($request, $payment_type, $payment_fees) {
+            if ($payment_type == '' || $payment_fees[$payment_type] == 0) {
+                $validator->errors()->add('error', 'Please select one of the payment options to proceed.');
+            }
+        });
+
+        if ($validator->fails()) {
+            return redirect('/checkout')
+                ->withErrors($validator)
+                ->withInput();
         }
 
+        $event          = $order->event;
+        $order_amount   = $order->order_amount;
+        $administration_fee = $payment_fees[$payment_type];
+        $payment_amount = $order_amount + $administration_fee;
+
+        $contact_id = Contact::create([
+            'first_name'    => ucwords($request->first_name),
+            'last_name'     => ucwords($request->last_name),
+            'email'         => $request->email,
+            'phone'         => $request->phone,
+        ])->id;
+
     	$order_id = Order::create([
-    		'user_id'	=> auth()->id(),
-            'event_id'  => $event->id,
-            'amount' 	=> $amount,
-            'order_status' => 0,
+    		'user_id'	    => auth()->id(),
+            'event_id'      => $event->id,
+            'contact_id'    => $contact_id,
+            'order_status'  => 0,
+            'order_amount' 	=> $order_amount,
+            'administration_fee' => $administration_fee,
             'payment_status' => 0,
-            'payment_type' => $payment_type,
+            'payment_amount'=> $payment_amount,
+            'payment_type'  => $payment_type,
         ])->id;
 
         $items = array();
@@ -124,7 +153,7 @@ class CheckoutController extends Controller
             'payment_type' => 'vtweb',
             'transaction_details' => array(
                 'order_id'    => $order_id,
-                'gross_amount'  => $amount,
+                'gross_amount'  => $payment_amount,
             ),
             'vtweb' => array(
                 'enabled_payments' => array('bca_klikpay'),
@@ -142,6 +171,88 @@ class CheckoutController extends Controller
         $vtweb_url = $vt->vtweb_charge($transaction_data);
 
         return redirect($vtweb_url);
+    }
+
+    /**
+     * Create order and finish.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function proceed(Request $request)
+    {
+        $order = json_decode(Redis::get('order:'.auth()->id()));
+
+        if ($order == null || $order->order_amount > 0) {
+            return redirect('');
+        }
+
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|alpha|min:2|max:30',
+            'last_name' => 'alpha|max:30',
+            'email'     => 'required|email|max:80',
+            'phone'     => 'required|min:6|max:20',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/checkout')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $event          = $order->event;
+        $order_amount   = $order->order_amount;
+        $ticket_ids     = $order->ticket_ids;
+        $administration_fee = 0;
+        $payment_amount = $order_amount + $administration_fee;
+        $payment_type   = 'free';
+
+        $contact_id = Contact::create([
+            'first_name'    => ucwords($request->first_name),
+            'last_name'     => ucwords($request->last_name),
+            'email'         => $request->email,
+            'phone'         => $request->phone,
+        ])->id;
+
+        $order_id = Order::create([
+            'user_id'       => auth()->id(),
+            'event_id'      => $event->id,
+            'contact_id'    => $contact_id,
+            'order_status'  => 0,
+            'order_amount'  => $order_amount,
+            'administration_fee' => $administration_fee,
+            'payment_status' => 0,
+            'payment_amount'=> $payment_amount,
+            'payment_type'  => $payment_type,
+        ])->id;
+
+        foreach ($order->order_details as $order_detail) {
+            OrderDetail::create([
+                'order_id'          => $order_id,
+                'ticket_group_id'   => $order_detail->ticket_group->id,
+                'quantity'          => $order_detail->quantity,
+            ]);
+        }
+
+        $tickets_updated = Ticket::whereIn('id', $ticket_ids)
+        ->where('status', 2)
+        ->where('booked_by', auth()->id())
+        ->update([
+            'status'    => 3,
+            'order_id'  => $order_id,
+        ]);
+
+        if ($tickets_updated > 0) {
+            Order::where('id', $order_id)->update([
+                'order_status'   => 2,
+                'payment_status' => 5,
+            ]);
+
+            Mail::to(auth()->user()->email)->queue(new CheckoutSuccess);
+            Redis::del('order:'.auth()->id());
+        }        
+
+        return redirect('checkout/success?order_id='.$order_id);
     }
 
     /**
@@ -195,6 +306,14 @@ class CheckoutController extends Controller
      *
      * @param  Request  $request
      * @return Response
+     *
+     * $status
+     * 1 = cancelled
+     * 2 = denied
+     * 3 = success (for credit card)
+     * 4 = challenged
+     * 5 = settlement
+     * 6 = others
      */
     public function bypass(Request $request)
     {

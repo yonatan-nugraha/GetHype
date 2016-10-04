@@ -77,9 +77,9 @@ class EventController extends Controller
      */
     public function bookTicket(Request $request, Event $event)
     {
-        $order_details = array();
-        $ticket_ids = array();
-        $amount = 0;
+        $order_details  = array();
+        $ticket_ids     = array();
+        $order_amount   = 0;
         $total_quantity = 0;
 
         foreach ($event->ticket_groups_available as $ticket_group) {
@@ -101,12 +101,12 @@ class EventController extends Controller
                     $ticket_ids[] = $ticket->id;
                 }
 
-                $amount += $quantity * $ticket_group->price;
+                $order_amount               += $quantity * $ticket_group->price;
 
-                $order_detail = new OrderDetail;
+                $order_detail               = new OrderDetail;
                 $order_detail->ticket_group = $ticket_group;
-                $order_detail->quantity = $quantity;
-                $order_details[] = $order_detail;
+                $order_detail->quantity     = $quantity;
+                $order_details[]            = $order_detail;
             }
         }
 
@@ -124,12 +124,12 @@ class EventController extends Controller
             'order_details' => $order_details,
             'ticket_ids'    => $ticket_ids,
             'event'         => $event,
-            'amount'        => $amount,
+            'order_amount'  => $order_amount,
             'total_quantity' => $total_quantity
         );
 
         Redis::set('order:'.auth()->id(), json_encode($order));
-        Redis::expire('order:'.auth()->id(), 1000);
+        Redis::expire('order:'.auth()->id(), 5000);
 
         return redirect('checkout');
     }

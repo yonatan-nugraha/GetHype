@@ -134,6 +134,12 @@
                                 <label>Gender</label><br>
                                 <span class="gender" n><input type="radio" name="gender" value="1" checked> Male</span>
                                 <span class="gender" n><input type="radio" name="gender" value="2"> Female</span>
+
+                                @if ($errors->has('gender'))
+                                    <span class="help-block">
+                                        <p>{{ $errors->first('gender') }}</p>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 

@@ -15,6 +15,8 @@ use App\Collection;
 use App\EventCollection;
 use App\Journal;
 
+use Carbon\Carbon;
+
 class AdminController extends Controller {
 
 	/**
@@ -185,7 +187,7 @@ class AdminController extends Controller {
                 'name'          => $request['ticket_name_'.$i],
                 'price'         => $request['ticket_price_'.$i],
                 'status'        => 1,
-                'started_at'    => $started_at,
+                'started_at'    => Carbon::now(),
                 'ended_at'      => $ended_at,
             ])->id;
 
@@ -222,13 +224,32 @@ class AdminController extends Controller {
             'ended_at'       => $ended_at,
         ]);
 
+        foreach ($event->ticket_groups as $ticket_group) {
+            $ticket_group->update([
+                'status'        => $request['ticket_status_'.$ticket_group->id] ? 1 : 0,
+                'started_at'    => substr($request['ticket_time_'.$ticket_group->id], 0, 19),
+                'ended_at'      => substr($request['ticket_time_'.$ticket_group->id], 22, 19),
+            ]);
+
+            $ticket_qty = $request['ticket_qty_'.$ticket_group->id];
+            if ($ticket_qty > 0) {
+                for ($i = 0; $i < $ticket_qty; $i++) {
+                    Ticket::create([
+                        'ticket_group_id' => $ticket_group->id,
+                        'code'      => sprintf("%s", mt_rand(1000000, 9999999)),
+                        'status'    => 1,
+                    ]);
+                }
+            }
+        }
+
         for ($i = 1; $i <= $request->ticket_group_quantity; $i++) {
             $ticket_group_id = TicketGroup::create([
                 'event_id'      => $event->id,
                 'name'          => $request['ticket_name_'.$i],
                 'price'         => $request['ticket_price_'.$i],
                 'status'        => 1,
-                'started_at'    => $started_at,
+                'started_at'    => Carbon::now(),
                 'ended_at'      => $ended_at,
             ])->id;
 

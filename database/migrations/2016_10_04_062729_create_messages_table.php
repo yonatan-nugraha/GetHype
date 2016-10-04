@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTicketGroupsTable extends Migration
+class CreateMessagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateTicketGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ticket_groups', function (Blueprint $table) {
+        Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('event_id');
-            $table->string('name');
-            $table->double('price');
+            $table->string('subject');
+            $table->text('description');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email');
+            $table->string('phone');
             $table->integer('status');
-            $table->dateTime('started_at');
-            $table->dateTime('ended_at');
-            $table->integer('weight')->default(10);
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ class CreateTicketGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('ticket_groups');
+        Schema::drop('messages');
     }
 }

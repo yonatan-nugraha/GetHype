@@ -56,9 +56,12 @@ class AccountController extends Controller
     public function updateProfile(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'first_name' => 'required|max:255',
-            'email'     => 'required|email|max:255|unique:users,email,'.$request->user()->id,
-            'phone'     => 'required|min:6|max:255',
+            'first_name' => 'required|alpha|min:2|max:30',
+            'last_name' => 'alpha|max:30',
+            'email'     => 'required|email|max:80|unique:users,email,'.$request->user()->id,
+            'phone'     => 'required|min:6|max:20',
+            'birthdate' => 'required|date',
+            'gender'    => 'required|in:1,2'
         ]);
 
         if ($validator->fails()) {
@@ -96,15 +99,15 @@ class AccountController extends Controller
         }
 
         $request->user()->update([
-            'first_name'    => $request->first_name,
-            'last_name'     => $request->last_name,
+            'first_name'    => ucwords($request->first_name),
+            'last_name'     => ucwords($request->last_name),
             'email'         => $request->email,
             'phone'         => $request->phone,
             'gender'        => $request->gender,
             'birthdate'     => $request->birthdate,
         ]);
 
-        return redirect('/account/settings#edit-profile');
+        return redirect('/account/settings');
     }
 
     /**
@@ -116,8 +119,8 @@ class AccountController extends Controller
     public function updatePassword(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'current_password' => 'required|min:6',
-            'new_password' => 'required|min:6|confirmed',
+            'current_password' => 'required|min:6|max:255',
+            'new_password' => 'required|min:6|max:255|confirmed',
         ]);
 
         $validator->after(function($validator) use ($request) {

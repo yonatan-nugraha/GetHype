@@ -351,9 +351,9 @@ body {
 						    	</div>
 
 						    	<div class="col-xs-8 contact-details">
-						    		<p>Name: {{ Auth::user()->first_name }}</p>
-						    		<p>Email: {{ Auth::user()->email }}</p>
-						    		<p>Phone: {{ Auth::user()->phone }}</p>
+						    		<p>Name: {{ $order->contact->first_name . ' ' . $order->contact->last_name }}</p>
+						    		<p>Email: {{ $order->contact->email }}</p>
+						    		<p>Phone: {{ $order->contact->phone }}</p>
 						    	</div>
 						    </div>
 					   </div>
@@ -413,9 +413,9 @@ body {
 						    	</div>
 
 						    	<div class="col-xs-8 contact-details">
-						    		<p>Name: {{ Auth::user()->first_name }}</p>
-						    		<p>Email: {{ Auth::user()->email }}</p>
-						    		<p>Phone: {{ Auth::user()->phone }}</p>
+						    		<p>Name: {{ $order->contact->first_name . ' ' . $order->contact->last_name }}</p>
+						    		<p>Email: {{ $order->contact->email }}</p>
+						    		<p>Phone: {{ $order->contact->phone }}</p>
 						    	</div>
 						    </div>
 					   </div>

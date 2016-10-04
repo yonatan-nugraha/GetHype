@@ -233,6 +233,11 @@ body {
 					    	</div>
 					    	<div class="form-group col-xs-5">
 					    		<input type="text" class="form-control" name="last_name" placeholder="Last Name" value="{{ Auth::user()->last_name }}">
+					    		@if ($errors->has('last_name'))
+		                            <span class="help-block">
+		                                <p>{{ $errors->first('last_name') }}</p>
+		                            </span>
+		                        @endif
 					    	</div>
 				    	</div>
 				    	<div class="row">
@@ -257,6 +262,11 @@ body {
 					    	<div class="form-group col-xs-5">
 					    		<label>Your Birthdate</label>
 					    		<input type="date" class="form-control" name="birthdate" value="{{ Auth::user()->birthdate }}">
+					    		@if ($errors->has('birthdate'))
+		                            <span class="help-block">
+		                                <p>{{ $errors->first('birthdate') }}</p>
+		                            </span>
+		                        @endif
 					    	</div>
 					    </div>
 					    <div class="row gender">
@@ -266,6 +276,11 @@ body {
 					    		<span>Male</span>
   								<input type="radio" name="gender" value="2" @if (Auth::user()->gender == 2) checked @endif> 
   								<span>Female</span><br>
+  								@if ($errors->has('gender'))
+		                            <span class="help-block">
+		                                <p>{{ $errors->first('gender') }}</p>
+		                            </span>
+		                        @endif
 					    	</div>
 					    </div>
 					    <div class="row interest">
