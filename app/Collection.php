@@ -16,6 +16,19 @@ class Collection extends Model
     ];
 
     /**
+     * Get the image for the event.
+     */
+    public function image()
+    {
+        $filename = md5('collection-' . $this->id) . '.jpg';
+        if (file_exists(public_path() . '/images/collections/'. $filename)) {
+            return $filename;
+        } else {
+            return 'default.jpg';
+        }     
+    }
+
+    /**
      * Get the events for the collection.
      */
     public function event_collections()

@@ -34,10 +34,9 @@ class HomeController extends Controller
         $events = Event::select(DB::raw('events.id, events.name, events.category_id, events.event_type_id, events.location, events.started_at, events.ended_at, events.slug, min(ticket_groups.price) as min_price, max(ticket_groups.price) as max_price'))
             ->leftJoin('ticket_groups', 'events.id', '=', 'ticket_groups.event_id')
             ->where('events.status', 1)
-            ->where('events.started_at', '<=', Carbon::now())
             ->where('events.ended_at', '>=', Carbon::now())
             ->groupBy('events.id')
-            ->orderBy('events.started_at', 'desc');
+            ->orderBy('events.weight', 'desc');
 
         return view('home', [
             'events'        => $events->take(8)->get(),

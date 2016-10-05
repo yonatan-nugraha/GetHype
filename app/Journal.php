@@ -14,4 +14,17 @@ class Journal extends Model
     protected $fillable = [
     	'title', 'content', 'status', 'slug'
     ];
+
+    /**
+     * Get the image for the event.
+     */
+    public function image()
+    {
+        $filename = md5('journal-' . $this->id) . '.jpg';
+        if (file_exists(public_path() . '/images/journals/'. $filename)) {
+            return $filename;
+        } else {
+            return 'default.jpg';
+        }     
+    }
 }

@@ -245,7 +245,7 @@
                 <div class="col-xs-12 col-md-3 event-box">
                     <div class="thumbnail">
                         <a href="{{ url('/events/'.$event->slug) }}">
-                            <img class="event-image" src="{{ asset('/images/events/event-'.$event->id.'.jpg') }}">
+                            <img class="event-image" src="{{ asset('/images/events/'.$event->image()) }}">
                             <div class="event-caption">
                                 <div class="event-caption-head">
                                     <span class="event-name">{{ $event->name }}</span>

@@ -154,7 +154,15 @@ class AccountController extends Controller
     public function updatePicture(Request $request)
     {   
         if ($request->hasFile('photo') && $request->photo->isValid()) {
-            $request->photo->move(public_path('/images/users'), md5('user-'.auth()->user()->id).'.jpg');
+            $validator = Validator::make($request->all(), [
+                'photo' => 'mimes:jpeg,png,bmp'
+            ]);
+
+            if ($validator->fails()) {
+                return 0;
+            }
+
+            $request->photo->move(public_path('/images/users'), md5('user-'.auth()->id()).'.jpg');
         }
 
         return 1;

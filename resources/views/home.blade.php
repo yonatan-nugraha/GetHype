@@ -402,7 +402,7 @@
                 <div class="col-xs-12 col-md-3 event-box">
                     <div class="thumbnail">
                         <a href="{{ url('/events/'.$event->slug) }}">
-                            <img class="event-image" src="{{ asset('/images/events/event-'.$event->id.'.jpg') }}">
+                            <img class="event-image" src="{{ asset('/images/events/'.$event->image()) }}">
                             <div class="event-caption">
                                 <div class="event-caption-head">
                                     <span class="event-name">{{ $event->name }}</span>
@@ -438,7 +438,7 @@
                 <div class="col-xs-12 col-md-3 event-box">
                     <div class="thumbnail">
                         <a href="{{ url('/collections/'.$collection->slug) }}">
-                            <img class="event-image" src="{{ asset('/images/collections/collection-'.$collection->id.'.jpg') }}">
+                            <img class="event-image" src="{{ asset('/images/collections/'.$collection->image()) }}">
                         </a>
                     </div>
                     <div class="event-name">
@@ -472,7 +472,7 @@
                 <div class="col-xs-12 col-md-3 event-box">
                     <div class="thumbnail">
                         <a href="{{ url('/journals/'.$journal->slug) }}">
-                            <img class="event-image" src="{{ asset('/images/journals/journal-'.$journal->id.'.jpg') }}">
+                            <img class="event-image" src="{{ asset('/images/journals/'.$journal->image()) }}">
                             <div class="event-caption">
                                 <p class="event-name">{{ $journal->title }}</p>
                                 <span class="event-description">{{ strip_tags($journal->content) }}</span>
