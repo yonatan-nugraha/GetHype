@@ -44,11 +44,15 @@
         }
 
         .navbar-default .navbar-brand {
-            color: #fff;
+            color: #f2f2f2;
         }
 
         .navbar-default .navbar-nav>li>a {
-            color: #fff;
+            color: #f2f2f2;
+        }
+
+        .navbar-default .navbar-nav>li>a:hover{
+            color: #ccc;
         }
 
         .navbar-default .navbar-brand img {
@@ -85,13 +89,11 @@
         /**************************************/
 
         .footer {
-            color: #fff;
+            color: #f2f2f2;
             background-color: #0F3844;
             font-size: 17px;
-        }
-
-        .footer .gethype-logo {
-            width: 100px;
+            display: -webkit-box;
+            position: inherit;
         }
 
         .footer .footer-title {
@@ -100,7 +102,7 @@
         }
 
         .footer a {
-            color: #fff;
+            color: #f2f2f2;
             font-weight: 100;
         }
 
@@ -110,7 +112,7 @@
         }
 
         .footer .footer-main {
-            margin-top: 30px;
+            margin-top: 2.8em;
         }
 
         .footer .footer-main ul {
@@ -127,7 +129,7 @@
         }
 
         .footer .gethype-logo {
-            width: 120px;
+            width: 90px;
         }
 
         .footer .gethype-copyright {
@@ -138,6 +140,11 @@
 
         .gethype-line {
             width: 100%;
+            height: 7px;
+        }
+
+        .footer-secondary{
+            margin-top:5em;
         }
     </style>
 
@@ -177,8 +184,9 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
+                        <li><a href="{{ url('/journals') }}">Journal</a></li>
+                        <li><a href="{{ url('/register') }}">Sign up</a></li>
+                        <li><a href="{{ url('/login') }}">Log in</a></li>
                     @else
                         @if (count(Auth::user()->events) > 0)
                         <li><a href="{{ url('/myevents') }}">My Events</a></li>
