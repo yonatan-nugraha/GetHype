@@ -194,7 +194,7 @@ class AdminController extends Controller {
             for ($j = 0; $j < $request['ticket_quantity_'.$i]; $j++) {
                 Ticket::create([
                     'ticket_group_id' => $ticket_group_id,
-                    'code'      => sprintf("%s", mt_rand(1000000, 9999999)),
+                    'code'      => sprintf('G5%s', mt_rand(1000000000, 9999999999)),
                     'status'    => 1,
                 ]);
             }
@@ -236,7 +236,7 @@ class AdminController extends Controller {
                 for ($i = 0; $i < $ticket_qty; $i++) {
                     Ticket::create([
                         'ticket_group_id' => $ticket_group->id,
-                        'code'      => sprintf("%s", mt_rand(1000000, 9999999)),
+                        'code'      => sprintf('G5%s', mt_rand(1000000000, 9999999999)),
                         'status'    => 1,
                     ]);
                 }
@@ -256,7 +256,7 @@ class AdminController extends Controller {
             for ($j = 0; $j < $request['ticket_quantity_'.$i]; $j++) {
                 Ticket::create([
                     'ticket_group_id' => $ticket_group_id,
-                    'code'      => sprintf("%s", mt_rand(1000000, 9999999)),
+                    'code'      => sprintf('G5%s', mt_rand(1000000000, 9999999999)),
                     'status'    => 1,
                 ]);
             }
