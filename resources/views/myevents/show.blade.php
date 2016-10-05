@@ -197,7 +197,7 @@ body {
 
 @section('content')
 <div class="row event-banner">
-    <img src="{{ asset('images/banners/banner-event.jpg') }}">
+    <img src="{{ asset('/images/events/'.$event->banner()) }}">
 </div>
 
 <div class="container myevent">

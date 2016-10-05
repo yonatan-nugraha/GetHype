@@ -1,7 +1,7 @@
 @extends('admin.index')
 
 @section('content')
-<form action="{{ url('events/'.$event->id) }}" method="POST">
+<form action="{{ url('events/'.$event->id) }}" method="POST" enctype="multipart/form-data">
     {!! csrf_field() !!}
     {{ method_field('PATCH') }}
 
@@ -14,11 +14,11 @@
                 <div class="box-body">
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Name" value="{{ $event->name }}" required pattern=".{3,50}">
+                        <input type="text" class="form-control" name="name" placeholder="Name" value="{{ $event->name }}" required pattern=".{3,60}">
                     </div>
                     <div class="form-group">
                         <label>Location</label>
-                        <textarea class="form-control" name="location" rows="3" required pattern=".{5,80}">{{ $event->location }}</textarea>
+                        <textarea class="form-control" name="location" rows="2" required pattern=".{5,150}">{{ $event->location }}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Date and Time</label>
@@ -26,12 +26,12 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-clock-o"></i>
                             </div>
-                            <input type="text" class="form-control pull-right event-time" name="event_time" value="{{ $event->started_at . ' - ' . $event->ended_at }}">
+                            <input type="text" class="form-control pull-right event-time" name="event_time" value="{{ $event->started_at . ' - ' . $event->ended_at }}" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Category</label>
-                        <select class="form-control" name=category>
+                        <select class="form-control" name=category required>
                             @foreach ($categories as $category)
                             <option value="{{ $category->id }}" @if ($event->category->id == $category->id) selected @endif>{{ $category->name }}</option>
                             @endforeach
@@ -39,11 +39,19 @@
                     </div>
                     <div class="form-group">
                         <label>Event Type</label>
-                        <select class="form-control" name="event_type">
+                        <select class="form-control" name="event_type" required>
                             @foreach ($event_types as $event_type)
                             <option value="{{ $event_type->id }}" @if ($event->event_type->id == $event_type->id) selected @endif>{{ $event_type->name }}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="form-group col-xs-6" style="padding-left: 0;">
+                        <label>Image</label>
+                        <input type="file" class="form-control" name="image">
+                    </div>
+                    <div class="form-group col-xs-6" style="padding-right: 0;">
+                        <label>Banner</label>
+                        <input type="file" class="form-control" name="banner">
                     </div>
                     <div class="form-group">
                         <label>Description</label>
@@ -136,7 +144,7 @@ $(function () {
         i++;
         ticket_count++;
 
-        $('#ticket-row-'+i).after('<div class="row" id="ticket-row-'+ticket_count+'"><div class="col-xs-7"><label>Name</label><input type="text" class="form-control" name="ticket_name_'+ticket_count+'" placeholder="Name" required pattern=".{3,20}"></div><div class="col-xs-2"><label>Quantity</label><input type="number" class="form-control" name="ticket_quantity_'+ticket_count+'" placeholder="Qty" required min="1" max="500"></div><div class="col-xs-3"><label>Price</label><input type="number" class="form-control" name="ticket_price_'+ticket_count+'" placeholder="Price" required min="0" max="5000000"></div></div>');
+        $('#ticket-row-'+i).after('<div class="row" id="ticket-row-'+ticket_count+'"><div class="col-xs-7"><label>Name</label><input type="text" class="form-control" name="ticket_name_'+ticket_count+'" placeholder="Name" required pattern=".{3,50}"></div><div class="col-xs-2"><label>Quantity</label><input type="number" class="form-control" name="ticket_quantity_'+ticket_count+'" placeholder="Qty" required min="1" max="500"></div><div class="col-xs-3"><label>Price</label><input type="number" class="form-control" name="ticket_price_'+ticket_count+'" placeholder="Price" required min="0" max="5000000"></div></div>');
 
         $('.ticket-group').val(ticket_count);
     });

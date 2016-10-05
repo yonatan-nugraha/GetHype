@@ -18,6 +18,32 @@ class Event extends Model
     ];
 
     /**
+     * Get the image for the event.
+     */
+    public function image()
+    {
+        $filename = md5('event-' . $this->id) . '.jpg';
+        if (file_exists(public_path() . '/images/events/'. $filename)) {
+            return $filename;
+        } else {
+            return 'default.jpg';
+        }     
+    }
+
+    /**
+     * Get the banner for the event.
+     */
+    public function banner()
+    {
+        $filename = md5('event-banner-' . $this->id) . '.jpg';
+        if (file_exists(public_path() . '/images/events/'. $filename)) {
+            return $filename;
+        } else {
+            return 'banner-default.jpg';
+        }     
+    }
+
+    /**
      * Get the category that owns the event.
      */
     public function category()

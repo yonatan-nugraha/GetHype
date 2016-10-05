@@ -299,7 +299,7 @@ body {
 					@if (Carbon\Carbon::now() <= $order->event->ended_at)
 					<div class="row order-list-row" id="{{ $order->id }}">
 						<div class="col-xs-2 thumbnail">
-							<img src="{{ asset('/images/events/event-'.$order->event->id.'.jpg') }}">
+							<img src="{{ asset('/images/events/'.$order->event->image()) }}">
 						</div>
 						<div class="col-xs-10">
 					    	<p class="event-header">
@@ -371,7 +371,7 @@ body {
 					@if (Carbon\Carbon::now() > $order->event->ended_at)
 					<div class="row order-list-row" id="{{ $order->id }}">
 						<div class="col-xs-2 thumbnail">
-							<img src="{{ asset('/images/events/event-'.$order->event->id.'.jpg') }}">
+							<img src="{{ asset('/images/events/'.$order->event->image()) }}">
 						</div>
 						<div class="col-xs-10">
 					    	<p class="event-header">
@@ -433,7 +433,7 @@ body {
 	                <div class="col-xs-12 col-md-4 event-box">
 	                    <div class="thumbnail">
 	                        <a href="{{ url('/events/'.$bookmark->event->slug) }}" target="_blank">
-	                            <img class="event-image" src="{{ asset('/images/events/event-'.$bookmark->event->id.'.jpg') }}">
+	                            <img class="event-image" src="{{ asset('/images/events/'.$bookmark->event->image()) }}">
 	                            <div class="event-caption">
 	                                <div class="event-caption-head">
 	                                    <span class="event-name">{{ $bookmark->event->name }}</span>
