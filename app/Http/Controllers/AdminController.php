@@ -181,6 +181,14 @@ class AdminController extends Controller {
             'slug'          => str_slug($request->name, '-') . '-' . sprintf("%s", mt_rand(10000, 99999)),
         ])->id;
 
+        if ($request->hasFile('image') && $request->image->isValid()) {
+            $request->image->move(public_path('/images/events'), md5('event-'.$event_id).'.jpg');
+        }
+
+        if ($request->hasFile('banner') && $request->banner->isValid()) {
+            $request->banner->move(public_path('/images/events'), md5('event-banner-'.$event_id).'.jpg');
+        }
+
         for ($i = 1; $i <= $request->ticket_group_quantity; $i++) {
             $ticket_group_id = TicketGroup::create([
                 'event_id'      => $event_id,
@@ -223,6 +231,14 @@ class AdminController extends Controller {
             'started_at'     => $started_at,
             'ended_at'       => $ended_at,
         ]);
+
+        if ($request->hasFile('image') && $request->image->isValid()) {
+            $request->image->move(public_path('/images/events'), md5('event-'.$event->id).'.jpg');
+        }
+
+        if ($request->hasFile('banner') && $request->banner->isValid()) {
+            $request->banner->move(public_path('/images/events'), md5('event-banner-'.$event->id).'.jpg');
+        }
 
         foreach ($event->ticket_groups as $ticket_group) {
             $ticket_group->update([
@@ -347,11 +363,15 @@ class AdminController extends Controller {
      */
     public function storeCollection(Request $request)
     {
-        Collection::create([
+        $collection_id = Collection::create([
             'name'          => $request->name,
             'description'   => $request->description,
             'slug'          => str_slug($request->name, '-') . '-' . sprintf("%s", mt_rand(10000, 99999)),
-        ]);
+        ])->id;
+
+        if ($request->hasFile('image') && $request->image->isValid()) {
+            $request->image->move(public_path('/images/collections'), md5('collection-'.$collection_id).'.jpg');
+        }
 
         return redirect('admin/collections');
     }
@@ -368,6 +388,10 @@ class AdminController extends Controller {
             'name'           => $request->name,
             'description'    => $request->description,
         ]);
+
+        if ($request->hasFile('image') && $request->image->isValid()) {
+            $request->image->move(public_path('/images/collections'), md5('collection-'.$collection->id).'.jpg');
+        }
 
         return redirect('admin/collections');
     }
@@ -443,12 +467,16 @@ class AdminController extends Controller {
      */
     public function storeJournal(Request $request)
     {
-        Journal::create([
+        $journal_id = Journal::create([
             'title'     => $request->title,
             'content'   => $request->content,
             'slug'      => str_slug($request->title, '-') . '-' . sprintf("%s", mt_rand(10000, 99999)),
             'status'    => 0
-        ]);
+        ])->id;
+
+        if ($request->hasFile('image') && $request->image->isValid()) {
+            $request->image->move(public_path('/images/journals'), md5('journal-'.$journal_id).'.jpg');
+        }
 
         return redirect('admin/journals');
     }
@@ -465,6 +493,10 @@ class AdminController extends Controller {
             'title'     => $request->title,
             'content'   => $request->content,
         ]);
+
+        if ($request->hasFile('image') && $request->image->isValid()) {
+            $request->image->move(public_path('/images/journals'), md5('journal-'.$journal->id).'.jpg');
+        }
 
         return redirect('admin/journals');
     }

@@ -153,7 +153,7 @@ body {
 					@if (Carbon\Carbon::now() <= $event->ended_at)
 					<div class="row myevents-list-row" id="{{ $event->id }}">
 						<div class="col-xs-2 thumbnail">
-							<img src="{{ asset('/images/events/event-'.$event->id.'.jpg') }}">
+							<img src="{{ asset('/images/events/'.$event->image()) }}">
 						</div>
 						<div class="col-xs-10">
 					    	<p class="event-header">
@@ -183,7 +183,7 @@ body {
 					@if (Carbon\Carbon::now() > $event->ended_at)
 					<div class="row myevents-list-row" id="{{ $event->id }}">
 						<div class="col-xs-2 thumbnail">
-							<img src="{{ asset('/images/events/event-'.$event->id.'.jpg') }}">
+							<img src="{{ asset('/images/events/'.$event->image()) }}">
 						</div>
 						<div class="col-xs-10">
 					    	<p class="event-header">

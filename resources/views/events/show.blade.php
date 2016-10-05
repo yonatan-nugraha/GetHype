@@ -111,7 +111,6 @@
 /**************************************/
 
 .event-subject {
-    background: #D33E40 url("/images/banners/banner-event.jpg");
     height: 450px;
     background-blend-mode: multiply;
     color: #fff;
@@ -277,7 +276,7 @@
 @section('content')
 
 <div class="row banner-event">
-    <img src="{{ asset('/images/banners/banner-event.jpg') }}">
+    <img src="{{ asset('/images/events/'.$event->banner()) }}">
 </div>
 
 <div class="row event-main">
@@ -327,7 +326,7 @@
 	</div>
 </div>
 
-<div class="row event-subject">
+<div class="row event-subject" style="background: #D33E40 url({{ '/images/events/'.$event->banner() }});">
 	<div class="container">
 	    <div class="col-xs-12 no-padding">
 	    	<p class="event-title">Subject <br>Discussion</p>

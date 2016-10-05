@@ -1,7 +1,7 @@
 @extends('admin.index')
 
 @section('content')
-<form action="{{ url('journals/'.$journal->id) }}" method="POST">
+<form action="{{ url('journals/'.$journal->id) }}" method="POST" enctype="multipart/form-data">
     {!! csrf_field() !!}
     {{ method_field('PATCH') }}
 
@@ -15,6 +15,10 @@
                     <div class="form-group">
                         <label>Title</label>
                         <input type="text" class="form-control" name="title" placeholder="Title" required pattern=".{3,50}" value="{{ $journal->title }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Image</label>
+                        <input type="file" class="form-control" name="image">
                     </div>
                     <div class="form-group">
                         <label>Content</label>

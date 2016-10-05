@@ -154,6 +154,7 @@ class EventController extends Controller
                     ->where('events.started_at', '<=', Carbon::now())
                     ->where('events.ended_at', '>=', Carbon::now())
                     ->groupBy('events.id')
+                    ->orderBy('events.weight', 'desc')
                     ->paginate(2);
 
         if ($category != 'all') {
