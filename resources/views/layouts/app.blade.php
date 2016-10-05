@@ -230,27 +230,18 @@
                 <div class="col-xs-3 footer-main-col">
                     <img class="gethype-logo" src="{{ asset('images/logo.png') }}">
                 </div>
-                <div class="col-xs-3 footer-main-col">
+                <div class="col-xs-2 footer-main-col">
                     <ul>
                         <li class="footer-title">Gethype</li>
                         <li><a>About Us</a></li>
+                        <li><a>Events</a></li>
                         <li><a>Partners</a></li>
+                        <li><a>Services</a></li>
+                        <li><a>What we do</a></li>
                         <li><a>Journals</a></li>
-                        <li><a>Careers</a></li>
-                        <li><a>Terms</a></li>
                     </ul>
                 </div>
-                <div class="col-xs-3 footer-main-col">
-                    <ul>
-                        <li class="footer-title">Services</li>
-                        <li><a>Advertising</a></li>
-                        <li><a>Create Event</a></li>
-                        <li><a>Ticketing</a></li>
-                        <li><a>Event Planner</a></li>
-                        <li><a>Journalistic</a></li>
-                    </ul>
-                </div>
-                <div class="col-xs-3 footer-main-col">
+                <div class="col-xs-2 footer-main-col">
                     <ul>
                         <li class="footer-title">Get in Touch</li>
                         <li><a>Contact Us</a></li>
@@ -258,6 +249,17 @@
                         <li><a>Facebook</a></li>
                         <li><a>Twitter</a></li>
                     </ul>
+                </div>
+                <div class="col-xs-5 footer-main-col" style="padding-top: 2em; font-weight: 100">
+                    <p style="font-size: 20px" class="footer-title">JOIN OUR MAILING LIST</p>
+                    <span>We promise zero spam and only relevant information on events and what's happening in Gethype</span>
+
+                    <p style="margin-top:2em">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2">
+                            <span class="input-group-addon" id="basic-addon2">SUBMIT</span>
+                        </div>
+                    </p>
                 </div>
             </div>
             <div class="row footer-secondary">

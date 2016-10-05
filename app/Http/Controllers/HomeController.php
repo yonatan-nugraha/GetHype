@@ -37,6 +37,13 @@ class HomeController extends Controller
             ->where('events.started_at', '<=', Carbon::now())
             ->where('events.ended_at', '>=', Carbon::now())
             ->groupBy('events.id')
+            ->groupBy('events.name')
+            ->groupBy('events.category_id')
+            ->groupBy('events.event_type_id')
+            ->groupBy('events.location')
+            ->groupBy('events.started_at')
+            ->groupBy('events.ended_at')
+            ->groupBy('events.slug')
             ->orderBy('events.started_at', 'desc');
 
         return view('home', [
