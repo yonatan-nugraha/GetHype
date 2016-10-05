@@ -153,7 +153,8 @@ class EventController extends Controller
                     ->where('events.status', 1)
                     ->where('events.started_at', '<=', Carbon::now())
                     ->where('events.ended_at', '>=', Carbon::now())
-                    ->groupBy('events.id');
+                    ->groupBy('events.id')
+                    ->paginate(2);
 
         if ($category != 'all') {
             $events->where('category_id', $category);
@@ -181,7 +182,9 @@ class EventController extends Controller
             }
         }
 
-        $events = $events->get();
+        $events->setPath('search?category='.$category.'&event_type='.$event_type.'&location='.$location.'&date='.$date.'&price='.$price);
+
+        // $events = $events->get();
 
         return view('events/search', [
             'events'        => $events,

@@ -265,6 +265,9 @@
                 </div>
                 @endforeach
             </div>
+            <div class="pull-right">
+                {{ $events->links() }}
+            </div>
         </div>
     </div>
 </div>
