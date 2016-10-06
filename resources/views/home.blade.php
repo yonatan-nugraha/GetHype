@@ -58,13 +58,13 @@
 .search-bar button {
     width: 15%;
     border-radius: 0;
-    background-color: red;
-    border-color: red;
+    background-color: #d33e40;
+    border-color: #d33e40;
 }
 
 .search-bar button:hover {
-    background-color: red;
-    border-color: red;
+    background-color: #d33e40;
+    border-color: #d33e40;
 }
 
 ::-webkit-input-placeholder {
@@ -118,7 +118,6 @@
 }
 
 .whats-new .event-caption-head {
-    margin-bottom: 10px;
     height: 35px;
 }
 
@@ -130,6 +129,9 @@
     color: #0F3844;
     font-size: 12px;
     font-weight: 500;
+    float: right;
+    margin-top: -52px;
+    color: #d33e40!important;
 }
 
 .whats-new .event-time {
@@ -227,8 +229,9 @@
 }
 
 .journal .event-read {
-    color: red;
+    color: #d33e40;
     font-weight: 400;
+    margin-top:-3px;
 }
 
 /**************************************/
@@ -238,9 +241,8 @@
 .banner-bottom .banner-additional {
     z-index: 100;
     position: absolute;
-    top: 32%;
-    left: 30%;
-
+    top: 30%;
+    left: 27%;
 }
 
 .banner-bottom .banner-title {
@@ -262,9 +264,15 @@
     color: #EBD38C;
     font-size: 15px;
     font-weight: 200;
-    top: 70%;
+    top: 75%;
     left: 59%;
+    text-align: center;
     transform: translate(-70%, -59%);
+}
+
+#bottomBanner{
+     background-image: url("{{ asset('/images/img-event-planner.jpg') }}");
+     height:400px;
 }
 
 </style>
@@ -273,9 +281,9 @@
 
 @section('content')
 
-<div class="row banner-top">
-    <div class="row banner-row-1">
-        <div class="col-xs-12">
+<div class="col-md-12 banner-top no-padding">
+    <div class="col-md-12 banner-row-1 no-padding">
+        <div class="col-xs-12 no-padding">
 
             <div id="big-carousel" class="carousel slide big-carousel" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -303,50 +311,29 @@
         </div>
     </div>
 
-    <div class="row banner-row-2">
+    <div class="col-md-12 banner-row-2 no-padding">
         <div class="col-xs-12 col-md-5 no-padding">
-            <div id="small-carousel" class="carousel slide small-carousel" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#small-carousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#small-carousel" data-slide-to="1"></li>
-                </ol>
-                <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <img src="{{ asset('images/banners/banner-2.jpg') }}" alt="...">
-                    </div>
-                    <div class="item">
-                        <img src="{{ asset('images/banners/banner-2.jpg') }}" alt="...">
-                    </div>
-                </div>
-                <a class="left carousel-control" href="#small-carousel" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#small-carousel" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
+            <img src="{{ asset('images/banners/banner-2.jpg') }}" alt="..." style="height: 440px">
         </div>
         <div class="col-xs-12 col-md-7 no-padding">
             <div class="col-xs-12 col-md-6 no-padding">
-                <img src="{{ asset('images/banners/banner-3.jpg') }}" alt="...">
+                <img src="{{ asset('images/banners/banner-3.jpg') }}" alt="..." style="height: 220px; width: 100%">
             </div>
             <div class="col-xs-12 col-md-6 no-padding">
-                <img src="{{ asset('images/banners/banner-4.jpg') }}" alt="...">
+                <img src="{{ asset('images/banners/banner-4.jpg') }}" alt="..." style="height: 220px; width: 100%">
             </div>
             <div class="col-xs-12 col-md-6 no-padding">
-                <img src="{{ asset('images/banners/banner-5.jpg') }}" alt="...">
+                <img src="{{ asset('images/banners/banner-5.jpg') }}" alt="..." style="height: 220px; width: 100%">
             </div>
             <div class="col-xs-12 col-md-6 no-padding">
-                <img src="{{ asset('images/banners/banner-6.jpg') }}" alt="...">
+                <img src="{{ asset('images/banners/banner-6.jpg') }}" alt="..." style="height: 220px; width: 100%">
             </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row search">
+<div class="col-md-12 search">
     <div class="container">
         <div class="row home-title">
             <span>Find Your Happiness!</span>
@@ -390,7 +377,7 @@
     </div>
 </div>
 
-<div class="row whats-new">
+<div class="col-md-12 whats-new">
     <div class="container">
         <div class="row home-title">
             <span>What's <br> New</span>
@@ -426,7 +413,7 @@
     </div>
 </div>
 
-<div class="row event-collection">
+<div class="col-md-12 event-collection">
     <div class="container">
         <div class="row home-title">
             <span>Event <br> Collection</span>
@@ -451,16 +438,15 @@
     </div>
 </div>
 
-<div class="row banner-bottom">
-    <div class="col-xs-12 no-padding">
-        <img src="{{ asset('/images/img-event-planner.jpg') }}">
+<div class="col-md-12 banner-bottom no-padding">
+    <div class="col-xs-12 no-padding" id="bottomBanner">
         <img class="banner-additional" src="{{ asset('/images/img-additional-1.png') }}">
         <a href="{{ url('services') }}"><p class="banner-title">Create Your Event with Gethype</p></a>
         <span class="banner-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
     </div>
 </div>
 
-<div class="row journal">
+<div class="col-md-12 journal">
     <div class="container">
         <div class="row home-title">
             <span>Gethype <br> Journal</span>
