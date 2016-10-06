@@ -118,7 +118,6 @@
 }
 
 .whats-new .event-caption-head {
-    margin-bottom: 10px;
     height: 35px;
 }
 
@@ -130,6 +129,9 @@
     color: #0F3844;
     font-size: 12px;
     font-weight: 500;
+    float: right;
+    margin-top: -52px;
+    color: #d33e40!important;
 }
 
 .whats-new .event-time {
@@ -229,6 +231,7 @@
 .journal .event-read {
     color: #d33e40;
     font-weight: 400;
+    margin-top:-3px;
 }
 
 /**************************************/
@@ -393,10 +396,11 @@
                                 </div>
                                 <span class="event-time clearfix">{{ Carbon\Carbon::parse($event->started_at)->format('l, M d, Y | g.i A') }}</span>
                                 <p class="event-price">
-                                    @if ($event->min_price == 0 && $event->max_price == 0) Free
+                                    {{-- @if ($event->min_price == 0 && $event->max_price == 0) Free
                                     @elseif ($event->min_price == 0 && $event->max_price > 0) IDR {{ $event->max_price/1000 . 'K' }} 
                                     @else IDR {{ $event->min_price/1000 . 'K' }} 
-                                    @endif
+                                    @endif --}}
+                                    Free
                                 </p>
                                 <span class="label label-default event-tag">{{ $event->category->name }}</span>
                                 <span class="label label-default event-tag">{{ $event->event_type->name }}</span>
