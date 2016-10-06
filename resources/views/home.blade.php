@@ -240,34 +240,30 @@
 
 .banner-bottom .banner-additional {
     z-index: 100;
-    position: absolute;
-    top: 30%;
-    left: 27%;
+    position: relative;
+    left: -37px;
+    top: 10px;
 }
 
 .banner-bottom .banner-title {
     z-index: 100;
-    position: absolute;
     color: #EBD38C;
     font-size: 32px;
     font-weight: 300;
     padding: 24px;
     border: 1px solid #EBD38C;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 300px;
+    margin: 0 auto;
 }
 
 .banner-bottom .banner-description {
     z-index: 100;
-    position: absolute;
     color: #EBD38C;
     font-size: 15px;
     font-weight: 200;
-    top: 75%;
-    left: 59%;
     text-align: center;
-    transform: translate(-70%, -59%);
+    width: 350px;
+    margin: 0 auto;
 }
 
 #bottomBanner{
@@ -281,7 +277,7 @@
 
 @section('content')
 
-<div class="col-md-12 banner-top no-padding">
+<div class="col-md-12 banner-top no-padding" style="z-index: 100">
     <div class="col-md-12 banner-row-1 no-padding">
         <div class="col-xs-12 no-padding">
 
@@ -312,23 +308,14 @@
     </div>
 
     <div class="col-md-12 banner-row-2 no-padding">
-        <div class="col-xs-12 col-md-5 no-padding">
-            <img src="{{ asset('images/banners/banner-2.jpg') }}" alt="..." style="height: 440px">
+        <div class="col-xs-12 col-md-4 no-padding">
+            <img src="{{ asset('images/banners/banner-4.jpg') }}" alt="..." style="height: 220px; width: 100%">
         </div>
-        <div class="col-xs-12 col-md-7 no-padding">
-            <div class="col-xs-12 col-md-6 no-padding">
-                <img src="{{ asset('images/banners/banner-3.jpg') }}" alt="..." style="height: 220px; width: 100%">
-            </div>
-            <div class="col-xs-12 col-md-6 no-padding">
-                <img src="{{ asset('images/banners/banner-4.jpg') }}" alt="..." style="height: 220px; width: 100%">
-            </div>
-            <div class="col-xs-12 col-md-6 no-padding">
-                <img src="{{ asset('images/banners/banner-5.jpg') }}" alt="..." style="height: 220px; width: 100%">
-            </div>
-            <div class="col-xs-12 col-md-6 no-padding">
-                <img src="{{ asset('images/banners/banner-6.jpg') }}" alt="..." style="height: 220px; width: 100%">
-            </div>
-            </div>
+        <div class="col-xs-12 col-md-4 no-padding">
+            <img src="{{ asset('images/banners/banner-2.jpg') }}" alt="..." style="height: 220px; width: 100%">
+        </div>
+        <div class="col-xs-12 col-md-4 no-padding">
+            <img src="{{ asset('images/banners/banner-3.jpg') }}" alt="..." style="height: 220px; width: 100%">
         </div>
     </div>
 </div>
@@ -396,10 +383,10 @@
                                 </div>
                                 <span class="event-time clearfix">{{ Carbon\Carbon::parse($event->started_at)->format('l, M d, Y | g.i A') }}</span>
                                 <p class="event-price">
-                                    @if ($event->min_price == 0 && $event->max_price == 0) Free
+                                   {{--  @if ($event->min_price == 0 && $event->max_price == 0) Free
                                     @elseif ($event->min_price == 0 && $event->max_price > 0) IDR {{ $event->max_price/1000 . 'K' }} 
                                     @else IDR {{ $event->min_price/1000 . 'K' }} 
-                                    @endif
+                                    @endif --}}
                                 </p>
                                 <span class="label label-default event-tag">{{ $event->category->name }}</span>
                                 <span class="label label-default event-tag">{{ $event->event_type->name }}</span>
@@ -438,11 +425,11 @@
     </div>
 </div>
 
-<div class="col-md-12 banner-bottom no-padding">
+<div class="col-md-12 banner-bottom no-padding" style="z-index: 100">
     <div class="col-xs-12 no-padding" id="bottomBanner">
-        <img class="banner-additional" src="{{ asset('/images/img-additional-1.png') }}">
+        <div style="width: 300px; margin: 0 auto; margin-top: 3em;"><img class="banner-additional" src="{{ asset('/images/img-additional-1.png') }}"></div>
         <a href="{{ url('services') }}"><p class="banner-title">Create Your Event with Gethype</p></a>
-        <span class="banner-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+        <div class="banner-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
     </div>
 </div>
 

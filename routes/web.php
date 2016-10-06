@@ -146,3 +146,9 @@ Route::group(['prefix' => 'notification'], function () {
 	Route::post('payment', 'NotificationController@payment');
 });
 
+//contact us
+Route::group(['prefix' => 'contact'], function() {
+	Route::get('/', function() {
+		return view('static.contact');
+	});
+});
