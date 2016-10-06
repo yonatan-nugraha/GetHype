@@ -184,7 +184,6 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ url('/journals') }}">Journal</a></li>
                         <li><a href="{{ url('/register') }}">Sign up</a></li>
                         <li><a href="{{ url('/login') }}">Log in</a></li>
                     @else
@@ -235,10 +234,10 @@
     <footer class="footer">
         <div class="container">
             <div class="row footer-main">
-                <div class="col-xs-3 footer-main-col">
+                <div class="col-sm-3 footer-main-col">
                     <img class="gethype-logo" src="{{ asset('images/logo.png') }}">
                 </div>
-                <div class="col-xs-2 footer-main-col">
+                <div class="col-sm-2 footer-main-col">
                     <ul>
                         <li class="footer-title">Gethype</li>
                         <li><a>About Us</a></li>
@@ -249,7 +248,7 @@
                         <li><a>Journals</a></li>
                     </ul>
                 </div>
-                <div class="col-xs-2 footer-main-col">
+                <div class="col-sm-2 footer-main-col">
                     <ul>
                         <li class="footer-title">Get in Touch</li>
                         <li><a>Contact Us</a></li>
@@ -258,7 +257,7 @@
                         <li><a>Twitter</a></li>
                     </ul>
                 </div>
-                <div class="col-xs-5 footer-main-col" style="padding-top: 2em; font-weight: 100">
+                <div class="col-sm-5 footer-main-col" style="padding-top: 2em; font-weight: 100">
                     <p style="font-size: 20px" class="footer-title">JOIN OUR MAILING LIST</p>
                     <span>We promise zero spam and only relevant information on events and what's happening in Gethype</span>
 
