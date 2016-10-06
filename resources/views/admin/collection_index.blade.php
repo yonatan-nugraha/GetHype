@@ -7,13 +7,15 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Collection List</h3>
                 <div class="box-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                    <form action="{{ url('admin/collections') }}" method="GET">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="q" class="form-control pull-right" placeholder="Search">
 
-                        <div class="input-group-btn">
-                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="box-body">
@@ -21,10 +23,10 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Events</th>
-                                <th>Action</th>
+                                <th width="5%">ID</th>
+                                <th width="20%">Name</th>
+                                <th width="50%">Events</th>
+                                <th width="10%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,9 +35,11 @@
                                 <td>{{ $collection->id }}</td>
                                 <td>{{ $collection->name }}</td>
                                 <td>
-                                    @foreach ($collection->event_collections as $event_collection)
-                                    <p>{{ $event_collection->event->name }}</p>
-                                    @endforeach
+                                    <ul>
+                                        @foreach ($collection->event_collections as $event_collection)
+                                        <li>{{ $event_collection->event->name }}</li>
+                                        @endforeach
+                                    </ul>
                                 </td>
                                 <td>
                                     <div class="btn-group">
@@ -50,16 +54,18 @@
                     </table>
                 </div>
                 <div class="box-footer clearfix">
-                    <ul class="pagination pagination-sm no-margin pull-right">
-                        <li><a href="#">&laquo;</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">&raquo;</a></li>
-                    </ul>
+                    {{ $collections->links() }}
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+$(function () {
+    $('.pagination').addClass('pagination-sm no-margin pull-right');
+});
+</script>
 @endsection

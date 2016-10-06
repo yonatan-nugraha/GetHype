@@ -54,6 +54,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('journals', 'AdminController@showJournalList');
     Route::get('journals/create', 'AdminController@createJournal');
     Route::get('journals/{journal}/edit', 'AdminController@editJournal');
+
+    //orders
+    Route::get('orders', 'AdminController@showOrderList');
 });
 
 //accounts

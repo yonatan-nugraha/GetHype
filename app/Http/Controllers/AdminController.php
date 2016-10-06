@@ -120,9 +120,18 @@ class AdminController extends Controller {
      */
     public function showEventList(Request $request)
     {
+        $events = Event::orderBy('created_at', 'desc');
+
+        $q = $request->q;
+        if ($q != '') {
+            $events->where('name', 'like', '%'.$q.'%');
+        }
+
+        $events = $events->paginate(10);
+
         return view('admin/event_index', [
             'page_title'    => 'Event List',
-            'events'        => Event::all(),
+            'events'        => $events,
             'collections'   => Collection::all()
         ]);
     }
@@ -306,9 +315,18 @@ class AdminController extends Controller {
      */
     public function showCollectionList(Request $request) 
     {
+        $collections = Collection::orderBy('created_at', 'desc');
+
+        $q = $request->q;
+        if ($q != '') {
+            $collections->where('name', 'like', '%'.$q.'%');
+        }
+
+        $collections = $collections->paginate(10);
+
         return view('admin/collection_index', [
             'page_title'    => 'Collection List',
-            'collections'   => Collection::all()
+            'collections'   => $collections,
         ]);
     }
 
@@ -426,9 +444,18 @@ class AdminController extends Controller {
      */
     public function showJournalList(Request $request) 
     {
+        $journals = Journal::orderBy('created_at', 'desc');
+
+        $q = $request->q;
+        if ($q != '') {
+            $journals->where('title', 'like', '%'.$q.'%');
+        }
+
+        $journals = $journals->paginate(10);
+
         return view('admin/journal_index', [
             'page_title'    => 'Journal List',
-            'journals'      => Journal::all()
+            'journals'      => $journals,
         ]);
     }
 
