@@ -17,6 +17,7 @@ class CreateTicketGroupsTable extends Migration
             $table->increments('id');
             $table->integer('event_id');
             $table->string('name');
+            $table->string('description')->nullable();
             $table->double('price');
             $table->integer('status');
             $table->dateTime('started_at');

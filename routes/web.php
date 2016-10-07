@@ -146,9 +146,8 @@ Route::group(['prefix' => 'notification'], function () {
 	Route::post('payment', 'NotificationController@payment');
 });
 
-//contact us
-Route::group(['prefix' => 'contact'], function() {
-	Route::get('/', function() {
-		return view('static.contact');
-	});
+//subscribers
+Route::group(['prefix' => 'subscribers'], function () {
+	Route::post('subscribe', 'SubscriberController@subscribe');
+	Route::get('unsubscribe/{subscriber}', 'SubscriberController@unsubscribe');
 });

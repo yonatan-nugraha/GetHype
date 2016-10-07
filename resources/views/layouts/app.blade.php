@@ -146,6 +146,20 @@
         .footer-secondary{
             margin-top:5em;
         }
+
+        /**************************************/
+        /************* Subscribe **************/
+        /**************************************/
+
+        .subscribe-submit {
+            cursor: pointer;
+        }
+
+        .subscribe-submit.disabled {
+            background-color: #ccc; 
+        }
+
+
     </style>
 
     <!-- Scripts -->
@@ -263,8 +277,9 @@
 
                     <p style="margin-top:2em">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2">
-                            <span class="input-group-addon" id="basic-addon2">SUBMIT</span>
+                            <input type="text" class="form-control subscribe-email" placeholder="Email Address" aria-describedby="basic-addon2">
+                            <span class="input-group-addon subscribe-submit" id="basic-addon2">SUBMIT</span>
+                            <span class="subscribe-message"></span>
                         </div>
                     </p>
                 </div>
@@ -281,6 +296,7 @@
     <script src="{{ asset('plugins/bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('plugins/chart.js/dist/Chart.min.js') }}"></script>
     <script src="{{ asset('js/date.js') }}"></script>
+    <script src="{{ asset('js/home.js') }}"></script>
 
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
