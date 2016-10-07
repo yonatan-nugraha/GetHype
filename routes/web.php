@@ -24,7 +24,10 @@ Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 
 //statics
-Route::get('/services', 'HomeController@service');
+Route::get('/services', 'HomeController@services');
+Route::get('/contact-us', 'HomeController@contactUs');
+Route::get('/about-us', 'HomeController@aboutUs');
+Route::get('/partners', 'HomeController@partners');
 
 //users
 Route::group(['prefix' => 'users'], function () {
@@ -125,7 +128,6 @@ Route::group(['prefix' => 'myevents'], function () {
 //tickets and orders
 Route::group(['prefix' => 'tickets'], function () {
 	Route::get('', 'TicketController@index');
-	Route::get('{order}', 'TicketController@show');
 	Route::get('{order}/invoice', 'TicketController@invoice');
 	Route::get('{order}/ticket', 'TicketController@ticket');
 });
@@ -150,4 +152,9 @@ Route::group(['prefix' => 'notification'], function () {
 Route::group(['prefix' => 'subscribers'], function () {
 	Route::post('subscribe', 'SubscriberController@subscribe');
 	Route::get('unsubscribe/{subscriber}', 'SubscriberController@unsubscribe');
+});
+
+//orders
+Route::group(['prefix' => 'orders'], function () {
+	Route::get('', 'OrderController@index');
 });

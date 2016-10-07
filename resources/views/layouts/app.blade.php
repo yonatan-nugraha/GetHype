@@ -221,6 +221,9 @@
                                     <a href="{{ url('/tickets') }}">My Tickets</a>
                                 </li>
                                 <li>
+                                    <a href="{{ url('/orders') }}">Order History</a>
+                                </li>
+                                <li>
                                     <a href="{{ url('/account/settings') }}">Account Settings</a>
                                 </li>
                                 <li class="divider"></li>
@@ -254,18 +257,18 @@
                 <div class="col-sm-2 footer-main-col">
                     <ul>
                         <li class="footer-title">Gethype</li>
-                        <li><a>About Us</a></li>
-                        <li><a>Events</a></li>
-                        <li><a>Partners</a></li>
-                        <li><a>Services</a></li>
-                        <li><a>What we do</a></li>
-                        <li><a>Journals</a></li>
+                        <li><a href="{{ url('about-us') }}">About Us</a></li>
+                        <li><a href="{{ url('') }}">Events</a></li>
+                        <li><a href="{{ url('partners') }}">Partners</a></li>
+                        <li><a href="{{ url('services') }}">Services</a></li>
+                        <li><a href="{{ url('') }}">What we do</a></li>
+                        <li><a href="{{ url('journals') }}">Journals</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-2 footer-main-col">
                     <ul>
                         <li class="footer-title">Get in Touch</li>
-                        <li><a>Contact Us</a></li>
+                        <li><a href="{{ url('about-us') }}">Contact Us</a></li>
                         <li><a>Instagram</a></li>
                         <li><a>Facebook</a></li>
                         <li><a>Twitter</a></li>

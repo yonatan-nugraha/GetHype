@@ -58,8 +58,32 @@ class HomeController extends Controller
     /**
      * Display all services form.
      */
-    public function service()
+    public function services()
     {
-        return view('statics/service');
+        return view('statics/services');
+    }
+
+    /**
+     * Display contact us form
+     */
+    public function contactUs()
+    {
+        return view('statics/contact_us');
+    }
+
+    /**
+     * Display about us page.
+     */
+    public function aboutUs()
+    {
+        return view('statics/about_us');
+    }
+
+    /**
+     * Display about us page.
+     */
+    public function partners()
+    {
+        return view('statics/partners');
     }
 }
