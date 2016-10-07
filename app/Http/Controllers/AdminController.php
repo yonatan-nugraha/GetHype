@@ -283,7 +283,7 @@ class AdminController extends Controller {
             for ($j = 0; $j < $request['ticket_quantity_'.$i]; $j++) {
                 Ticket::create([
                     'ticket_group_id' => $ticket_group_id,
-                    'code'      => sprintf('G5%s', mt_rand(1000000000, 9999999999)),
+                    'code'      => sprintf('8%s-%s-%s-%s', mt_rand(100, 999), mt_rand(1000, 9999), mt_rand(1000, 9999), mt_rand(1000, 9999)),
                     'status'    => 1,
                 ]);
             }
