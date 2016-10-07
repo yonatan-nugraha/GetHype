@@ -260,7 +260,7 @@ class EventController extends Controller
             return redirect('');
         }
 
-        return view('events/showCollection', [
+        return view('events/show_collection', [
             'collection' => $collection,
         ]);
     }
