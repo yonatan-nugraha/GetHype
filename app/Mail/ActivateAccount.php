@@ -29,7 +29,7 @@ class ActivateAccount extends Mailable
     public function __construct(User $user)
     {
         $this->user = $user;
-        $this->key = sha1('gethype'.$user->email);
+        $this->key = sha1('gethype:'.$user->email);
     }
 
     /**

@@ -117,7 +117,7 @@ class RegisterController extends Controller
         }
 
         $key    = $request->key;
-        $lock   = sha1('gethype'.$user->email);
+        $lock   = sha1('gethype:'.$user->email);
 
         if ($key == $lock && $user->status == 0) {
             $user->update([
