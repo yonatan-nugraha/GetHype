@@ -68,7 +68,7 @@ class HomeController extends Controller
      */
     public function contactUs()
     {
-        return view('statics/contact_us');
+        return view('statics.contact');
     }
 
     /**
@@ -76,7 +76,7 @@ class HomeController extends Controller
      */
     public function aboutUs()
     {
-        return view('statics/about_us');
+        return view('statics/about');
     }
 
     /**

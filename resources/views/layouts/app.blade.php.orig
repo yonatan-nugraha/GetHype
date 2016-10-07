@@ -21,7 +21,151 @@
     <link rel="stylesheet" href="{{ asset('css/sticky-footer-navbar.css') }}">
     
     @yield('styles')
+<<<<<<< HEAD
+
+    <style>
+        @media (min-width: 1200px) {
+            .container {
+                width: 1080px;
+            }
+        }
+
+        /**************************************/
+        /************** Header ****************/
+        /**************************************/
+
+        .navbar-default {
+            background-color: #0F3844;
+            border: none;
+            font-weight: normal;
+            letter-spacing: 2px;
+            font-weight: 300;
+            margin-bottom: 0;
+            height: 85px;
+        }
+
+        .navbar-default .navbar-brand {
+            color: #f2f2f2;
+        }
+
+        .navbar-default .navbar-nav>li>a {
+            color: #f2f2f2;
+        }
+
+        .navbar-default .navbar-nav>li>a:hover{
+            color: #ccc;
+        }
+
+        .navbar-default .navbar-brand img {
+            width: 60px;
+        }
+
+        .navbar-default .nav-bar-right {
+            vertical-align: text-top;
+        }
+
+        .navbar-nav > li > a {
+           line-height: 55px;
+           font-size: 14px;
+        }
+
+        .navbar-right li > ul {
+           border-radius: 0 !important;
+        }
+
+        .navbar-right li > ul > li > a {
+           font-size: 14px;
+           font-weight: 300;
+           letter-spacing: 0;
+        }
+
+        .user-image img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        /**************************************/
+        /************** Footer ****************/
+        /**************************************/
+
+        .footer {
+            color: #f2f2f2;
+            background-color: #0F3844;
+            font-size: 17px;
+            display: -webkit-box;
+            position: inherit;
+        }
+
+        .footer .footer-title {
+            margin-bottom: 20px !important;
+            font-weight: 500;
+        }
+
+        .footer a {
+            color: #f2f2f2;
+            font-weight: 100;
+        }
+
+        .footer a:hover {
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .footer .footer-main {
+            margin-top: 2.8em;
+        }
+
+        .footer .footer-main ul {
+            list-style-type: none;
+            padding: 20px 0;
+        }
+
+        .footer .footer-main li {
+            margin-bottom: 5px;
+        }
+
+        .footer .footer-main p {
+            margin-bottom: 5px;
+        }
+
+        .footer .gethype-logo {
+            width: 90px;
+        }
+
+        .footer .gethype-copyright {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: 100;
+        }
+
+        .gethype-line {
+            width: 100%;
+            height: 7px;
+        }
+
+        .footer-secondary{
+            margin-top:5em;
+        }
+
+        /**************************************/
+        /************* Subscribe **************/
+        /**************************************/
+
+        .subscribe-submit {
+            cursor: pointer;
+        }
+
+        .subscribe-submit.disabled {
+            background-color: #ccc; 
+        }
+
+
+    </style>
+
+=======
     <link rel="stylesheet" type="text/css" href="{{ URL::to('css/main.css') }}">
+>>>>>>> front-end
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -117,18 +261,31 @@
                 <div class="col-sm-2 footer-main-col">
                     <ul>
                         <li class="footer-title">Gethype</li>
+<<<<<<< HEAD
                         <li><a href="{{ url('about-us') }}">About Us</a></li>
                         <li><a href="{{ url('') }}">Events</a></li>
                         <li><a href="{{ url('partners') }}">Partners</a></li>
                         <li><a href="{{ url('services') }}">Services</a></li>
                         <li><a href="{{ url('') }}">What we do</a></li>
                         <li><a href="{{ url('journals') }}">Journals</a></li>
+=======
+                        <li><a href="{{ URL::to('/about') }}">About Us</a></li>
+                        <li><a>Events</a></li>
+                        <li><a>Partners</a></li>
+                        <li><a>Services</a></li>
+                        <li><a>What we do</a></li>
+                        <li><a>Journals</a></li>
+>>>>>>> front-end
                     </ul>
                 </div>
                 <div class="col-sm-2 footer-main-col">
                     <ul>
                         <li class="footer-title">Get in Touch</li>
+<<<<<<< HEAD
+                        <li><a href="{{ url('about-us') }}">Contact Us</a></li>
+=======
                         <li><a href="{{ URL::to('contact') }}">Contact Us</a></li>
+>>>>>>> front-end
                         <li><a>Instagram</a></li>
                         <li><a>Facebook</a></li>
                         <li><a>Twitter</a></li>
