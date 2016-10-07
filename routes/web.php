@@ -146,6 +146,13 @@ Route::group(['prefix' => 'notification'], function () {
 //contact us
 Route::group(['prefix' => 'contact'], function() {
 	Route::get('/', function() {
-		return view('static.contact');
+		return view('statics.contact');
+	});
+});
+
+//About
+Route::group(['prefix' => 'about'], function() {
+	Route::get('/', function() {
+		return view('statics.about');
 	});
 });
