@@ -185,8 +185,6 @@ class EventController extends Controller
         $events = $events->paginate(2);
         $events->setPath('search?category='.$category.'&event_type='.$event_type.'&location='.$location.'&date='.$date.'&price='.$price);
 
-        
-
         return view('events/search', [
             'events'        => $events,
             'categories'    => Category::all(),

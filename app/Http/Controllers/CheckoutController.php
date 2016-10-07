@@ -149,6 +149,9 @@ class CheckoutController extends Controller
             $items[] = $item;
     	}
 
+        $order->order_id = $order_id;
+        Redis::set('order:'.auth()->id(), json_encode($order));
+
         $transaction_data = array(
             'payment_type' => 'vtweb',
             'transaction_details' => array(
@@ -156,13 +159,13 @@ class CheckoutController extends Controller
                 'gross_amount'  => $payment_amount,
             ),
             'vtweb' => array(
-                'enabled_payments' => array('bca_klikpay'),
+                'enabled_payments' => array($payment_type),
                 'credit_card_3d_secure' => true,
             ),
             'customer_details' => array(
-                'first_name' => auth()->user()->name,
+                'first_name' => auth()->user()->first_name,
                 'email' => auth()->user()->email,
-                'phone' => '081122334455',
+                'phone' => auth()->user()->phone,
             ),
             'item_details'  => $items,
         );
@@ -265,12 +268,13 @@ class CheckoutController extends Controller
     {
         $order_id = $request->order_id;
         $order = Order::where('id', $order_id)
-                ->where('order_status', 2)
-                ->where('user_id', auth()->id())
-                ->first();
+            ->where('order_status', 2)
+            ->whereIn('payment_status', [4,5])
+            ->where('user_id', auth()->id())
+            ->first();
 
     	if (count($order) == 0) {
-    		return redirect('');
+            return redirect('checkout/failed?order_id='.$order_id);		
     	}
 
         return view('checkout/success', [
@@ -288,9 +292,9 @@ class CheckoutController extends Controller
     {
         $order_id = $request->order_id;
         $order = Order::where('id', $order_id)
-                ->where('order_status', 1)
-                ->where('user_id', auth()->id())
-                ->first();
+            ->whereIn('order_status', [0,1])
+            ->where('user_id', auth()->id())
+            ->first();
 
         if (count($order) == 0) {
             return redirect('');
@@ -306,54 +310,45 @@ class CheckoutController extends Controller
      *
      * @param  Request  $request
      * @return Response
-     *
-     * $status
-     * 1 = cancelled
-     * 2 = denied
-     * 3 = success (for credit card)
-     * 4 = challenged
-     * 5 = settlement
-     * 6 = others
      */
     public function bypass(Request $request)
     {
-        $order_id           = $request->order_id;
-        $order              = Order::find($order_id);
-        $user               = User::find($order->user_id);
-
-        $payment_status     = 5;
         $order_status       = 1;
+        $payment_status     = 5;
 
-        $ticket_ids     = json_decode(Redis::get('order:'.$order->user_id))->ticket_ids;
+        $order  = Order::find($request->order_id);
+        if (count($order) == 0 || (count($order) > 0 && $order->order_status == 2)) {
+            return redirect('');
+        }
 
-        if ($ticket_ids != null) {
-            //update ticket status
+        $order_redis    = json_decode(Redis::get('order:'.$order->user_id));
+
+        if ($order_redis && $order_redis->order_id == $order->id) {
+            $ticket_ids     = $order_redis->ticket_ids;
+            
             $tickets_updated = Ticket::whereIn('id', $ticket_ids)
-            ->where('status', 2)
-            ->where('booked_by', $order->user_id)
-            ->update([
-                'status'    => 3,
-                'order_id'  => $order->id,
-            ]);
+                ->where('status', 2)
+                ->where('booked_by', $order->user_id)
+                ->update([
+                    'status'    => 3,
+                    'order_id'  => $order->id,
+                ]);
 
             if ($tickets_updated > 0) {
                 $order_status = 2;
 
-                //send checkout success email
-                Mail::to($user->email)->queue(new CheckoutSuccess);
+                Mail::to($order->user->email)->queue(new CheckoutSuccess);
 
-                //remove redis
                 Redis::del('order:'.$order->user_id);
             }
-
-            //update payment status
-            $order->update([
-                'order_status'   => $order_status,
-                'payment_status' => $payment_status,
-            ]);
         }
 
-        return redirect('checkout/success?order_id='.$order_id);
+        $order->update([
+            'order_status'   => $order_status,
+            'payment_status' => $payment_status,
+        ]);
+
+        return redirect('checkout/success?order_id='.$order->id);
     }
 
     /**

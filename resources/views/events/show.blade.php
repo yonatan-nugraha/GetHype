@@ -292,8 +292,6 @@
 		    	<a href="http://twitter.com/intent/tweet?text={{ urlencode($event->name . ' | Gethype' )}}&url={{ url('/events/'.$event->slug) }}&hashtags=Gethype&via=Gethype" onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=450'); return false;" target="_blank">
 		    		<img class="event-sosmed" src="{{ asset('/images/icons/twitter.png') }}">
 		    	</a>
-		    	
-		    	<img class="event-sosmed" src="{{ asset('/images/icons/instagram.png') }}">
 		    </div>
 		    <div class="event-time-venue">
 		    	<div class="event-date">
