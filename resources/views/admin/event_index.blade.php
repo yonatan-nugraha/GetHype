@@ -7,13 +7,15 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Event List</h3>
                 <div class="box-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                    <form action="{{ url('admin/events') }}" method="GET">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="q" class="form-control pull-right" placeholder="Search">
 
-                        <div class="input-group-btn">
-                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="box-body">
@@ -21,13 +23,13 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Date</th>
-                                <th>Location</th>
-                                <th>Category</th>
-                                <th>Event Type</th>
-                                <th>Status</th>
+                                <th width="5%">ID</th>
+                                <th width="20%">Name</th>
+                                <th width="15%">Date</th>
+                                <th width="20%">Location</th>
+                                <th width="8%">Category</th>
+                                <th width="8%">Event Type</th>
+                                <th width="8%">Status</th>
                                 <th width="13%">Action</th>
                             </tr>
                         </thead>
@@ -71,13 +73,7 @@
                     </table>
                 </div>
                 <div class="box-footer clearfix">
-                    <ul class="pagination pagination-sm no-margin pull-right">
-                        <li><a href="#">&laquo;</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">&raquo;</a></li>
-                    </ul>
+                    {{ $events->links() }}
                 </div>
             </div>
         </div>
@@ -93,6 +89,8 @@ $(function () {
     $('.status').on('switchChange.bootstrapSwitch', function(event, state) {
         $(this).closest('form').submit();
     });
+
+    $('.pagination').addClass('pagination-sm no-margin pull-right');
 });
 </script>
 @endsection

@@ -312,7 +312,6 @@ body {
 							    	<a href="http://twitter.com/intent/tweet?text={{ urlencode($order->event->name . ' | Gethype' )}}&url={{ url('/events/'.$order->event->slug) }}&hashtags=Gethype&via=Gethype" onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=450'); return false;" target="_blank">
 							    		<img class="event-sosmed" src="{{ asset('/images/icons/twitter.png') }}">
 							    	</a>
-					    			<img src="{{ asset('images/icons/instagram.png') }}">
 					    		</span>
 					    	</p>
 					    	<p class="event-time">{{ Carbon\Carbon::parse($order->event->started_at)->format('l, M d, Y | g.i A') }}</p>

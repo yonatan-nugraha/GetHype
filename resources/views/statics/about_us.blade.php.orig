@@ -5,6 +5,9 @@
 @stop
 
 @section('content')
+<<<<<<< HEAD:resources/views/statics/about_us.blade.php
+adasdas
+=======
 
 <div class="col-md-12 no-padding" class="contactContent">
 	<div class="col-md-6 no-padding">
@@ -18,6 +21,7 @@
 		<p>We'd be more than happy to assist you!</p>
 	</div>
 </div>
+>>>>>>> front-end:resources/views/statics/contact.blade.php
 
 <div class="col-md-12 no-padding" class="contactContent">
 	<div class="col-md-6" id="secondContent">
@@ -37,4 +41,4 @@
 	</div>
 </div>
 
-@stop
+@endsection

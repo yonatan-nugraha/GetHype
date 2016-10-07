@@ -154,8 +154,7 @@ class EventController extends Controller
                     ->where('events.started_at', '<=', Carbon::now())
                     ->where('events.ended_at', '>=', Carbon::now())
                     ->groupBy('events.id')
-                    ->orderBy('events.weight', 'desc')
-                    ->paginate(2);
+                    ->orderBy('events.weight', 'desc');
 
         if ($category != 'all') {
             $events->where('category_id', $category);
@@ -183,9 +182,8 @@ class EventController extends Controller
             }
         }
 
+        $events = $events->paginate(2);
         $events->setPath('search?category='.$category.'&event_type='.$event_type.'&location='.$location.'&date='.$date.'&price='.$price);
-
-        // $events = $events->get();
 
         return view('events/search', [
             'events'        => $events,
@@ -262,7 +260,7 @@ class EventController extends Controller
             return redirect('');
         }
 
-        return view('events/showCollection', [
+        return view('events/show_collection', [
             'collection' => $collection,
         ]);
     }

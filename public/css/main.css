@@ -18,8 +18,8 @@
     height: 85px;
 }
 
-.no-padding{
-    padding:0 !important;
+.no-padding {
+    padding:0!important;
 }
 
 .navbar-default .navbar-brand {
@@ -124,4 +124,16 @@
 
 .footer-secondary{
     margin-top:5em;
+}
+
+/**************************************/
+/************* Subscribe **************/
+/**************************************/
+
+.subscribe-submit {
+    cursor: pointer;
+}
+
+.subscribe-submit.disabled {
+    background-color: #ccc; 
 }
