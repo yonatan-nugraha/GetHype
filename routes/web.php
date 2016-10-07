@@ -54,6 +54,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('journals', 'AdminController@showJournalList');
     Route::get('journals/create', 'AdminController@createJournal');
     Route::get('journals/{journal}/edit', 'AdminController@editJournal');
+
+    //orders
+    Route::get('orders', 'AdminController@showOrderList');
 });
 
 //accounts
@@ -143,9 +146,8 @@ Route::group(['prefix' => 'notification'], function () {
 	Route::post('payment', 'NotificationController@payment');
 });
 
-//contact us
-Route::group(['prefix' => 'contact'], function() {
-	Route::get('/', function() {
-		return view('static.contact');
-	});
+//subscribers
+Route::group(['prefix' => 'subscribers'], function () {
+	Route::post('subscribe', 'SubscriberController@subscribe');
+	Route::get('unsubscribe/{subscriber}', 'SubscriberController@unsubscribe');
 });

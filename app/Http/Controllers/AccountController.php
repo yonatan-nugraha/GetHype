@@ -62,13 +62,7 @@ class AccountController extends Controller
             'phone'     => 'required|min:6|max:20',
             'birthdate' => 'required|date',
             'gender'    => 'required|in:1,2'
-        ]);
-
-        if ($validator->fails()) {
-            return redirect('/account/settings#edit-profile')
-                ->withErrors($validator)
-                ->withInput();
-        }
+        ])->validate();
 
         $interests = $request->interests;
 
