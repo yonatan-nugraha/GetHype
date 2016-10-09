@@ -10,7 +10,7 @@ use App\Category;
 use App\EventType;
 use App\Interest;
 
-use Validator, Input, Redirect;
+use Validator;
 
 class AccountController extends Controller
 {

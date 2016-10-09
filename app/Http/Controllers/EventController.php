@@ -77,6 +77,15 @@ class EventController extends Controller
      */
     public function bookTicket(Request $request, Event $event)
     {
+        if (auth()->guest()) {
+            session()->put('url.intended', '/events/'.$event->slug);
+
+            return array(
+                'success' => 0,
+                'login'   => 0
+            );
+        }
+
         $order_details  = array();
         $ticket_ids     = array();
         $order_amount   = 0;
@@ -94,7 +103,10 @@ class EventController extends Controller
                     ->get();
 
                 if (count($tickets) != $quantity) {
-                    return redirect()->back();
+                    return array(
+                        'success'   => 0,
+                        'message'   => 'Cannot book ticket at the moment, please try again in a while :)'
+                    );
                 }
 
                 foreach ($tickets as $ticket) {
@@ -111,8 +123,18 @@ class EventController extends Controller
         }
 
         if ($order_details == null) {
-            return redirect()->back();
+            return array(
+                'success'   => 0,
+                'message'   => 'Please select the quantity of the ticket that you would like to buy :)'
+            );
         }
+
+        Ticket::where('status', 2)
+            ->where('booked_by', auth()->id())
+            ->update([
+                'status' => 1,
+                'booked_by' => null,
+            ]);
 
         Ticket::whereIn('id', $ticket_ids)
             ->update([
@@ -131,7 +153,10 @@ class EventController extends Controller
         Redis::set('order:'.auth()->id(), json_encode($order));
         Redis::expire('order:'.auth()->id(), 5000);
 
-        return redirect('checkout');
+        return array(
+            'success'   => 1,
+            'message'   => 'Please select the quantity of the ticket that you would like to buy :)'
+        );
     }
 
     /**
