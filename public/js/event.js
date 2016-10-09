@@ -50,4 +50,37 @@ $(document).ready(function() {
 	    	}
 	    });
 	});
+
+	$('.ticket-checkout').click(function() {
+		var event_id = $(this).attr('id');
+
+		var data = {};
+		$("select[name^='ticket_quantity']").each(function() {
+			data[$(this).attr('name')] = $(this).val();
+		});
+
+	    $.ajaxSetup({
+		    headers: {
+		        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+		    }
+		});
+
+    	$.ajax({
+    		url: '/events/'+event_id+'/book-ticket', 
+    		type: 'POST',
+    		data: data,
+    		success: function(result) {
+    			if (result.success == 0) {
+    				if (result.login == 0) {
+	    				location.href = '/login';
+	    			} else {
+	    				$('.ticket-message').fadeIn();
+		        		$('.ticket-message p').text(result.message);
+	    			}
+    			} else {
+    				location.href = '/checkout';
+    			}
+	    	}
+	    });
+	});
 });

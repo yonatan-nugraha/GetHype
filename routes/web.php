@@ -78,7 +78,7 @@ Route::group(['prefix' => 'events'], function () {
 	Route::patch('{event}/update-status-event', 'AdminController@updateStatusEvent');
 
 	//book ticket
-	Route::patch('{event}/book-ticket', 'EventController@bookTicket')->middleware('auth');
+	Route::post('{event}/book-ticket', 'EventController@bookTicket');
 
 	//bookmark
 	Route::post('add-bookmark', 'EventController@addBookmark')->middleware('auth');
