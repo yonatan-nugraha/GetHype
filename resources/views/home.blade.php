@@ -1,283 +1,12 @@
-<style>
-/**************************************/
-/************* Banner Top *************/
-/**************************************/
-
-.banner-1, .banner-2, .banner-3, .banner-4 {
-    padding-left: 0 !important;
-}
-
-.banner-1 .thumbnail, .banner-2 .thumbnail, .banner-3 .thumbnail, .banner-4 .thumbnail {
-    padding: 0 !important;
-}
-
-.no-padding {
-    padding: 0 !important;
-}
-
-/**************************************/
-/************* Home Title *************/
-/**************************************/
-
-.home-title {
-    color: #0F3844;
-    margin: 50px 0 15px; 
-    font-weight: 700;
-    font-size: 25px;
-    line-height: 120%;
-}
-
-/**************************************/
-/************* Search Bar *************/
-/**************************************/
-
-.search {
-    background-color: #F1F2F2;
-}
-
-.search-bar {
-    margin-bottom: 40px;
-}
-
-.search-bar select, .search-bar input {
-    float: left;
-    -webkit-appearance: none;
-    border: 2px solid #0F3844;
-    border-radius: 0;
-    color: #0F3844;
-}
-
-.search-category, .search-type {
-    max-width: 20%;
-}
-
-.search-location, .search-date, .search-price {
-    max-width: 15%;
-}
-
-.search-bar button {
-    width: 15%;
-    border-radius: 0;
-    background-color: #d33e40;
-    border-color: #d33e40;
-}
-
-.search-bar button:hover {
-    background-color: #d33e40;
-    border-color: #d33e40;
-}
-
-::-webkit-input-placeholder {
-    color: #0F3844;
-}
-:-moz-placeholder {
-    color: #0F3844;
-}
-::-moz-placeholder {
-    color: #0F3844;
-}
-:-ms-input-placeholder {
-    color: #0F3844;
-}
-
-/**************************************/
-/************* What's New *************/
-/**************************************/
-
-.whats-new {
-    background-color: #F1F2F2;
-    padding-bottom: 30px;
-}
-
-.whats-new .events {
-    margin-bottom: 20px;
-}
-
-.whats-new .event-box {
-    cursor: pointer;
-    padding-bottom: 15px;
-}
-
-.whats-new .event-box a {
-    color: #000;
-}
-
-.whats-new .event-box .thumbnail {
-    padding: 0;
-    border-radius: 0;
-    border-style: none;
-}
-
-.whats-new .event-box a:hover {
-    text-decoration: none;
-}
-
-.whats-new .event-caption {
-    margin: 10px 15px;
-    padding-bottom: 10px;
-}
-
-.whats-new .event-caption-head {
-    height: 35px;
-}
-
-.whats-new .event-name {
-    color: #0F3844;
-}
-
-.whats-new .event-price {
-    color: #0F3844;
-    font-size: 12px;
-    font-weight: 500;
-    float: right;
-    margin-top: -52px;
-    color: #d33e40!important;
-}
-
-.whats-new .event-time {
-    margin-top: 10px !important;
-    font-weight: 100;
-    font-size: 12px;
-}
-
-.whats-new .event-tag {
-    background-color: #E6E6E6;
-    color: #000000;
-    font-weight: 200;
-    font-size: 10px;
-}
-
-
-/**************************************/
-/*********** Event Collection *********/
-/**************************************/
-
-.event-collection {
-    background-color: #fff;
-}
-
-.event-collection .events{
-    margin-bottom: 70px;
-}
-
-.event-collection .thumbnail {
-    padding: 0;
-    border-radius: 0;
-    border-style: none;
-}
-
-.event-collection .event-image {
-    width: 100%;
-}
-
-.event-collection .event-name {
-    border: 1px solid #EBD38C;
-    padding: 18px;
-    text-align: center;
-    color: #0F3844;
-    font-weight: 500;
-    font-size: 20px;
-}
-
-/**************************************/
-/************** Journal ***************/
-/**************************************/
-
-.journal{
-    background-color: #F1F2F2;
-}
-
-.journal .events {
-    margin-bottom: 50px;
-}
-
-.journal .event-box {
-    cursor: pointer;
-}
-
-.journal .thumbnail {
-    padding: 0;
-    border-radius: 0;
-    border-style: none;
-}
-
-.journal .event-image {
-    width: 100%;
-}
-
-.journal .event-caption {
-    margin: 10px 15px;
-}
-
-.journal .event-name {
-    text-transform: uppercase;
-    color: #0F3844;
-    font-weight: 500;
-    font-size: 13px;
-}
-
-.journal .event-description {
-    text-overflow: ellipsis;
-    max-width: 170px;
-    overflow: hidden; 
-    white-space: nowrap;
-    display: inline-block;
-    font-weight: 100;
-    font-size: 12px;
-    color: #000000;
-    margin-bottom: 10px;
-}
-
-.journal .event-read {
-    color: #d33e40;
-    font-weight: 400;
-    margin-top:-3px;
-}
-
-/**************************************/
-/************* Banner Bottom **********/
-/**************************************/
-
-.banner-bottom .banner-additional {
-    z-index: 100;
-    position: relative;
-    left: -37px;
-    top: 10px;
-}
-
-.banner-bottom .banner-title {
-    z-index: 100;
-    color: #EBD38C;
-    font-size: 32px;
-    font-weight: 300;
-    padding: 24px;
-    border: 1px solid #EBD38C;
-    width: 300px;
-    margin: 0 auto;
-}
-
-.banner-bottom .banner-description {
-    z-index: 100;
-    color: #EBD38C;
-    font-size: 15px;
-    font-weight: 200;
-    text-align: center;
-    width: 350px;
-    margin: 0 auto;
-}
-
-#bottomBanner{
-     background-image: url("{{ asset('/images/img-event-planner.jpg') }}");
-     height:400px;
-}
-
-</style>
-
 @extends('layouts.app')
+
+@section('styles')
+    <link rel="stylesheet" type="text/css" href="{{ URL::to('css/home.css') }}">
+@stop
 
 @section('content')
 
-<div class="col-md-12 banner-top no-padding" style="z-index: 100">
+<div class="col-md-12 banner-top no-padding">
     <div class="col-md-12 banner-row-1 no-padding">
         <div class="col-xs-12 no-padding">
 
@@ -309,13 +38,13 @@
 
     <div class="col-md-12 banner-row-2 no-padding">
         <div class="col-xs-12 col-md-4 no-padding">
-            <img src="{{ asset('images/banners/banner-4.jpg') }}" alt="..." style="height: 220px; width: 100%">
+            <img src="{{ asset('images/banners/banner-4.jpg') }}" alt="...">
         </div>
         <div class="col-xs-12 col-md-4 no-padding">
-            <img src="{{ asset('images/banners/banner-2.jpg') }}" alt="..." style="height: 220px; width: 100%">
+            <img src="{{ asset('images/banners/banner-2.jpg') }}" alt="...">
         </div>
         <div class="col-xs-12 col-md-4 no-padding">
-            <img src="{{ asset('images/banners/banner-3.jpg') }}" alt="..." style="height: 220px; width: 100%">
+            <img src="{{ asset('images/banners/banner-3.jpg') }}" alt="...">
         </div>
     </div>
 </div>
@@ -383,10 +112,10 @@
                                 </div>
                                 <span class="event-time clearfix">{{ Carbon\Carbon::parse($event->started_at)->format('l, M d, Y | g.i A') }}</span>
                                 <p class="event-price">
-                                   {{--  @if ($event->min_price == 0 && $event->max_price == 0) Free
+                                    @if ($event->min_price == 0 && $event->max_price == 0) Free
                                     @elseif ($event->min_price == 0 && $event->max_price > 0) IDR {{ $event->max_price/1000 . 'K' }} 
                                     @else IDR {{ $event->min_price/1000 . 'K' }} 
-                                    @endif --}}
+                                    @endif 
                                 </p>
                                 <span class="label label-default event-tag">{{ $event->category->name }}</span>
                                 <span class="label label-default event-tag">{{ $event->event_type->name }}</span>
@@ -395,6 +124,7 @@
                     </div>      
                 </div>
                 @endforeach
+                <a href="{{ url('events/search') }}"><div class="pull-right">View More <span class="fa fa-angle-right"></span></div></a>
             </div>
         </div>
     </div>
@@ -425,9 +155,9 @@
     </div>
 </div>
 
-<div class="col-md-12 banner-bottom no-padding" style="z-index: 100">
+<div class="col-md-12 banner-bottom no-padding">
     <div class="col-xs-12 no-padding" id="bottomBanner">
-        <div style="width: 300px; margin: 0 auto; margin-top: 3em;"><img class="banner-additional" src="{{ asset('/images/img-additional-1.png') }}"></div>
+        <div class="first"><img class="banner-additional" src="{{ asset('/images/img-additional-1.png') }}"></div>
         <a href="{{ url('services') }}"><p class="banner-title">Create Your Event with Gethype</p></a>
         <div class="banner-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
     </div>

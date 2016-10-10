@@ -255,6 +255,10 @@
     height: 20px;
 }
 
+.ticket-message {
+	display: none;
+}
+
 </style>
 
 @extends('layouts.app')
@@ -292,8 +296,6 @@
 		    	<a href="http://twitter.com/intent/tweet?text={{ urlencode($event->name . ' | Gethype' )}}&url={{ url('/events/'.$event->slug) }}&hashtags=Gethype&via=Gethype" onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=450'); return false;" target="_blank">
 		    		<img class="event-sosmed" src="{{ asset('/images/icons/twitter.png') }}">
 		    	</a>
-		    	
-		    	<img class="event-sosmed" src="{{ asset('/images/icons/instagram.png') }}">
 		    </div>
 		    <div class="event-time-venue">
 		    	<div class="event-date">
@@ -395,10 +397,10 @@
           		<button type="button" class="close" data-dismiss="modal">&times;</button>
           		<h4 class="modal-title">{{ $event->name }}</h4>
         	</div>
-        	<form action="{{ url('events/'.$event->id.'/book-ticket') }}" method="POST">
-                {!! csrf_field() !!}
-                {{ method_field('PATCH') }}
 	        	<div class="modal-body">
+	        		<div class="alert alert-danger ticket-message">
+	                	<p></p>
+	              	</div>
 			  		@foreach ($event->ticket_groups as $ticket_group)
 			  		@if ($ticket_group->status == 1)
 			  		<input type="hidden" id="ticket-price-{{ $ticket_group->id }}" value="{{ $ticket_group->price }}">
@@ -436,7 +438,7 @@
 			  	</div>
 	        	<div class="modal-footer">
 	        		<div class="col-xs-6">
-	          			<button type="submit" class="btn ticket-submit">Checkout</button>
+	          			<button type="button" id="{{ $event->id }}" class="btn ticket-checkout">Checkout</button>
 	          		</div>
 	          		<div class="col-xs-3">
 	          			<p class="ticket-quantity-total">QTY: 0</p>
@@ -445,7 +447,6 @@
 	          			<p class="ticket-grandtotal">{{ 'Rp '. number_format(0) }}</p>
 	          		</div>
 	        	</div>
-        	</form>
       	</div>
       
     </div>

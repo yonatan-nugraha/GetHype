@@ -1,0 +1,44 @@
+.banner {
+	width: 100%;
+}
+
+#description{
+    margin-top: 4em;
+    margin-bottom: 4em;
+}
+
+#firstContent {
+	padding-left: 45px;
+    padding-top: 20px;
+}
+
+.singleLine {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.singleLine input {
+	width: 50%
+}
+
+input, textarea {
+    border-radius: 0 !important;
+    border-color: #092D33 !important;
+    margin-bottom: 0;
+}
+
+#secondContent {
+	padding-top: 25px;
+	padding-left: 90px;
+}
+
+.contactContent {
+	background-color: #F2F1F0
+}
+
+.contact-error {
+	font-size: 12px;
+	margin-top: 5px;
+	color: red;
+	margin-bottom: 15px;
+}

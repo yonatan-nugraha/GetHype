@@ -1,0 +1,24 @@
+#mainBanner img {
+	width: 100%;
+}
+
+#mainBanner h1 {
+    color: white;
+    position: absolute;
+    top: 45%;
+    width: 100%;
+    text-align: center;
+}
+
+#mainContent {
+    padding-top: 20px;
+    padding-bottom: 90px;
+}
+
+#mainContent h1 {
+	margin-bottom: 40px;
+}
+
+#mainContent p {
+	margin-bottom: 20px;
+}

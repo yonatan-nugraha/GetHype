@@ -77,6 +77,15 @@ class EventController extends Controller
      */
     public function bookTicket(Request $request, Event $event)
     {
+        if (auth()->guest()) {
+            session()->put('url.intended', '/events/'.$event->slug);
+
+            return array(
+                'success' => 0,
+                'login'   => 0
+            );
+        }
+
         $order_details  = array();
         $ticket_ids     = array();
         $order_amount   = 0;
@@ -94,7 +103,10 @@ class EventController extends Controller
                     ->get();
 
                 if (count($tickets) != $quantity) {
-                    return redirect()->back();
+                    return array(
+                        'success'   => 0,
+                        'message'   => 'Cannot book ticket at the moment, please try again in a while :)'
+                    );
                 }
 
                 foreach ($tickets as $ticket) {
@@ -111,8 +123,18 @@ class EventController extends Controller
         }
 
         if ($order_details == null) {
-            return redirect()->back();
+            return array(
+                'success'   => 0,
+                'message'   => 'Please select the quantity of the ticket that you would like to buy :)'
+            );
         }
+
+        Ticket::where('status', 2)
+            ->where('booked_by', auth()->id())
+            ->update([
+                'status' => 1,
+                'booked_by' => null,
+            ]);
 
         Ticket::whereIn('id', $ticket_ids)
             ->update([
@@ -131,7 +153,10 @@ class EventController extends Controller
         Redis::set('order:'.auth()->id(), json_encode($order));
         Redis::expire('order:'.auth()->id(), 5000);
 
-        return redirect('checkout');
+        return array(
+            'success'   => 1,
+            'message'   => 'Please select the quantity of the ticket that you would like to buy :)'
+        );
     }
 
     /**
@@ -156,24 +181,24 @@ class EventController extends Controller
                     ->groupBy('events.id')
                     ->orderBy('events.weight', 'desc');
 
-        if ($category != 'all') {
+        if ($category && $category != 'all') {
             $events->where('category_id', $category);
         }
 
-        if ($event_type != 'all') {
+        if ($event_type && $event_type != 'all') {
             $events->where('event_type_id', $event_type);
         }
 
-        if ($location != 'all') {
+        if ($location && $location != 'all') {
             $events->where('location', 'like', '%'.$location.'%');
         }
 
-        if ($date != '') {
+        if ($date && $date != '') {
             $events->whereDate('events.started_at', '<=', $date);
             $events->whereDate('events.ended_at', '>=', $date);
         }
 
-        if ($price != 'all') {
+        if ($price && $price != 'all') {
             if ($price == 'free') {
                 $events->havingRaw('sum(ticket_groups.price) is null');
             } 
@@ -184,8 +209,6 @@ class EventController extends Controller
 
         $events = $events->paginate(2);
         $events->setPath('search?category='.$category.'&event_type='.$event_type.'&location='.$location.'&date='.$date.'&price='.$price);
-
-        
 
         return view('events/search', [
             'events'        => $events,
@@ -262,7 +285,7 @@ class EventController extends Controller
             return redirect('');
         }
 
-        return view('events/showCollection', [
+        return view('events/show_collection', [
             'collection' => $collection,
         ]);
     }

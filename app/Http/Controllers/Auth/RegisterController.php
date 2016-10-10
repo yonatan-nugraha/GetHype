@@ -9,8 +9,7 @@ use App\User;
 use App\Mail\ActivateAccount;
 use App\Mail\Welcome;
 
-use Validator, Mail;
-use Carbon\Carbon;
+use Mail, Carbon\Carbon;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -55,9 +54,9 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'first_name' => 'required|alpha|min:2|max:30',
-            'last_name' => 'alpha|max:30',
+        return validate()->make($data, [
+            'first_name' => 'required|regex:/^[\pL\s\-]+$/u|min:2|max:30',
+            'last_name' => 'regex:/^[\pL\s\-]+$/u|max:30',
             'email'     => 'required|email|max:80|unique:users',
             'phone'     => 'required|min:6|max:20',
             'birthdate' => 'required|date',

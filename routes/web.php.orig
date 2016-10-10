@@ -78,7 +78,7 @@ Route::group(['prefix' => 'events'], function () {
 	Route::patch('{event}/update-status-event', 'AdminController@updateStatusEvent');
 
 	//book ticket
-	Route::post('{event}/book-ticket', 'EventController@bookTicket');
+	Route::patch('{event}/book-ticket', 'EventController@bookTicket')->middleware('auth');
 
 	//bookmark
 	Route::post('add-bookmark', 'EventController@addBookmark')->middleware('auth');
@@ -158,9 +158,3 @@ Route::group(['prefix' => 'subscribers'], function () {
 Route::group(['prefix' => 'orders'], function () {
 	Route::get('', 'OrderController@index');
 });
-
-//messages
-Route::group(['prefix' => 'messages'], function () {
-	Route::post('', 'MessageController@store');
-});
-
