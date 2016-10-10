@@ -101,7 +101,6 @@
 
         <div class="row events">
             <div class="row">
-                @for($i=0; $i<8;$i++)
                 @foreach ($events as $event)
                 <div class="col-xs-12 col-md-3 event-box">
                     <div class="thumbnail">
@@ -113,10 +112,10 @@
                                 </div>
                                 <span class="event-time clearfix">{{ Carbon\Carbon::parse($event->started_at)->format('l, M d, Y | g.i A') }}</span>
                                 <p class="event-price">
-                                   {{--  @if ($event->min_price == 0 && $event->max_price == 0) Free
+                                    @if ($event->min_price == 0 && $event->max_price == 0) Free
                                     @elseif ($event->min_price == 0 && $event->max_price > 0) IDR {{ $event->max_price/1000 . 'K' }} 
                                     @else IDR {{ $event->min_price/1000 . 'K' }} 
-                                    @endif --}}
+                                    @endif 
                                 </p>
                                 <span class="label label-default event-tag">{{ $event->category->name }}</span>
                                 <span class="label label-default event-tag">{{ $event->event_type->name }}</span>
@@ -125,8 +124,7 @@
                     </div>      
                 </div>
                 @endforeach
-                @endfor
-                <div class="pull-right">Read More <span class="fa fa-angle-right"></span></div>
+                <a href="{{ url('events/search') }}"><div class="pull-right">View More <span class="fa fa-angle-right"></span></div></a>
             </div>
         </div>
     </div>

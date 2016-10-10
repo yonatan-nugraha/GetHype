@@ -158,3 +158,9 @@ Route::group(['prefix' => 'subscribers'], function () {
 Route::group(['prefix' => 'orders'], function () {
 	Route::get('', 'OrderController@index');
 });
+
+//messages
+Route::group(['prefix' => 'messages'], function () {
+	Route::post('', 'MessageController@store');
+});
+

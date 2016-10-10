@@ -10,8 +10,6 @@ use App\Category;
 use App\EventType;
 use App\Interest;
 
-use Validator;
-
 class AccountController extends Controller
 {
     /**
@@ -55,9 +53,9 @@ class AccountController extends Controller
      */
     public function updateProfile(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'first_name' => 'required|alpha|min:2|max:30',
-            'last_name' => 'alpha|max:30',
+        $validator = validator()->make($request->all(), [
+            'first_name' => 'required|regex:/^[\pL\s\-]+$/u|min:2|max:30',
+            'last_name' => 'regex:/^[\pL\s\-]+$/u|max:30',
             'email'     => 'required|email|max:80|unique:users,email,'.$request->user()->id,
             'phone'     => 'required|min:6|max:20',
             'birthdate' => 'required|date',
@@ -112,7 +110,7 @@ class AccountController extends Controller
      */
     public function updatePassword(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = validator()->make($request->all(), [
             'current_password' => 'required|min:6|max:255',
             'new_password' => 'required|min:6|max:255|confirmed',
         ]);
@@ -148,7 +146,7 @@ class AccountController extends Controller
     public function updatePicture(Request $request)
     {   
         if ($request->hasFile('photo') && $request->photo->isValid()) {
-            $validator = Validator::make($request->all(), [
+            $validator = validator()->make($request->all(), [
                 'photo' => 'mimes:jpeg,png,bmp'
             ]);
 

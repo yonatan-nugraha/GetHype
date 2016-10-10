@@ -181,24 +181,24 @@ class EventController extends Controller
                     ->groupBy('events.id')
                     ->orderBy('events.weight', 'desc');
 
-        if ($category != 'all') {
+        if ($category && $category != 'all') {
             $events->where('category_id', $category);
         }
 
-        if ($event_type != 'all') {
+        if ($event_type && $event_type != 'all') {
             $events->where('event_type_id', $event_type);
         }
 
-        if ($location != 'all') {
+        if ($location && $location != 'all') {
             $events->where('location', 'like', '%'.$location.'%');
         }
 
-        if ($date != '') {
+        if ($date && $date != '') {
             $events->whereDate('events.started_at', '<=', $date);
             $events->whereDate('events.ended_at', '>=', $date);
         }
 
-        if ($price != 'all') {
+        if ($price && $price != 'all') {
             if ($price == 'free') {
                 $events->havingRaw('sum(ticket_groups.price) is null');
             } 
