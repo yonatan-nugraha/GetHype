@@ -39,21 +39,28 @@ class MessageController extends Controller
             'phone'     	=> 'max:20',
         ])->validate();
 
+        $subject    = $request->subject;
+        $description = $request->description;
+        $first_name = $request->first_name;
+        $last_name  = $request->last_name;
+        $email      = $request->email;
+        $phone      = $request->phone;
+
     	if ($request->cookie('message') == null) {
-    		Mail::queue([], [], function ($message) use ($request) {
-		      	$message->from($request->email, $request->first_name . ' ' . $request->last_name)
+    		Mail::queue([], [], function ($message) use ($subject, $description, $first_name, $last_name, $email) {
+		      	$message->from($email, $first_name . ' ' . $last_name)
 					->to('yonatan.nugraha@gethype.co.id')
-					->subject($request->subject)
-					->setBody($request->description);
+					->subject($subject)
+					->setBody($description);
 		    });
 
 	    	Message::create([
-	    		'subject' 	=> $request->subject,
-	    		'description' 	=> $request->description,
-	    		'first_name' 	=> $request->first_name,
-	    		'last_name' 	=> $request->last_name,
-	    		'email' 	=> $request->email,
-	    		'phone' 	=> $request->phone,
+	    		'subject' 	=> $subject,
+	    		'description' 	=> $description,
+	    		'first_name' 	=> $first_name,
+	    		'last_name' 	=> $last_name,
+	    		'email' 	=> $email,
+	    		'phone' 	=> $phone,
 	    		'status' 	=> 0,
 			]);
 

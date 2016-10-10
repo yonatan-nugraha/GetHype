@@ -229,24 +229,37 @@ class EventController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function addBookmark(Request $request)
+    public function addBookmark(Request $request, Event $event)
     {   
-        $event_id   = $request->event_id;
-        $event      = Event::find($event_id);
-        $bookmark   = Bookmark::where('event_id', $event_id)
+        if (auth()->guest()) {
+            session()->put('url.intended', '/events/'.$event->slug);
+
+            return array(
+                'success' => 0,
+                'login'   => 0
+            );
+        }
+
+        $bookmark   = Bookmark::where('event_id', $event->id)
                         ->where('user_id', auth()->id())
                         ->get();
 
         if (count($event) > 0 && count($bookmark) == 0) {
             Bookmark::create([
                 'user_id' => auth()->id(),
-                'event_id' => $event_id
+                'event_id' => $event->id
             ]);
 
-            return 1;
+            return array(
+                'success' => 1,
+                'message' => 'This event has been succesfully added to your bookmark list'
+            );
         }
 
-        return 0;
+        return array(
+            'success' => 0,
+            'message' => 'This event is already on your bookmark list'
+        );
     }
 
     /**
@@ -257,6 +270,15 @@ class EventController extends Controller
      */
     public function removeBookmark(Request $request, Event $event)
     {   
+        if (auth()->guest()) {
+            session()->put('url.intended', '/events/'.$event->slug);
+
+            return array(
+                'success' => 0,
+                'login'   => 0
+            );
+        }
+        
         $bookmark   = Bookmark::where('event_id', $event->id)
                         ->where('user_id', auth()->id())
                         ->get();
@@ -266,10 +288,16 @@ class EventController extends Controller
                         ->where('user_id', auth()->id())
                         ->delete();
 
-            return 1;
+            return array(
+                'success' => 1,
+                'message' => 'This event has been succesfully added to your bookmark list'
+            );
         }
 
-        return 0;
+        return array(
+            'success' => 0,
+            'message' => 'This event has been succesfully added to your bookmark list'
+        );
     }
 
     /**

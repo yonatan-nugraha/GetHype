@@ -81,8 +81,8 @@ Route::group(['prefix' => 'events'], function () {
 	Route::post('{event}/book-ticket', 'EventController@bookTicket');
 
 	//bookmark
-	Route::post('add-bookmark', 'EventController@addBookmark')->middleware('auth');
-	Route::delete('{event}/remove-bookmark', 'EventController@removeBookmark')->middleware('auth');
+	Route::post('{event}/add-bookmark', 'EventController@addBookmark');
+	Route::delete('{event}/remove-bookmark', 'EventController@removeBookmark');
 
 	//search events
 	Route::get('search', 'EventController@search');
