@@ -8,8 +8,6 @@ use App\Http\Requests;
 
 use App\Subscriber;
 
-use Validator;
-
 class SubscriberController extends Controller
 {
     /**
@@ -30,7 +28,7 @@ class SubscriberController extends Controller
      */
     public function subscribe(Request $request)
     {   
-        $validator = Validator::make($request->all(), [
+        $validator = validator()->make($request->all(), [
             'email' => 'required|email|max:80',
         ])->validate();
 
@@ -49,7 +47,10 @@ class SubscriberController extends Controller
         	]);
 	    }
 
-	    return 'Your email has been subscribed to our mailing list.';
+        return array(
+            'success' => 1,
+            'message' => 'Your email has been subscribed to our mailing list.'
+        );
     }
 
     /**

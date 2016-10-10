@@ -128,7 +128,7 @@
                 <div class="col-sm-2 footer-main-col">
                     <ul>
                         <li class="footer-title">Get in Touch</li>
-                        <li><a href="{{ URL::to('contact') }}">Contact Us</a></li>
+                        <li><a href="{{ URL::to('contact-us') }}">Contact Us</a></li>
                         <li><a>Instagram</a></li>
                         <li><a>Facebook</a></li>
                         <li><a>Twitter</a></li>

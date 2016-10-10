@@ -24,7 +24,8 @@ class OrderController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function index() {
+    public function index() 
+    {
     	$orders = auth()->user()->orders()->get();
 
         return view('orders/index', [

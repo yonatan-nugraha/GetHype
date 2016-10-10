@@ -24,7 +24,7 @@
 input, textarea {
     border-radius: 0 !important;
     border-color: #092D33 !important;
-    margin-bottom: 15px;
+    margin-bottom: 0;
 }
 
 #secondContent {
@@ -34,4 +34,11 @@ input, textarea {
 
 .contactContent {
 	background-color: #F2F1F0
+}
+
+.contact-error {
+	font-size: 12px;
+	margin-top: 5px;
+	color: red;
+	margin-bottom: 15px;
 }
