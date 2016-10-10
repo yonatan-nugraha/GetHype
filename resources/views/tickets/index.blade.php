@@ -286,7 +286,7 @@ body {
 	</div>
 	<div class="row order-body">
 		<div class="col-xs-2 order-sidebar">
-			<ul class="nav nav-pills nav-stacked">
+			<ul class="nav nav-stacked nav-pills">
 			  	<li class="active"><a data-toggle="tab" href="#upcoming-events">Upcoming Events</a></li>
 			  	<li><a data-toggle="tab" href="#past-events">Past Events</a></li>
 			  	<li><a data-toggle="tab" href="#bookmark-events">Bookmark Events</a></li>
