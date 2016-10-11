@@ -22,7 +22,7 @@ class JournalController extends Controller
 
     public function showList() 
     {
-    	return view('journals.index', [
+    	return view('journals.list', [
     	]);
     }
 
@@ -30,7 +30,7 @@ class JournalController extends Controller
     {
         $journal = Journal::where('slug', $slug)->first();
 
-    	return view('journals.show', [
+    	return view('journals.detail', [
             'journal' => $journal
     	]);
     }

@@ -47,7 +47,7 @@ class MyEventController extends Controller
         	return redirect('');
         }
 
-        return view('myevents/index', [
+        return view('myevents/list', [
         	'events' => $events
         ]);
     }
@@ -97,7 +97,7 @@ class MyEventController extends Controller
 		$total_cost 		= 0.1 * $total_revenue;
 		$total_profit 		= $total_revenue - $total_cost;
 
-        return view('myevents/show', [
+        return view('myevents/statistic', [
         	'event' 		=> $event,
             'total_views'   => $total_views[0],
         	'ticket_sales' 	=> $ticket_sales,

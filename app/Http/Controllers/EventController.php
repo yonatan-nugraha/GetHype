@@ -50,7 +50,7 @@ class EventController extends Controller
         $cookie_name   = 'views:' . $event->id;
         $cookie_value  = $request->cookie($cookie_name);
 
-        $response = response()->view('events/show', [
+        $response = response()->view('events/detail', [
             'event' => $event,
             'guests' => ['Joko Widodo', 'Basuki Tjahaja Purnama', 'Mark Zuckerberg', 'Larry Page']
         ]);
@@ -313,7 +313,7 @@ class EventController extends Controller
             return redirect('');
         }
 
-        return view('events/show_collection', [
+        return view('events/collection', [
             'collection' => $collection,
         ]);
     }
