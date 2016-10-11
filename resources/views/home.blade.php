@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
 @section('styles')
-    <link rel="stylesheet" type="text/css" href="{{ URL::to('css/home.css') }}">
-@stop
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+@endsection
 
 @section('content')
-
 <div class="col-md-12 banner-top no-padding">
     <div class="col-md-12 banner-row-1 no-padding">
         <div class="col-xs-12 no-padding">

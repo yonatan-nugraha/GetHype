@@ -37,7 +37,7 @@ class AccountController extends Controller
             $user_interests_name[] = $interest->category->name;
         }
 
-        return view('account/index', [
+        return view('account/settings', [
         	'categories'   => Category::all(),
             'interests'     => auth()->user()->interests,
             'user_interests' => $user_interests,

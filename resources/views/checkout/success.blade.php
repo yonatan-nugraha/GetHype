@@ -1,43 +1,10 @@
-<style>
-body {
-	background-color: #F1F2F2 !important;
-}
-
-.checkout-success {
-	margin-top: 50px;
-	padding-bottom: 50px !important;
-}
-
-.checkout-success .panel {
-	border-radius: 0;
-	border-color: #F1F2F2;
-}
-
-.checkout-success .panel-heading {
-	border-radius: 0;
-	background-color: #0F3844;
-}
-
-.checkout-success .panel-body {
-	padding: 10px 0;
-}
-
-.checkout-success-title {
-	font-size: 25px;
-	font-weight: 600;
-}
-
-.checkout-success-content {
-	font-size: 12px;
-	font-weight: 300;
-}
-
-</style>
-
 @extends('layouts.app')
 
-@section('content')
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/checkout-success.css') }}">
+@endsection
 
+@section('content')
 <div class="container checkout-success">
 	<div class="row">
 		<div class="panel">
@@ -55,5 +22,4 @@ body {
 		</div>
 	</div>
 </div>
-
 @endsection

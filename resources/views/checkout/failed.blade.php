@@ -1,43 +1,10 @@
-<style>
-body {
-	background-color: #F1F2F2 !important;
-}
-
-.checkout-failed {
-	margin-top: 50px;
-	padding-bottom: 50px !important;
-}
-
-.checkout-failed .panel {
-	border-radius: 0;
-	border-color: #F1F2F2;
-}
-
-.checkout-failed .panel-heading {
-	border-radius: 0;
-	background-color: #0F3844;
-}
-
-.checkout-failed .panel-body {
-	padding: 10px 0;
-}
-
-.checkout-failed-title {
-	font-size: 25px;
-	font-weight: 600;
-}
-
-.checkout-failed-content {
-	font-size: 12px;
-	font-weight: 300;
-}
-
-</style>
-
 @extends('layouts.app')
 
-@section('content')
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/checkout-failed.css') }}">
+@endsection
 
+@section('content')
 <div class="container checkout-failed">
 	<div class="row">
 		<div class="panel">
@@ -54,5 +21,4 @@ body {
 		</div>
 	</div>
 </div>
-
 @endsection

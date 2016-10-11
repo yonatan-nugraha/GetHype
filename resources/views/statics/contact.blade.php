@@ -1,14 +1,13 @@
 @extends('layouts.app')
 
 @section('styles')
-	<link rel="stylesheet" type="text/css" href="{{ URL::to('css/contact.css') }}">
-@stop
+	<link rel="stylesheet" href="{{ asset('css/contact.css') }}">
+@endsection
 
 @section('content')
-
 <div class="col-md-12 no-padding" class="contactContent">
 	<div class="col-md-6 no-padding">
-		<img src="{{ URL::to('images/contact/contact-banner-1.jpg') }}" class="banner">
+		<img src="{{ asset('images/contact/contact-banner-1.jpg') }}" class="banner">
 	</div>
 	<div class="col-md-6" id="firstContent">
 		<h1>Contact</h1>
@@ -46,8 +45,7 @@
 		</div>
 	</div>
 	<div class="col-md-6 no-padding">
-		<img src="{{ URL::to('images/contact/contact-banner-2.jpg') }}" class="banner">
+		<img src="{{ asset('images/contact/contact-banner-2.jpg') }}" class="banner">
 	</div>
 </div>
-
-@stop
+@endsection
