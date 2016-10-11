@@ -19,9 +19,10 @@
     <link rel="stylesheet" href="{{ asset('plugins/bootstrap-3.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/font-awesome-4.6.3/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sticky-footer-navbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     
     @yield('styles')
-    <link rel="stylesheet" type="text/css" href="{{ URL::to('css/main.css') }}">
+    
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -128,7 +129,7 @@
                 <div class="col-sm-2 footer-main-col">
                     <ul>
                         <li class="footer-title">Get in Touch</li>
-                        <li><a href="{{ URL::to('contact-us') }}">Contact Us</a></li>
+                        <li><a href="{{ url('contact-us') }}">Contact Us</a></li>
                         <li><a>Instagram</a></li>
                         <li><a>Facebook</a></li>
                         <li><a>Twitter</a></li>

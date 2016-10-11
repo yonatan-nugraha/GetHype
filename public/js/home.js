@@ -64,30 +64,30 @@ $(document).ready(function() {
     		data: data,
     		success: function(result) {
     			if (result.success == 1) {
-	    			$('#'+id+'Message').text(result.message);
+	    			$('#'+id+'-message').text(result.message);
 	    		} else {
-	    			$('#'+id+'Error').text(result.message);
+	    			$('#'+id+'-error').text(result.message);
 	    		}
 	    	},
 	    	error: function (result) {
         		var errors = $.parseJSON(result.responseText);
         		if (errors.first_name) {
-	        		$('#'+id+'FirstName').text(errors.first_name[0]);
+	        		$('#'+id+'-first-name').text(errors.first_name[0]);
 	        	}
 	        	if (errors.last_name) {
-	        		$('#'+id+'LastName').text(errors.last_name[0]);
+	        		$('#'+id+'-last-name').text(errors.last_name[0]);
 	        	}
         		if (errors.email) {
-	        		$('#'+id+'Email').text(errors.email[0]);
+	        		$('#'+id+'-email').text(errors.email[0]);
 	        	}
 	        	if (errors.phone) {
-	        		$('#'+id+'Phone').text(errors.phone[0]);
+	        		$('#'+id+'-phone').text(errors.phone[0]);
 	        	}
 	        	if (errors.subject) {
-	        		$('#'+id+'Subject').text(errors.subject[0]);
+	        		$('#'+id+'-subject').text(errors.subject[0]);
 	        	}
 	        	if (errors.description) {
-	        		$('#'+id+'Description').text(errors.description[0]);
+	        		$('#'+id+'-description').text(errors.description[0]);
 	        	}
 	    	},
 	    	beforeSend: function () {

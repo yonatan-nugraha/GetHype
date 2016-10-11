@@ -1,14 +1,13 @@
 @extends('layouts.app')
 
 @section('styles')
-	<link rel="stylesheet" type="text/css" href="{{ URL::to('css/contact.css') }}">
-@stop
+	<link rel="stylesheet" href="{{ asset('css/contact.css') }}">
+@endsection
 
 @section('content')
-
 <div class="col-md-12 no-padding" class="contactContent">
 	<div class="col-md-6 no-padding">
-		<img src="{{ URL::to('images/contact/contact-banner-1.jpg') }}" class="banner">
+		<img src="{{ asset('images/contact/contact-banner-1.jpg') }}" class="banner">
 	</div>
 	<div class="col-md-6" id="firstContent">
 		<h1>Contact</h1>
@@ -25,29 +24,28 @@
 		<div class="col-md-12 no-padding">
 			<div class="row singleLine">
 				<input type="text" name="contact_first_name" placeholder="Name" class="form-control">
-				<p class="contact-error" id="contactFirstName"></p>
+				<p class="contact-error" id="contact-first-name"></p>
 			</div>
 			<div class="row singleLine">
 				<input type="email" name="contact_email" placeholder="Email" class="form-control">
-				<p class="contact-error" id="contactEmail"></p>
+				<p class="contact-error" id="contact-email"></p>
 			</div>
 			<div class="row singleLine">
 				<input type="text" name="contact_subject" placeholder="Subject" class="form-control">
-				<p class="contact-error" id="contactSubject"></p>
+				<p class="contact-error" id="contact-subject"></p>
 			</div>
 			<div class="row singleLine">
 				<textarea name="contact_description" placeholder="Message" class="form-control" rows="5"></textarea>
-				<p class="contact-error" id="contactDescription"></p>
+				<p class="contact-error" id="contact-description"></p>
 			</div>
 			<input type="hidden" name="contact_last_name">
 			<input type="hidden" name="contact_phone">
 			<button class="message-submit" id="contact">Send</button>
-			<p class="contact-error" id="contactError"></p>
+			<p class="contact-error" id="contact-error"></p>
 		</div>
 	</div>
 	<div class="col-md-6 no-padding">
-		<img src="{{ URL::to('images/contact/contact-banner-2.jpg') }}" class="banner">
+		<img src="{{ asset('images/contact/contact-banner-2.jpg') }}" class="banner">
 	</div>
 </div>
-
-@stop
+@endsection

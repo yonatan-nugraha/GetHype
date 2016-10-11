@@ -28,29 +28,7 @@ $(document).ready(function() {
 	  	calculate_ticket();
 	});
 
-	$('.add-bookmark').click(function() {
-		var event_id = $(this).attr('id');
-
-	    $.ajaxSetup({
-		    headers: {
-		        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		    }
-		});
-
-    	$.ajax({
-    		url: '/events/add-bookmark', 
-    		type: 'POST',
-    		data: {event_id: event_id},
-    		success: function(result) {
-    			if (result == 1) {
-		        	alert('This event has been succesfully added to your bookmark list');
-		        } else {
-		        	alert('This event is already on your bookmark list');
-		        }
-	    	}
-	    });
-	});
-
+    //ticket checkout
 	$('.ticket-checkout').click(function() {
 		var event_id = $(this).attr('id');
 
@@ -80,6 +58,29 @@ $(document).ready(function() {
     			} else {
     				location.href = '/checkout';
     			}
+	    	}
+	    });
+	});
+
+	//add-bookmark
+	$('.add-bookmark').click(function() {
+		var event_id = $(this).attr('id');
+
+	    $.ajaxSetup({
+		    headers: {
+		        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		    }
+		});
+
+    	$.ajax({
+    		url: '/events/'+event_id+'/add-bookmark', 
+    		type: 'POST',
+    		success: function(result) {
+    			if (result.login == 0) {
+    				location.href = '/login';
+    				return;
+    			}
+		        alert(result.message);
 	    	}
 	    });
 	});
