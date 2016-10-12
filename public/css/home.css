@@ -44,7 +44,7 @@
 /**************************************/
 
 .search {
-    background-color: #F1F2F2;
+    background-color: #f1f2f2;
 }
 
 .search-bar {
@@ -111,7 +111,7 @@
 /**************************************/
 
 .whats-new {
-    background-color: #F1F2F2;
+    background-color: #f1f2f2;
     padding-bottom: 30px;
 }
 
@@ -164,7 +164,7 @@
 }
 
 .whats-new .event-tag {
-    background-color: #E6E6E6;
+    background-color: #e6e6e6;
     color: #000000;
     font-weight: 200;
     font-size: 10px;
@@ -203,7 +203,7 @@
 }
 
 .event-collection .event-name {
-    border: 1px solid #EBD38C;
+    border: 1px solid #ebd38c;
     padding: 18px;
     text-align: center;
     color: #0f3844;
@@ -216,7 +216,7 @@
 /**************************************/
 
 .journal{
-    background-color: #F1F2F2;
+    background-color: #f1f2f2;
 }
 
 .journal .events {
@@ -282,18 +282,18 @@
 
 .banner-bottom .banner-title {
     z-index: 100;
-    color: #EBD38C;
+    color: #ebd38c;
     font-size: 32px;
     font-weight: 300;
     padding: 24px;
-    border: 1px solid #EBD38C;
+    border: 1px solid #ebd38c;
     width: 300px;
     margin: 0 auto;
 }
 
 .banner-bottom .banner-description {
     z-index: 100;
-    color: #EBD38C;
+    color: #ebd38c;
     font-size: 15px;
     font-weight: 200;
     text-align: center;
