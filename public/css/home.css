@@ -28,7 +28,7 @@
 /**************************************/
 
 .home-title {
-    color: #0F3844;
+    color: #0f3844;
     margin: 50px 0 15px; 
     font-weight: 700;
     font-size: 25px;
@@ -36,7 +36,7 @@
 }
 
 .banner-row-2 img {
-    height: 220px; width: 100%
+    height: 300px; width: 100%
 }
 
 /**************************************/
@@ -54,16 +54,25 @@
 .search-bar select, .search-bar input {
     float: left;
     -webkit-appearance: none;
-    border: 2px solid #0F3844;
+    border: 2px solid #0f3844;
     border-radius: 0;
-    color: #0F3844;
+    color: #0f3844;
+    background-color: #f1f2f2;
 }
 
 .search-category, .search-type {
-    max-width: 20%;
+    max-width: 19%;
 }
 
-.search-location, .search-date, .search-price {
+.search-location {
+    max-width: 17%;
+}
+
+.search-date {
+    max-width: 15%;
+}
+
+.search-price {
     max-width: 15%;
 }
 
@@ -80,16 +89,21 @@
 }
 
 ::-webkit-input-placeholder {
-    color: #0F3844;
+    color: #0f3844;
 }
 :-moz-placeholder {
-    color: #0F3844;
+    color: #0f3844;
 }
 ::-moz-placeholder {
-    color: #0F3844;
+    color: #0f3844;
 }
 :-ms-input-placeholder {
-    color: #0F3844;
+    color: #0f3844;
+}
+
+.gethype-line img {
+    width: 100%;
+    max-height: 5px;
 }
 
 /**************************************/
@@ -134,11 +148,11 @@
 }
 
 .whats-new .event-name {
-    color: #0F3844;
+    color: #0f3844;
 }
 
 .whats-new .event-price {
-    color: #0F3844;
+    color: #0f3844;
     font-size: 12px;
     font-weight: 500;
 }
@@ -154,6 +168,15 @@
     color: #000000;
     font-weight: 200;
     font-size: 10px;
+}
+
+.whats-new .view-more {
+    text-align: center;
+}
+
+.whats-new .view-more a {
+    color: #0f3844;
+    font-weight: 500;
 }
 
 
@@ -183,7 +206,7 @@
     border: 1px solid #EBD38C;
     padding: 18px;
     text-align: center;
-    color: #0F3844;
+    color: #0f3844;
     font-weight: 500;
     font-size: 20px;
 }
@@ -220,7 +243,7 @@
 
 .journal .event-name {
     text-transform: uppercase;
-    color: #0F3844;
+    color: #0f3844;
     font-weight: 500;
     font-size: 13px;
 }

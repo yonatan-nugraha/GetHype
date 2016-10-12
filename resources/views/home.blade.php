@@ -37,13 +37,13 @@
 
     <div class="col-md-12 banner-row-2 no-padding">
         <div class="col-xs-12 col-md-4 no-padding">
-            <img src="{{ asset('images/banners/banner-4.jpg') }}" alt="...">
+            <img src="{{ asset('images/banners/small-banner-1.jpg') }}" alt="...">
         </div>
         <div class="col-xs-12 col-md-4 no-padding">
-            <img src="{{ asset('images/banners/banner-2.jpg') }}" alt="...">
+            <img src="{{ asset('images/banners/small-banner-2.jpg') }}" alt="...">
         </div>
         <div class="col-xs-12 col-md-4 no-padding">
-            <img src="{{ asset('images/banners/banner-3.jpg') }}" alt="...">
+            <img src="{{ asset('images/banners/small-banner-3.jpg') }}" alt="...">
         </div>
     </div>
 </div>
@@ -51,7 +51,7 @@
 <div class="col-md-12 search">
     <div class="container">
         <div class="row home-title">
-            <span>Find Your Happiness!</span>
+            <span>Find the Hype!</span>
         </div>
         
         <div class="row search-bar">
@@ -78,7 +78,7 @@
                     <input type="date" class="form-control search-date" name="date">
                 </div>
                 <select class="form-control search-price" name="price">
-                    <option value="all">All Budgets</option>
+                    <option value="all">All Price</option>
                     <option value="free">Free</option>
                     <option value="paid">Paid</option>
                 </select>
@@ -86,8 +86,8 @@
             </form>
         </div>
 
-        <div class="row">
-            <img class="gethype-line" src="{{ asset('images/img-additional-2.png') }}">
+        <div class="row gethype-line">
+            <img src="{{ asset('images/img-additional-2.png') }}">
         </div>
     </div>
 </div>
@@ -123,7 +123,9 @@
                     </div>      
                 </div>
                 @endforeach
-                <a href="{{ url('events/search') }}"><div class="pull-right">View More <span class="fa fa-angle-right"></span></div></a>
+                <div class="view-more">
+                    <a href="{{ url('events/search') }}">view more</a>
+                </div>
             </div>
         </div>
     </div>
