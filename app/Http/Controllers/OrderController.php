@@ -26,7 +26,10 @@ class OrderController extends Controller
      */
     public function index() 
     {
-    	$orders = auth()->user()->orders()->get();
+    	$orders = auth()->user()->orders()
+            ->whereIn('payment_status', [4,5])
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('orders/index', [
         	'orders' => $orders,

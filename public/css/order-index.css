@@ -1,0 +1,138 @@
+body {
+	background-color: #F1F2F2 !important;
+}
+
+/**************************************/
+/*********** Orders General ***********/
+/**************************************/
+
+.orders-header {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	margin-left: 5px;
+}
+
+.orders-header .title {
+	font-size: 20px;
+	font-weight: 600;
+	color: #0F3844;
+	margin-bottom: 0;
+}
+
+.orders-header .description {
+	font-size: 14px;
+	font-weight: 300;
+	color: #0F3844;
+}
+
+.event-name {
+	font-size: 18px;
+}
+
+.event-date {
+	font-size: 11px;
+}
+
+.orders a {
+	text-decoration: none;
+	color: #0F3844;
+	background-color: none;
+}
+
+.orders a:hover {
+	text-decoration: none;
+	color: #0F3844;
+	background-color: none;
+}
+
+.orders-bottom {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+/**************************************/
+/********** Orders Sidebar ************/
+/**************************************/
+
+.orders-content {
+	margin-bottom: 70px;
+}
+
+.orders-sidebar li {
+	border-radius: 0;
+	background-color: #fff;
+}
+
+.orders-sidebar a {
+	color: #0F3844;
+	background-color: #fff;
+	font-size: 13px;
+	min-height: 100px;
+	padding: 5px 5px 5px 5px !important;
+}
+
+.orders-sidebar li.active:after {
+    content: "";
+    display: block;
+    height: 3px;
+    width: 90%;
+    background: #EBD38C;
+    margin: 0 auto;
+}
+
+.orders-sidebar li.active a {
+	background-color: #fff !important;
+	color: #0F3844 !important;
+}
+
+.orders-sidebar li.active a:hover {
+    background-color: #F1F2F2 !important;
+}
+
+.orders-sidebar .thumbnail {
+	padding: 0;
+}
+
+
+/**************************************/
+/*********** Orders Detail ************/
+/**************************************/
+
+.orders-detail {
+	background-color: #fff;
+}
+
+.orders-detail .title {
+	font-size: 10px;
+	font-weight: 200;
+	margin-top: 10px;
+	margin-bottom: 0;
+}
+
+.orders-detail .description {
+	font-size: 17px;
+	font-weight: 400;
+}
+
+.row-1, .row-2, .row-3 {
+	border-bottom: 1px dotted black;
+}
+
+.row-1 .col-1, .row-1 .col-2, .row-3 .col-1 {
+	border-right: 1px dotted black;
+}
+
+.row-2 .col-2 {
+	border-left: 1px dotted black;
+	border-right: 1px dotted black;
+}
+
+.row-3 {
+	text-align: center;
+}
+
+.status-icon {
+	width: 20px;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}

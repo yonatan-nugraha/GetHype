@@ -123,6 +123,9 @@ Route::group(['prefix' => 'myevents'], function () {
 
 	Route::get('{event}/order-details', 'MyEventController@showOrderDetails');
 	Route::get('{event}/ticket-sales', 'MyEventController@showTicketSales');
+
+	Route::get('{event}/register', 'MyEventController@showRegister');
+	Route::post('{event}/register', 'MyEventController@register');
 });
 
 //tickets and orders

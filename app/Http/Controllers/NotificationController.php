@@ -106,7 +106,7 @@ class NotificationController extends Controller
                     if ($tickets_updated > 0) {
                         $order_status = 2;
 
-                        Mail::to($order->user->email)->queue(new CheckoutSuccess);
+                        Mail::to($order->user->email)->queue(new CheckoutSuccess($order));
 
                         Redis::del('order:'.$order->user_id);
                     }
