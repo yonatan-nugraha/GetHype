@@ -1,0 +1,19 @@
+.invoice-header, .invoice-contact, .invoice-payment {
+	border-bottom: 1px solid black;
+	padding-bottom: 20px;
+	margin-bottom: 30px;
+}
+
+.logo img {
+	width: 120px;
+}
+
+.invoice-bottom {
+	margin-top: 100px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+.page-break {
+    page-break-after: always;
+}

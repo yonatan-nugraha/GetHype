@@ -30,6 +30,11 @@
 					    	<p class="event-header">
 					    		<span class="event-name">{{ $event->name }}</span>
 					    		<span class="event-share">
+					    			<a class="pull-right" href="{{ url('myevents/'.$event->id.'/register') }}">
+						    			<button type="button" class="btn btn-default">
+										  	<i class="fa fa-bomb"></i>
+										</button>
+									</a>
 					    			<a class="pull-right" href="{{ url('myevents/'.$event->id.'/statistic') }}">
 										<button type="button" class="btn btn-default">
 										  	<i class="fa fa-bar-chart"></i>
@@ -60,6 +65,11 @@
 					    	<p class="event-header">
 					    		<span class="event-name">{{ $event->name }}</span>
 					    		<span class="event-share">
+					    			<a class="pull-right" href="{{ url('myevents/'.$event->id.'/register') }}">
+						    			<button type="button" class="btn btn-default">
+										  	<i class="fa fa-bomb"></i>
+										</button>
+									</a>
 					    			<a class="pull-right" href="{{ url('myevents/'.$event->id.'/statistic') }}">
 										<button type="button" class="btn btn-default">
 										  	<i class="fa fa-bar-chart"></i>

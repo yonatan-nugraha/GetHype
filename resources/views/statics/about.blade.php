@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="col-md-12 no-padding" id="mainBanner">
-	<img src="{{ URL::to('images/about-header.jpg') }}">
+	<img src="{{ URL::to('images/about/about-header.jpg') }}">
 	<h1>WE ARE HERE TO HELP YOU</h1>
 </div>
 

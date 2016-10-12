@@ -53,8 +53,8 @@ class LoginController extends Controller
     protected function login(Request $request)
     {
         $this->validate($request, [
-            'email'     => 'required|email', 
-            'password'  => 'required|min:6',
+            'email'     => 'required|email|max:80', 
+            'password'  => 'required|alpha_num|min:6|max:255',
         ]);
 
         if (auth()->attempt(array('email' => $request->email, 'password' => $request->password))) {

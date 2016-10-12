@@ -13,7 +13,7 @@
     <title>{{ config('app.name', 'Gethype') }}</title>
 
     <!-- Icon -->
-    <link rel="icon" href="{{ asset('images/logo_dark.png') }}">
+    <link rel="icon" href="{{ asset('images/logo-dark.png') }}">
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('plugins/bootstrap-3.3.7-dist/css/bootstrap.min.css') }}">
@@ -45,7 +45,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('images/logo.png') }}">
+                    <img src="{{ asset('images/logo-gold.png') }}">
                 </a>
             </div>
 
@@ -113,7 +113,7 @@
         <div class="container">
             <div class="row footer-main">
                 <div class="col-sm-3 footer-main-col">
-                    <img class="gethype-logo" src="{{ asset('images/logo.png') }}">
+                    <img class="gethype-logo" src="{{ asset('images/logo-gold.png') }}">
                 </div>
                 <div class="col-sm-2 footer-main-col">
                     <ul>
