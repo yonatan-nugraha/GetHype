@@ -112,45 +112,45 @@
     <footer class="footer">
         <div class="container">
             <div class="row footer-main">
-                <div class="col-sm-3 footer-main-col">
-                    <img class="gethype-logo" src="{{ asset('images/logo-gold.png') }}">
+                <div class="col-sm-3">
+                    <img src="{{ asset('images/logo-gold.png') }}">
                 </div>
-                <div class="col-sm-2 footer-main-col">
+                <div class="col-sm-2">
                     <ul>
-                        <li class="footer-title">Gethype</li>
-                        <li><a href="{{ url('about-us') }}">About Us</a></li>
-                        <li><a href="{{ url('') }}">Events</a></li>
-                        <li><a href="{{ url('partners') }}">Partners</a></li>
-                        <li><a href="{{ url('services') }}">Services</a></li>
-                        <li><a href="{{ url('') }}">What we do</a></li>
-                        <li><a href="{{ url('journals') }}">Journals</a></li>
+                        <li class="footer-list-title">Gethype</li>
+                        <li class="footer-list"><a href="{{ url('about-us') }}">About Us</a></li>
+                        <li class="footer-list"><a href="{{ url('events/search') }}">Events</a></li>
+                        <li class="footer-list"><a href="{{ url('services') }}">Services</a></li>
+                        <li class="footer-list"><a href="{{ url('services') }}">Create Events</a></li>
+                        <li class="footer-list"><a href="{{ url('journals') }}">Journals</a></li>
+                        <li class="footer-list"><a href="{{ url('help') }}">Help</a></li>
                     </ul>
                 </div>
-                <div class="col-sm-2 footer-main-col">
+                <div class="col-sm-2">
                     <ul>
-                        <li class="footer-title">Get in Touch</li>
-                        <li><a href="{{ url('contact-us') }}">Contact Us</a></li>
-                        <li><a>Instagram</a></li>
-                        <li><a>Facebook</a></li>
-                        <li><a>Twitter</a></li>
+                        <li class="footer-list-title">Get in Touch</li>
+                        <li class="footer-list"><a href="{{ url('contact-us') }}">Contact Us</a></li>
+                        <li class="footer-list"><a>Instagram</a></li>
+                        <li class="footer-list"><a>Facebook</a></li>
+                        <li class="footer-list"><a>Twitter</a></li>
                     </ul>
                 </div>
-                <div class="col-sm-5 footer-main-col" style="padding-top: 2em; font-weight: 100">
-                    <p style="font-size: 20px" class="footer-title">JOIN OUR MAILING LIST</p>
-                    <span>We promise zero spam and only relevant information on events and what's happening in Gethype</span>
+                <div class="col-sm-5 subscribe">
+                    <p class="subscribe-title">Subscribe Now</p>
+                    <span class="subscribe-description">Let us provide you the latest info about what’s happening on Gethype and keep you up to date with our best offering for your needs.</span>
 
-                    <p style="margin-top:2em">
+                    <p class="subscribe-form">
                         <div class="input-group">
-                            <input type="text" class="form-control subscribe-email" placeholder="Email Address" aria-describedby="basic-addon2">
-                            <span class="input-group-addon subscribe-submit" id="basic-addon2">SUBMIT</span>
-                            <span class="subscribe-message"></span>
+                            <input type="text" class="form-control subscribe-email" placeholder="Email Address">
+                            <span class="input-group-addon subscribe-submit" id="basic-addon2">SUBMIT</span>   
                         </div>
                     </p>
+                    <p class="subscribe-message"></p>
                 </div>
             </div>
             <div class="row footer-secondary">
-                <img class="gethype-line" src="{{ asset('images/img-additional-2.png') }}">
-                <p class="gethype-copyright">2016 | Gethype.co.id</p>
+                <img src="{{ asset('images/img-additional-2.png') }}">
+                <p>2016 | Gethype.co.id</p>
             </div>
         </div>
     </footer>
