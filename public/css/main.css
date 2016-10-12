@@ -9,7 +9,7 @@
 /**************************************/
 
 .navbar-default {
-    background-color: #0F3844;
+    background-color: #0f3844;
     border: none;
     font-weight: normal;
     letter-spacing: 2px;
@@ -75,14 +75,15 @@
     position: inherit;
 }
 
-.footer .footer-title {
-    margin-bottom: 20px !important;
-    font-weight: 500;
+.footer ul {
+    list-style-type: none;
+    padding: 20px 0;
 }
 
 .footer a {
     color: #f2f2f2;
     font-weight: 100;
+    font-size: 16px;
 }
 
 .footer a:hover {
@@ -90,45 +91,83 @@
     text-decoration: none;
 }
 
-.footer .footer-main {
+.footer-main {
     margin-top: 2.8em;
 }
 
-.footer .footer-main ul {
-    list-style-type: none;
-    padding: 20px 0;
-}
-
-.footer .footer-main li {
-    margin-bottom: 5px;
-}
-
-.footer .footer-main p {
-    margin-bottom: 5px;
-}
-
-.footer .gethype-logo {
+.footer-main img {
     width: 90px;
 }
 
-.footer .gethype-copyright {
-    text-align: center;
-    margin-top: 20px;
-    font-weight: 100;
+.footer-main .footer-list-title {
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 18px;
 }
 
-.gethype-line {
+.footer-main .footer-list {
+    margin-bottom: 5px;
+}
+
+.footer-main p {
+    margin-bottom: 5px;
+}
+
+.footer-secondary {
+    text-align: center;
+}
+
+.footer-secondary img {
     width: 100%;
     height: 7px;
 }
 
-.footer-secondary{
-    margin-top:5em;
+.footer-secondary p {
+    margin-top: 20px;
+    font-weight: 100;
 }
+
 
 /**************************************/
 /************* Subscribe **************/
 /**************************************/
+
+.subscribe {
+    padding-top: 2em; 
+    font-weight: 100;
+}
+
+.subscribe-title {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.subscribe-description {
+    color: #f2f2f2;
+    font-size: 16px;
+}
+
+.subscribe-form {
+    margin-top: 10px;
+}
+
+.subscribe input {
+    border-color: #f2f2f2;
+    border-radius: 0;
+    background-color: #0f3844;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+}
+
+.subscribe-submit {
+    border-color: #f2f2f2;
+    border-radius: 0;
+    color: #0f3844;
+    font-size: 18px;
+    font-weight: 500;
+}
 
 .subscribe-submit {
     cursor: pointer;
@@ -136,4 +175,24 @@
 
 .subscribe-submit.disabled {
     background-color: #ccc; 
+}
+
+.subscribe-message {
+    color: #fff;
+}
+
+.subscribe ::-webkit-input-placeholder {
+    color: #fff;
+}
+
+.subscribe :-moz-placeholder {
+    color: #fff;
+}
+
+.subscribe ::-moz-placeholder {
+    color: #fff;
+}
+
+.subscribe ::-ms-input-placeholder {
+    color: #fff;
 }
