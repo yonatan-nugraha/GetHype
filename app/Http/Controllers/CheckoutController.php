@@ -18,8 +18,7 @@ use App\Mail\Welcome;
 use App\Mail\ActivateAccount;
 use App\Mail\CheckoutSuccess;
 
-use Mail;
-use Validator, Input, Redirect;
+use Mail, PDF;
 
 use App\Veritrans\Veritrans;
 
@@ -74,9 +73,9 @@ class CheckoutController extends Controller
             return redirect('');
         }
 
-        $validator = Validator::make($request->all(), [
-            'first_name' => 'required|alpha|min:2|max:30',
-            'last_name' => 'alpha|max:30',
+        $validator = validator()->make($request->all(), [
+            'first_name' => 'required|regex:/^[\pL\s\-]+$/u|min:2|max:30',
+            'last_name' => 'regex:/^[\pL\s\-]+$/u|max:30',
             'email'     => 'required|email|max:80',
             'phone'     => 'required|min:6|max:20',
         ]);
@@ -190,9 +189,9 @@ class CheckoutController extends Controller
             return redirect('');
         }
 
-        $validator = Validator::make($request->all(), [
-            'first_name' => 'required|alpha|min:2|max:30',
-            'last_name' => 'alpha|max:30',
+        $validator = validator()->make($request->all(), [
+            'first_name' => 'required|regex:/^[\pL\s\-]+$/u|min:2|max:30',
+            'last_name' => 'regex:/^[\pL\s\-]+$/u|max:30',
             'email'     => 'required|email|max:80',
             'phone'     => 'required|min:6|max:20',
         ]);
@@ -337,7 +336,7 @@ class CheckoutController extends Controller
             if ($tickets_updated > 0) {
                 $order_status = 2;
 
-                Mail::to($order->user->email)->queue(new CheckoutSuccess);
+                Mail::to($order->user->email)->queue(new CheckoutSuccess($order));
 
                 Redis::del('order:'.$order->user_id);
             }

@@ -287,4 +287,50 @@ class MyEventController extends Controller
             'total_profit'  => $total_profit
         );
     }
+
+    /**
+     * Register the event ticket.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function showRegister(Request $request, Event $event)
+    {   
+        if ($event->user_id != auth()->user()->id) {
+            return redirect('');
+        }
+
+        return view('myevents/register', [
+            'event' => $event
+        ]);
+    }
+
+    /**
+     * Register the event ticket.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function register(Request $request, Event $event)
+    {   
+        if ($event->user_id != auth()->user()->id) {
+            return redirect('');
+        }
+        
+        $code = trim($request->code);
+
+        $ticket_group_ids = $event->ticket_groups->pluck('id')->toArray();
+
+        $tickets_updated = Ticket::where('code', $code)
+            ->whereIn('status', [3,4])
+            ->whereIn('ticket_group_id', $ticket_group_ids)
+            ->update([
+                'status' => 4
+            ]);
+
+        $success = ($tickets_updated > 0) ? '2' : '1';
+
+        return redirect('myevents/'.$event->id.'/register')
+            ->with('register_success', $success);
+    }
 }

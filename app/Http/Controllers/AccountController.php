@@ -91,10 +91,10 @@ class AccountController extends Controller
         }
 
         $request->user()->update([
-            'first_name'    => ucwords($request->first_name),
-            'last_name'     => ucwords($request->last_name),
-            'email'         => $request->email,
-            'phone'         => $request->phone,
+            'first_name'    => ucwords(trim($request->first_name)),
+            'last_name'     => ucwords(trim($request->last_name)),
+            'email'         => trim($request->email),
+            'phone'         => trim($request->phone),
             'gender'        => $request->gender,
             'birthdate'     => $request->birthdate,
         ]);
@@ -111,8 +111,8 @@ class AccountController extends Controller
     public function updatePassword(Request $request)
     {
         $validator = validator()->make($request->all(), [
-            'current_password' => 'required|min:6|max:255',
-            'new_password' => 'required|min:6|max:255|confirmed',
+            'current_password' => 'required|alpha_num|min:6|max:255',
+            'new_password' => 'required|alpha_num|min:6|max:255|confirmed',
         ]);
 
         $validator->after(function($validator) use ($request) {
@@ -131,14 +131,14 @@ class AccountController extends Controller
         }
 
         $request->user()->update([
-            'password'  => bcrypt($request->new_password),
+            'password'  => bcrypt(trim($request->new_password)),
         ]);
 
         return redirect('/account/settings#change-password');
     }
 
     /**
-     * Edit password.
+     * Edit profile picture.
      *
      * @param  Request  $request
      * @return Response
