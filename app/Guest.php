@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class View extends Model
+class Guest extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,6 +12,6 @@ class View extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'event_id',
+    	'event_id', 'name', 'title', 'description', 'status',
     ];
 }

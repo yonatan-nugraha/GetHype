@@ -14,7 +14,7 @@ use App\Ticket;
 use App\OrderDetail;
 use App\Order;
 use App\Bookmark;
-use App\View;
+use App\PageView;
 
 use DB, Carbon\Carbon;
 
@@ -64,7 +64,7 @@ class MyEventController extends Controller
     		return redirect('');
     	}
 
-        $total_views = View::select(DB::raw('count(*) as total_views'))
+        $total_views = PageView::select(DB::raw('count(*) as total_views'))
             ->where('event_id', $event->id)
             ->pluck('total_views');
 
@@ -123,7 +123,7 @@ class MyEventController extends Controller
     		return redirect('');
     	}
 
-        $views = View::select(DB::raw('date(created_at) as date, count(*) as views'))
+        $views = PageView::select(DB::raw('date(created_at) as date, count(*) as views'))
             ->where('event_id', $event->id)
             ->whereDate('created_at', '>=', $request->start_date)
             ->whereDate('created_at', '<=', $request->end_date)
@@ -131,7 +131,7 @@ class MyEventController extends Controller
             ->pluck('views', 'date')
             ->toArray();
 
-        $total_views = View::select(DB::raw('count(*) as total_views'))
+        $total_views = PageView::select(DB::raw('count(*) as total_views'))
             ->where('event_id', $event->id)
             ->whereDate('created_at', '>=', $request->start_date)
             ->whereDate('created_at', '<=', $request->end_date)
@@ -155,11 +155,11 @@ class MyEventController extends Controller
     		return redirect('');
     	}
 
-        $views = View::select(DB::raw('(case users.gender when 1 then "male" else "female" end) as gender, count(*) as views'))
-        	->join('users', 'views.user_id', '=', 'users.id')
-            ->where('views.event_id', $event->id)
-            ->whereDate('views.created_at', '>=', $request->start_date)
-            ->whereDate('views.created_at', '<=', $request->end_date)
+        $views = PageView::select(DB::raw('(case users.gender when 1 then "male" else "female" end) as gender, count(*) as views'))
+        	->join('users', 'page_views.user_id', '=', 'users.id')
+            ->where('page_views.event_id', $event->id)
+            ->whereDate('page_views.created_at', '>=', $request->start_date)
+            ->whereDate('page_views.created_at', '<=', $request->end_date)
             ->groupBy('users.gender')
             ->pluck('views', 'gender')
             ->toArray();
@@ -179,17 +179,17 @@ class MyEventController extends Controller
     		return redirect('');
     	}
 
-        $views = View::select(DB::raw('(case 
+        $views = PageView::select(DB::raw('(case 
         	when timestampdiff(year, users.birthdate, now()) <= 17 then "< 17"
         	when timestampdiff(year, users.birthdate, now()) between 18 and 23 then "18-23"
 			when timestampdiff(year, users.birthdate, now()) between 24 and 34 then "24-34"
 			when timestampdiff(year, users.birthdate, now()) between 35 and 44 then "35-44"
 			when timestampdiff(year, users.birthdate, now()) >= 45 then "45+"
 			end) as age_group, count(*) as views'))
-        	->join('users', 'views.user_id', '=', 'users.id')
-            ->where('views.event_id', $event->id)
-            ->whereDate('views.created_at', '>=', $request->start_date)
-            ->whereDate('views.created_at', '<=', $request->end_date)
+        	->join('users', 'page_views.user_id', '=', 'users.id')
+            ->where('page_views.event_id', $event->id)
+            ->whereDate('page_views.created_at', '>=', $request->start_date)
+            ->whereDate('page_views.created_at', '<=', $request->end_date)
             ->groupBy('age_group')
             ->pluck('views', 'age_group')
             ->toArray();

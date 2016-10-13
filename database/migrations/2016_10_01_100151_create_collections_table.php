@@ -18,6 +18,7 @@ class CreateCollectionsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('slug');
+            $table->integer('status');
             $table->integer('weight')->default(10);
             $table->timestamps();
         });

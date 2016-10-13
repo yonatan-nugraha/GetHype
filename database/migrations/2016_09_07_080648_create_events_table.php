@@ -24,6 +24,8 @@ class CreateEventsTable extends Migration
             $table->text('location');
             $table->dateTime('started_at');
             $table->dateTime('ended_at');
+            $table->text('subject_discussion')->nullable();
+            $table->text('video_url')->nullable();
             $table->string('slug');
             $table->integer('weight')->default(10);
             $table->timestamps();

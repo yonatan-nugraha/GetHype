@@ -204,6 +204,7 @@ class AdminController extends Controller {
             $ticket_group_id = TicketGroup::create([
                 'event_id'      => $event_id,
                 'name'          => $request['ticket_name_'.$i],
+                'description'   => '',
                 'price'         => $request['ticket_price_'.$i],
                 'status'        => 1,
                 'started_at'    => Carbon::now(),
@@ -253,6 +254,7 @@ class AdminController extends Controller {
 
         foreach ($event->ticket_groups as $ticket_group) {
             $ticket_group->update([
+                'description'   => '',
                 'status'        => $request['ticket_status_'.$ticket_group->id] ? 1 : 0,
                 'started_at'    => substr($request['ticket_time_'.$ticket_group->id], 0, 19),
                 'ended_at'      => substr($request['ticket_time_'.$ticket_group->id], 22, 19),
@@ -274,6 +276,7 @@ class AdminController extends Controller {
             $ticket_group_id = TicketGroup::create([
                 'event_id'      => $event->id,
                 'name'          => $request['ticket_name_'.$i],
+                'description'   => '',
                 'price'         => $request['ticket_price_'.$i],
                 'status'        => 1,
                 'started_at'    => Carbon::now(),
@@ -365,27 +368,12 @@ class AdminController extends Controller {
      * @param  Request  $request
      * @return Response
      */
-    public function storeEventCollection(Request $request)
-    {
-        EventCollection::create([
-            'collection_id'      => $request->collection_id,
-            'event_collection'  => $request->event_id,
-        ]);
-
-        return redirect('collections/'.$collection_slug);
-    }
-
-    /**
-     * Create a new collection.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
     public function storeCollection(Request $request)
     {
         $collection_id = Collection::create([
             'name'          => $request->name,
             'description'   => $request->description,
+            'status'        => 0,
             'slug'          => str_slug($request->name, '-') . '-' . sprintf("%s", mt_rand(10000, 99999)),
         ])->id;
 
@@ -397,7 +385,7 @@ class AdminController extends Controller {
     }
 
     /**
-     * Edit an event.
+     * Edit a collection.
      *
      * @param  Request  $request
      * @return Response
@@ -412,6 +400,23 @@ class AdminController extends Controller {
         if ($request->hasFile('image') && $request->image->isValid()) {
             $request->image->move(public_path('/images/collections'), md5('collection-'.$collection->id).'.jpg');
         }
+
+        return redirect('admin/collections');
+    }
+
+    /**
+     * Edit collection's status.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function updateStatusCollection(Request $request, Collection $collection)
+    {
+        $status = $request->status ? 1 : 0;
+
+        $collection->update([
+            'status' => $status,
+        ]);
 
         return redirect('admin/collections');
     }

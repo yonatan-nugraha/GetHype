@@ -17,6 +17,7 @@ class CreateEventCollectionsTable extends Migration
             $table->increments('id');
             $table->integer('collection_id');
             $table->integer('event_id');
+            $table->integer('weight')->default(10);
             $table->timestamps();
         });
     }
