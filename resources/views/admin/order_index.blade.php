@@ -58,23 +58,31 @@
                                     {{ 'Rp '. number_format($order->order_amount) }}
                                 </td>
                                 <td>
-                                        @if ($order->payment_status == 0)
+                                    @if ($order->payment_status == 0)
                                         <span class="badge bg-yellow">Pending</span>
-                                        @elseif ($order->payment_status == 1)
+                                    @elseif ($order->payment_status == 1)
                                         <span class="badge bg-red">Failed</span>
-                                        @elseif ($order->payment_status == 2)
+                                    @elseif ($order->payment_status == 2)
                                         <span class="badge bg-red">Rejected</span>
-                                        @elseif ($order->payment_status == 3)
+                                    @elseif ($order->payment_status == 3)
                                         <span class="badge bg-red">Cancelled</span>
-                                        @elseif ($order->payment_status == 4)
+                                    @elseif ($order->payment_status == 4)
                                         <span class="badge bg-red">Success</span>
-                                        @elseif ($order->payment_status == 5)
+                                    @elseif ($order->payment_status == 5)
                                         <span class="badge bg-green">Settled</span>
-                                        @else
+                                    @else
                                         <span class="badge bg-blue">Others</span>
                                         @endif<br>
+
                                     {{ 'Rp '. number_format($order->order_amount) }}<br>
-                                    {{ $order->payment_type }}
+
+                                    @if ($order->payment_method == 'bank_transfer')
+                                        Bank Transfer
+                                    @elseif ($order->payment_method == 'credit_card')
+                                        Credit Card
+                                    @else
+                                        Free
+                                    @endif
                                 </td>
                                 <td>
                                     {{ $order->user->first_name . ' ' . $order->user->last_name }}<br>

@@ -1,6 +1,5 @@
 
 <link rel="stylesheet" href="{{ asset('css/ticket-invoice.css') }}">
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="{{ asset('plugins/bootstrap-3.3.7-dist/css/bootstrap.min.css') }}">
 
 <div class="row invoice-header">
@@ -26,19 +25,19 @@
 		<tbody>
 			<tr>
 				<td>Name</td>
-				<td>{{ $order->contact->first_name . ' ' . $order->contact->last_name }}</td>
+				<td>{{ $order->first_name . ' ' . $order->last_name }}</td>
 				<td>Receipt Number</td>
 				<td>{{ $order->id }}</td>
 			</tr>
 			<tr>
 				<td>Email</td>
-				<td>{{ $order->contact->email }}</td>
+				<td>{{ $order->email }}</td>
 				<td>Receipt Date</td>
 				<td>{{ Carbon\Carbon::parse($order->created_at)->format('d M, Y') }}</td>
 			</tr>
 			<tr>
 				<td>Phone</td>
-				<td>{{ $order->contact->phone }}</td>
+				<td>{{ $order->phone }}</td>
 				<td>Receipt Time</td>
 				<td>{{ Carbon\Carbon::parse($order->created_at)->format('g.i A') }}</td>
 			</tr>
@@ -61,8 +60,8 @@
 			<tr>
 				<td>{{ $order->id }}</td>
 				<td>
-					@if ($order->payment_type == 'bank_transfer') Bank Transfer
-					@elseif ($order->payment_type == 'credit_card') Credit Card
+					@if ($order->payment_method == 'bank_transfer') Bank Transfer
+					@elseif ($order->payment_method == 'credit_card') Credit Card
 					@else Free
 					@endif
 				</td>

@@ -17,13 +17,16 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('event_id');
-            $table->integer('contact_id');
             $table->integer('order_status');
             $table->double('order_amount');
             $table->double('administration_fee');
             $table->integer('payment_status');
-            $table->string('payment_type');
+            $table->string('payment_method');
             $table->double('payment_amount');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email');
+            $table->string('phone');
             $table->timestamps();
         });
     }

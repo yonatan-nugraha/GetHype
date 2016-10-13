@@ -65,7 +65,7 @@
 				  	</div>
 				</div>
 				<div class="panel payment-options">
-					<input type="hidden" class="payment-type" name="payment_type" value="">
+					<input type="hidden" class="payment-method" name="payment_method" value="">
 				  	<div class="panel-heading">
 				    	<h3 class="panel-title">Payment Options</h3>
 				  	</div>
