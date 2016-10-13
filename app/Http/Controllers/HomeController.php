@@ -40,10 +40,10 @@ class HomeController extends Controller
 
         return view('home', [
             'events'        => $events->take(8)->get(),
-            'collections'   => Collection::orderBy('id')->take(4)->get(),
-            'journals'      => Journal::where('status', 1)->orderBy('id')->take(4)->get(),
-            'categories'    => Category::all(),
-            'event_types'   => EventType::all(),
+            'collections'   => Collection::where('status', 1)->orderBy('weight', 'desc')->take(4)->get(),
+            'journals'      => Journal::where('status', 1)->orderBy('created_at', 'desc')->take(4)->get(),
+            'categories'    => Category::where('status', 1)->orderBy('weight', 'desc')->get(),
+            'event_types'   => EventType::where('status', 1)->orderBy('weight', 'desc')->get(),
             'locations'     => ['Jakarta', 'Bandung', 'Surabaya', 'Bali'],
         ]);
     }
@@ -70,13 +70,5 @@ class HomeController extends Controller
     public function aboutUs()
     {
         return view('statics/about');
-    }
-
-    /**
-     * Display about us page.
-     */
-    public function partners()
-    {
-        return view('statics/partners');
     }
 }

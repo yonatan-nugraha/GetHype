@@ -148,6 +148,15 @@ class CheckoutController extends Controller
             $items[] = $item;
     	}
 
+        $item = array(
+            'id'       => 0,
+            'price'    => $administration_fee,
+            'quantity' => 1,
+            'name'     => 'Administration Fee',
+        );
+
+        $items[] = $item;
+
         $order->order_id = $order_id;
         Redis::set('order:'.auth()->id(), json_encode($order));
 

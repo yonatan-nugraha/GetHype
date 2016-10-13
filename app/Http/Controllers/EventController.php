@@ -15,7 +15,7 @@ use App\Ticket;
 use App\OrderDetail;
 use App\Order;
 use App\Bookmark;
-use App\View;
+use App\PageView;
 use App\Collection;
 use App\EventCollection;
 
@@ -47,7 +47,7 @@ class EventController extends Controller
             return redirect('');
         }
 
-        $cookie_name   = 'views:' . $event->id;
+        $cookie_name   = 'page_views:' . $event->id;
         $cookie_value  = $request->cookie($cookie_name);
 
         $response = response()->view('events/detail', [
@@ -58,7 +58,7 @@ class EventController extends Controller
         if ($cookie_value == null) {
             $user_id = auth()->check() ? auth()->id() : 0;
 
-            View::create([
+            PageView::create([
                 'user_id'   => $user_id,
                 'event_id'  => $event->id
             ]);

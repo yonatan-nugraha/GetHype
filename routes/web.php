@@ -27,7 +27,6 @@ Route::get('/home', 'HomeController@index');
 Route::get('/services', 'HomeController@services');
 Route::get('/contact-us', 'HomeController@contactUs');
 Route::get('/about-us', 'HomeController@aboutUs');
-Route::get('/partners', 'HomeController@partners');
 
 //users
 Route::group(['prefix' => 'users'], function () {
@@ -96,6 +95,7 @@ Route::group(['prefix' => 'collections'], function () {
 	Route::get('add-event', 'AdminController@addEventCollection');
 	Route::post('', 'AdminController@storeCollection');
 	Route::patch('{collection}', 'AdminController@updateCollection');
+	Route::patch('{collection}/update-status-collection', 'AdminController@updateStatusCollection');
 
 	Route::get('{collection}', 'EventController@showCollectionDetail');
 });

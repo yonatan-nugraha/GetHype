@@ -25,7 +25,8 @@
                             <tr>
                                 <th width="5%">ID</th>
                                 <th width="20%">Name</th>
-                                <th width="50%">Events</th>
+                                <th width="40%">Events</th>
+                                <th width="10%">Status</th>
                                 <th width="10%">Action</th>
                             </tr>
                         </thead>
@@ -40,6 +41,13 @@
                                         <li>{{ $event_collection->event->name }}</li>
                                         @endforeach
                                     </ul>
+                                </td>
+                                <td>
+                                    <form action="{{ url('collections/'.$collection->id.'/update-status-collection') }}" method="POST">
+                                        {!! csrf_field() !!}
+                                        {{ method_field('PATCH') }}
+                                        <input type="checkbox" name="status" id="{{ $collection->id }}" class="status" data-size="mini" @if ($collection->status > 0) checked @endif ><br>
+                                    </form>
                                 </td>
                                 <td>
                                     <div class="btn-group">
@@ -66,6 +74,12 @@
 <script>
 $(function () {
     $('.pagination').addClass('pagination-sm no-margin pull-right');
+
+    // status switcher
+    $('.status').bootstrapSwitch();
+    $('.status').on('switchChange.bootstrapSwitch', function(event, state) {
+        $(this).closest('form').submit();
+    });
 });
 </script>
 @endsection
