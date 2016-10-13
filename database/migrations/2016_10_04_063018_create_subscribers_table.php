@@ -17,7 +17,7 @@ class CreateSubscribersTable extends Migration
             $table->increments('id');
             $table->string('email');
             $table->integer('status');
-            $table->string('reason')->nullable();
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

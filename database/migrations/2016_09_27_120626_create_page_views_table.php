@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateViewsTable extends Migration
+class CreatePageViewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateViewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('views', function (Blueprint $table) {
+        Schema::create('page_views', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('event_id');
@@ -28,6 +28,6 @@ class CreateViewsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('views');
+        Schema::drop('page_views');
     }
 }

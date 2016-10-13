@@ -35,8 +35,8 @@
 				<p class="contact-error" id="contact-subject"></p>
 			</div>
 			<div class="row singleLine">
-				<textarea name="contact_description" placeholder="Message" class="form-control" rows="5"></textarea>
-				<p class="contact-error" id="contact-description"></p>
+				<textarea name="contact_content" placeholder="Message" class="form-control" rows="5"></textarea>
+				<p class="contact-error" id="contact-content"></p>
 			</div>
 			<input type="hidden" name="contact_last_name">
 			<input type="hidden" name="contact_phone">

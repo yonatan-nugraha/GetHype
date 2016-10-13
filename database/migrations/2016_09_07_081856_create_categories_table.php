@@ -18,6 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('slug');
+            $table->integer('status')->default(1);
             $table->integer('weight')->default(10);
         });
     }

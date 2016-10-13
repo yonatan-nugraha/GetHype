@@ -123,14 +123,15 @@
                     </div>      
                 </div>
                 @endforeach
-                <div class="view-more">
-                    <a href="{{ url('events/search') }}">view more</a>
-                </div>
+            </div>
+            <div class="view-more">
+                <a href="{{ url('events/search') }}">view more</a>
             </div>
         </div>
     </div>
 </div>
 
+@if (count($collections))
 <div class="col-md-12 event-collection">
     <div class="container">
         <div class="row home-title">
@@ -155,6 +156,7 @@
         </div>
     </div>
 </div>
+@endif
 
 <div class="col-md-12 banner-bottom no-padding">
     <div class="col-xs-12 no-padding" id="bottomBanner">
@@ -164,6 +166,7 @@
     </div>
 </div>
 
+@if (count($journals))
 <div class="col-md-12 journal">
     <div class="container">
         <div class="row home-title">
@@ -190,6 +193,7 @@
         </div>
     </div>
 </div>
+@endif
 
 </div>
 @endsection
