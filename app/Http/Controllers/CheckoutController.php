@@ -245,12 +245,13 @@ class CheckoutController extends Controller
         ]);
 
         if ($tickets_updated > 0) {
-            Order::where('id', $order_id)->update([
+            $order  = Order::find($order_id);
+            $order->update([
                 'order_status'   => 2,
                 'payment_status' => 5,
             ]);
 
-            Mail::to(auth()->user()->email)->queue(new CheckoutSuccess);
+            Mail::to(auth()->user()->email)->queue(new CheckoutSuccess($order));
             Redis::del('order:'.auth()->id());
         }        
 
