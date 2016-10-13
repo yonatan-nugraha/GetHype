@@ -12,7 +12,6 @@ use App\Ticket;
 use App\TicketGroup;
 use App\Order;
 use App\OrderDetail;
-use App\Contact;
 
 use App\Mail\Welcome;
 use App\Mail\ActivateAccount;
@@ -80,7 +79,7 @@ class CheckoutController extends Controller
             'phone'     => 'required|min:6|max:20',
         ]);
 
-        $payment_type = $request->payment_type;
+        $payment_method = $request->payment_method;
         $payment_fees = array(
             'bank_transfer'     => 4900,
             'credit_card'       => 5000,
@@ -94,8 +93,8 @@ class CheckoutController extends Controller
             'xl_tunai'          => 3000,
         );
 
-        $validator->after(function($validator) use ($request, $payment_type, $payment_fees) {
-            if ($payment_type == '' || $payment_fees[$payment_type] == 0) {
+        $validator->after(function($validator) use ($request, $payment_method, $payment_fees) {
+            if ($payment_method == '' || $payment_fees[$payment_method] == 0) {
                 $validator->errors()->add('error', 'Please select one of the payment options to proceed.');
             }
         });
@@ -108,26 +107,22 @@ class CheckoutController extends Controller
 
         $event          = $order->event;
         $order_amount   = $order->order_amount;
-        $administration_fee = $payment_fees[$payment_type];
+        $administration_fee = $payment_fees[$payment_method];
         $payment_amount = $order_amount + $administration_fee;
-
-        $contact_id = Contact::create([
-            'first_name'    => ucwords($request->first_name),
-            'last_name'     => ucwords($request->last_name),
-            'email'         => $request->email,
-            'phone'         => $request->phone,
-        ])->id;
 
     	$order_id = Order::create([
     		'user_id'	    => auth()->id(),
             'event_id'      => $event->id,
-            'contact_id'    => $contact_id,
             'order_status'  => 0,
             'order_amount' 	=> $order_amount,
             'administration_fee' => $administration_fee,
             'payment_status' => 0,
             'payment_amount'=> $payment_amount,
-            'payment_type'  => $payment_type,
+            'payment_method' => $payment_method,
+            'first_name'    => ucwords($request->first_name),
+            'last_name'     => ucwords($request->last_name),
+            'email'         => $request->email,
+            'phone'         => $request->phone,
         ])->id;
 
         $items = array();
@@ -167,7 +162,7 @@ class CheckoutController extends Controller
                 'gross_amount'  => $payment_amount,
             ),
             'vtweb' => array(
-                'enabled_payments' => array($payment_type),
+                'enabled_payments' => array($payment_method),
                 'credit_card_3d_secure' => true,
             ),
             'customer_details' => array(
@@ -216,25 +211,21 @@ class CheckoutController extends Controller
         $ticket_ids     = $order->ticket_ids;
         $administration_fee = 0;
         $payment_amount = $order_amount + $administration_fee;
-        $payment_type   = 'free';
-
-        $contact_id = Contact::create([
-            'first_name'    => ucwords($request->first_name),
-            'last_name'     => ucwords($request->last_name),
-            'email'         => $request->email,
-            'phone'         => $request->phone,
-        ])->id;
+        $payment_method = 'free';
 
         $order_id = Order::create([
             'user_id'       => auth()->id(),
             'event_id'      => $event->id,
-            'contact_id'    => $contact_id,
             'order_status'  => 0,
             'order_amount'  => $order_amount,
             'administration_fee' => $administration_fee,
             'payment_status' => 0,
             'payment_amount'=> $payment_amount,
-            'payment_type'  => $payment_type,
+            'payment_method'=> $payment_method,
+            'first_name'    => ucwords($request->first_name),
+            'last_name'     => ucwords($request->last_name),
+            'email'         => $request->email,
+            'phone'         => $request->phone,
         ])->id;
 
         foreach ($order->order_details as $order_detail) {

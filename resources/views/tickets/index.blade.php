@@ -81,9 +81,9 @@
 						    	</div>
 
 						    	<div class="col-xs-8 contact-details">
-						    		<p>Name: {{ $order->contact->first_name . ' ' . $order->contact->last_name }}</p>
-						    		<p>Email: {{ $order->contact->email }}</p>
-						    		<p>Phone: {{ $order->contact->phone }}</p>
+						    		<p>Name: {{ $order->first_name . ' ' . $order->last_name }}</p>
+						    		<p>Email: {{ $order->email }}</p>
+						    		<p>Phone: {{ $order->phone }}</p>
 						    	</div>
 						    </div>
 					   </div>

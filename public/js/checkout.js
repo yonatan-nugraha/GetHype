@@ -5,8 +5,8 @@ $(document).ready(function() {
 			return;
 		}
 		
-		var payment_type = $(this).attr('id');
-		$('.payment-type').val(payment_type);
+		var payment_method = $(this).attr('id');
+		$('.payment-method').val(payment_method);
 
 		$('.payment-box').removeClass('payment-selected');
 		$(this).addClass('payment-selected');
@@ -25,7 +25,7 @@ $(document).ready(function() {
 		};
 
 		var subtotal = parseInt($('.subtotal-hidden').val());
-		var adminfee = parseInt(payment_fees[payment_type]);
+		var adminfee = parseInt(payment_fees[payment_method]);
 		var grandtotal = parseInt(subtotal + adminfee);
 
 		$('.adminfee-price').text('Rp '+ adminfee.toLocaleString());

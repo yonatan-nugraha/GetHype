@@ -36,7 +36,7 @@
 					<div class="row row-1">
 						<div class="col-xs-4 col-1">
 							<p class="title">Ordered By:</p>
-							<p class="description">{{ $order->contact->first_name . ' ' . $order->contact->last_name }}</p>
+							<p class="description">{{ $order->first_name . ' ' . $order->last_name }}</p>
 						</div>
 						<div class="col-xs-4 col-2">
 							<p class="title">Order Date:</p>
@@ -50,7 +50,7 @@
 					<div class="row row-2">
 						<div class="col-xs-3 col-1">
 							<p class="title">Payment Method:</p>
-							<p class="description">@if ($order->payment_type == 'credit_card') Credit Card @elseif ($order->payment_type == 'bank_transfer') Virtual Account @else Free @endif</p>
+							<p class="description">@if ($order->payment_method == 'credit_card') Credit Card @elseif ($order->payment_method == 'bank_transfer') Virtual Account @else Free @endif</p>
 						</div>
 						<div class="col-xs-6 col-2">
 							<p class="title">Ticket:</p>
