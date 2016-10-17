@@ -1,6 +1,6 @@
 function edit_interest() {
 	var interests_array = [];
-	$(".interest .label").each(function() {
+	$('.interest .label').each(function() {
 		$category_id = $(this).attr('id');
 
 		if ($(this).hasClass('selected')) {
@@ -9,7 +9,7 @@ function edit_interest() {
 	});
 
 	var interests = interests_array.join(',');
-	$(".interests").val(interests);
+	$('.interests').val(interests);
 }
 
 $(document).ready(function() {
@@ -19,15 +19,15 @@ $(document).ready(function() {
 	var hash = window.location.hash;
 	hash && $('ul.nav a[href="' + hash + '"]').tab('show');
 
-	$(".nav-tabs a").click(function () {
+	$('.nav-tabs a').click(function () {
 	    $(this).tab('show');
 	    var scrollmem = $("body").scrollTop();
 	    window.location.hash = this.hash;
-	    $("html,body").scrollTop(scrollmem);
+	    $('html,body').scrollTop(scrollmem);
 	});
 
 	//click interest
-	$(".interest .label").click(function () {
+	$('.interest .label').click(function () {
 		if (!$(this).hasClass('selected')) {
 		    $(this).addClass('selected');
 		} else {
@@ -38,7 +38,7 @@ $(document).ready(function() {
 	});
 
 	//upload image
-	$(".edit-profile-image").change(function() {
+	$('.edit-profile-image').change(function() {
 	    var file = this.files[0];
 
 	    var form_data = new FormData();
@@ -61,4 +61,10 @@ $(document).ready(function() {
 	    	}
 	    });
 	})
+
+	$('input[name="birthdate"').change(function() {
+	    this.setAttribute('data-date', moment(this.value, 'YYYY-MM-DD').format(this.getAttribute('data-date-format')));
+	});
+
+	$('input[name="birthdate"').trigger("change");
 });

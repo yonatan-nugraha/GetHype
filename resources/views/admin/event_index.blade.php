@@ -1,5 +1,9 @@
 @extends('admin.index')
 
+@section('styles')
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+@endsection
+
 @section('content')
 <div class="row">
     <div class="col-xs-12">
@@ -30,7 +34,7 @@
                                 <th width="8%">Category</th>
                                 <th width="8%">Event Type</th>
                                 <th width="8%">Status</th>
-                                <th width="13%">Action</th>
+                                <th width="15%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,7 +57,9 @@
                                     <div class="btn-group">
                                         <a href="{{ url('admin/events/'.$event->id.'/edit') }}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-edit text-blue"></i></button></a>
 
-                                        <a href="{{ url('events/'.$event->slug) }}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-share text-yellow"></i></button></a>
+                                        <a href="{{ url('events/'.$event->slug) }}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-rocket text-yellow"></i></button></a>
+
+                                        <a data-toggle="modal" data-target="#edit-user-event-{{ $event->id }}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-user-plus text-green"></i></button></a>
                                     </div>
                                     <div class="btn-group dropdown">
                                         <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
@@ -79,9 +85,32 @@
         </div>
     </div>
 </div>
+
+@foreach ($events as $event)
+<div class="modal fade" tabindex="-1" role="dialog" id="edit-user-event-{{ $event->id }}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Assign an Owner</h4>
+            </div>
+            <div class="modal-body">
+                <p id="update-message-{{ $event->id }}"></p>
+                <input type="text" class="form-control email" id="email-{{ $event->id }}" event_id="{{ $event->id }}" value="{{ $event->user->email }}" placeholder="Email">
+            </div>
+            <div class="modal-footer"> 
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary update-user-event" id="{{ $event->id }}">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
 @endsection
 
 @section('scripts')
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 $(function () {
     // status switcher
@@ -91,6 +120,47 @@ $(function () {
     });
 
     $('.pagination').addClass('pagination-sm no-margin pull-right');
+
+    $('.email').keyup(function() {
+        var email   = $(this).val();
+        var event_id = $(this).attr('event_id');
+        console.log(event_id);
+
+        $.ajax({
+            url: '/users/get-email-list?email='+email, 
+            type: 'GET',
+            success: function(result) {
+                $('#email-'+event_id).autocomplete({
+                    source: result,
+                    appendTo : $('#edit-user-event-'+event_id)
+                });
+            }
+        });
+    });
+
+    $('.update-user-event').click(function() {
+        var event_id = $(this).attr('id');
+        var email    = $('#email-'+event_id).val();
+        
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            }
+        });
+
+        $.ajax({
+            url: '/events/'+event_id+'/update-user-event', 
+            type: 'POST',
+            data: {email: email},
+            success: function(result) {
+                if (result.success == 1) {
+                    location.href = '/admin/events';
+                } else {
+                    $('#update-message-'+event_id).text(result.message);
+                }
+            }
+        });
+    });
 });
 </script>
 @endsection

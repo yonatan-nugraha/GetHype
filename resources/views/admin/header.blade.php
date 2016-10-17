@@ -11,7 +11,7 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{ asset('/images/users/'.Auth::user()->photo()) }}" class="user-image" alt="User Image"/>
-                        <span class="hidden-xs">Yonatan Nugraha</span>
+                        <span class="hidden-xs">{{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-header">

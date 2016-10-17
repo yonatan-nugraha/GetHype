@@ -99,7 +99,7 @@
 					    <div class="row birthdate">
 					    	<div class="form-group col-xs-5">
 					    		<label>Your Birthdate</label>
-					    		<input type="date" class="form-control" name="birthdate" value="{{ Auth::user()->birthdate }}">
+					    		<input type="date" data-date="" data-date-format="DD MMMM YYYY" class="form-control" name="birthdate" value="{{ Auth::user()->birthdate }}">
 					    		@if ($errors->has('birthdate'))
 		                            <span class="help-block">
 		                                <p>{{ $errors->first('birthdate') }}</p>
@@ -182,5 +182,7 @@
 @endsection
 
 @section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
 <script type="text/javascript" src="{{ asset('js/account.js') }}"></script>
+
 @endsection

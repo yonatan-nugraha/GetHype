@@ -32,6 +32,7 @@ Route::get('/about-us', 'HomeController@aboutUs');
 Route::group(['prefix' => 'users'], function () {
 	Route::patch('{user}', 'AdminController@updateUser');
 	Route::patch('{user}/update-status-user', 'AdminController@updateStatusUser');
+	Route::get('get-email-list', 'AdminController@getEmailList');
 });
 
 //admin
@@ -75,6 +76,7 @@ Route::group(['prefix' => 'events'], function () {
 	Route::post('', 'AdminController@storeEvent');
 	Route::patch('{event}', 'AdminController@updateEvent');
 	Route::patch('{event}/update-status-event', 'AdminController@updateStatusEvent');
+	Route::post('{event}/update-user-event', 'AdminController@updateUserEvent');
 
 	//book ticket
 	Route::post('{event}/book-ticket', 'EventController@bookTicket');

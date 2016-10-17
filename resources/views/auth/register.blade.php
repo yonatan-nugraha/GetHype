@@ -83,7 +83,7 @@
                         <div class="form-group{{ $errors->has('birthdate') ? ' has-error' : '' }}">
                             <div class="col-md-12">
                                 <label>Birthdate</label>
-                                <input type="date" class="form-control" name="birthdate" value="{{ old('birthdate') }}" selected>
+                                <input type="date" data-date="" data-date-format="DD MMMM YYYY" class="form-control" name="birthdate" value="{{ old('birthdate') }}" selected>
 
                                 @if ($errors->has('birthdate'))
                                     <span class="help-block">
@@ -132,4 +132,15 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('input[name="birthdate"').change(function() {
+        this.setAttribute('data-date', moment(this.value, 'YYYY-MM-DD').format(this.getAttribute('data-date-format')));
+    });
+});
+</script>
 @endsection
