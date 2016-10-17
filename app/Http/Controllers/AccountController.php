@@ -154,7 +154,7 @@ class AccountController extends Controller
                 return 0;
             }
 
-            $request->photo->move(public_path('/images/users'), md5('user-'.auth()->id()).'.jpg');
+            $request->photo->move(public_path('images/users'), md5('user-'.auth()->id()).'.jpg');
         }
 
         return 1;
