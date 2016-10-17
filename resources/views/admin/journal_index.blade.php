@@ -47,7 +47,7 @@
                                     <div class="btn-group">
                                         <a href="{{ url('admin/journals/'.$journal->id.'/edit') }}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-edit text-blue"></i></button></a>
 
-                                        <a href="{{ url('journals/'.$journal->slug) }}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-share text-yellow"></i></button></a>
+                                        <a href="{{ url('journals/'.$journal->slug) }}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-rocket text-yellow"></i></button></a>
                                     </div>
                                 </td>
                             </tr>

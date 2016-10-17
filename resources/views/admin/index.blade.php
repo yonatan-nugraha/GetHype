@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('plugins/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
 
+@yield('styles')
 
 </head> 
 <body class="skin-blue">

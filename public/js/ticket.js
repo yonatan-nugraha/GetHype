@@ -44,7 +44,6 @@ $(document).ready(function() {
     	$.ajax({
     		url: '/events/'+event_id+'/remove-bookmark', 
     		type: 'POST',
-	        data: {_method: 'delete'},
     		success: function(result) {
     			if (result.login == 0) {
     				location.href = '/login';

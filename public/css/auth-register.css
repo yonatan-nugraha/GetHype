@@ -62,3 +62,29 @@
     font-weight: 300;
     font-size: 12px;
 }
+
+input[name="birthdate"] {
+    position: relative;
+    width: 445px; 
+    height: 30px;
+    color: white;
+}
+
+input[name="birthdate"]:before {
+    position: absolute;
+    content: attr(data-date);
+    display: inline-block;
+    color: #0f3844;
+}
+
+input[name="birthdate"]::-webkit-datetime-edit, input[name="birthdate"]::-webkit-inner-spin-button, input[name="birthdate"]::-webkit-clear-button {
+    display: none;
+}
+
+input[name="birthdate"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 8px;
+    right: 5px;
+    color: black;
+    opacity: 1;
+}

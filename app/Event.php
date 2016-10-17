@@ -14,7 +14,7 @@ class Event extends Model
      * @var array
      */
     protected $fillable = [
-    	'category_id', 'event_type_id', 'name', 'description', 'location', 'started_at', 'ended_at', 'subject_discussion', 'video_url', 'status', 'weight', 'slug'
+    	'user_id', 'category_id', 'event_type_id', 'name', 'description', 'location', 'started_at', 'ended_at', 'subject_discussion', 'video_url', 'status', 'weight', 'slug'
     ];
 
     /**
@@ -84,5 +84,13 @@ class Event extends Model
     public function guests()
     {
         return $this->hasMany(Guest::class);
+    }
+
+    /**
+     * Get the user for the event.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);  
     }
 }

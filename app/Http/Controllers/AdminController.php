@@ -117,6 +117,19 @@ class AdminController extends Controller {
     }
 
     /**
+     * Display a list of emails by prefix.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function getEmailList(Request $request)
+    {
+        return User::where('email', 'like', $request->email.'%')
+            ->pluck('email')
+            ->toArray();
+    }
+
+    /**
      * Display a list of events.
      *
      * @param  Request  $request
@@ -358,6 +371,34 @@ class AdminController extends Controller {
         ]);
 
         return redirect('admin/events');
+    }
+
+    /**
+     * Edit event's user.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function updateUserEvent(Request $request, Event $event)
+    {
+        $email = trim($request->email);
+        $user = User::where('email', $email)->first();
+
+        if (count($user) == 0) {
+            return array(
+                'success' => 0,
+                'message' => 'Email doesn\'t exist'
+            );
+        }
+
+        $event->update([
+            'user_id' => $user->id,
+        ]);
+
+        return array(
+            'success' => 1,
+            'message' => 'Success'
+        );
     }
 
     /**
