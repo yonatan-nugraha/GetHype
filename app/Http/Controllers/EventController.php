@@ -18,6 +18,7 @@ use App\Bookmark;
 use App\PageView;
 use App\Collection;
 use App\EventCollection;
+use App\Guest;
 
 use DB, Carbon\Carbon;
 
@@ -52,7 +53,7 @@ class EventController extends Controller
 
         $response = response()->view('events/detail', [
             'event' => $event,
-            'guests' => ['Joko Widodo', 'Basuki Tjahaja Purnama', 'Mark Zuckerberg', 'Larry Page']
+            'guests' => $event->guests->where('status', 1),
         ]);
 
         if ($cookie_value == null) {

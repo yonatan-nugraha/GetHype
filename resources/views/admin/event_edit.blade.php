@@ -55,7 +55,15 @@
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea class="form-control" name="description" rows="5" required pattern=".{5,}">{{ $event->description }}</textarea>
+                        <textarea class="form-control" name="description" rows="8" required pattern=".{5,}">{{ $event->description }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Subject Discussion</label>
+                        <textarea class="form-control" name="subject_discussion" rows="5" pattern=".{5,}">{{ $event->subject_discussion }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Video URL</label>
+                        <input type="text" class="form-control" name="video_url" value="{{ $event->video_url }}">
                     </div>
                 </div>      
             </div>
@@ -70,14 +78,14 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-xs-12">
-                            <button type="button" class="btn btn-primary btn-xs pull-right add-ticket">+ Add Ticket</button>
+                            <button type="button" class="btn btn-success btn-xs pull-right add-ticket">+ Add Ticket</button>
                         </div>
                     </div>
                     @foreach ($event->ticket_groups as $ticket_group)
                     <div class="row" id="ticket-row">
                         <div class="col-xs-7" style="margin-bottom: 5px;">
                             <label>Name</label>
-                            <input type="text" class="form-control" placeholder="Name" value="{{ $ticket_group->name }}" disabled="">
+                            <input type="text" class="form-control" placeholder="Name" name="ticket_name_update_{{ $ticket_group->id }}" value="{{ $ticket_group->name }}">
                         </div>
                         <div class="col-xs-2">
                             <label>Quantity</label>
@@ -93,7 +101,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-clock-o"></i>
                                 </div>
-                                <input type="text" class="form-control ticket-time" name="ticket_time_{{ $ticket_group->id }}" value="{{ $ticket_group->started_at . ' - ' . $ticket_group->ended_at }}">
+                                <input type="text" class="form-control ticket-time" name="ticket_time_update_{{ $ticket_group->id }}" value="{{ $ticket_group->started_at . ' - ' . $ticket_group->ended_at }}">
                             </div>
                         </div>
                         <div class="col-xs-2">
@@ -102,12 +110,53 @@
                         </div>
                         <div class="col-xs-3">
                             <label>Status</label>
-                            <input type="checkbox" name="ticket_status_{{ $ticket_group->id }}" class="status" data-size="small" @if ($ticket_group->status > 0) checked @endif ><br>
+                            <input type="checkbox" name="ticket_status_update_{{ $ticket_group->id }}" class="status" data-size="small" @if ($ticket_group->status > 0) checked @endif ><br>
                         </div>
                     </div>
                     <hr>
                     @endforeach
                     <div class="row" id="ticket-row-0">
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" class="guest" name="guest_quantity" value="0">
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title">3. Edit/Create Guests</h3>
+                </div>
+
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button type="button" class="btn btn-danger btn-xs pull-right add-guest">+ Add Guest</button>
+                        </div>
+                    </div>
+                    @foreach ($event->guests as $guest)
+                    <div class="row" id="ticket-row">
+                        <div class="col-xs-4" style="margin-bottom: 5px;">
+                            <label>Name</label>
+                            <input type="text" class="form-control" placeholder="Name" name="guest_name_update_{{ $guest->id }}" value="{{ $guest->name }}">
+                        </div>
+                        <div class="col-xs-4">
+                            <label>Title</label>
+                            <input type="text" class="form-control" placeholder="Title" name="guest_title_update_{{ $guest->id }}" value="{{ $guest->title }}">
+                        </div>
+                        <div class="col-xs-4">
+                            <label>Image</label>
+                            <input type="file" class="form-control" name="guest_image_update_{{ $guest->id }}">
+                        </div>
+                        <div class="col-xs-9">
+                            <label>Description</label>
+                            <textarea class="form-control" placeholder="Description" name="guest_description_update_{{ $guest->id }}" value="{{ $guest->description }}"></textarea>
+                        </div>
+                        <div class="col-xs-3">
+                            <label>Status</label>
+                            <input type="checkbox" name="guest_status_update_{{ $guest->id }}" class="status" name="guest_status_update_{{ $guest->id }}" data-size="small" @if ($guest->status > 0) checked @endif ><br>
+                        </div>
+                    </div>
+                    <hr>
+                    @endforeach
+                    <div class="row" id="guest-row-0">
                     </div>
                 </div>
                 <div class="box-footer">
@@ -147,6 +196,18 @@ $(function () {
         $('#ticket-row-'+i).after('<div class="row" id="ticket-row-'+ticket_count+'"><div class="col-xs-7"><label>Name</label><input type="text" class="form-control" name="ticket_name_'+ticket_count+'" placeholder="Name" required pattern=".{3,50}"></div><div class="col-xs-2"><label>Quantity</label><input type="number" class="form-control" name="ticket_quantity_'+ticket_count+'" placeholder="Qty" required min="1" max="500"></div><div class="col-xs-3"><label>Price</label><input type="number" class="form-control" name="ticket_price_'+ticket_count+'" placeholder="Price" required min="0" max="5000000"></div></div>');
 
         $('.ticket-group').val(ticket_count);
+    });
+
+    // add guest
+    var j = -1;
+    var guest_count = 0;
+    $('.add-guest').click(function() {
+        j++;
+        guest_count++;
+
+        $('#guest-row-'+j).after('<div class="row" id="guest-row-'+guest_count+'"><div class="col-xs-4"><label>Name</label><input type="text" class="form-control" name="guest_name_'+guest_count+'" placeholder="Name" required pattern=".{3,50}"></div><div class="col-xs-4"><label>Title</label><input type="text" class="form-control" name="guest_title_'+guest_count+'" placeholder="Title" required pattern=".{3,50}"></div><div class="col-xs-4"><label>Image</label><input type="file" class="form-control" name="guest_image_'+guest_count+'"></div></div>');
+
+        $('.guest').val(guest_count);
     });
 
     // status switcher

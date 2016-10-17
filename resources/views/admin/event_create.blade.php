@@ -55,7 +55,15 @@
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea class="form-control" name="description" rows="5" required pattern=".{5,}"></textarea>
+                        <textarea class="form-control" name="description" rows="8" required pattern=".{5,}"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Subject Discussion</label>
+                        <textarea class="form-control" name="subject_discussion" rows="5" pattern=".{5,}"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Video URL</label>
+                        <input type="text" class="form-control" name="video_url">
                     </div>
                 </div>
             </div>
@@ -74,18 +82,23 @@
                         </div>
                     </div>
                     <div class="row" id="ticket-row-0">
-<!--                         <div class="col-xs-6">
-                            <label>Name</label>
-                            <input type="text" class="form-control" name="ticket_name_1" placeholder="Name">
+                    </div>
+                </div>
+            </div>
+
+            <input type="hidden" class="guest" name="guest_quantity" value="0">
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title">3. Create Guests</h3>
+                </div>
+
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button type="button" class="btn btn-danger pull-right btn-xs add-guest">+ Add Ticket</button>
                         </div>
-                        <div class="col-xs-3">
-                            <label>Quantity</label>
-                            <input type="number" class="form-control" name="ticket_quantity_1" placeholder="Quantity">
-                        </div>
-                        <div class="col-xs-3">
-                            <label>Price</label>
-                            <input type="number" class="form-control" name="ticket_price_1" placeholder="Price">
-                        </div> -->
+                    </div>
+                    <div class="row" id="guest-row-0">
                     </div>
                 </div>
                 <div class="box-footer">
@@ -119,6 +132,18 @@ $(function () {
         $("#ticket-row-"+i).after('<div class="row" id="ticket-row-'+ticket_count+'"><div class="col-xs-7"><label>Name</label><input type="text" class="form-control" name="ticket_name_'+ticket_count+'" placeholder="Name" required pattern=".{3,50}"></div><div class="col-xs-2"><label>Quantity</label><input type="number" class="form-control" name="ticket_quantity_'+ticket_count+'" placeholder="Qty" required min="1" max="500"></div><div class="col-xs-3"><label>Price</label><input type="number" class="form-control" name="ticket_price_'+ticket_count+'" placeholder="Price" required min="0" max="5000000"></div></div>');
 
         $(".ticket-group").val(ticket_count);
+    });
+
+    // add guest
+    var j = -1;
+    var guest_count = 0;
+    $('.add-guest').click(function() {
+        j++;
+        guest_count++;
+
+        $('#guest-row-'+j).after('<div class="row" id="guest-row-'+guest_count+'"><div class="col-xs-4"><label>Name</label><input type="text" class="form-control" name="guest_name_'+guest_count+'" placeholder="Name" required pattern=".{3,50}"></div><div class="col-xs-4"><label>Title</label><input type="text" class="form-control" name="guest_title_'+guest_count+'" placeholder="Title" required pattern=".{3,50}"></div><div class="col-xs-4"><label>Image</label><input type="file" class="form-control" name="guest_image_'+guest_count+'"></div></div>');
+
+        $('.guest').val(guest_count);
     });
 });
 </script>

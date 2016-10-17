@@ -69,23 +69,20 @@
 	</div>
 </div>
 
+@if ($event->subject_discussion)
 <div class="row event-subject" style="background: #D33E40 url({{ '/images/events/'.$event->banner() }});">
 	<div class="container">
 	    <div class="col-xs-12 no-padding">
 	    	<p class="event-title">Subject <br>Discussion</p>
 	        <span class="event-subject-description">
-				•Pengertian mengenai digital marketing.<br>
-				•Proses langkah-demi-langkah untuk menjalankan kampanye pemasaran di Google AdWords.<br>
-				•Fitur kunci dan kemampuan Google AdWords.<br>
-				•Navigasi melalui antarmuka pengguna Google AdWords.<br>
-				•Cara mengatur account, kampanye iklan, dan Grup iklan di Google AdWords. •Strategi kata kunci dan tool <br>untuk membangun daftar kata kunci yang ditargetkan. •Cara untuk melacak kinerja iklan dalam Google AdWords.
-				•Optimasi dan tips Google AdWords.<br>
-				•Google AdWords tingkat lanjut.<br>
+				{!! nl2br(e($event->subject_discussion)) !!}
 			</span>
 	    </div>
     </div>
 </div>
+@endif
 
+@if (count($event->guests) > 0)
 <div class="row event-guests">
 	<div class="container">
 	    <div class="col-xs-12 no-padding">
@@ -96,12 +93,12 @@
                 <div class="col-xs-12 col-md-3 event-box">
                     <div class="thumbnail">
                         <a href="">
-                            <img class="event-image" src="{{ asset('/images/guests/guest-'.$loop->index.'.png') }}">
+                            <img class="event-image" src="{{ asset('/images/guests/'.$guest->image()) }}">
                         </a>
                     </div>
                     <div class="guest-caption">
-                        <p class="guest-name">{{ $guest }}</p>
-                        <p class="guest-title">Orang Terkenal</p>
+                        <p class="guest-name">{{ $guest->name }}</p>
+                        <p class="guest-title">{{ $guest->title }}</p>
                     </div> 
                 </div>
                 @endforeach
@@ -109,12 +106,13 @@
         </div>
     </div>
 </div>
+@endif
 
 @if (count($event->ticket_groups) > 0)
 <div class="row investments">
 	<div class="container">
 	    <div class="col-xs-12 no-padding">
-	    	<p class="event-title">Investment</p>
+	    	<p class="event-title">Ticket Price</p>
 
             <ul>
             	@foreach ($event->ticket_groups as $ticket_group)
@@ -124,6 +122,16 @@
 
             <button data-toggle="modal" data-target="#buy-ticket">Buy Ticket</button>
         </div>
+    </div>
+</div>
+@endif
+
+@if ($event->video_url)
+<div class="row video">
+	<div class="container">
+	    <div class="col-xs-12 no-padding">
+	    	<iframe src="{{ $event->video_url }}"></iframe>
+        </div>	
     </div>
 </div>
 @endif

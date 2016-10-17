@@ -5,12 +5,7 @@
 @endsection
 
 @section('content')
-<div class="container">
-	<div class="row orders-header">
-		<p class="title">Order History</p>
-		<p class="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-	</div>
-
+<div class="container orders">
 	<div class="row orders-content">
 		<div class="col-xs-4 orders-sidebar">
 			<ul class="nav nav-pills nav-stacked">

@@ -14,4 +14,17 @@ class Guest extends Model
     protected $fillable = [
     	'event_id', 'name', 'title', 'description', 'status',
     ];
+
+    /**
+     * Get the image for the event.
+     */
+    public function image()
+    {
+        $filename = md5('guest-' . $this->id) . '.jpg';
+        if (file_exists(public_path() . '/images/guests/'. $filename)) {
+            return $filename;
+        } else {
+            return 'default.jpg';
+        }     
+    }
 }

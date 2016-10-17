@@ -25,7 +25,7 @@
 }
 
 .event-name {
-	color: #D33E40;
+	color: #d33e40;
 	font-size: 30px;
 	font-weight: 500;
 	line-height: 120%;
@@ -96,7 +96,7 @@
 .buy-ticket button {
 	background-color: white;
 	border-radius: 5px;
-	border-color: #0F3844;
+	border-color: #0f3844;
 	padding: 5px 10px;
 	min-width: 100px;
 }
@@ -128,14 +128,14 @@
 /**************************************/
 
 .event-guests {
-	color: #0F3844;
-	background-color: #F1F2F2;
+	color: #0f3844;
+	background-color: #f1f2f2;
 	padding-bottom: 50px;
 }
 
 .event-guests .thumbnail {
 	border-style: none;
-	background-color: #F1F2F2;
+	background-color: #f1f2f2;
 	margin-bottom: 5px;
 }
 
@@ -185,11 +185,27 @@
 }
 
 /**************************************/
+/**************** Video ***************/
+/**************************************/
+
+.video {
+	background-color: #f1f2f2;
+	padding-bottom: 50px;
+	padding-top: 50px;
+	text-align: center;
+}
+
+.video iframe {
+	width: 600px;
+	height: 400px;
+}
+
+/**************************************/
 /************ Buy Ticket **************/
 /**************************************/
 
 #buy-ticket .modal-body {
-	color: #0F3844;
+	color: #0f3844;
 	min-height: 200px;
 }
 
@@ -208,7 +224,7 @@
 }
 
 #buy-ticket .modal-footer {
-	background-color: #0F3844;
+	background-color: #0f3844;
 	text-align: left;
 }
 
@@ -238,17 +254,17 @@
 
 #buy-ticket .modal-footer button {
     border-radius: 0;
-    background-color: #0F3844;
-    border-color: #0F3844;
-    color: #EBD38C;
+    background-color: #0f3844;
+    border-color: #ebd38c;
+    color: #ebd38c;
     font-size: 15px;
 }
 
 #buy-ticket select {
 	-webkit-appearance: none;
-    border: 1px solid #0F3844;
+    border: 1px solid #0f3844;
     border-radius: 0px;
-    color: #0F3844;
+    color: #0f3844;
     background-color: #fff;
     width: 30px;
     height: 20px;
