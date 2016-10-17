@@ -576,7 +576,7 @@ class AdminController extends Controller {
      */
     public function editJournal(Request $request, Journal $journal) 
     {
-        return view('admin/Journal_edit', [
+        return view('admin/journal_edit', [
             'page_title'    => 'Edit Journal',
             'journal'         => $journal,
         ]);
