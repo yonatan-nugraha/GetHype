@@ -77,4 +77,12 @@ class Event extends Model
             ->where('started_at', '<=', Carbon::now())
             ->where('ended_at', '>=', Carbon::now());
     }
+
+    /**
+     * Get the guests for the event.
+     */
+    public function guests()
+    {
+        return $this->hasMany(Guest::class);
+    }
 }

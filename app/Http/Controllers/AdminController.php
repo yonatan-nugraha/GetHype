@@ -17,6 +17,7 @@ use App\EventCollection;
 use App\Journal;
 use App\Order;
 use App\OrderDetail;
+use App\Guest;
 
 use Carbon\Carbon;
 
@@ -123,7 +124,7 @@ class AdminController extends Controller {
      */
     public function showEventList(Request $request)
     {
-        $events = Event::orderBy('created_at', 'desc');
+        $events = Event::orderBy('created_at', 'asc');
 
         $q = $request->q;
         if ($q != '') {
@@ -189,6 +190,8 @@ class AdminController extends Controller {
             'location'      => $request->location,
             'started_at'    => $started_at,
             'ended_at'      => $ended_at,
+            'subject_discussion' => $request->subject_discussion,
+            'video_url'     => $request->video_url,
             'status'        => 0,
             'slug'          => str_slug($request->name, '-') . '-' . sprintf("%s", mt_rand(10000, 99999)),
         ])->id;
@@ -221,6 +224,20 @@ class AdminController extends Controller {
             }
         }
 
+        for ($i = 1; $i <= $request->guest_quantity; $i++) {
+            $guest_id = Guest::create([
+                'event_id'      => $event_id,
+                'name'          => ucwords(trim($request['guest_name_'.$i])),
+                'title'         => trim($request['guest_title_'.$i]),
+                'description'   => '',
+                'status'        => 1,
+            ])->id;
+
+            if ($request->hasFile('guest_image_'.$i) && $request->file('guest_image_'.$i)->isValid()) {
+                $request->file('guest_image_'.$i)->move(public_path('/images/guests'), md5('guest-'.$guest_id).'.jpg');
+            }
+        }
+
         return redirect('admin/events');
     }
 
@@ -243,6 +260,8 @@ class AdminController extends Controller {
             'location'       => $request->location,
             'started_at'     => $started_at,
             'ended_at'       => $ended_at,
+            'subject_discussion' => $request->subject_discussion,
+            'video_url'     => $request->video_url,
         ]);
 
         if ($request->hasFile('image') && $request->image->isValid()) {
@@ -255,10 +274,11 @@ class AdminController extends Controller {
 
         foreach ($event->ticket_groups as $ticket_group) {
             $ticket_group->update([
+                'name'          => trim($request['ticket_name_update_'.$ticket_group->id]),
                 'description'   => '',
-                'status'        => $request['ticket_status_'.$ticket_group->id] ? 1 : 0,
-                'started_at'    => substr($request['ticket_time_'.$ticket_group->id], 0, 19),
-                'ended_at'      => substr($request['ticket_time_'.$ticket_group->id], 22, 19),
+                'status'        => $request['ticket_status_update_'.$ticket_group->id] ? 1 : 0,
+                'started_at'    => substr($request['ticket_time_update_'.$ticket_group->id], 0, 19),
+                'ended_at'      => substr($request['ticket_time_update_'.$ticket_group->id], 22, 19),
             ]);
 
             $ticket_qty = $request['ticket_qty_'.$ticket_group->id];
@@ -293,6 +313,33 @@ class AdminController extends Controller {
             }
         }
 
+        foreach ($event->guests as $guest) {
+            $guest->update([
+                'name'          => ucwords(trim($request['guest_name_update_'.$guest->id])),
+                'title'         => trim($request['guest_title_update_'.$guest->id]),
+                'description'   => $request['guest_description_update_'.$guest->id],
+                'status'        => $request['guest_status_update_'.$guest->id] ? 1 : 0,
+            ]);
+
+            if ($request->hasFile('guest_image_update_'.$guest->id) && $request->file('guest_image_update_'.$guest->id)->isValid()) {
+                $request->file('guest_image_update_'.$guest->id)->move(public_path('/images/guests'), md5('guest-'.$guest->id).'.jpg');
+            }
+        }
+
+        for ($i = 1; $i <= $request->guest_quantity; $i++) {
+            $guest_id = Guest::create([
+                'event_id'      => $event->id,
+                'name'          => ucwords(trim($request['guest_name_'.$i])),
+                'title'         => trim($request['guest_title_'.$i]),
+                'description'   => '',
+                'status'        => 1,
+            ])->id;
+
+            if ($request->hasFile('guest_image_'.$i) && $request->file('guest_image_'.$i)->isValid()) {
+                $request->file('guest_image_'.$i)->move(public_path('/images/guests'), md5('guest-'.$guest_id).'.jpg');
+            }
+        }
+
         return redirect('admin/events');
     }
 
@@ -321,7 +368,7 @@ class AdminController extends Controller {
      */
     public function showCollectionList(Request $request) 
     {
-        $collections = Collection::orderBy('created_at', 'desc');
+        $collections = Collection::orderBy('created_at', 'asc');
 
         $q = $request->q;
         if ($q != '') {
@@ -452,7 +499,7 @@ class AdminController extends Controller {
      */
     public function showJournalList(Request $request) 
     {
-        $journals = Journal::orderBy('created_at', 'desc');
+        $journals = Journal::orderBy('created_at', 'asc');
 
         $q = $request->q;
         if ($q != '') {
@@ -561,7 +608,7 @@ class AdminController extends Controller {
      */
     public function showOrderList(Request $request)
     {
-        $orders = Order::orderBy('created_at', 'desc');
+        $orders = Order::orderBy('created_at', 'asc');
 
         $orders = $orders->paginate(10);
 

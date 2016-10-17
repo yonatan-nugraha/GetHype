@@ -6,11 +6,7 @@
 
 @section('content')
 <div class="container myevents">
-	<div class="row myevents-header">
-		<p class="myevents-title">Find Your Happiness!</p>
-		<p class="myevents-content">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-	</div>
-	<div class="row myevents-body">
+	<div class="row">
 		<div class="col-xs-2 myevents-sidebar">
 			<ul class="nav nav-pills nav-stacked">
 			  	<li class="active"><a data-toggle="tab" href="#upcoming-events">Upcoming Events</a></li>

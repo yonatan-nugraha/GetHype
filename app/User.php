@@ -45,14 +45,14 @@ class User extends Authenticatable
      * Get the photo for the user.
      */
     public function photo()
-     {
+    {
         $filename = md5('user-' . $this->id) . '.jpg';
         if (file_exists(public_path() . '/images/users/'. $filename)) {
             return $filename;
         } else {
             return 'default.png';
         }     
-     }
+    }
 
     /**
      * Get the events for the user.

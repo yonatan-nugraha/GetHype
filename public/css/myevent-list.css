@@ -3,26 +3,8 @@ body {
 }
 
 .myevents {
-	margin-top: 30px;
+	margin-top: 50px;
 	padding-bottom: 50px !important;
-}
-
-.myevents-header {
-	margin-bottom: 30px;
-	margin-left: 0 !important;
-}
-
-.myevents-title {
-	font-size: 20px;
-	font-weight: 600;
-	color: #0F3844;
-	margin-bottom: 0;
-}
-
-.myevents-content {
-	font-size: 14px;
-	font-weight: 300;
-	color: #0F3844;
 }
 
 .myevents a {

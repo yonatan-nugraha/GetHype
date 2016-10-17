@@ -116,19 +116,4 @@
         </div>
     </div>
 </div>
-
-<div class="row banner-bottom">
-    <div class="container">
-    	<div class="col-md-6 col-xs-12 no-padding-left">
-    		<a class="thumbnail">
-    			<img src="{{ asset('images/banners/banner-7.jpg') }}">
-    		</a>
-    	</div>
-    	<div class="col-md-6 col-xs-12 no-padding-right">
-    		<a class="thumbnail">
-    			<img src="{{ asset('images/banners/banner-8.jpg') }}">
-    		</a>
-    	</div>
-    </div>
-</div>
 @endsection
