@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\User;
 use App\Event;
 use App\Category;
 use App\EventType;
@@ -70,5 +71,43 @@ class HomeController extends Controller
     public function aboutUs()
     {
         return view('statics/about');
+    }
+
+    /**
+     * Display email page.
+     */
+    public function email(Request $request)
+    {
+        $user = User::find(1);
+
+        $q = $request->q;
+        if ($q == 'welcome') {
+            return view('emails/welcome');
+        }
+        else if ($q == 'activate_account') {
+            return view('emails/activate_account', [
+                'user' => $user,
+                'key'   => 'asd'
+            ]);
+        }
+        else if ($q == 'reset_password') {
+            return view('emails/reset_password', [
+                'user' => $user,
+                'token'   => 'asd'
+            ]);
+        }
+        else if ($q == 'checkout_success') {
+            return view('emails/checkout_success', [
+                'user' => $user,
+            ]);
+        }
+        else if ($q == 'email_blast') {
+            return view('emails/email_blast', [
+                'user' => $user,
+            ]);
+        }
+        else {
+            return view('emails/send');
+        }
     }
 }

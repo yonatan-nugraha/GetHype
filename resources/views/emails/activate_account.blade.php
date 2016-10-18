@@ -3,19 +3,19 @@
 <body>
 	<div style="font-family: arial,helvetica neue,helvetica,sans-serif; font-size: 14px; background: #fff; line-height: 1.5; border: 2px solid #eceded; background: #fff; width: 100%; max-width: 600px; margin: 0 auto;">
 		<div>
-			<img src="http://gethype.co.id/images/banners/banner-1.jpg" width="100%" alt="banner">
+			<img src="http://gethype.co.id/images/emails/activation.jpg" width="100%" alt="banner">
 		</div>
 
 		<div style="text-decoration: none; padding: 0 20px">
 			<div style="color:#505050">
-				<p><b>Hai, {{ $user->first_name }} @if ($user->last_name) {{ $user->last_name }} @endif !</b></p>
+				<p><b>Hai, {{ $user->first_name }} @if ($user->last_name) {{ $user->last_name }}@endif!</b></p>
 				<p style="margin-top:10px">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
 
 				<p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
 			</div>
 		</div>
 		<div align="center" style="text-align: center; margin: 20px; padding: 0">
-			<a href="{{ url('activate/'.$user->id.'?key='.$key) }}" target="_blank" style="color: #fff; text-decoration: none; display: inline-block; text-align: center; padding: 12px 16px; border-radius: 0; font-size: 15px; line-height: 1.3; font-weight: lighter; min-width: 20%; max-width: 50%; overflow: hidden; word-wrap: break-word; background-color: #f26039">Aktivasi</a> 
+			<a href="{{ url('activate/'.$user->id.'?key='.$key) }}" target="_blank" style="color: #fff; text-decoration: none; display: inline-block; text-align: center; padding: 12px 16px; border-radius: 0; font-size: 15px; line-height: 1.3; font-weight: lighter; min-width: 20%; max-width: 50%; overflow: hidden; word-wrap: break-word; background-color: #d33e40">Aktivasi</a> 
 		</div>
 
 		<table style="margin-top: 30px; border-top: 1px solid #d6d6d6; background-color: #fff; width: 100%; border-spacing: 10px;">
@@ -24,16 +24,16 @@
 					<td style="margin: 0; padding: 0; width: 45%; text-align: center">
 						<div style="color:#606060; font-size:12px">Ikuti Kami :<br>
 							<a href="" target="_blank" style="text-decoration:none">
-								<img src="https://ecs7.tokopedia.net/img/email-isyana/facebook.png" style="margin-top: 5px; width: 25px"> 
+								<img src="http://gethype.co.id/images/emails/facebook.png" style="margin-top: 5px; width: 25px"> 
 							</a>
 							<a href="" target="_blank" style="text-decoration:none">
-								<img src="https://ecs7.tokopedia.net/img/email-isyana/twitter.png" style="margin-top: 5px; width: 25px"> 
+								<img src="http://gethype.co.id/images/emails/twitter.png" style="margin-top: 5px; width: 25px"> 
 							</a>
 							<a href="" target="_blank" style="text-decoration:none">
-								<img src="https://ecs7.tokopedia.net/img/email-isyana/gplus.png" style="margin-top: 5px; width: 25px"> 
+								<img src="http://gethype.co.id/images/emails/instagram.png" style="margin-top: 5px; width: 25px"> 
 							</a>
 							<a href="" target="_blank" style="text-decoration:none">
-								<img src="https://ecs7.tokopedia.net/img/email-isyana/instagram.png" style="margin-top:5px; width: 25px"> 
+								<img src="http://gethype.co.id/images/emails/linkedin.png" style="margin-top:5px; width: 25px"> 
 							</a>
 						</div>
 					</td>
@@ -46,7 +46,7 @@
 				<tr>
 					<td>
 						<a href="" target="_blank" style="text-decoration: none">
-							<img src="http://gethype.co.id/images/logo_dark.png" style="width: 20px; vertical-align: middle;">
+							<img src="http://gethype.co.id/images/logo-dark.png" style="width: 20px; vertical-align: middle;">
 						</a>
 						<span style="color: #91908e; font-size: 12px; font-weight: normal; margin: 0; padding-left: 5px"> 2016 © Gethype
 						</span> 

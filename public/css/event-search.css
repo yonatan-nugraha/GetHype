@@ -25,37 +25,56 @@
 .search-bar select, .search-bar input {
     float: left;
     -webkit-appearance: none;
-    border: 2px solid #0F3844;
-    border-radius: 0px;
-    color: #0F3844;
+    border: 2px solid #0f3844;
+    border-radius: 0;
+    color: #0f3844;
+    background-color: #fff;
 }
 
 .search-category, .search-type {
-    max-width: 20%;
+    max-width: 19%;
 }
 
-.search-location, .search-date, .search-price {
+.search-location {
+    max-width: 17%;
+}
+
+.search-date {
+    max-width: 15%;
+}
+
+.search-price {
     max-width: 15%;
 }
 
 .search-bar button {
     width: 15%;
     border-radius: 0;
-    background-color: red;
-    border-color: red;
+    background-color: #d33e40;
+    border-color: #d33e40;
+}
+
+.search-bar button:hover {
+    background-color: #d33e40;
+    border-color: #d33e40;
 }
 
 ::-webkit-input-placeholder {
-    color: #0F3844;
+    color: #0f3844;
 }
 :-moz-placeholder {
-    color: #0F3844;
+    color: #0f3844;
 }
 ::-moz-placeholder {
-    color: #0F3844;
+    color: #0f3844;
 }
 :-ms-input-placeholder {
-    color: #0F3844;
+    color: #0f3844;
+}
+
+.gethype-line img {
+    width: 100%;
+    max-height: 5px;
 }
 
 /**************************************/
@@ -122,4 +141,39 @@
     color: #000000;
     font-weight: 200;
     font-size: 10px;
+}
+
+.gethype-line img {
+    width: 100%;
+    max-height: 5px;
+}
+
+/**************************************/
+/*************** Date *****************/
+/**************************************/
+
+input[name="date"] {
+    position: relative;
+    width: 225px; 
+    height: 34px;
+    color: white;
+}
+
+input[name="date"]:before {
+    position: absolute;
+    content: attr(data-date);
+    display: inline-block;
+    color: #0f3844;
+}
+
+input[name="date"]::-webkit-datetime-edit, input[name="date"]::-webkit-inner-spin-button, input[name="date"]::-webkit-clear-button {
+    display: none;
+}
+
+input[name="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 8px;
+    right: 5px;
+    color: black;
+    opacity: 1;
 }

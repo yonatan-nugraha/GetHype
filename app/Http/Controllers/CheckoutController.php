@@ -350,19 +350,4 @@ class CheckoutController extends Controller
 
         return redirect('checkout/success?order_id='.$order->id);
     }
-
-    /**
-     * Test send email.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function sendEmail(Request $request)
-    {
-        // send checkout success email
-        Mail::to('yonatan.nugraha@gethype.co.id')->queue(new ActivateAccount(auth()->user()));
-
-        dd('ooo yeahhh');
-        // return view('emails.activate_account');
-    }
 }

@@ -25,16 +25,16 @@
 					<td style="margin: 0; padding: 0; width: 45%; text-align: center">
 						<div style="color:#606060; font-size:12px">Ikuti Kami :<br>
 							<a href="" target="_blank" style="text-decoration:none">
-								<img src="https://ecs7.tokopedia.net/img/email-isyana/facebook.png" style="margin-top: 5px; width: 25px"> 
+								<img src="http://gethype.co.id/images/emails/facebook.png" style="margin-top: 5px; width: 25px"> 
 							</a>
 							<a href="" target="_blank" style="text-decoration:none">
-								<img src="https://ecs7.tokopedia.net/img/email-isyana/twitter.png" style="margin-top: 5px; width: 25px"> 
+								<img src="http://gethype.co.id/images/emails/twitter.png" style="margin-top: 5px; width: 25px"> 
 							</a>
 							<a href="" target="_blank" style="text-decoration:none">
-								<img src="https://ecs7.tokopedia.net/img/email-isyana/gplus.png" style="margin-top: 5px; width: 25px"> 
+								<img src="http://gethype.co.id/images/emails/instagram.png" style="margin-top: 5px; width: 25px"> 
 							</a>
 							<a href="" target="_blank" style="text-decoration:none">
-								<img src="https://ecs7.tokopedia.net/img/email-isyana/instagram.png" style="margin-top:5px; width: 25px"> 
+								<img src="http://gethype.co.id/images/emails/linkedin.png" style="margin-top:5px; width: 25px"> 
 							</a>
 						</div>
 					</td>
@@ -47,16 +47,11 @@
 				<tr>
 					<td>
 						<a href="" target="_blank" style="text-decoration: none">
-							<img src="http://gethype.co.id/images/logo_dark.png" style="width: 20px; vertical-align: middle;">
+							<img src="http://gethype.co.id/images/logo-dark.png" style="width: 20px; vertical-align: middle;">
 						</a>
 						<span style="color: #91908e; font-size: 12px; font-weight: normal; margin: 0; padding-left: 5px"> 2016 © Gethype
 						</span> 
 					</td>
-<!-- 					<td style="text-align: right">
-						<a href="" target="_blank" style="text-decoration: none">
-							<img src="https://ecs7.tokopedia.net/img/email-isyana/tokopedia-logo-kecil.png" height="23" style="margin-top:5px">
-						</a>
-					</td> -->
 				</tr>
 			</tbody>
 		</table>

@@ -75,7 +75,7 @@
                     @endforeach
                 </select>
                 <div>
-                    <input type="date" class="form-control search-date" name="date">
+                    <input type="date" data-date="" data-date-format="DD MMMM YYYY" class="form-control search-date" name="date">
                 </div>
                 <select class="form-control search-price" name="price">
                     <option value="all">All Price</option>
@@ -195,5 +195,9 @@
 </div>
 @endif
 
-</div>
+@endsection
+
+@section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<script src="{{ asset('js/home.js') }}"></script>
 @endsection

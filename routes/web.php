@@ -27,6 +27,7 @@ Route::get('/home', 'HomeController@index');
 Route::get('/services', 'HomeController@services');
 Route::get('/contact-us', 'HomeController@contactUs');
 Route::get('/about-us', 'HomeController@aboutUs');
+Route::get('/emails', 'HomeController@email');
 
 //users
 Route::group(['prefix' => 'users'], function () {
@@ -145,7 +146,6 @@ Route::group(['prefix' => 'checkout'], function () {
 	Route::get('success', 'CheckoutController@success');
 	Route::get('failed', 'CheckoutController@failed');
 	Route::get('bypass', 'CheckoutController@bypass');
-	Route::get('email', 'CheckoutController@sendEmail');
 });
 
 //notification
