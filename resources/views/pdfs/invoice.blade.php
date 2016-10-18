@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="{{ asset('css/ticket-invoice.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/bootstrap-3.3.7-dist/css/bootstrap.min.css') }}">
 

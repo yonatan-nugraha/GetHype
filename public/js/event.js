@@ -84,4 +84,16 @@ $(document).ready(function() {
 	    	}
 	    });
 	});
+
+	//date
+	$('input[name="date"').change(function() {
+		if (this.value == '') {
+			this.setAttribute('data-date', 'All Dates');
+		} 
+		else {
+		    this.setAttribute('data-date', moment(this.value, 'YYYY-MM-DD').format(this.getAttribute('data-date-format')));
+		}
+	});
+
+	$('input[name="date"').trigger('change');
 });

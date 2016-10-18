@@ -61,10 +61,10 @@
                     @endforeach
                 </select>
                 <div>
-                    <input type="date" class="form-control search-date" name="date">
+                    <input type="date" data-date="" data-date-format="DD MMMM YYYY" class="form-control search-date" name="date" value="{{ $date }}">
                 </div>
                 <select class="form-control search-price" name="price">
-                    <option value="all">All Budgets</option>
+                    <option value="all">All Price</option>
                     <option value="free" @if ($price == 'free') selected @endif>Free</option>
                     <option value="paid" @if ($price == 'paid') selected @endif>Paid</option>
                 </select>
@@ -72,8 +72,8 @@
             </form>
         </div>
 
-        <div class="row">
-            <img class="gethype-line" src="{{ asset('images/img-additional-2.png') }}">
+        <div class="row gethype-line">
+            <img src="{{ asset('images/img-additional-2.png') }}">
         </div>
     </div>
 </div>
@@ -116,4 +116,9 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<script src="{{ asset('js/event.js') }}"></script>
 @endsection

@@ -310,4 +310,32 @@
     width: 300px; margin: 0 auto; margin-top: 3em;
 }
 
-</style>
+/**************************************/
+/*************** Date *****************/
+/**************************************/
+
+input[name="date"] {
+    position: relative;
+    width: 225px; 
+    height: 34px;
+    color: white;
+}
+
+input[name="date"]:before {
+    position: absolute;
+    content: attr(data-date);
+    display: inline-block;
+    color: #0f3844;
+}
+
+input[name="date"]::-webkit-datetime-edit, input[name="date"]::-webkit-inner-spin-button, input[name="date"]::-webkit-clear-button {
+    display: none;
+}
+
+input[name="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 8px;
+    right: 5px;
+    color: black;
+    opacity: 1;
+}

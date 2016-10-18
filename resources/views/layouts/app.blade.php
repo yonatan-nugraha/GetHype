@@ -160,7 +160,6 @@
     <script src="{{ asset('plugins/bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('plugins/chart.js/dist/Chart.min.js') }}"></script>
     <script src="{{ asset('js/date.js') }}"></script>
-    <script src="{{ asset('js/home.js') }}"></script>
 
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -1,6 +1,6 @@
 $(document).ready(function() {
+	//subscribe
 	$('.subscribe-submit').click(function() {
-
 		var email = $('.subscribe-email').val();
 		
 		$.ajaxSetup({
@@ -33,6 +33,7 @@ $(document).ready(function() {
 	    });
 	});
 
+	//message
 	$('.message-submit').click(function() {
 		var id = $(this).attr('id');
 
@@ -100,4 +101,15 @@ $(document).ready(function() {
 	    });
 	});
 
+	//date
+	$('input[name="date"').change(function() {
+		if (this.value == '') {
+			this.setAttribute('data-date', 'All Dates');
+		} 
+		else {
+		    this.setAttribute('data-date', moment(this.value, 'YYYY-MM-DD').format(this.getAttribute('data-date-format')));
+		}
+	});
+
+	$('input[name="date"').trigger('change');
 });

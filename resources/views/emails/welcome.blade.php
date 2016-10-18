@@ -3,7 +3,7 @@
 <body>
 	<div style="font-family: arial,helvetica neue,helvetica,sans-serif; font-size: 14px; background: #fff; line-height: 1.5; border: 2px solid #eceded; background: #fff; width: 100%; max-width: 600px; margin: 0 auto;">
 		<div>
-			<img src="http://image.go-jek.com/custloads/761809282/md_461125.jpg" width="100%" alt="banner">
+			<img src="http://gethype.co.id/images/emails/welcome.jpg" width="100%" alt="banner">
 		</div>
 
 		<div style="text-decoration: none; padding: 0 20px">
@@ -25,16 +25,16 @@
 					<td style="margin: 0; padding: 0; width: 45%; text-align: center">
 						<div style="color:#606060; font-size:12px">Ikuti Kami :<br>
 							<a href="" target="_blank" style="text-decoration:none">
-								<img src="https://ecs7.tokopedia.net/img/email-isyana/facebook.png" style="margin-top: 5px; width: 25px"> 
+								<img src="http://gethype.co.id/images/emails/facebook.png" style="margin-top: 5px; width: 25px"> 
 							</a>
 							<a href="" target="_blank" style="text-decoration:none">
-								<img src="https://ecs7.tokopedia.net/img/email-isyana/twitter.png" style="margin-top: 5px; width: 25px"> 
+								<img src="http://gethype.co.id/images/emails/twitter.png" style="margin-top: 5px; width: 25px"> 
 							</a>
 							<a href="" target="_blank" style="text-decoration:none">
-								<img src="https://ecs7.tokopedia.net/img/email-isyana/gplus.png" style="margin-top: 5px; width: 25px"> 
+								<img src="http://gethype.co.id/images/emails/instagram.png" style="margin-top: 5px; width: 25px"> 
 							</a>
 							<a href="" target="_blank" style="text-decoration:none">
-								<img src="https://ecs7.tokopedia.net/img/email-isyana/instagram.png" style="margin-top:5px; width: 25px"> 
+								<img src="http://gethype.co.id/images/emails/linkedin.png" style="margin-top:5px; width: 25px"> 
 							</a>
 						</div>
 					</td>
@@ -47,7 +47,7 @@
 				<tr>
 					<td>
 						<a href="" target="_blank" style="text-decoration: none">
-							<img src="http://gethype.co.id/images/logo_dark.png" style="width: 20px; vertical-align: middle;">
+							<img src="http://gethype.co.id/images/logo-dark.png" style="width: 20px; vertical-align: middle;">
 						</a>
 						<span style="color: #91908e; font-size: 12px; font-weight: normal; margin: 0; padding-left: 5px"> 2016 © Gethype
 						</span> 
