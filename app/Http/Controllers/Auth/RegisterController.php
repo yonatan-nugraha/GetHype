@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 use App\User;
+use App\Subscriber;
 use App\Mail\ActivateAccount;
 use App\Mail\Welcome;
 
@@ -122,6 +123,19 @@ class RegisterController extends Controller
             $user->update([
                 'status' => 1,
             ]);
+
+            $subscriber = Subscriber::where('email', $user->email)->first();
+            if (!$subscriber) {
+                Subscriber::create([
+                    'email'     => $user->email,
+                    'status'    => 1,
+                ]);   
+            }
+            else {
+                $subscriber->update([
+                    'status' => 1
+                ]);
+            }
 
             Mail::to($user->email)->queue(new Welcome);
 

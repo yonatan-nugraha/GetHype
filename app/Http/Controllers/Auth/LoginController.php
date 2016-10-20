@@ -14,6 +14,7 @@ use Carbon\Carbon;
 
 use App\User;
 use App\SocialAccount;
+use App\Subscriber;
 
 use App\Mail\Welcome;
 
@@ -176,6 +177,19 @@ class LoginController extends Controller
                     'provider_user_id' => $provider_user_id,
                     'provider'      => $provider,
                 ]);
+
+                $subscriber = Subscriber::where('email', $user->email)->first();
+                if (!$subscriber) {
+                    Subscriber::create([
+                        'email'     => $user->email,
+                        'status'    => 1,
+                    ]);   
+                }
+                else {
+                    $subscriber->update([
+                        'status' => 1
+                    ]);
+                }
 
                 Mail::to($user->email)->queue(new Welcome);
 
