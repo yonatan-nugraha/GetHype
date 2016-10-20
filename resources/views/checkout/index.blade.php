@@ -10,11 +10,9 @@
 	<div class="container checkout">
 		<div class="row">
 			<div class="col-xs-8 checkout-input">
-				@if ($errors->has('error'))
-					<div class="alert alert-dismissible alert-danger">
-	                	<p>{{ $errors->first('error') }}</p>
-	              	</div>
-	            @endif
+				<div class="alert alert-dismissible alert-danger" id="error-message">
+                	<p>{{ $errors->first('error') }}</p>
+              	</div>
 				<div class="panel contact-details">
 				  	<div class="panel-heading">
 				    	<h3 class="panel-title">Contact Details</h3>
@@ -23,41 +21,23 @@
 				    	<div class="form-group col-xs-5">
 						 	<label class="control-label">First Name</label>
 						  	<input class="form-control" type="text" name="first_name" value="{{ Auth::user()->first_name }}">
-						  	@if ($errors->has('first_name'))
-	                        <span class="error-block">
-	                        	{{ $errors->first('first_name') }}
-	                        </span>
-	                        @endif
+						  	<span class="error-block" id="first-name-error"></span>
 						</div>
 						<div class="form-group col-xs-5">
 						 	<label class="control-label">Last Name</label>
 						  	<input class="form-control" type="text" name="last_name" value="{{ Auth::user()->last_name }}">
-						  	@if ($errors->has('first_name'))
-	                        <span class="error-block">&nbsp;</span>
-	                        @endif
+						  	<span class="error-block" id="last-name-error"></span>
 						</div>
 
 						<div class="form-group col-xs-5">
 						  	<label class="control-label">Email</label>
 						  	<input class="form-control" type="email" name="email" value="{{ Auth::user()->email }}">
-						  	@if ($errors->has('email'))
-	                        <span class="error-block">
-	                        	{{ $errors->first('email') }}
-	                        </span>
-	                        @elseif ($errors->has('phone'))
-	                        <span class="error-block">&nbsp;</span>
-	                        @endif
+						  	<span class="error-block" id="email-error"></span>
 						</div>
 						<div class="form-group col-xs-5">
 						  	<label class="control-label">Mobile Phone</label>
 						  	<input class="form-control" type="text" name="phone" value="{{ Auth::user()->phone }}">
-						  	@if ($errors->has('phone'))
-	                        <span class="error-block">
-	                        	{{ $errors->first('phone') }}
-	                        </span>
-	                        @elseif ($errors->has('email'))
-	                        <span class="error-block">&nbsp;</span>
-	                        @endif
+						  	<span class="error-block" id="phone-error"></span>
 						</div>
 						<div class="col-xs-12">
 							<span class="contact-alert">* make sure you contact detail is correct</span>
@@ -102,7 +82,7 @@
 				    	</div>
 				  	</div>
 				</div>
-				<button class="btn pay-submit pull-right" type="submit">@if ($order_amount > 0) Pay @else Proceed @endif</button>
+				<button class="btn pull-right" type="button" id="pay-button">@if ($order_amount > 0) Pay @else Proceed @endif</button>
 			</div>
 			<div class="col-xs-4 order-details">
 				<p class="order-summary">Order Summary</p>
@@ -147,6 +127,7 @@
 @endsection
 
 @section('scripts')
+<script type="text/javascript" src="{{ $snap_js_url }}" data-client-key="{{ $client_key }}"></script>
 <script type="text/javascript" src="{{ asset('js/checkout.js') }}"></script>
 @endsection
 
