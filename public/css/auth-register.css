@@ -5,11 +5,11 @@
 
 .register .panel {
     border-radius: 0;
-    border-color: #0F3844;
+    border-color: #0f3844;
 }
 
 .register .panel-heading {
-    background-color: #0F3844;
+    background-color: #0f3844;
     border-radius: 0;
     color: #fff;
     font-size: 18px;
@@ -28,7 +28,7 @@
 
 .register input {
     border-radius: 0;
-    border: 1px solid #0F3844;
+    border: 1px solid #0f3844;
     font-size: 12px;
 }
 
@@ -42,8 +42,8 @@
 
 .register button {
     border-radius: 0;
-    background-color: red;
-    border-color: red;
+    background-color: #0f3844;
+    border-color: #0f3844;
     color: #fff;
     font-size: 15px;
     margin-top: 15px;
@@ -53,8 +53,8 @@
 
 .register hr {
     height: 2px;
-    border-top: 1px solid #0F3844;
-    border-bottom: 1px solid #0F3844;
+    border-top: 1px solid #0f3844;
+    border-bottom: 1px solid #0f3844;
 }
 
 .help-block p {

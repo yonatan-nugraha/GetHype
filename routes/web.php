@@ -20,14 +20,20 @@ Auth::routes();
 Route::get('/activate/{user}', 'Auth\RegisterController@activate');
 
 //home
-Route::get('/', 'HomeController@index');
-Route::get('/home', 'HomeController@index');
+Route::get('', 'HomeController@index');
+Route::get('home', 'HomeController@index');
 
 //statics
-Route::get('/services', 'HomeController@services');
-Route::get('/contact-us', 'HomeController@contactUs');
-Route::get('/about-us', 'HomeController@aboutUs');
-Route::get('/emails', 'HomeController@email');
+Route::get('services', 'HomeController@services');
+Route::get('contact-us', 'HomeController@contactUs');
+Route::get('about-us', 'HomeController@aboutUs');
+Route::get('emails', 'HomeController@email');
+
+//auth socialite
+Route::group(['prefix' => 'auth'], function () {
+	Route::get('{provider}/redirect', 'Auth\LoginController@redirectToProvider');
+	Route::get('{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+});
 
 //users
 Route::group(['prefix' => 'users'], function () {

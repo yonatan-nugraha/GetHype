@@ -9,8 +9,13 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use Validator, Redirect;
+use Validator, Redirect, Socialite, Mail;
 use Carbon\Carbon;
+
+use App\User;
+use App\SocialAccount;
+
+use App\Mail\Welcome;
 
 class LoginController extends Controller
 {
@@ -57,7 +62,7 @@ class LoginController extends Controller
             'password'  => 'required|alpha_num|min:6|max:255',
         ]);
 
-        if (auth()->attempt(array('email' => $request->email, 'password' => $request->password))) {
+        if (auth()->attempt(array('email' => $request->email, 'password' => $request->password), $request->remember)) {
             if (auth()->user()->status == 0) {
                 auth()->logout();
                 return back()
@@ -70,6 +75,114 @@ class LoginController extends Controller
             return back()
                 ->withErrors([ 'error' => 'Incorrect email address or password.' ])
                 ->withInput();
+        }
+    }
+
+    /**
+     * Handle a login request with social provider.
+     *
+     * @param  Request  $request
+     * @return User
+     */
+    public function redirectToProvider(Request $request, $provider)
+    {
+        return Socialite::driver($provider)
+            ->redirect();
+
+        // return Socialite::driver('facebook')->fields([
+        //     'first_name', 'last_name', 'email', 'gender', 'birthday'
+        // ])->scopes([
+        //     'email', 'user_birthday'
+        // ])->redirect();
+    }
+
+    /**
+     * Handle a callback from social provider.
+     *
+     * @param  Request  $request
+     * @return User
+     */
+    public function handleProviderCallback(Request $request, $provider)
+    {
+        $provider_user;
+        $first_name     = '';
+        $last_name      = '';
+        $birthdate_format = 'Y-m-d';
+
+        if ($provider == 'facebook') {
+            $provider_user = Socialite::with($provider)->fields([
+                'name', 'email', 'gender', 'verified', 'first_name', 'last_name', 'birthday'
+            ])->user();
+
+            $first_name = $provider_user->user['first_name'];
+            $last_name  = $provider_user->user['last_name'];
+            $birthdate_format = 'm/d/Y';
+        }
+        else if ($provider == 'google') {
+            $provider_user = Socialite::with($provider)->user();
+
+            $first_name = $provider_user->user['name']['givenName'];
+            $last_name  = $provider_user->user['name']['familyName'];
+        }
+        else {
+            return redirect('');
+        }
+
+        $provider_user_id  = $provider_user->id;
+        $email      = $provider_user->email;
+        $gender     = ($provider_user->user['gender'] == 'male') ? 1 : 2;
+        $birthdate  = $provider_user->user['birthday'];
+
+        $valid_date = $birthdate ? Carbon::createFromFormat($birthdate_format, $birthdate) : '';
+        if ($valid_date && $valid_date->format($birthdate_format) == $birthdate) {
+            if ($valid_date->year) {
+                $birthdate = $valid_date->toDateString();
+            }
+            else {
+                $birthdate = Carbon::createFromFormat('Y-m-d', '1991-'.$valid_date->month.'-'.$valid_date->day)->toDateString();
+            }
+        } else {
+            $birthdate = '1991-01-01';
+        }
+
+        if ($provider_user_id) {
+            $social_account = SocialAccount::where('provider', $provider)
+                ->where('provider_user_id', $provider_user_id)
+                ->first();
+
+            if ($social_account) {
+                auth()->loginUsingId($social_account->user_id, true);
+
+                return redirect()->intended('/home');
+            } 
+            else {
+                $user = User::where('email', $email)->first();
+
+                if (!$user) {
+                    $user = User::create([
+                        'first_name' => ucwords(trim($first_name)),
+                        'last_name' => ucwords(trim($last_name)),
+                        'email'     => trim($email),
+                        'phone'     => '',
+                        'gender'    => $gender,
+                        'birthdate' => $birthdate,
+                        'password'  => '',
+                        'status'    => 1,
+                    ]);
+                }
+
+                SocialAccount::create([
+                    'user_id'       => $user->id,
+                    'provider_user_id' => $provider_user_id,
+                    'provider'      => $provider,
+                ]);
+
+                Mail::to($user->email)->queue(new Welcome);
+
+                auth()->login($user, true);
+
+                return redirect()->intended('/home');
+            }
         }
     }
 }
