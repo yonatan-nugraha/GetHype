@@ -26,7 +26,7 @@ class NotificationController extends Controller
      */
     public function __construct()
     {
-        Veritrans::$serverKey = env('VERITRANS_SERVER', '');
+        Veritrans::$serverKey = 'VT-server-hDPL0IDkJCWQ44Sp5t3jvDyy';
         Veritrans::$isProduction = env('APP_ENV', '') == 'production' ? true : false;
     }
 

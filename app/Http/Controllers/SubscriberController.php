@@ -34,8 +34,8 @@ class SubscriberController extends Controller
 
         $email = $request->email;
 
-        $subscriber = Subscriber::where('email', $email);
-        if (count($subscriber->get()) == 0) {
+        $subscriber = Subscriber::where('email', $email)->first();
+        if (!$subscriber) {
 	        Subscriber::create([
 	        	'email' 	=> $email,
 	        	'status' 	=> 1,

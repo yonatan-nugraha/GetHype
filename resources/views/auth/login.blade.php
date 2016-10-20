@@ -74,10 +74,10 @@
                             <p>Or, login with</p>
                         </div>
                         <div class="col-md-12 login-facebook">
-                            <button><i class="fa fa-facebook-f pull-left"></i> Facebook</button>
+                            <a href="{{ url('auth/facebook/redirect') }}"><button><i class="fa fa-facebook-f pull-left"></i> Facebook</button></a>
                         </div>
                         <div class="col-md-12 login-google">
-                            <button><i class="fa fa-google-plus pull-left"></i> Google</button>
+                            <a href="{{ url('auth/google/redirect') }}"><button><i class="fa fa-google-plus pull-left"></i> Google</button></a>
                         </div>
                     </div>
                 </div>
