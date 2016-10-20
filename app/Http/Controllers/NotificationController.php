@@ -27,6 +27,7 @@ class NotificationController extends Controller
     public function __construct()
     {
         Veritrans::$serverKey = 'VT-server-hDPL0IDkJCWQ44Sp5t3jvDyy';
+        Veritrans::$clientKey = 'VT-client-H9RQT94F8JCr8hvr';
         Veritrans::$isProduction = env('APP_ENV', '') == 'production' ? true : false;
     }
 
@@ -38,11 +39,12 @@ class NotificationController extends Controller
      *
      * $status
      * 1 = cancelled
-     * 2 = denied
+     * 2 = pending
      * 3 = challenged (for credit card)
      * 4 = success (for credit card)
      * 5 = settlement
-     * 6 = others
+     * 6 = expired
+     * 7 = others
      */
     public function payment(Request $request)
     {
@@ -69,7 +71,7 @@ class NotificationController extends Controller
             if ($transaction_status == 'cancel') {
                 $payment_status = 1;
             }
-            else if ($transaction_status == 'deny') {
+            else if ($transaction_status == 'pending') {
                 $payment_status = 2;
             }
             if ($transaction_status == 'capture') {
@@ -85,8 +87,11 @@ class NotificationController extends Controller
             else if ($transaction_status == 'settlement') {
                 $payment_status = 5;
             }
-            else {
+            else if ($transaction_status == 'expired') {
                 $payment_status = 6;
+            }
+            else {
+                $payment_status = 7;
             }
 
             if (in_array($payment_status, [4,5])) {

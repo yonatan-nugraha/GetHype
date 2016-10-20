@@ -33,6 +33,7 @@ class CheckoutController extends Controller
         $this->middleware('auth');
 
         Veritrans::$serverKey = 'VT-server-hDPL0IDkJCWQ44Sp5t3jvDyy';
+        Veritrans::$clientKey = 'VT-client-H9RQT94F8JCr8hvr';
         Veritrans::$isProduction = env('APP_ENV', '') == 'production' ? true : false;
     }
 
@@ -54,7 +55,9 @@ class CheckoutController extends Controller
         	'order_details' => $order->order_details,
             'event'         => $order->event,
         	'order_amount'  => $order->order_amount,
-            'total_quantity' => $order->total_quantity
+            'total_quantity' => $order->total_quantity,
+            'client_key'    => Veritrans::$clientKey,
+            'snap_js_url'   => Veritrans::getSnapJsUrl()
         ]);
     }
 
@@ -67,6 +70,8 @@ class CheckoutController extends Controller
     public function pay(Request $request)
     {
         $order = json_decode(Redis::get('order:'.auth()->id()));
+
+        // dd($request->all());
 
         if ($order == null || $order->order_amount == 0) {
             return redirect('');
@@ -100,9 +105,7 @@ class CheckoutController extends Controller
         });
 
         if ($validator->fails()) {
-            return redirect('/checkout')
-                ->withErrors($validator)
-                ->withInput();
+            $validator->validate();
         }
 
         $event          = $order->event;
@@ -156,17 +159,14 @@ class CheckoutController extends Controller
         Redis::set('order:'.auth()->id(), json_encode($order));
 
         $transaction_data = array(
-            'payment_type' => 'vtweb',
+            'enabled_payments' => array($payment_method),
             'transaction_details' => array(
                 'order_id'    => $order_id,
                 'gross_amount'  => $payment_amount,
             ),
-            'vtweb' => array(
-                'enabled_payments' => array($payment_method),
-                'credit_card_3d_secure' => true,
-            ),
             'customer_details' => array(
                 'first_name' => auth()->user()->first_name,
+                'last_name' => auth()->user()->last_name,
                 'email' => auth()->user()->email,
                 'phone' => auth()->user()->phone,
             ),
@@ -174,9 +174,13 @@ class CheckoutController extends Controller
         );
 
         $vt = new Veritrans;
-        $vtweb_url = $vt->vtweb_charge($transaction_data);
 
-        return redirect($vtweb_url);
+        return array(
+            'token' => $vt->getSnapToken($transaction_data)
+        );
+
+        // $vtweb_url = $vt->vtweb_charge($transaction_data);
+        // return redirect($vtweb_url);
     }
 
     /**

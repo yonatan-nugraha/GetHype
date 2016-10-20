@@ -5,7 +5,7 @@ $(document).ready(function() {
 		
 		$.ajaxSetup({
 		    headers: {
-		        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('description')
 		    }
 		});
 
@@ -38,7 +38,7 @@ $(document).ready(function() {
 		var id = $(this).attr('id');
 
 		var subject 	= $("input[name='"+id+"_subject']").val();
-		var content 	= $("textarea[name='"+id+"_content']").val();
+		var description 	= $("textarea[name='"+id+"_description']").val();
 		var first_name 	= $("input[name='"+id+"_first_name']").val();
 		var last_name 	= $("input[name='"+id+"_last_name']").val();
 		var email 		= $("input[name='"+id+"_email']").val();
@@ -46,7 +46,7 @@ $(document).ready(function() {
 
 		var data = {
 			subject: subject,
-			content: content,
+			description: description,
 			first_name: first_name,
 			last_name: last_name,
 			email: email,
@@ -55,7 +55,7 @@ $(document).ready(function() {
 		
 		$.ajaxSetup({
 		    headers: {
-		        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('description')
 		    }
 		});
 
@@ -87,8 +87,8 @@ $(document).ready(function() {
 	        	if (errors.subject) {
 	        		$('#'+id+'-subject').text(errors.subject[0]);
 	        	}
-	        	if (errors.content) {
-	        		$('#'+id+'-content').text(errors.content[0]);
+	        	if (errors.description) {
+	        		$('#'+id+'-description').text(errors.description[0]);
 	        	}
 	    	},
 	    	beforeSend: function () {
