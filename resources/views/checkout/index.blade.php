@@ -82,6 +82,7 @@
 				    	</div>
 				  	</div>
 				</div>
+				<input type="hidden" id="order-amount" value="{{ $order_amount }}">
 				<button class="btn pull-right" type="button" id="pay-button">@if ($order_amount > 0) Pay @else Proceed @endif</button>
 			</div>
 			<div class="col-xs-12 col-md-4">

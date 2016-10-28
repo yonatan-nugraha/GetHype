@@ -71,10 +71,10 @@ class CheckoutController extends Controller
     {
         $order = json_decode(Redis::get('order:'.auth()->id()));
 
-        // dd($request->all());
-
         if ($order == null || $order->order_amount == 0) {
-            return redirect('');
+            return array(
+                'success' => 0
+            );
         }
 
         $validator = validator()->make($request->all(), [
@@ -176,7 +176,8 @@ class CheckoutController extends Controller
         $vt = new Veritrans;
 
         return array(
-            'token' => $vt->getSnapToken($transaction_data)
+            'success'   => 1,
+            'token'     => $vt->getSnapToken($transaction_data)
         );
 
         // $vtweb_url = $vt->vtweb_charge($transaction_data);
@@ -194,7 +195,9 @@ class CheckoutController extends Controller
         $order = json_decode(Redis::get('order:'.auth()->id()));
 
         if ($order == null || $order->order_amount > 0) {
-            return redirect('');
+            return array(
+                'success' => 0
+            );
         }
 
         $validator = validator()->make($request->all(), [
@@ -205,9 +208,7 @@ class CheckoutController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('/checkout')
-                ->withErrors($validator)
-                ->withInput();
+            $validator->validate();
         }
 
         $event          = $order->event;
@@ -259,7 +260,12 @@ class CheckoutController extends Controller
             Redis::del('order:'.auth()->id());
         }        
 
-        return redirect('checkout/success?order_id='.$order_id);
+        return array(
+            'success' => 1,
+            'order_id' => $order_id
+        );
+
+        // return redirect('checkout/success?order_id='.$order_id);
     }
 
     /**
