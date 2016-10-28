@@ -57,5 +57,9 @@
         </div>
         @endforeach
     </div>
+    
+    <div class="pull-right">
+        {{ $journals->links() }}
+    </div>
 </div>
 @endsection
