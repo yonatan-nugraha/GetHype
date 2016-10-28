@@ -38,6 +38,7 @@ $(document).ready(function() {
 		var email 		= $("input[name='email']").val();
 		var phone 		= $("input[name='phone']").val();
 		var payment_method 	= $("input[name='payment_method']").val();
+		var order_amount = $('#order-amount').val();
 
 		var data = {
 			'first_name': first_name,
@@ -53,62 +54,105 @@ $(document).ready(function() {
 		    }
 		});
 
-    	$.ajax({
-    		url: '/checkout/pay', 
-    		type: 'POST',
-    		data: data,
-    		success: function(result) {
-    			snap.pay(result.token, {
-				  	onSuccess: function(result) {
-				  		console.log('success');
-				  		console.log(result);
-				  	},
-				  	onPending: function(result) {
-				  		console.log('pending');
-				  		console.log(result);
-				  	},
-				  	onError: function(result) {
-				  		console.log('error');
-				  		console.log(result);
-				  	},
-				  	onClose: function() {
-				  		console.log('customer closed the popup without finishing the payment');
-				  	}
-				});
-	    	},
-	    	error: function (result) {
-	    		snap.hide();
+		if (order_amount > 0) {
+	    	$.ajax({
+	    		url: '/checkout/pay', 
+	    		type: 'POST',
+	    		data: data,
+	    		success: function(result) {
+	    			if (result.success == 1) {
+		    			snap.pay(result.token, {
+						  	onSuccess: function(result) {
+						  		console.log('success');
+						  		console.log(result);
+						  	},
+						  	onPending: function(result) {
+						  		console.log('pending');
+						  		console.log(result);
+						  	},
+						  	onError: function(result) {
+						  		console.log('error');
+						  		console.log(result);
+						  	},
+						  	onClose: function() {
+						  		console.log('customer closed the popup without finishing the payment');
+						  	}
+						});
+		    		}
+		    	},
+		    	error: function (result) {
+		    		snap.hide();
 
-	    		$(window).scrollTop(0);
+		    		$(window).scrollTop(0);
 
-        		var errors = $.parseJSON(result.responseText);
-        		if (errors.first_name) {
-	        		$('#first-name-error').html(errors.first_name[0]);
-	        	}
-	        	if (errors.last_name) {
-	        		$('#last-name-error').html(errors.last_name[0]);
-	        	}
-        		if (errors.email) {
-	        		$('#email-error').html(errors.email[0]);
-	        	}
-	        	if (errors.phone) {
-	        		$('#phone-error').html(errors.phone[0]);
-	        	}
-	        	if (errors.error) {
-	        		$('#error-message').show();
-	        		$('#error-message p').html(errors.error[0]);
-	        	}
-	    	},
-	    	beforeSend: function() {
-	    		snap.show();
+	        		var errors = $.parseJSON(result.responseText);
+	        		if (errors.first_name) {
+		        		$('#first-name-error').html(errors.first_name[0]);
+		        	}
+		        	if (errors.last_name) {
+		        		$('#last-name-error').html(errors.last_name[0]);
+		        	}
+	        		if (errors.email) {
+		        		$('#email-error').html(errors.email[0]);
+		        	}
+		        	if (errors.phone) {
+		        		$('#phone-error').html(errors.phone[0]);
+		        	}
+		        	if (errors.error) {
+		        		$('#error-message').show();
+		        		$('#error-message p').html(errors.error[0]);
+		        	}
+		    	},
+		    	beforeSend: function() {
+		    		snap.show();
 
-	    		$('.error-block').html('');
-	    		$('#error-message').hide();
-	    	},
-	    	complete: function() {
-	    		snap.hide();
-	    	}
-	    });
+		    		$('.error-block').html('');
+		    		$('#error-message').hide();
+		    	},
+		    	complete: function() {
+		    		snap.hide();
+		    	}
+		    });
+	    }
+	    else {
+	    	$.ajax({
+	    		url: '/checkout/proceed', 
+	    		type: 'POST',
+	    		data: data,
+	    		success: function(result) {
+	    			if (result.success == 1) {
+	    				location.href = '/checkout/success?order_id='+result.order_id;
+	    			}
+		    	},
+		    	error: function (result) {
+		    		$(window).scrollTop(0);
+
+	        		var errors = $.parseJSON(result.responseText);
+	        		if (errors.first_name) {
+		        		$('#first-name-error').html(errors.first_name[0]);
+		        	}
+		        	if (errors.last_name) {
+		        		$('#last-name-error').html(errors.last_name[0]);
+		        	}
+	        		if (errors.email) {
+		        		$('#email-error').html(errors.email[0]);
+		        	}
+		        	if (errors.phone) {
+		        		$('#phone-error').html(errors.phone[0]);
+		        	}
+		        	if (errors.error) {
+		        		$('#error-message').show();
+		        		$('#error-message p').html(errors.error[0]);
+		        	}
+		    	},
+		    	beforeSend: function() {
+		    		$('.error-block').html('');
+		    		$('#error-message').hide();
+		    	},
+		    	complete: function() {
+		    	}
+		    });
+	    }
 	});
 
 	$("#countdown").countdown("11/05/2016 06:00", function(event) {
