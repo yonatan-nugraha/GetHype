@@ -17,6 +17,7 @@ class CreateJournalsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('content');
+            $table->string('tag');
             $table->integer('status');
             $table->string('slug');
             $table->timestamps();

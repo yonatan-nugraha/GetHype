@@ -1,4 +1,3 @@
-<style>
 /**************************************/
 /************* Banner Top *************/
 /**************************************/
@@ -19,17 +18,40 @@
     z-index: 100;
 }
 
-.carousel-inner .item img {
+/*.carousel-inner .item img {
     height: 100%;
-}
+}*/
+
+/*annur*/
+    .banner-slider{
+        width: 100%;
+        height: 400px;
+        background-size: cover;
+    }
+
+    @media(max-width: 768px){
+        .banner-slider{
+            height: 250px;
+        }
+    }
+/*end annur*/
 
 /**************************************/
 /************* Home Title *************/
 /**************************************/
 
+/* Update
 .home-title {
     color: #0f3844;
     margin: 50px 0 15px; 
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 120%;
+}*/
+
+.home-title {
+    color: #0f3844;
+    margin: 30px 0 15px; 
     font-weight: 700;
     font-size: 25px;
     line-height: 120%;
@@ -48,7 +70,7 @@
 }
 
 .search-bar {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .search-bar select, .search-bar input {
@@ -61,7 +83,7 @@
 }
 
 .search-category, .search-type {
-    max-width: 19%;
+    max-width: 17%;
 }
 
 .search-location {
@@ -69,11 +91,23 @@
 }
 
 .search-date {
-    max-width: 15%;
+    max-width: 17%;
 }
 
 .search-price {
-    max-width: 15%;
+    max-width: 16%;
+}
+
+.search-category, .search-type,.search-location, .search-date, .search-price{
+    padding-left: 30px;
+}
+
+.search-icon{
+    position: absolute;
+    display: inline-block;
+    margin-top: 7px;
+    margin-left: 10px;
+    z-index: 1;
 }
 
 .search-bar button {
@@ -81,6 +115,19 @@
     border-radius: 0;
     background-color: #d33e40;
     border-color: #d33e40;
+}
+
+@media(max-width: 720px){
+    .search-bar select, .search-bar input{
+        float: none;
+    }
+
+    .search-category, .search-type,.search-location, .search-date, .search-price{
+        max-width: 100%;
+    }
+    .search-bar button{
+        width: 100%;
+    }
 }
 
 .search-bar button:hover {
@@ -196,10 +243,41 @@
     padding: 0;
     border-radius: 0;
     border-style: none;
+    -webkit-transition: all .35s ease-in-out;
+  -moz-transition: all .35s ease-in-out;
+  transition: all .35s ease-in-out;
 }
 
-.event-collection .event-image {
+.event-box .thumbnail .event-image{
     width: 100%;
+    -webkit-transition: all .35s ease-in-out;
+  -moz-transition: all .35s ease-in-out;
+  transition: all .35s ease-in-out;
+}
+
+.event-box .thumbnail .event-img-wrap{
+    overflow: hidden;
+}
+
+.event-box:hover .thumbnail{
+    -webkit-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.1);
+}
+
+.event-box:hover .thumbnail .event-image{
+    -ms-transform: scale(1.2,1.2); /* IE 9 */
+    -webkit-transform: scale(1.2,1.2); /* Safari */
+    transform: scale(1.2,1.2); /* Standard syntax */
+}
+
+.event-box:hover .event-name, .event-box:hover .event-price{
+    color: #9e904e;
+    text-decoration: none;
+}
+
+.event-box:hover a, .collection-box:hover a{
+    text-decoration: none;
 }
 
 .event-collection .event-name {
@@ -208,7 +286,81 @@
     text-align: center;
     color: #0f3844;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 14px;
+}
+
+.collection-box .thumbnail .event-image{
+    width: 100%;
+      -webkit-transition: all .35s ease-in-out;
+  -moz-transition: all .35s ease-in-out;
+  transition: all .35s ease-in-out;
+}
+
+
+.collection-box .thumbnail .event-img-wrap{
+    overflow: hidden;
+}
+
+.collection-box:hover .thumbnail{
+    -webkit-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.1);
+}
+
+.collection-box:hover .thumbnail .event-image{
+    -ms-transform: scale(1.2,1.2); /* IE 9 */
+    -webkit-transform: scale(1.2,1.2); /* Safari */
+    transform: scale(1.2,1.2); /* Standard syntax */
+}
+
+.collection-box:hover .event-caption-head .event-name, .collection-box:hover .event-price{
+    color: #9e904e;
+}
+
+.collection-box:hover .event-title{
+    color: #9e904e;
+}
+
+.collection-box .event-name{
+   
+}
+
+.collection-box .event-name .event-title{
+    height: 50px;
+    line-height: 22px;
+    display: table-cell;
+    vertical-align: middle;
+    margin: 0;
+}
+
+.journal-box .event-name{
+     height:50px;
+    display: table-cell;
+    vertical-align: middle;
+    margin-bottom: 15px;
+    line-height: 22px;
+}
+
+.col-grid-5{
+    width: 18%;
+    float: left;
+    margin: 20px 1%;
+}
+
+@media(max-width: 991px){
+    .col-grid-5{
+        width: 46%;
+        margin: 30px 2%;
+    }
+}
+
+@media(max-width: 767px){
+    .col-grid-5{
+        width: 100%;
+        float: none;
+        margin: 30px auto;
+        padding:0 15px;
+    }
 }
 
 /**************************************/
@@ -298,7 +450,8 @@
     font-weight: 200;
     text-align: center;
     width: 350px;
-    margin: 0 auto;
+    max-width: 90%;
+    margin: 10px auto 0;
 }
 
 #bottomBanner{
@@ -319,6 +472,12 @@ input[name="date"] {
     width: 225px; 
     height: 34px;
     color: white;
+}
+
+@media(max-width: 720px){
+    input[name="date"] {
+        width: 100%;
+    }
 }
 
 input[name="date"]:before {

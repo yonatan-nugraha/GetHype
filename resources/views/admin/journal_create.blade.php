@@ -24,6 +24,10 @@
                         <label>Content</label>
                         <textarea class="form-control" name="content" placeholder="Content" rows="20" required pattern=".{5,}"></textarea>
                     </div>
+                    <div class="form-group">
+                        <label>Tag</label>
+                        <input type="text" class="form-control" name="tag" placeholder="Tag" required pattern=".{3,50}">
+                    </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>      
             </div>

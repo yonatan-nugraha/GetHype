@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="col-md-12 banner-top no-padding">
+<div class="row-fluid banner-top no-padding">
     <div class="col-md-12 banner-row-1 no-padding">
         <div class="col-xs-12 no-padding">
 
@@ -16,10 +16,10 @@
                 </ol>
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
-                        <img src="{{ asset('images/banners/banner-1.jpg') }}" alt="...">
+                        <div class="banner-slider" style="background: url('{{ asset('images/banners/banner-1.jpg') }}') center center;"></div>
                     </div>
                     <div class="item">
-                        <img src="{{ asset('images/banners/banner-1.jpg') }}" alt="...">
+                        <div class="banner-slider" style="background: url('{{ asset('images/banners/banner-1.jpg') }}') center center;"></div>
                     </div>
                 </div>
                 <a class="left carousel-control" href="#big-carousel" role="button" data-slide="prev">
@@ -35,59 +35,93 @@
         </div>
     </div>
 
-    <div class="col-md-12 banner-row-2 no-padding">
-        <div class="col-xs-12 col-md-4 no-padding">
-            <img src="{{ asset('images/banners/small-banner-1.jpg') }}" alt="...">
-        </div>
-        <div class="col-xs-12 col-md-4 no-padding">
-            <img src="{{ asset('images/banners/small-banner-2.jpg') }}" alt="...">
-        </div>
-        <div class="col-xs-12 col-md-4 no-padding">
-            <img src="{{ asset('images/banners/small-banner-3.jpg') }}" alt="...">
+    <div class="row-fluid">
+        <div class="col-md-12 no-padding">
+            <div class="col-xs-4 col-md-4 no-padding">
+                <img src="{{ asset('images/banners/small-banner-1.jpg') }}" class="img-responsive" alt="...">
+            </div>
+            <div class="col-xs-4 col-md-4 no-padding">
+                <img src="{{ asset('images/banners/small-banner-2.jpg') }}" class="img-responsive" alt="...">
+            </div>
+            <div class="col-xs-4 col-md-4 no-padding">
+                <img src="{{ asset('images/banners/small-banner-3.jpg') }}" class="img-responsive" alt="...">
+            </div>
         </div>
     </div>
 </div>
 
-<div class="col-md-12 search">
-    <div class="container">
-        <div class="row home-title">
-            <span>Find the Hype!</span>
-        </div>
-        
-        <div class="row search-bar">
-            <form action="{{ url('events/search') }}" method="GET">
-                <select class="form-control search-category" name="category">
-                    <option value="all">All Categories</option>
-                    @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
-                </select>
-                <select class="form-control search-type" name="event_type">
-                    <option value="all">All Event Types</option>
-                    @foreach ($event_types as $event_type)
-                    <option value="{{ $event_type->id }}">{{ $event_type->name }}</option>
-                    @endforeach
-                </select>
-                <select class="form-control search-location" name="location">
-                    <option value="all">All Cities</option>
-                    @foreach ($locations as $loc)
-                    <option value="{{ $loc }}">{{ $loc }}</option>
-                    @endforeach
-                </select>
-                <div>
-                    <input type="date" data-date="" data-date-format="DD MMMM YYYY" class="form-control search-date" name="date">
+<div class="clearfix"></div>
+
+<div class="search">
+    <div class="container clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row-fluid home-title">
+                    <span>Find the Hype!</span>
                 </div>
-                <select class="form-control search-price" name="price">
-                    <option value="all">All Price</option>
-                    <option value="free">Free</option>
-                    <option value="paid">Paid</option>
-                </select>
-                <button type="submit" class="btn btn-primary search-submit">Search</button>
-            </form>
+            </div>
         </div>
 
-        <div class="row gethype-line">
-            <img src="{{ asset('images/img-additional-2.png') }}">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="search-bar">
+                    <form action="{{ url('events/search') }}" method="GET">
+                        <div class="form-group">
+                            <span class="search-icon">
+                                <i class="glyphicon glyphicon-th-list"></i>
+                            </span>
+                            <select class="form-control search-category" name="category">
+                                <option value="all">All Categories</option>
+                                @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <span class="search-icon">
+                                <i class="glyphicon glyphicon-bookmark"></i>
+                            </span>
+                            <select class="form-control search-type" name="event_type">
+                                @foreach ($event_types as $event_type)
+                                <option value="{{ $event_type->id }}">{{ $event_type->name }}</option>
+                                @endforeach
+                            </select> 
+                        </div>
+                        <div class="form-group">
+                            <span class="search-icon">
+                                <i class="glyphicon glyphicon-map-marker"></i>
+                            </span>
+                            <select class="form-control search-location" name="location">
+                                <option value="all">All Cities</option>
+                                @foreach ($locations as $loc)
+                                <option value="{{ $loc }}">{{ $loc }}</option>
+                                @endforeach
+                            </select>       
+                        </div>
+                        <div class="form-group">
+                            <span class="search-icon">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </span>
+                            <input type="date" data-date="" data-date-format="DD MMMM YYYY" class="form-control search-date" name="date">
+                        </div>
+                        <div class="form-group">
+                            <span class="search-icon">
+                                <i class="glyphicon glyphicon-tag"></i>
+                            </span>
+                            <select class="form-control search-price" name="price">
+                                <option value="all">All Price</option>
+                                <option value="free">Free</option>
+                                <option value="paid">Paid</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary search-submit">Search</button>
+                    </form>
+                </div>
+
+                <div class="row gethype-line">
+                    <img src="{{ asset('images/img-additional-2.png') }}">
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -101,10 +135,12 @@
         <div class="row events">
             <div class="row">
                 @foreach ($events as $event)
-                <div class="col-xs-12 col-md-3 event-box">
+                <div class="col-xs-12 col-sm-6 col-md-3 event-box">
                     <div class="thumbnail">
                         <a href="{{ url('/events/'.$event->slug) }}">
-                            <img class="event-image" src="{{ asset('/images/events/'.$event->image()) }}">
+                            <div class="event-img-wrap">
+                                <img class="event-image" src="{{ asset('/images/events/'.$event->image()) }}">
+                            </div>
                             <div class="event-caption">
                                 <div class="event-caption-head">
                                     <span class="event-name">{{ $event->name }}</span>
@@ -141,14 +177,16 @@
         <div class="row events">
             <div class="row">
                 @foreach ($collections as $collection)
-                <div class="col-xs-12 col-md-3 event-box">
+                <div class="col-grid-5 collection-box">
                     <div class="thumbnail">
                         <a href="{{ url('/collections/'.$collection->slug) }}">
-                            <img class="event-image" src="{{ asset('/images/collections/'.$collection->image()) }}">
+                            <div class="event-img-wrap">
+                                <img class="event-image" src="{{ asset('/images/collections/'.$collection->image()) }}">
+                            </div>
                         </a>
                     </div>
                     <div class="event-name">
-                        <span>{{ $collection->name }}</span>
+                        <p class="event-title">{{ $collection->name }}</p>
                     </div>    
                 </div>
                 @endforeach
@@ -159,7 +197,7 @@
 @endif
 
 <div class="col-md-12 banner-bottom no-padding">
-    <div class="col-xs-12 no-padding" id="bottomBanner">
+    <div class="no-padding" id="bottomBanner">
         <div class="first"><img class="banner-additional" src="{{ asset('/images/img-additional-1.png') }}"></div>
         <a href="{{ url('services') }}"><p class="banner-title">Create Your Event with Gethype</p></a>
         <div class="banner-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
@@ -176,10 +214,12 @@
         <div class="row events">
             <div class="row">
                 @foreach ($journals as $journal)
-                <div class="col-xs-12 col-md-3 event-box">
+                <div class="col-grid-5 event-box journal-box">
                     <div class="thumbnail">
                         <a href="{{ url('/journals/'.$journal->slug) }}">
-                            <img class="event-image" src="{{ asset('/images/journals/'.$journal->image()) }}">
+                            <div class="event-img-wrap">
+                                <img class="event-image" src="{{ asset('/images/journals/'.$journal->image()) }}">
+                            </div>
                             <div class="event-caption">
                                 <p class="event-name">{{ $journal->title }}</p>
                                 <span class="event-description">{{ strip_tags($journal->content) }}</span>

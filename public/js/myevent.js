@@ -32,17 +32,42 @@ function render_event_statistic(event_id, start_date_s, end_date_s) {
 			    now_date.addDays(add_days);
 			}
 
-			var myChart = new Chart(ctx, {
-			    type: 'line',
-			    data: {
-			        labels: dates,
-			        datasets: [{
-			            label: 'Number of Views',
-			            data: views,
-			            borderWidth: 1
-			        }]
-			    },
-			});
+			$('#views-statistic').highcharts({
+                title: {
+                    text: 'Number of views',
+                    x: -20
+                },
+                subtitle: {
+                    text: '',
+                    x: -20
+                },
+                xAxis: {
+                    categories: dates
+                },
+                yAxis: {
+                    title: {
+                        text: 'Total Views'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 2,
+                        color: '#ebd58e'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: ''
+                },
+                legend: {
+                    enabled: false,
+                    floating: true,
+                    verticalAlign: 'top',
+                    align: 'right',
+                },
+                series: [{
+                    name: 'Number of views',
+                    data: views
+                }]
+            });
 
 			$('.total-views').html(result.total_views);
     	}
@@ -72,16 +97,41 @@ function render_event_statistic_by_gender(event_id, start_date_s, end_date_s) {
 				views.push(views_percentage);
 			}
 
-			var myChart = new Chart(ctx, {
-			    type: 'pie',
-			    data: {
-			        labels: genders,
-			        datasets: [{
-			            data: views,
-			            borderWidth: 1
-			        }]
-			    },
-			});
+			$('#gender').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Gender'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [{
+                    name: 'Brands',
+                    colorByPoint: true,
+                    data: [{
+                        name: 'Male',
+                        y: 56.33
+                    }, {
+                        name: 'Female',
+                        y: 44.67
+                    }]
+                }]
+            });
     	}
     });
 }
@@ -108,17 +158,45 @@ function render_event_statistic_by_age(event_id, start_date_s, end_date_s) {
 				views.push(views_percentage);
 			}
 
-			var myChart = new Chart(ctx, {
-			    type: 'bar',
-			    data: {
-			        labels: age_groups,
-			        datasets: [{
-			        	label: '% of views by age',
-			            data: views,
-			            borderWidth: 1
-			        }]
-			    },
-			});
+			$('#age').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Views by Age'
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                    categories: age_groups,
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Total Views'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: 'Age Groups',
+                    data: views
+                }]
+            });
     	}
     });
 }
@@ -152,22 +230,50 @@ function render_ticket_statistic(event_id, start_date_s, end_date_s) {
 				now_date_e = now_date.toString('dd MMM');
 
 				dates.push(now_date_e);
-				orders.push((result[now_date_s]) ? result[now_date_s] : 0);
+				orders.push((result[now_date_s]) ? parseInt(result[now_date_s]) : 0);
 
 			    now_date.addDays(add_days);
 			}
 
-			var myChart = new Chart(ctx, {
-			    type: 'line',
-			    data: {
-			        labels: dates,
-			        datasets: [{
-			            label: 'Number of Orders',
-			            data: orders,
-			            borderWidth: 1
-			        }]
-			    },
-			});
+			console.log(dates);
+			console.log(orders);
+
+			$('#ticket-statistic').highcharts({
+                title: {
+                    text: 'Order Statistic',
+                    x: -20 //center
+                },
+                subtitle: {
+                    text: '',
+                    x: -20
+                },
+                xAxis: {
+                    categories: dates
+                },
+                yAxis: {
+                    title: {
+                        text: 'Total Orders'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 2,
+                        color: '#ebd58e'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: ''
+                },
+                legend: {
+                    enabled: false,
+                    floating: true,
+                    verticalAlign: 'top',
+                    align: 'right',
+                },
+                series: [{
+                    name: 'Number of order',
+                    data: orders,
+                }]
+            });
     	}
     });
 }

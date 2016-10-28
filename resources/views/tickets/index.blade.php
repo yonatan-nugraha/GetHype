@@ -7,26 +7,28 @@
 @section('content')
 <div class="container order-tickets">
 	<div class="row">
-		<div class="col-xs-2 order-sidebar">
-			<ul class="nav nav-stacked nav-pills">
-			  	<li class="active"><a data-toggle="tab" href="#upcoming-events">Upcoming Events</a></li>
-			  	<li><a data-toggle="tab" href="#past-events">Past Events</a></li>
-			  	<li><a data-toggle="tab" href="#bookmark-events">Bookmark Events</a></li>
-			</ul>
+		<div class="col-xs-12 col-sm-2">
+			<div class="order-sidebar">
+				<ul class="nav nav-stacked nav-pills">
+				  	<li class="active"><a data-toggle="tab" href="#upcoming-events">Upcoming Events</a></li>
+				  	<li><a data-toggle="tab" href="#past-events">Past Events</a></li>
+				  	<li><a data-toggle="tab" href="#bookmark-events">Bookmark Events</a></li>
+				</ul>
+			</div>
 		</div>
-		<div class="col-xs-10">
+		<div class="col-xs-12 col-sm-10">
 			<div class="tab-content">
 				<div class="tab-pane fade in active order-list" id="upcoming-events">
 					@foreach ($orders as $order)
 					@if (Carbon\Carbon::now() <= $order->event->ended_at)
-					<div class="row order-list-row" id="{{ $order->id }}">
-						<div class="col-xs-2 thumbnail">
+					<div class="order-list-row" id="{{ $order->id }}">
+						<div class="col-xs-12 col-sm-3 col-md-2 thumbnail">
 							<img src="{{ asset('/images/events/'.$order->event->image()) }}">
 						</div>
-						<div class="col-xs-10">
+						<div class="col-xs-12 col-sm-9 col-md-10">
 					    	<p class="event-header">
 					    		<span class="event-name">{{ $order->event->name }}</span>
-					    		<span class="pull-right event-share">Share:
+					    		<span class="event-share">Share:
 					    			<a href="http://www.facebook.com/sharer/sharer.php?u={{ url('/events/'.$order->event->slug) }}" onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250'); return false;" target="_blank">
 							    		<img class="event-sosmed" src="{{ asset('/images/icons/facebook.png') }}">
 							    	</a>
@@ -58,8 +60,10 @@
 					    		</span>
 					    	</p>
 					   </div>
+					   <div class="clearfix"></div>
 					</div>
-					<div class="row order-detail-row" id="order-detail-{{ $order->id }}">
+					
+					<div class="order-detail-row" id="order-detail-{{ $order->id }}">
 						<div class="col-xs-10 col-xs-offset-2 order-detail">
 							<div class="row order-detail-title">
 					    		<p>Order Information</p>

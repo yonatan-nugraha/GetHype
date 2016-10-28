@@ -7,29 +7,30 @@
 @section('content')
 <div class="container orders">
 	<div class="row orders-content">
-		<div class="col-xs-4 orders-sidebar">
+		<div class="col-xs-12 col-sm-4 orders-sidebar">
 			<ul class="nav nav-pills nav-stacked">
 				@foreach ($orders as $order)
 			  	<li class="@if ($loop->first) active @endif">
 			  		<a data-toggle="tab" href="#order-detail-{{ $order->id }}">
-			  			<div class="col-xs-4 thumbnail">
+			  			<div class="col-xs-4 col-sm-12 col-md-4  thumbnail">
 							<img src="{{ asset('/images/events/'.$order->event->image()) }}">
 						</div>
-						<div class="col-xs-8">
+						<div class="col-xs-8 col-sm-12 col-md-8">
 							<p class="event-name">{{ $order->event->name }}</p>
 							<p class="event-date">{{ Carbon\Carbon::parse($order->event->started_at)->format('l, M d, Y | g.i A') }}</p>
 						</div>
+						<span class="clearfix"></span>
 			  		</a>
 			  	</li>
 			  	@endforeach
 			</ul>
 		</div>
-		<div class="col-xs-8 orders-detail">
+		<div class="col-xs-12 col-sm-8 orders-detail">
 			<div class="tab-content">
 				@foreach ($orders as $order)
 				<div class="tab-pane fade in @if ($loop->first) active @endif" id="order-detail-{{ $order->id }}">
 					<div class="row row-1">
-						<div class="col-xs-4 col-1">
+						<div class="col-xs-4 col-md-4 col-1">
 							<p class="title">Ordered By:</p>
 							<p class="description">{{ $order->first_name . ' ' . $order->last_name }}</p>
 						</div>
@@ -43,11 +44,11 @@
 						</div>
 					</div>
 					<div class="row row-2">
-						<div class="col-xs-3 col-1">
+						<div class="col-xs-6 col-sm-3 col-1 payment-method">
 							<p class="title">Payment Method:</p>
 							<p class="description">@if ($order->payment_method == 'credit_card') Credit Card @elseif ($order->payment_method == 'bank_transfer') Virtual Account @else Free @endif</p>
 						</div>
-						<div class="col-xs-6 col-2">
+						<div class="col-xs-6 col-sm-6 ticket-type">
 							<p class="title">Ticket:</p>
 							<p class="description">
 							@foreach ($order->order_details as $order_detail)
@@ -56,7 +57,7 @@
 							@endforeach
 							</p>
 						</div>
-						<div class="col-xs-3 col-3">
+						<div class="col-xs-6 col-sm-3 col-3 payment-ammount">
 							<p class="title">Payment Amount:</p>
 							<p class="description">{{ 'Rp '. number_format($order->payment_amount) }}</p>
 						</div>

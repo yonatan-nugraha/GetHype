@@ -16,8 +16,8 @@
     <link rel="icon" href="{{ asset('images/logo-dark.png') }}">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('plugins/bootstrap-3.3.7-dist/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/font-awesome-4.6.3/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sticky-footer-navbar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     
@@ -50,11 +50,6 @@
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    &nbsp;
-                </ul>
-
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
@@ -115,18 +110,17 @@
                 <div class="col-sm-3">
                     <img src="{{ asset('images/logo-gold.png') }}">
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-2 col-xs-6">
                     <ul>
                         <li class="footer-list-title">Gethype</li>
                         <li class="footer-list"><a href="{{ url('about-us') }}">About Us</a></li>
                         <li class="footer-list"><a href="{{ url('events/search') }}">Events</a></li>
                         <li class="footer-list"><a href="{{ url('services') }}">Services</a></li>
-                        <li class="footer-list"><a href="{{ url('services') }}">Create Events</a></li>
                         <li class="footer-list"><a href="{{ url('journals') }}">Journals</a></li>
                         <li class="footer-list"><a href="{{ url('help') }}">Help</a></li>
                     </ul>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-2 col-xs-6">
                     <ul>
                         <li class="footer-list-title">Get in Touch</li>
                         <li class="footer-list"><a href="{{ url('contact-us') }}">Contact Us</a></li>
@@ -135,7 +129,7 @@
                         <li class="footer-list"><a>Twitter</a></li>
                     </ul>
                 </div>
-                <div class="col-sm-5 subscribe">
+                <div class="col-sm-5 col-xs-12 subscribe">
                     <p class="subscribe-title">Subscribe Now</p>
                     <span class="subscribe-description">Let us provide you the latest info about what’s happening on Gethype and keep you up to date with our best offering for your needs.</span>
 
@@ -156,9 +150,8 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="{{ asset('plugins/bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('plugins/chart.js/dist/Chart.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/date.js') }}"></script>
 
     <script>

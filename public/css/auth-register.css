@@ -1,11 +1,18 @@
 .register {
-    margin-top: 50px;
-    padding-bottom: 50px !important;
+    background-size: cover;
+}
+
+@media(max-width: 767px){
+    .register {
+        padding: 20px;
+    }
 }
 
 .register .panel {
     border-radius: 0;
     border-color: #0f3844;
+    margin: 50px auto;
+    max-width: 500px;
 }
 
 .register .panel-heading {

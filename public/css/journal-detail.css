@@ -1,0 +1,129 @@
+section.journal-detail{
+	background: #f2f3f4;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.detail-content{
+	background: #fff;
+	padding: 15px;
+}
+
+.detail-content .cate-date {
+	margin-bottom: 15px;
+}
+
+.detail-content .cate-date .category{
+	color: #d53f40;
+	display: inline-block;
+	margin-right: 10px;
+}
+
+
+.detail-content .cate-date .date{
+	display: inline-block;
+	margin-left: 10px;
+}
+
+.detail-content .point {
+	font-size: 16px;
+	margin:35px 0 20px;
+}
+
+.detail-content .point .number{
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.detail-content .point .subtitle{
+	display: inline-block;
+	color: #d53f40;
+}
+
+
+.detail-content .img-desc{
+	color: #999;
+	font-style: italic;
+	text-align: center;
+	margin: 10px;
+	font-size: 12px;
+	margin-bottom: 15px;
+}
+
+.journal-detail .box-share{
+	background: #fff;
+	padding: 15px;
+}
+
+.journal-detail .box-share ul {
+	list-style: none;
+	margin-bottom: 0;
+	float: right;
+}
+
+.journal-detail .box-share ul li{
+	display: inline;
+	padding: 10px;
+}
+
+.journal-detail .related-article{
+	padding: 15px;
+	background: #fff;
+	margin-top: 30px;
+}
+
+.journal-detail .related-article h3, .journal-detail .box-subscribe h3{
+	margin: 10px 0;
+	color: #0f3844;
+}
+
+.journal-detail .related-article .list-related-article {
+	margin: 30px 0;
+}
+
+
+.journal-detail .related-article .list-related-article p.cate{
+	margin: 0;
+}
+.journal-detail .related-article .list-related-article p.cate a{
+	color: #0f3844;
+	font-size: 12px;
+	margin: 0;
+}
+
+.journal-detail .related-article .list-related-article a.title{
+	margin-bottom: 5px;
+	display: inline-block;
+	color: #d53f40;
+}
+
+.journal-detail .related-article .list-related-article p.date{
+	font-size: 12px;
+	color: #999;
+	margin: 0;
+}
+
+.box-subscribe{
+	padding: 15px;
+	background: #fff;
+	margin-top: 30px;
+}
+
+.box-subscribe input.form-control{
+	margin-top: 20px;
+	border: 1px solid #0f3844;
+	border-radius: 0;
+}
+
+.btn-subscribe{
+	margin-top: 15px;
+	background: #d53f40;
+	border-radius: 0;
+	border: 1px solid #b32c2d;
+	color: #fff;
+}
+
+.btn-subscribe:hover{
+	background:  #b32c2d;
+	color: #fff;
+}

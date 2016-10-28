@@ -9,7 +9,7 @@
 {!! csrf_field() !!}
 	<div class="container checkout">
 		<div class="row">
-			<div class="col-xs-8 checkout-input">
+			<div class="col-xs-12 col-md-8 checkout-input">
 				<div class="alert alert-dismissible alert-danger" id="error-message">
                 	<p>{{ $errors->first('error') }}</p>
               	</div>
@@ -84,41 +84,44 @@
 				</div>
 				<button class="btn pull-right" type="button" id="pay-button">@if ($order_amount > 0) Pay @else Proceed @endif</button>
 			</div>
-			<div class="col-xs-4 order-details">
-				<p class="order-summary">Order Summary</p>
-				<p class="ticket-quantity-head">
-					<span class="ticket-quantity-total">{{ $total_quantity }}</span>
-					<span class="ticket-title">@if ($total_quantity > 1) Tickets @else Ticket @endif</span>
-				</p>
-				<p class="event-name">Digital Marketing with Google Ads</p>
-				<div class="row event-details">
-					<p class="event-location">{{ $event->location }}</p>
-					<p class="event-date">{{ Carbon\Carbon::parse($event->started_at)->format('l, M d, Y') }}</p>
-					<p class="event-time">{{ Carbon\Carbon::parse($event->started_at)->format('g.i A') }}</p>
-				</div>
-				<div class="ticket-list">
-					@foreach ($order_details as $order_detail)
-					<div class="row ticket-row">
-						<span class="col-xs-5 ticket-name">{{ $order_detail->ticket_group->name }}</span>
-						<span class="col-xs-3 ticket-quantity">{{ $order_detail->quantity }} @if ($order_detail->quantity > 1) tickets @else ticket @endif</span>
-						<span class="col-xs-4 ticket-total-price">{{ 'Rp '. number_format($order_detail->quantity * $order_detail->ticket_group->price) }}</span>
+			<div class="col-xs-12 col-md-4">
+				<div id="countdown"></div>
+				<div class="order-details">
+					<p class="order-summary">Order Summary</p>
+					<p class="ticket-quantity-head">
+						<span class="ticket-quantity-total">{{ $total_quantity }}</span>
+						<span class="ticket-title">@if ($total_quantity > 1) Tickets @else Ticket @endif</span>
+					</p>
+					<p class="event-name">Digital Marketing with Google Ads</p>
+					<div class="row event-details">
+						<p class="event-location">{{ $event->location }}</p>
+						<p class="event-date">{{ Carbon\Carbon::parse($event->started_at)->format('l, M d, Y') }}</p>
+						<p class="event-time">{{ Carbon\Carbon::parse($event->started_at)->format('g.i A') }}</p>
 					</div>
-					@endforeach
-				</div>
-				<div class="row subtotal">
-					<input type="hidden" class="subtotal-hidden" value="{{ $order_amount }}">
-					<span class="col-xs-8 subtotal-title">Sub Total</span>
-					<span class="col-xs-4 subtotal-price">{{ 'Rp '. number_format($order_amount) }}</span>
-				</div>
-				<div class="row adminfee">
-					<p class="adminfee-plus">(+)</p>
-					<span class="col-xs-8 adminfee-title">Administration Fee</span>
-					<span class="col-xs-4 adminfee-price">{{ 'Rp '. number_format(0) }}</span>
-					<p class="adminfee-vat">Including VAT</p>
-				</div>
-				<div class="row grandtotal">
-					<span class="col-xs-8 grandtotal-title">Total</span>
-					<span class="col-xs-4 grandtotal-price">{{ 'Rp '. number_format($order_amount) }}</span>
+					<div class="ticket-list">
+						@foreach ($order_details as $order_detail)
+						<div class="row ticket-row">
+							<span class="col-xs-5 ticket-name">{{ $order_detail->ticket_group->name }}</span>
+							<span class="col-xs-3 ticket-quantity">{{ $order_detail->quantity }} @if ($order_detail->quantity > 1) tickets @else ticket @endif</span>
+							<span class="col-xs-4 ticket-total-price">{{ 'Rp '. number_format($order_detail->quantity * $order_detail->ticket_group->price) }}</span>
+						</div>
+						@endforeach
+					</div>
+					<div class="row subtotal">
+						<input type="hidden" class="subtotal-hidden" value="{{ $order_amount }}">
+						<span class="col-xs-8 subtotal-title">Sub Total</span>
+						<span class="col-xs-4 subtotal-price">{{ 'Rp '. number_format($order_amount) }}</span>
+					</div>
+					<div class="row adminfee">
+						<p class="adminfee-plus">(+)</p>
+						<span class="col-xs-8 adminfee-title">Administration Fee</span>
+						<span class="col-xs-4 adminfee-price">{{ 'Rp '. number_format(0) }}</span>
+						<p class="adminfee-vat">Including VAT</p>
+					</div>
+					<div class="row grandtotal">
+						<span class="col-xs-8 grandtotal-title">Total</span>
+						<span class="col-xs-4 grandtotal-price">{{ 'Rp '. number_format($order_amount) }}</span>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -128,6 +131,7 @@
 
 @section('scripts')
 <script type="text/javascript" src="{{ $snap_js_url }}" data-client-key="{{ $client_key }}"></script>
+<script type="text/javascript" src="{{ asset('js/jquery.countdown.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/checkout.js') }}"></script>
 @endsection
 

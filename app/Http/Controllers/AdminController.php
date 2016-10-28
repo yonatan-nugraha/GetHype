@@ -593,6 +593,7 @@ class AdminController extends Controller {
         $journal_id = Journal::create([
             'title'     => $request->title,
             'content'   => $request->content,
+            'tag'       => $request->tag,
             'slug'      => str_slug($request->title, '-') . '-' . sprintf("%s", mt_rand(10000, 99999)),
             'status'    => 0
         ])->id;
@@ -615,6 +616,7 @@ class AdminController extends Controller {
         $journal->update([
             'title'     => $request->title,
             'content'   => $request->content,
+            'tag'       => $request->tag,
         ]);
 
         if ($request->hasFile('image') && $request->image->isValid()) {

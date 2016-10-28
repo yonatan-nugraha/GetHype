@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="container register">
+<div class="register" style="background: url('{{ asset('images/bg-auth.jpg') }}') center center no-repeat;">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel">
@@ -123,7 +123,7 @@
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary register-submit">
                                     Register
-                                </button><hr>
+                                </button>
                             </div>
                         </div>
                     </form>
