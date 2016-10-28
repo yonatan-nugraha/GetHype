@@ -9,13 +9,11 @@
 		<div style="text-decoration: none; padding: 0 20px">
 			<div style="color:#505050">
 				<p><b>Hai, {{ $user->first_name }} @if ($user->last_name) {{ $user->last_name }}@endif!</b></p>
-				<p style="margin-top:10px">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-
-				<p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+				<p style="margin-top:10px">Welcome to Gethype. Confirm your email and be ready to start the hype!</p>
 			</div>
 		</div>
 		<div align="center" style="text-align: center; margin: 20px; padding: 0">
-			<a href="{{ url('activate/'.$user->id.'?key='.$key) }}" target="_blank" style="color: #fff; text-decoration: none; display: inline-block; text-align: center; padding: 12px 16px; border-radius: 0; font-size: 15px; line-height: 1.3; font-weight: lighter; min-width: 20%; max-width: 50%; overflow: hidden; word-wrap: break-word; background-color: #d33e40">Aktivasi</a> 
+			<a href="{{ url('activate/'.$user->id.'?key='.$key) }}" target="_blank" style="color: #fff; text-decoration: none; display: inline-block; text-align: center; padding: 12px 16px; border-radius: 0; font-size: 15px; line-height: 1.3; font-weight: lighter; min-width: 20%; max-width: 50%; overflow: hidden; word-wrap: break-word; background-color: #d33e40">Confirm Email</a> 
 		</div>
 
 		<table style="margin-top: 30px; border-top: 1px solid #d6d6d6; background-color: #fff; width: 100%; border-spacing: 10px;">

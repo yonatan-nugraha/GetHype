@@ -17,6 +17,20 @@
     margin-bottom: 0;
     height: 85px;
 }
+.navbar-brand{
+    padding:12px 15px;
+}
+
+.navbar-header{
+    height: 85px;
+}
+.navbar-default .navbar-toggle{
+    margin-top: 25px;
+}
+
+.navbar-collapse{
+    background: #0f3844;
+}
 
 .no-padding {
     padding:0!important;
@@ -38,6 +52,41 @@
     width: 60px;
 }
 
+.navbar-default .navbar-toggle .icon-bar{
+    background: #d1c58f;
+}
+
+.navbar-default .navbar-toggle{
+    border-color: #d1c58f;
+}
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+    background-color: transparent;
+    border-color: #fff;
+}
+
+.navbar-default .navbar-toggle:focus .icon-bar, .navbar-default .navbar-toggle:hover .icon-bar{
+    background-color: #fff;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
+    background: #d1c58f;
+}
+
+@media(max-width: 767px){
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:focus, .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover
+    {
+        color: #e7e7e7;
+    }
+}
+
+@media (max-width: 767px){
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a {
+        color: #e7e7e7;
+    }
+}
+
+
 .navbar-default .nav-bar-right {
     vertical-align: text-top;
 }
@@ -45,6 +94,12 @@
 .navbar-nav > li > a {
    line-height: 55px;
    font-size: 14px;
+}
+
+@media(max-width: 767px){
+    .navbar-nav > li > a {
+        line-height: 30px;
+    }
 }
 
 .navbar-right li > ul {
@@ -61,6 +116,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    margin-left: 10px;
 }
 
 /**************************************/
@@ -95,6 +151,12 @@
     margin-top: 2.8em;
 }
 
+@media(max-width: 767px){
+    .footer-main{
+        margin-top: 30px;
+    }
+}
+
 .footer-main img {
     width: 90px;
 }
@@ -115,6 +177,17 @@
 
 .footer-secondary {
     text-align: center;
+}
+
+@media(max-width: 767px){
+    .footer-secondary {
+        padding-top: 10px;
+    }
+
+    .footer-secondary p{
+        margin-top: 10px !important;
+        margin-bottom: 20px;
+    }
 }
 
 .footer-secondary img {

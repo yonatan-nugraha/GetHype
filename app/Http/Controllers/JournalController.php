@@ -23,6 +23,7 @@ class JournalController extends Controller
     public function showList() 
     {
     	return view('journals.list', [
+            'journals' => Journal::all()
     	]);
     }
 
@@ -31,6 +32,7 @@ class JournalController extends Controller
         $journal = Journal::where('slug', $slug)->first();
 
     	return view('journals.detail', [
+            'journals' => Journal::all(),
             'journal' => $journal
     	]);
     }

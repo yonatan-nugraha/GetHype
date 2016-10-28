@@ -74,6 +74,14 @@ class HomeController extends Controller
     }
 
     /**
+     * Display help page.
+     */
+    public function help()
+    {
+        return view('statics/help');
+    }
+
+    /**
      * Display email page.
      */
     public function email(Request $request)

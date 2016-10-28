@@ -2,26 +2,34 @@
 	width: 100%;
 }
 
+@media(max-width: 767px){
+	.banner{
+
+	}
+}
+
+.banner-contact{}
+
 #description{
     margin-top: 4em;
-    margin-bottom: 4em;
+    margin-bottom: 1em;
 }
 
 #firstContent {
-	padding-left: 45px;
     padding-top: 20px;
 }
 
 .singleLine {
 	padding-left: 15px;
 	padding-right: 15px;
+	margin-bottom: 20px;
 }
 
 .singleLine input {
 	width: 50%
 }
 
-input, textarea {
+.singleLine input, textarea {
     border-radius: 0 !important;
     border-color: #092D33 !important;
     margin-bottom: 0;
@@ -32,7 +40,7 @@ input, textarea {
 	padding-left: 90px;
 }
 
-.contactContent {
+.contact {
 	background-color: #F2F1F0
 }
 
@@ -41,4 +49,24 @@ input, textarea {
 	margin-top: 5px;
 	color: red;
 	margin-bottom: 15px;
+}
+
+.contact-error{
+	color: red;
+	margin:5px 0;
+}
+
+.message-submit{
+	border: 1px solid #b32c2d;
+	border-radius: 0;
+	padding-left: 20px;
+	padding-right: 20px;
+	background: #d53f40;
+	margin-bottom: 20px;
+	color: #fff;
+}
+
+.message-submit:hover{
+	background:  #b32c2d;
+	color: #fff;
 }

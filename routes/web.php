@@ -27,6 +27,7 @@ Route::get('home', 'HomeController@index');
 Route::get('services', 'HomeController@services');
 Route::get('contact-us', 'HomeController@contactUs');
 Route::get('about-us', 'HomeController@aboutUs');
+Route::get('help', 'HomeController@help');
 Route::get('emails', 'HomeController@email');
 
 //auth socialite

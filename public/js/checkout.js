@@ -110,4 +110,11 @@ $(document).ready(function() {
 	    	}
 	    });
 	});
+
+	$("#countdown").countdown("11/05/2016 06:00", function(event) {
+        var $this = $(this).html(event.strftime(''
+        + '<div class="countdown-element"><span>%H</span> <label>H</label></div> '
+        + '<div class="countdown-element"><span>%M</span> <label>M</label></div> '
+        + '<div class="countdown-element"><span>%S</span> <label>S</label></div>'));
+    })
 });

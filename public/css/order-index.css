@@ -43,6 +43,12 @@ body {
 /********** Orders Sidebar ************/
 /**************************************/
 
+@media(max-width: 767px){
+	.orders-sidebar{
+		padding: 0;
+	}
+}
+
 .orders-sidebar li {
 	border-radius: 0;
 	background-color: #fff;
@@ -87,6 +93,12 @@ body {
 	background-color: #fff;
 }
 
+@media(max-width: 767px){
+	.orders-detail{
+		margin-top: 20px;
+	}
+}
+
 .orders-detail .title {
 	font-size: 10px;
 	font-weight: 200;
@@ -111,6 +123,34 @@ body {
 	border-left: 1px dotted black;
 	border-right: 1px dotted black;
 }
+
+.border-left{
+	border-left: 1px dotted black;
+}
+
+.ticket-type{
+	border-left: 1px dotted black;
+	border-right: 1px dotted black;
+}
+
+.payment-method{
+	border-right: 1px dotted black;
+}
+
+@media(max-width: 767px){
+	.ticket-type{
+		border-left: 0;
+		border-top: 1px dotted black;
+	}
+
+	.payment-ammount{
+		border-top: 1px dotted black;
+	}
+
+
+}
+
+
 
 .row-3 {
 	text-align: center;

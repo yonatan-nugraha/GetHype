@@ -24,6 +24,10 @@
                         <label>Content</label>
                         <textarea class="form-control" name="content" rows="20" required pattern=".{5,}">{{ $journal->content }}</textarea>
                     </div>
+                    <div class="form-group">
+                        <label>Tag</label>
+                        <input type="text" class="form-control" name="tag" placeholder="Tag" required pattern=".{3,50}" value="{{ $journal->tag }}">
+                    </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>      
             </div>

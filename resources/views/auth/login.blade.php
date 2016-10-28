@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="container login">
+<div class="login" style="background: url('{{ asset('images/bg-auth.jpg') }}') center center no-repeat;">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel">

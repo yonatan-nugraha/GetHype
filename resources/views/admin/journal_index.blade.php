@@ -25,7 +25,8 @@
                             <tr>
                                 <th width="5%">ID</th>
                                 <th width="20%">Title</th>
-                                <th width="55%">Content</th>
+                                <th width="40%">Content</th>
+                                <th width="15%">Tag</th>
                                 <th width="10%">Status</th>
                                 <th width="10%">Action</th>
                             </tr>
@@ -36,6 +37,7 @@
                                 <td>{{ $journal->id }}</td>
                                 <td>{{ $journal->title }}</td>
                                 <td style="text-overflow: ellipsis; max-width: 800px; overflow: hidden; white-space: nowrap;">{{ strip_tags($journal->content) }}</td>
+                                <td>{{ $journal->tag }}</td>
                                 <td>
                                     <form action="{{ url('journals/'.$journal->id.'/update-status-journal') }}" method="POST">
                                         {!! csrf_field() !!}
