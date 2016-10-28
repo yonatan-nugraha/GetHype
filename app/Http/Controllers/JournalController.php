@@ -22,8 +22,10 @@ class JournalController extends Controller
 
     public function showList() 
     {
+        $journals = Journal::paginate(1);
+
     	return view('journals.list', [
-            'journals' => Journal::all()
+            'journals' => $journals
     	]);
     }
 
