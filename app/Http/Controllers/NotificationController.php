@@ -79,7 +79,7 @@ class NotificationController extends Controller
             else if ($transaction_status == 'pending') {
                 $payment_status = 2;
             }
-            if ($transaction_status == 'capture') {
+            else if ($transaction_status == 'capture') {
                 if ($payment_type == 'credit_card'){
                     if ($fraud_status == 'challenge') {
                         $payment_status = 3;

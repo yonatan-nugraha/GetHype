@@ -24,9 +24,9 @@
 			  		</p>
 			    	<span class="checkout-success-content">
 			    		@if ($order->payment_method == 'bank_transfer' && $order->order_status == 1)
-			    		<p>Please transfer Rp {{ number_format($order->payment_amount) }} to ....</p>
+			    		<p>Congrats, your checkout is success. Please go to <a href="{{ url('orders') }}">My Order</a> Page to see your order details. Thank you.</p>
 			    		@else
-			    		<p>Congrats, your payment is success. Please check your email to get the tickets and go to <a href="{{ url('orders') }}">My Order</a> Page to see your order details. Thank you.</p>
+			    		<p>Congrats, your checkout is success. Please check your email to get the tickets and go to <a href="{{ url('orders') }}">My Order</a> Page to see your order details. Thank you.</p>
 			    		@endif
 			    	</span>
 		    	</div>

@@ -305,7 +305,7 @@ class CheckoutController extends Controller
             ->where('user_id', auth()->id())
             ->first();
 
-    	if (count($order) == 0 || ($order->payment_method == 'credit_card' && $order->order_status == 1)) {
+    	if (count($order) == 0) {
             return redirect('checkout/failed?order_id='.$order_id);		
     	}
 
