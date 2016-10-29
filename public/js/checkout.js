@@ -74,8 +74,7 @@ $(document).ready(function() {
     				} else {
 		    			snap.pay(result.token, {
 						  	onSuccess: function(result) {
-						  		console.log('success');
-						  		console.log(result);
+						  		location.href = '/checkout/success?order_id='+result.order_id;
 						  	},
 						  	onPending: function(result) {
 						  		console.log('pending');

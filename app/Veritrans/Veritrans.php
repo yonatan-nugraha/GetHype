@@ -154,12 +154,13 @@ Class Veritrans
 	    }
 	    else {
 	        $result_array = json_decode($result);
+          // dd($result_array);
 
 	        // if (isset($result_array->status_code) && !in_array($result_array->status_code, array(200, 201, 202, 407))) {
 	        //     $message = 'Veritrans Error (' . $result_array->status_code . '): '. $result_array->status_message;
          //        throw new VeritransException($message, $result_array->status_code);
 	        // }
-            if ($info['http_code'] != 201) {
+            if (!in_array($info['http_code'], array(200, 201, 202, 407))) {
                 $message = 'Veritrans Error (' . $info['http_code'] . '): '. implode(',', $result_array->error_messages);
                 throw new VeritransException($message, $info['http_code']);
             } 
