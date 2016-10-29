@@ -44,6 +44,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($request->ajax() && $exception instanceof \App\Exceptions\VeritransException) {
+            return response()->json(['error' => $exception->getMessage()], $exception->getCode());
+        }
+
         return parent::render($request, $exception);
     }
 

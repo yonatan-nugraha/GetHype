@@ -54,13 +54,24 @@ $(document).ready(function() {
 		    }
 		});
 
-		if (order_amount > 0) {
-	    	$.ajax({
-	    		url: '/checkout/pay', 
-	    		type: 'POST',
-	    		data: data,
-	    		success: function(result) {
-	    			if (result.success == 1) {
+		var action = (order_amount > 0) ? 'pay':'proceed';
+
+    	$.ajax({
+    		url: '/checkout/' + action, 
+    		type: 'POST',
+    		data: data,
+    		success: function(result) {
+    			if (result.success == 0) {
+    				if (result.login == 0) {
+    					location.href = '/login';
+    				} else {
+    					location.href = '/';
+    				}
+    			}
+    			else {
+    				if (order_amount == 0) {
+    					location.href = '/checkout/success?order_id='+result.order_id;
+    				} else {
 		    			snap.pay(result.token, {
 						  	onSuccess: function(result) {
 						  		console.log('success');
@@ -79,13 +90,16 @@ $(document).ready(function() {
 						  	}
 						});
 		    		}
-		    	},
-		    	error: function (result) {
-		    		snap.hide();
+	    		}
+	    	},
+	    	error: function (result) {
+	    		snap.hide();
 
-		    		$(window).scrollTop(0);
+	    		$(window).scrollTop(0);
 
-	        		var errors = $.parseJSON(result.responseText);
+	    		var status = result.status;
+	    		var errors = $.parseJSON(result.responseText);
+	    		if (status == 422) {
 	        		if (errors.first_name) {
 		        		$('#first-name-error').html(errors.first_name[0]);
 		        	}
@@ -102,63 +116,34 @@ $(document).ready(function() {
 		        		$('#error-message').show();
 		        		$('#error-message p').html(errors.error[0]);
 		        	}
-		    	},
-		    	beforeSend: function() {
-		    		snap.show();
+		        } else {
+	    			$('#error-message').show();
+	        		$('#error-message p').html(errors.error);
+	    		}
+	    	},
+	    	beforeSend: function() {
+	    		snap.show();
 
-		    		$('.error-block').html('');
-		    		$('#error-message').hide();
-		    	},
-		    	complete: function() {
-		    		snap.hide();
-		    	}
-		    });
-	    }
-	    else {
-	    	$.ajax({
-	    		url: '/checkout/proceed', 
-	    		type: 'POST',
-	    		data: data,
-	    		success: function(result) {
-	    			if (result.success == 1) {
-	    				location.href = '/checkout/success?order_id='+result.order_id;
-	    			}
-		    	},
-		    	error: function (result) {
-		    		$(window).scrollTop(0);
-
-	        		var errors = $.parseJSON(result.responseText);
-	        		if (errors.first_name) {
-		        		$('#first-name-error').html(errors.first_name[0]);
-		        	}
-		        	if (errors.last_name) {
-		        		$('#last-name-error').html(errors.last_name[0]);
-		        	}
-	        		if (errors.email) {
-		        		$('#email-error').html(errors.email[0]);
-		        	}
-		        	if (errors.phone) {
-		        		$('#phone-error').html(errors.phone[0]);
-		        	}
-		        	if (errors.error) {
-		        		$('#error-message').show();
-		        		$('#error-message p').html(errors.error[0]);
-		        	}
-		    	},
-		    	beforeSend: function() {
-		    		$('.error-block').html('');
-		    		$('#error-message').hide();
-		    	},
-		    	complete: function() {
-		    	}
-		    });
-	    }
+	    		$('.error-block').html('');
+	    		$('#error-message').hide();
+	    	},
+	    	complete: function() {
+	    		snap.hide();
+	    	}
+	    });
 	});
 
-	$("#countdown").countdown("11/05/2016 06:00", function(event) {
+
+	var remaining_time = $('#remaining-time').val();
+	var countdown = moment().add(remaining_time, 'seconds')
+	countdown = countdown.format('MM/DD/YYYY HH:mm:ss');
+
+	$('#countdown').countdown(countdown, function(event) {
         var $this = $(this).html(event.strftime(''
         + '<div class="countdown-element"><span>%H</span> <label>H</label></div> '
         + '<div class="countdown-element"><span>%M</span> <label>M</label></div> '
         + '<div class="countdown-element"><span>%S</span> <label>S</label></div>'));
-    })
+    }).on('finish.countdown', function() {
+    	location.href = '/';
+    });
 });

@@ -20,6 +20,7 @@ use App\Mail\CheckoutSuccess;
 use Mail, PDF;
 
 use App\Veritrans\Veritrans;
+use App\Exceptions\VeritransException;
 
 class CheckoutController extends Controller
 {
@@ -30,7 +31,7 @@ class CheckoutController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['pay', 'proceed']);
 
         Veritrans::$serverKey = 'VT-server-hDPL0IDkJCWQ44Sp5t3jvDyy';
         Veritrans::$clientKey = 'VT-client-H9RQT94F8JCr8hvr';
@@ -51,11 +52,14 @@ class CheckoutController extends Controller
             return redirect('');
         }
 
+        $remaining_time = Redis::ttl('order:'.auth()->id());
+
         return view('checkout/index', [
         	'order_details' => $order->order_details,
             'event'         => $order->event,
         	'order_amount'  => $order->order_amount,
             'total_quantity' => $order->total_quantity,
+            'remaining_time' => $remaining_time,
             'client_key'    => Veritrans::$clientKey,
             'snap_js_url'   => Veritrans::getSnapJsUrl()
         ]);
@@ -69,6 +73,15 @@ class CheckoutController extends Controller
      */
     public function pay(Request $request)
     {
+        if (auth()->guest()) {
+            session()->put('url.intended', '/checkout');
+
+            return array(
+                'success' => 0,
+                'login'   => 0
+            );
+        }
+
         $order = json_decode(Redis::get('order:'.auth()->id()));
 
         if ($order == null || $order->order_amount == 0) {
@@ -192,6 +205,15 @@ class CheckoutController extends Controller
      */
     public function proceed(Request $request)
     {
+        if (auth()->guest()) {
+            session()->put('url.intended', '/checkout');
+
+            return array(
+                'success' => 0,
+                'login'   => 0
+            );
+        }
+
         $order = json_decode(Redis::get('order:'.auth()->id()));
 
         if ($order == null || $order->order_amount > 0) {
@@ -278,12 +300,12 @@ class CheckoutController extends Controller
     {
         $order_id = $request->order_id;
         $order = Order::where('id', $order_id)
-            ->where('order_status', 2)
-            ->whereIn('payment_status', [4,5])
+            ->where('order_status', '!=', 0)
+            ->whereIn('payment_status', [2,4,5])
             ->where('user_id', auth()->id())
             ->first();
 
-    	if (count($order) == 0) {
+    	if (count($order) == 0 || ($order->payment_method == 'credit_card' && $order->order_status == 1)) {
             return redirect('checkout/failed?order_id='.$order_id);		
     	}
 
@@ -302,7 +324,7 @@ class CheckoutController extends Controller
     {
         $order_id = $request->order_id;
         $order = Order::where('id', $order_id)
-            ->whereIn('order_status', [0,1])
+            ->where('order_status', 0)
             ->where('user_id', auth()->id())
             ->first();
 

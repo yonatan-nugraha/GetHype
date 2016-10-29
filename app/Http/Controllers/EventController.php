@@ -152,11 +152,11 @@ class EventController extends Controller
         );
 
         Redis::set('order:'.auth()->id(), json_encode($order));
-        Redis::expire('order:'.auth()->id(), 5000);
+        Redis::expire('order:'.auth()->id(), 90*60);
 
         return array(
             'success'   => 1,
-            'message'   => 'Please select the quantity of the ticket that you would like to buy :)'
+            'message'   => 'Please select the quantity of the ticket that you would like to buy.'
         );
     }
 
