@@ -18,23 +18,23 @@
 				    	<h3 class="panel-title">Contact Details</h3>
 				  	</div>
 				  	<div class="panel-body">
-				    	<div class="form-group col-xs-5">
+				    	<div class="form-group col-xs-12 col-sm-5 col-md-5">
 						 	<label class="control-label">First Name</label>
 						  	<input class="form-control" type="text" name="first_name" value="{{ Auth::user()->first_name }}">
 						  	<span class="error-block" id="first-name-error"></span>
 						</div>
-						<div class="form-group col-xs-5">
+						<div class="form-group col-xs-12 col-sm-5 col-md-5">
 						 	<label class="control-label">Last Name</label>
 						  	<input class="form-control" type="text" name="last_name" value="{{ Auth::user()->last_name }}">
 						  	<span class="error-block" id="last-name-error"></span>
 						</div>
 
-						<div class="form-group col-xs-5">
+						<div class="form-group col-xs-12 col-sm-5 col-md-5">
 						  	<label class="control-label">Email</label>
 						  	<input class="form-control" type="email" name="email" value="{{ Auth::user()->email }}">
 						  	<span class="error-block" id="email-error"></span>
 						</div>
-						<div class="form-group col-xs-5">
+						<div class="form-group col-xs-12 col-sm-5 col-md-5">
 						  	<label class="control-label">Mobile Phone</label>
 						  	<input class="form-control" type="text" name="phone" value="{{ Auth::user()->phone }}">
 						  	<span class="error-block" id="phone-error"></span>
@@ -86,6 +86,7 @@
 				<button class="btn pull-right" type="button" id="pay-button">@if ($order_amount > 0) Pay @else Proceed @endif</button>
 			</div>
 			<div class="col-xs-12 col-md-4">
+				<input type="hidden" id="remaining-time" value="{{ $remaining_time }}">
 				<div id="countdown"></div>
 				<div class="order-details">
 					<p class="order-summary">Order Summary</p>
@@ -131,6 +132,7 @@
 @endsection
 
 @section('scripts')
+<script type="text/javascript" src="{{ asset('js/moment.min.js') }}"></script>
 <script type="text/javascript" src="{{ $snap_js_url }}" data-client-key="{{ $client_key }}"></script>
 <script type="text/javascript" src="{{ asset('js/jquery.countdown.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/checkout.js') }}"></script>

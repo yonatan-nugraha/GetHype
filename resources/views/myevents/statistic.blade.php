@@ -197,7 +197,7 @@
 @endsection
 
 @section('scripts')
-	<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+	<script type="text/javascript" src="{{ asset('js/moment.min.js') }}"></script>
 	<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 	<script type="text/javascript" src="{{ asset('js/highcharts.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/exporting.js') }}"></script>

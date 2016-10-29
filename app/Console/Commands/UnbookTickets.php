@@ -41,7 +41,7 @@ class UnbookTickets extends Command
     public function handle()
     {
         $unbooked_tickets = Ticket::where('status', 2)
-            ->where('updated_at', '<=', Carbon::now()->addMinutes(-10))
+            ->where('updated_at', '<=', Carbon::now()->addMinutes(-90))
             ->update([
                 'status'    => 1,
                 'booked_by' => null
