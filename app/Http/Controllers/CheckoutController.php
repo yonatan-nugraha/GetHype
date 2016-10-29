@@ -20,7 +20,6 @@ use App\Mail\CheckoutSuccess;
 use Mail, PDF;
 
 use App\Veritrans\Veritrans;
-use App\Exceptions\VeritransException;
 
 class CheckoutController extends Controller
 {
@@ -190,6 +189,7 @@ class CheckoutController extends Controller
 
         return array(
             'success'   => 1,
+            'order_id' => $order_id,
             'token'     => $vt->getSnapToken($transaction_data)
         );
 

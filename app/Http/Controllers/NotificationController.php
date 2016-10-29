@@ -56,6 +56,10 @@ class NotificationController extends Controller
         if ($result) {
             $notif  = $vt->status($result->order_id);
 
+            if (!isset($notif->order_id)) {
+                return;
+            }
+
             $order  = Order::find($notif->order_id);
             if (count($order) == 0 || (count($order) > 0 && $order->order_status == 2)) {
                 return;
@@ -87,7 +91,7 @@ class NotificationController extends Controller
             else if ($transaction_status == 'settlement') {
                 $payment_status = 5;
             }
-            else if ($transaction_status == 'expired') {
+            else if ($transaction_status == 'expire') {
                 $payment_status = 6;
             }
             else {
