@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('css/ticket-index.css') }}">
+<link rel="stylesheet" href="{{ asset('css/ticket-index.css') }}">
 @endsection
 
 @section('content')
@@ -33,7 +33,7 @@
 							    		<img class="event-sosmed" src="{{ asset('/images/icons/facebook.png') }}">
 							    	</a>
 
-							    	<a href="http://twitter.com/intent/tweet?text={{ urlencode($order->event->name . ' | Gethype' )}}&url={{ url('/events/'.$order->event->slug) }}&hashtags=Gethype&via=Gethype" onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=450'); return false;" target="_blank">
+							    	<a href="http://twitter.com/intent/tweet?text={{ urlencode($order->event->name . ' | Gethype' )}}&url={{ url('/events/'.$order->event->slug) }}&hashtags=Gethype&via=gethype.id" onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=450'); return false;" target="_blank">
 							    		<img class="event-sosmed" src="{{ asset('/images/icons/twitter.png') }}">
 							    	</a>
 					    		</span>

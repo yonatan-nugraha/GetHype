@@ -10,6 +10,7 @@ use App\Category;
 use App\EventType;
 use App\Collection;
 use App\Journal;
+use App\Banner;
 
 use DB, Carbon\Carbon;
 
@@ -37,14 +38,52 @@ class HomeController extends Controller
             ->where('events.status', 1)
             ->where('events.ended_at', '>=', Carbon::now())
             ->groupBy('events.id')
-            ->orderBy('events.weight', 'desc');
+            ->orderBy('events.weight', 'desc')
+            ->take(8)
+            ->get();
+
+        $collections = Collection::where('status', 1)
+            ->orderBy('weight', 'desc')
+            ->take(4)
+            ->get();
+
+        $journals = Journal::where('status', 1)
+            ->orderBy('created_at', 'desc')
+            ->take(4)
+            ->get();
+
+        $categories = Category::where('status', 1)
+            ->orderBy('weight', 'desc')
+            ->get();
+
+        $event_types = EventType::where('status', 1)
+            ->orderBy('weight', 'desc')
+            ->get();
+
+        $carousel_banners = Banner::where('status', 1)
+            ->where('type', 1)
+            ->where('started_at', '<=', Carbon::now())
+            ->where('ended_at', '>=', Carbon::now())
+            ->orderBy('weight', 'desc')
+            ->take(5)
+            ->get();
+
+        $small_banners = Banner::where('status', 1)
+            ->where('type', 2)
+            ->where('started_at', '<=', Carbon::now())
+            ->where('ended_at', '>=', Carbon::now())
+            ->orderBy('weight', 'desc')
+            ->take(3)
+            ->get();
 
         return view('home', [
-            'events'        => $events->take(8)->get(),
-            'collections'   => Collection::where('status', 1)->orderBy('weight', 'desc')->take(4)->get(),
-            'journals'      => Journal::where('status', 1)->orderBy('created_at', 'desc')->take(4)->get(),
-            'categories'    => Category::where('status', 1)->orderBy('weight', 'desc')->get(),
-            'event_types'   => EventType::where('status', 1)->orderBy('weight', 'desc')->get(),
+            'events'        => $events,
+            'collections'   => $collections,
+            'journals'      => $journals,
+            'categories'    => $categories,
+            'event_types'   => $event_types,
+            'carousel_banners' => $carousel_banners,
+            'small_banners' => $small_banners,
             'locations'     => ['Jakarta', 'Bandung', 'Surabaya', 'Bali'],
         ]);
     }

@@ -1,11 +1,11 @@
 function render_event_statistic(event_id, start_date_s, end_date_s) {
 	var ctx = $('.event-statistic');
 
-	var now_date   = new Date(start_date_s);
-	var end_date   = new Date(end_date_s);
+	var now_date   = moment(start_date_s);
+	var end_date   = moment(end_date_s);
 
 	if (start_date_s == end_date_s) {
-		now_date.addDays(-1);
+		now_date.subtract(1, 'days');
 	}
 
 	var days_range = Math.abs(end_date - now_date) / (1000 * 60 * 60 * 24);
@@ -23,13 +23,13 @@ function render_event_statistic(event_id, start_date_s, end_date_s) {
 			var views = [];
 
 			while (now_date <= end_date) {
-				now_date_s = now_date.toString('yyyy-MM-dd');
-				now_date_e = now_date.toString('dd MMM');
+				now_date_s = now_date.format('YYYY-MM-DD');
+				now_date_e = now_date.format('DD MMM');
 
 				dates.push(now_date_e);
 				views.push((result.views[now_date_s]) ? result.views[now_date_s] : 0);
 
-			    now_date.addDays(add_days);
+			    now_date.add(add_days, 'days');
 			}
 
 			$('#views-statistic').highcharts({
@@ -125,10 +125,10 @@ function render_event_statistic_by_gender(event_id, start_date_s, end_date_s) {
                     colorByPoint: true,
                     data: [{
                         name: 'Male',
-                        y: 56.33
+                        y: views[0]
                     }, {
                         name: 'Female',
-                        y: 44.67
+                        y: views[1]
                     }]
                 }]
             });
@@ -204,8 +204,8 @@ function render_event_statistic_by_age(event_id, start_date_s, end_date_s) {
 function render_ticket_statistic(event_id, start_date_s, end_date_s) {
 	var ctx = $('.ticket-statistic');
 
-	var now_date   = new Date(start_date_s);
-	var end_date   = new Date(end_date_s);
+	var now_date   = moment(start_date_s);
+	var end_date   = moment(end_date_s);
 
 	var days_range  = Math.abs(end_date - now_date) / (1000 * 60 * 60 * 24);
 	var add_days 	= Math.ceil((days_range/10));
@@ -215,7 +215,7 @@ function render_ticket_statistic(event_id, start_date_s, end_date_s) {
 	}
 
 	if (start_date_s == end_date_s) {
-		now_date.addDays(-1);
+		now_date.subtract(1, 'days');
 	}
 
 	$.ajax({
@@ -226,17 +226,14 @@ function render_ticket_statistic(event_id, start_date_s, end_date_s) {
 			var orders = [];
 
 			while (now_date <= end_date) {
-				now_date_s = now_date.toString('yyyy-MM-dd');
-				now_date_e = now_date.toString('dd MMM');
+				now_date_s = now_date.format('YYYY-MM-DD');
+				now_date_e = now_date.format('DD MMM');
 
 				dates.push(now_date_e);
 				orders.push((result[now_date_s]) ? parseInt(result[now_date_s]) : 0);
 
-			    now_date.addDays(add_days);
+			    now_date.add(add_days, 'days');
 			}
-
-			console.log(dates);
-			console.log(orders);
 
 			$('#ticket-statistic').highcharts({
                 title: {

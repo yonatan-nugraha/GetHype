@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('css/event-search.css') }}">
+<link rel="stylesheet" href="{{ asset('css/event-search.css') }}">
 @endsection
 
 @section('content')
@@ -10,16 +10,18 @@
 
         <div id="big-carousel" class="carousel slide big-carousel" data-ride="carousel">
             <ol class="carousel-indicators">
-                <li data-target="#big-carousel" data-slide-to="0" class="active"></li>
-                <li data-target="#big-carousel" data-slide-to="1"></li>
+                @foreach($carousel_banners as $carousel_banner)
+                <li data-target="#big-carousel" data-slide-to="{{ $loop->index }}" class="@if ($loop->index == 0) active @endif"></li>
+                @endforeach
             </ol>
             <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <img src="{{ asset('images/banners/banner-1.jpg') }}" alt="...">
+                @foreach($carousel_banners as $carousel_banner)
+                <div class="item @if ($loop->index == 0) active @endif">
+                    <a href="{{ $carousel_banner->link_url }}">
+                        <img src="{{ asset('images/banners/'.$carousel_banner->image()) }}" alt="...">
+                    </a>
                 </div>
-                <div class="item">
-                    <img src="{{ asset('images/banners/banner-1.jpg') }}" alt="...">
-                </div>
+                @endforeach
             </div>
             <a class="left carousel-control" href="#big-carousel" role="button" data-slide="prev">
                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -119,6 +121,6 @@
 @endsection
 
 @section('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
-<script src="{{ asset('js/event.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/moment.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/event.js') }}"></script>
 @endsection

@@ -49,9 +49,9 @@
                                 </td>
                                 <td>
                                     @if ($order->order_status == 0)
-                                    <span class="badge bg-yellow">Pending</span>
+                                    <span class="badge bg-yellow">Unprocessed</span>
                                     @elseif ($order->order_status == 1)
-                                    <span class="badge bg-red">Failed</span>
+                                    <span class="badge bg-yellow">Pending</span>
                                     @else
                                     <span class="badge bg-green">Success</span>
                                     @endif<br>
@@ -59,17 +59,19 @@
                                 </td>
                                 <td>
                                     @if ($order->payment_status == 0)
-                                        <span class="badge bg-yellow">Pending</span>
+                                        <span class="badge bg-yellow">Unprocessed</span>
                                     @elseif ($order->payment_status == 1)
-                                        <span class="badge bg-red">Failed</span>
-                                    @elseif ($order->payment_status == 2)
-                                        <span class="badge bg-red">Rejected</span>
-                                    @elseif ($order->payment_status == 3)
                                         <span class="badge bg-red">Cancelled</span>
+                                    @elseif ($order->payment_status == 2)
+                                        <span class="badge bg-yellow">Pending</span>
+                                    @elseif ($order->payment_status == 3)
+                                        <span class="badge bg-red">Challenged</span>
                                     @elseif ($order->payment_status == 4)
-                                        <span class="badge bg-red">Success</span>
+                                        <span class="badge bg-green">Success</span>
                                     @elseif ($order->payment_status == 5)
                                         <span class="badge bg-green">Settled</span>
+                                    @elseif ($order->payment_status == 6)
+                                        <span class="badge bg-red">Expired</span>
                                     @else
                                         <span class="badge bg-blue">Others</span>
                                         @endif<br>

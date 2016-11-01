@@ -9,17 +9,16 @@
 <meta property="og:type" content="event" />
 <meta property="og:title" content="{{ $event->name . ' | Gethype' }}" />
 <meta property="og:description" content="Lorem ipsum dolor sit amet, propriae mnesarchum deterruisset sea ei. Te sit oportere theophrastus, sea an invidunt deterruisset. Atqui viris consequuntur per te, est quot adversarium eu. Malis deleniti pertinacia te quo, vim id libris epicurei adversarium. Putant causae ne mei, sumo bonorum mei te." />
-<meta property="og:image" content="{{ asset('/images/events/event-'.$event->id.'.jpg') }}" />
+<meta property="og:image" content="{{ asset('/images/events/'.$event->image()) }}" />
 
 <meta name="twitter:card" content="event" />
-<meta name="twitter:site" content="@Gethype" />
+<meta name="twitter:site" content="@gethype.id" />
 <meta name="twitter:title" content="{{ $event->name . ' | Gethype' }}" />
 <meta name="twitter:description" content="Lorem ipsum dolor sit amet, propriae mnesarchum deterruisset sea ei. Te sit oportere theophrastus, sea an invidunt deterruisset. Atqui viris consequuntur per te, est quot adversarium eu. Malis deleniti pertinacia te quo, vim id libris epicurei adversarium. Putant causae ne mei, sumo bonorum mei te." />
-<meta name="twitter:image" content="{{ asset('/images/events/event-'.$event->id.'.jpg') }}" />
+<meta name="twitter:image" content="{{ asset('/images/events/'.$event->image()) }}" />
 @endsection
 
 @section('content')
-
 <div class="row banner-event">
     <img src="{{ asset('/images/events/'.$event->banner()) }}">
 </div>
@@ -34,7 +33,7 @@
 		    		<img class="event-sosmed" src="{{ asset('/images/icons/facebook.png') }}">
 		    	</a>
 
-		    	<a href="http://twitter.com/intent/tweet?text={{ urlencode($event->name . ' | Gethype' )}}&url={{ url('/events/'.$event->slug) }}&hashtags=Gethype&via=Gethype" onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=450'); return false;" target="_blank">
+		    	<a href="http://twitter.com/intent/tweet?text={{ urlencode($event->name . ' | Gethype' )}}&url={{ url('/events/'.$event->slug) }}&hashtags=Gethype&via=gethype.id" onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=450'); return false;" target="_blank">
 		    		<img class="event-sosmed" src="{{ asset('/images/icons/twitter.png') }}">
 		    	</a>
 		    </div>

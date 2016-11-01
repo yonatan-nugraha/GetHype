@@ -301,7 +301,7 @@ class CheckoutController extends Controller
         $order_id = $request->order_id;
         $order = Order::where('id', $order_id)
             ->where('order_status', '!=', 0)
-            ->whereIn('payment_status', [2,4,5])
+            ->whereIn('payment_status', [0,2,4,5])
             ->where('user_id', auth()->id())
             ->first();
 
@@ -324,11 +324,11 @@ class CheckoutController extends Controller
     {
         $order_id = $request->order_id;
         $order = Order::where('id', $order_id)
-            ->where('order_status', 0)
+            ->whereIn('order_status', [0,1])
             ->where('user_id', auth()->id())
             ->first();
 
-        if (count($order) == 0) {
+        if (count($order) == 0 || in_array($order->payment_status, [1,2,3,7])) {
             return redirect('');
         }
 

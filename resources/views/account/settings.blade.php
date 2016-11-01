@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('css/account-settings.css') }}">
+<link rel="stylesheet" href="{{ asset('css/account-settings.css') }}">
 @endsection
 
 @section('content')
@@ -186,6 +186,6 @@
 @endsection
 
 @section('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<script type="text/javascript" src="{{ asset('js/moment.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/account.js') }}"></script>
 @endsection

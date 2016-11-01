@@ -19,6 +19,7 @@ use App\PageView;
 use App\Collection;
 use App\EventCollection;
 use App\Guest;
+use App\Banner;
 
 use DB, Carbon\Carbon;
 
@@ -64,7 +65,7 @@ class EventController extends Controller
                 'event_id'  => $event->id
             ]);
 
-            $response->cookie($cookie_name, md5($event->id), 180);
+            $response->cookie($cookie_name, md5($event->id), 300);
         } 
 
         return $response;
@@ -211,6 +212,14 @@ class EventController extends Controller
         $events = $events->paginate(2);
         $events->setPath('search?category='.$category.'&event_type='.$event_type.'&location='.$location.'&date='.$date.'&price='.$price);
 
+        $carousel_banners = Banner::where('status', 1)
+            ->where('type', 3)
+            ->where('started_at', '<=', Carbon::now())
+            ->where('ended_at', '>=', Carbon::now())
+            ->orderBy('weight', 'desc')
+            ->take(5)
+            ->get();
+
         return view('events/search', [
             'events'        => $events,
             'categories'    => Category::all(),
@@ -220,7 +229,8 @@ class EventController extends Controller
             'event_type_id' => $event_type,
             'location'      => $location,
             'date'          => $date,
-            'price'         => $price
+            'price'         => $price,
+            'carousel_banners' => $carousel_banners
         ]);
     }
 

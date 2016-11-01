@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('css/journal-list.css') }}">
+<link rel="stylesheet" href="{{ asset('css/journal-list.css') }}">
 @endsection
 
 @section('content')
@@ -29,7 +29,7 @@
                   			<li><a href="#">Separated link</a></li>
                 		</ul>
                   	</div>
-                  	<input type="text" class="form-control journal-search-input" >
+                  	<input type="text" class="form-control journal-search-input" name="tag">
                   	<button class="btn btn-primary journal-search-button">Search</button>
                 </div>
             </div>

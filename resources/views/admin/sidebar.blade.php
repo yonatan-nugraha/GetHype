@@ -27,28 +27,40 @@
                 <a href="{{ url('admin') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
             </li>
             <li>
-                <a href="{{ url('admin/users') }}"><i class="fa fa-female"></i> <span>Users</span></a>
+                <a href="{{ url('admin/users') }}"><i class="fa fa-blind"></i> <span>Users</span></a>
             </li>
             <li class="treeview">
-                <a href="#"><i class="fa fa-ambulance"></i> <span>Events</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class="fa fa-rocket"></i> <span>Events</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="{{ url('admin/events') }}"><i class="fa fa-circle-o"></i>Event List</a></li>
+                    <li><a href="{{ url('admin/events') }}"><i class="fa fa-circle-o"></i>Event List</a></li>
                     <li><a href="{{ url('admin/events/create') }}"><i class="fa fa-circle-o"></i>Create Event</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class="fa fa-paw"></i> <span>Collections</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
                     <li><a href="{{ url('admin/collections') }}"><i class="fa fa-circle-o"></i>Collection List</a></li>
                     <li><a href="{{ url('admin/collections/create') }}"><i class="fa fa-circle-o"></i>Create Collection</a></li>
                 </ul>
             </li>
             <li class="treeview">
-                <a href="#"><i class="fa fa-bomb"></i> <span>Journals</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class="fa fa-coffee"></i> <span>Journals</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="{{ url('admin/journals') }}"><i class="fa fa-circle-o"></i>Journal List</a></li>
+                    <li><a href="{{ url('admin/journals') }}"><i class="fa fa-circle-o"></i>Journal List</a></li>
                     <li><a href="{{ url('admin/journals/create') }}"><i class="fa fa-circle-o"></i>Create Journal</a></li>
                 </ul>
             </li>
             <li class="treeview">
-                <a href="#"><i class="fa fa-paw"></i> <span>Orders</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class="fa fa-shopping-cart"></i> <span>Orders</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="{{ url('admin/orders') }}"><i class="fa fa-circle-o"></i>Order List</a></li>
+                    <li><a href="{{ url('admin/orders') }}"><i class="fa fa-circle-o"></i>Order List</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class="fa fa-fire"></i> <span>Banners</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url('admin/banners') }}"><i class="fa fa-circle-o"></i>Banner List</a></li>
+                    <li><a href="{{ url('admin/banners/create') }}"><i class="fa fa-circle-o"></i>Create Banner</a></li>
                 </ul>
             </li>
         </ul>

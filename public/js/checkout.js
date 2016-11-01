@@ -77,15 +77,12 @@ $(document).ready(function() {
 						  		location.href = '/checkout/success?order_id='+result.order_id;
 						  	},
 						  	onPending: function(result) {
-						  		console.log('pending');
-						  		console.log(result);
+						  		location.href = '/checkout/success?order_id='+result.order_id;
 						  	},
 						  	onError: function(result) {
-						  		console.log('error');
-						  		console.log(result);
+						  		location.href = '/';
 						  	},
 						  	onClose: function() {
-						  		console.log('customer closed the popup without finishing the payment');
 						  	}
 						});
 		    		}

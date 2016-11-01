@@ -1,6 +1,6 @@
 @section('styles')
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css">
-	<link rel="stylesheet" href="{{ asset('css/myevent-statistic.css') }}">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css">
+<link rel="stylesheet" href="{{ asset('css/myevent-statistic.css') }}">
 @endsection
 
 @extends('layouts.app')
@@ -120,7 +120,6 @@
 			@endif
 			<hr>
 			<div id="ticket-statistic"></div>
-			<!-- <canvas class="ticket-statistic"></canvas> -->
 	  	</div>
 	</div>
 
@@ -197,9 +196,9 @@
 @endsection
 
 @section('scripts')
-	<script type="text/javascript" src="{{ asset('js/moment.min.js') }}"></script>
-	<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-	<script type="text/javascript" src="{{ asset('js/highcharts.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/exporting.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/myevent.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/moment.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/daterangepicker.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/highcharts.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/exporting.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/myevent.js') }}"></script>
 @endsection

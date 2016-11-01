@@ -18,7 +18,7 @@
                     </div>
                     <div class="form-group">
                         <label>Location</label>
-                        <textarea class="form-control" name="location" rows="2" required pattern=".{5,150}">{{ $event->location }}</textarea>
+                        <textarea class="form-control" name="location" rows="2" required pattern=".{5,150}" placeholder="Location">{{ $event->location }}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Date and Time</label>
@@ -55,15 +55,15 @@
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea class="form-control" name="description" rows="8" required pattern=".{5,}">{{ $event->description }}</textarea>
+                        <textarea class="form-control" name="description" rows="8" required pattern=".{5,}" placeholder="Description">{{ $event->description }}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Subject Discussion</label>
-                        <textarea class="form-control" name="subject_discussion" rows="5" pattern=".{5,}">{{ $event->subject_discussion }}</textarea>
+                        <textarea class="form-control" name="subject_discussion" rows="5" pattern=".{5,}" placeholder="Subject Discussion">{{ $event->subject_discussion }}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Video URL</label>
-                        <input type="text" class="form-control" name="video_url" value="{{ $event->video_url }}">
+                        <input type="text" class="form-control" name="video_url" value="{{ $event->video_url }}" placeholder="Video URL">
                     </div>
                 </div>      
             </div>
