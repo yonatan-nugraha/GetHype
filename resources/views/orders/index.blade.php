@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('css/order-index.css') }}">
+<link rel="stylesheet" href="{{ asset('css/order-index.css') }}">
 @endsection
 
 @section('content')
@@ -101,6 +101,10 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="pull-right">
+        {{ $orders->links() }}
+    </div>
 
 	<div class="row orders-bottom">
 		<div class="col-xs-12">

@@ -46,6 +46,7 @@ Route::group(['prefix' => 'users'], function () {
 //admin
 Route::group(['prefix' => 'admin'], function () {
 	Route::get('', 'AdminController@index');
+	Route::get('statistic', 'AdminController@showMonthlyStatistic');
 
 	//users
 	Route::get('users', 'AdminController@showUserList');
@@ -68,6 +69,11 @@ Route::group(['prefix' => 'admin'], function () {
 
     //orders
     Route::get('orders', 'AdminController@showOrderList');
+
+    //banners
+	Route::get('banners', 'AdminController@showBannerList');
+	Route::get('banners/create', 'AdminController@createBanner');
+	Route::get('banners/{banner}/edit', 'AdminController@editBanner');
 });
 
 //accounts
@@ -176,3 +182,9 @@ Route::group(['prefix' => 'messages'], function () {
 	Route::post('', 'MessageController@store');
 });
 
+//banners
+Route::group(['prefix' => 'banners'], function () {
+	Route::post('', 'AdminController@storeBanner');
+	Route::patch('{banner}', 'AdminController@updateBanner');
+	Route::patch('{banner}/update-status-banner', 'AdminController@updateStatusBanner');
+});

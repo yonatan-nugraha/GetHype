@@ -18,7 +18,7 @@
                     </div>
                     <div class="form-group">
                         <label>Location</label>
-                        <textarea class="form-control" name="location" rows="3" required pattern=".{5,150}"></textarea>
+                        <textarea class="form-control" name="location" rows="3" required pattern=".{5,150}" placeholder="Location"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Date and Time</label>
@@ -55,15 +55,15 @@
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea class="form-control" name="description" rows="8" required pattern=".{5,}"></textarea>
+                        <textarea class="form-control" name="description" rows="8" required pattern=".{5,}" placeholder="Description"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Subject Discussion</label>
-                        <textarea class="form-control" name="subject_discussion" rows="5" pattern=".{5,}"></textarea>
+                        <textarea class="form-control" name="subject_discussion" rows="5" pattern=".{5,}" placeholder="Subject Discussion"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Video URL</label>
-                        <input type="text" class="form-control" name="video_url">
+                        <input type="text" class="form-control" name="video_url" placeholder="Video URL">
                     </div>
                 </div>
             </div>
@@ -115,6 +115,8 @@
 $(function () {
     // date range picker with time picker
     $('#reservationtime').daterangepicker({
+        startDate: moment(),
+        endDate: moment().add(30, 'days'),
         timePicker: true, 
         timePickerIncrement: 30, 
         locale: {

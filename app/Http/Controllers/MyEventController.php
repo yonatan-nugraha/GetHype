@@ -21,7 +21,7 @@ use DB, Carbon\Carbon;
 class MyEventController extends Controller
 {
 
-    protected $orders_limit = 3;
+    protected $orders_limit = 10;
 
     /**
      * Create a new controller instance.

@@ -1,7 +1,21 @@
 @extends('layouts.app')
 
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('css/journal-detail.css') }}">
+<link rel="stylesheet" href="{{ asset('css/journal-detail.css') }}">
+@endsection
+
+@section('metas')
+<meta property="og:url" content="{{ Request::url() }}" />
+<meta property="og:type" content="journal" />
+<meta property="og:title" content="{{ $journal->title . ' | Gethype' }}" />
+<meta property="og:description" content="Lorem ipsum dolor sit amet, propriae mnesarchum deterruisset sea ei. Te sit oportere theophrastus, sea an invidunt deterruisset. Atqui viris consequuntur per te, est quot adversarium eu. Malis deleniti pertinacia te quo, vim id libris epicurei adversarium. Putant causae ne mei, sumo bonorum mei te." />
+<meta property="og:image" content="{{ asset('/images/journals/'.$journal->image()) }}" />
+
+<meta name="twitter:card" content="journal" />
+<meta name="twitter:site" content="@gethype.id" />
+<meta name="twitter:title" content="{{ $journal->title . ' | Gethype' }}" />
+<meta name="twitter:description" content="Lorem ipsum dolor sit amet, propriae mnesarchum deterruisset sea ei. Te sit oportere theophrastus, sea an invidunt deterruisset. Atqui viris consequuntur per te, est quot adversarium eu. Malis deleniti pertinacia te quo, vim id libris epicurei adversarium. Putant causae ne mei, sumo bonorum mei te." />
+<meta name="twitter:image" content="{{ asset('/images/journals/'.$journal->image()) }}" />
 @endsection
 
 @section('content')
@@ -81,13 +95,14 @@
                 <div class="box-share">
                     <ul>
                         <li>
-                            <img class="event-sosmed" src="http://gethype.co.id/images/icons/twitter.png" height="25">
+                            <a href="http://www.facebook.com/sharer/sharer.php?u={{ url('/journals/'.$journal->slug) }}" onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250'); return false;" target="_blank">
+                                <img class="event-sosmed" src="{{ asset('/images/icons/facebook.png') }}" height="25">
+                            </a>
                         </li>
                         <li>
-                            <img class="event-sosmed" src="http://gethype.co.id/images/icons/facebook.png" height="25">
-                        </li>
-                        <li>
-                            <img class="event-sosmed" src="http://gethype.co.id/images/icons/instagram.png" height="25">
+                            <a href="http://twitter.com/intent/tweet?text={{ urlencode($journal->title . ' | Gethype' )}}&url={{ url('/journals/'.$journal->slug) }}&hashtags=Gethype&via=gethype.id" onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=450'); return false;" target="_blank">
+                                <img class="event-sosmed" src="{{ asset('/images/icons/twitter.png') }}" height="25">
+                            </a>
                         </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -106,7 +121,7 @@
                             </div>
                             <div class="col-xs-7">
                                 <a href="" class="title">{{ $journal->title }}</a>
-                                <p class="cate"><a href="" >Art & Culture</a></p>
+                                <p class="cate"><a href="" >{{ $journal->tag }}</a></p>
                                 <p class="date">{{ Carbon\Carbon::parse($journal->created_at)->format('l, M d') }}</p>
                             </div>
                         </div>

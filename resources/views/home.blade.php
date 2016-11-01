@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+<link rel="stylesheet" href="{{ asset('css/home.css') }}">
 @endsection
 
 @section('content')
@@ -11,16 +11,18 @@
 
             <div id="big-carousel" class="carousel slide big-carousel" data-ride="carousel">
                 <ol class="carousel-indicators">
-                    <li data-target="#big-carousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#big-carousel" data-slide-to="1"></li>
+                    @foreach($carousel_banners as $carousel_banner)
+                    <li data-target="#big-carousel" data-slide-to="{{ $loop->index }}" class="@if ($loop->index == 0) active @endif"></li>
+                    @endforeach
                 </ol>
                 <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <div class="banner-slider" style="background: url('{{ asset('images/banners/banner-1.jpg') }}') center center;"></div>
+                    @foreach($carousel_banners as $carousel_banner)
+                    <div class="item @if ($loop->index == 0) active @endif">
+                        <a href="{{ $carousel_banner->link_url }}">
+                            <div class="banner-slider" style="background: url('{{ asset('images/banners/'.$carousel_banner->image()) }}') center center;"></div>
+                        </a>
                     </div>
-                    <div class="item">
-                        <div class="banner-slider" style="background: url('{{ asset('images/banners/banner-1.jpg') }}') center center;"></div>
-                    </div>
+                    @endforeach
                 </div>
                 <a class="left carousel-control" href="#big-carousel" role="button" data-slide="prev">
                     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -37,15 +39,13 @@
 
     <div class="row-fluid">
         <div class="col-md-12 no-padding">
-            <div class="col-xs-4 col-md-4 no-padding">
-                <img src="{{ asset('images/banners/small-banner-1.jpg') }}" class="img-responsive" alt="...">
-            </div>
-            <div class="col-xs-4 col-md-4 no-padding">
-                <img src="{{ asset('images/banners/small-banner-2.jpg') }}" class="img-responsive" alt="...">
-            </div>
-            <div class="col-xs-4 col-md-4 no-padding">
-                <img src="{{ asset('images/banners/small-banner-3.jpg') }}" class="img-responsive" alt="...">
-            </div>
+            @foreach($small_banners as $small_banner)
+            <a href="{{ $small_banner->link_url }}">
+                <div class="col-xs-4 col-md-4 no-padding">
+                    <img src="{{ asset('images/banners/'.$small_banner->image()) }}" class="img-responsive" alt="...">
+                </div>
+            </a>
+            @endforeach
         </div>
     </div>
 </div>
@@ -160,9 +160,11 @@
                 </div>
                 @endforeach
             </div>
+            @if (count($events) >= 8)
             <div class="view-more">
                 <a href="{{ url('events/search') }}">view more</a>
             </div>
+            @endif
         </div>
     </div>
 </div>
@@ -238,6 +240,6 @@
 @endsection
 
 @section('scripts')
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<script type="text/javascript" src="{{ asset('js/moment.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/home.js') }}"></script>
 @endsection

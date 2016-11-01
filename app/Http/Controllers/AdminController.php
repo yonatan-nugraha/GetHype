@@ -18,8 +18,10 @@ use App\Journal;
 use App\Order;
 use App\OrderDetail;
 use App\Guest;
+use App\Banner;
 
 use Carbon\Carbon;
+use DB;
 
 class AdminController extends Controller {
 
@@ -41,14 +43,61 @@ class AdminController extends Controller {
      */
     public function index(Request $request)
     {
-        $data['tasks'] = [
-            [
-                'name' => 'Design New Dashboard',
-                'progress' => '87',
-                'color' => 'danger'
-            ],
-        ];
-        return view('admin/test')->with($data);
+        $today      = Carbon::now();
+        $last_month = Carbon::now()->subDays(30);
+
+        $users = User::whereBetween('created_at', [$last_month, $today])
+            ->count();
+
+        $orders = Order::where('order_status', 2)
+            ->whereBetween('created_at', [$last_month, $today])
+            ->count();
+
+        $tickets = Ticket::whereIn('status', [3,4])
+            ->whereBetween('updated_at', [$last_month, $today])
+            ->count();
+
+        $events = Event::whereBetween('created_at', [$last_month, $today])
+            ->count();
+
+        return view('admin/dashboard', [
+            'today'     => $today,
+            'last_month' => $last_month,
+            'users'     => $users,
+            'orders'    => $orders,
+            'events'    => $events,
+            'tickets'   => $tickets,
+        ]);
+    }
+
+    /**
+     * Show monthly statistic.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function showMonthlyStatistic(Request $request)
+    {
+        $today      = Carbon::now();
+        $last_month = Carbon::now()->subDays(30);
+
+        $sales = Order::select(DB::raw('date(created_at) as date, sum(order_amount) as revenue'))
+            ->where('order_status', 2)
+            ->whereBetween('created_at', [$last_month, $today])
+            ->groupBy('date')
+            ->pluck('revenue', 'date')
+            ->toArray();
+
+        $total_revenue      = array_sum($sales);
+        $total_cost         = 0.9 * $total_revenue;
+        $total_profit       = $total_revenue - $total_cost;
+
+        return array(
+            'sales'     => $sales,
+            'total_revenue' => $total_revenue,
+            'total_cost'    => $total_cost,
+            'total_profit'  => $total_profit
+        );
     }
 
     /**
@@ -653,12 +702,137 @@ class AdminController extends Controller {
     {
         $orders = Order::orderBy('created_at', 'asc');
 
+        $q = $request->q;
+        if ($q != '') {
+            $orders->where('name', 'like', '%'.$q.'%');
+        }
+
         $orders = $orders->paginate(10);
 
         return view('admin/order_index', [
             'page_title'    => 'Order List',
             'orders'        => $orders,
         ]);
+    }
+
+    /**
+     * Display a list of banners.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function showBannerList(Request $request)
+    {
+        $banners = Banner::orderBy('created_at', 'asc');
+
+        $q = $request->q;
+        if ($q != '') {
+            $banners->where('name', 'like', '%'.$q.'%');
+        }
+
+        $banners = $banners->paginate(10);
+
+        return view('admin/banner_index', [
+            'page_title'    => 'Banner List',
+            'banners'       => $banners
+        ]);
+    }
+
+    /**
+     * Display a form to create a banner.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function createBanner(Request $request) 
+    {
+        return view('admin/banner_create', [
+            'page_title'   => 'Create Banner',
+        ]);
+    }
+
+    /**
+     * Display a form to edit a banner.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function editBanner(Request $request, Banner $banner) 
+    {
+        return view('admin/banner_edit', [
+            'page_title'   => 'Edit Banner',
+            'banner'       => $banner,
+        ]);
+    }
+
+    /**
+     * Create a new banner.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function storeBanner(Request $request)
+    {
+        $started_at = substr($request->banner_time, 0, 19);
+        $ended_at   = substr($request->banner_time, 22, 19);
+
+        $banner_id = Banner::create([
+            'name'      => $request->name,
+            'type'      => $request->type,
+            'link_url'  => $request->link_url,
+            'started_at' => $started_at,
+            'ended_at'   => $ended_at,
+            'status'    => 0
+        ])->id;
+
+        if ($request->hasFile('image') && $request->image->isValid()) {
+            $request->image->move(public_path('/images/banners'), md5('banner-'.$banner_id).'.jpg');
+        }
+
+        return redirect('admin/banners');
+    }
+
+    /**
+     * Edit banner.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function updateBanner(Request $request, Banner $banner)
+    {
+        $started_at = substr($request->banner_time, 0, 19);
+        $ended_at   = substr($request->banner_time, 22, 19);
+
+        $banner->update([
+            'name'      => $request->name,
+            'type'      => $request->type,
+            'link_url'  => $request->link_url,
+            'started_at' => $started_at,
+            'ended_at'   => $ended_at
+        ]);
+
+        if ($request->hasFile('image') && $request->image->isValid()) {
+            $request->image->move(public_path('/images/banners'), md5('banner-'.$banner->id).'.jpg');
+        }
+
+        return redirect('admin/banners');
+    }
+
+    /**
+     * Edit banner's status.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function updateStatusBanner(Request $request, Banner $banner)
+    {
+        $status = $request->status ? 1 : 0;
+
+        $banner->update([
+            'status' => $status,
+        ]);
+
+        return redirect('admin/banners');
     }
 
 }
