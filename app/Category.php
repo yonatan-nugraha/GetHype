@@ -12,8 +12,15 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-    	'name', 'description'
+    	'name', 'description', 'slug', 'status'
     ];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 
     /**
      * Get the events for the category.

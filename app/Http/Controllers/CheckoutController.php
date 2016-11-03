@@ -81,9 +81,10 @@ class CheckoutController extends Controller
             );
         }
 
-        $order = json_decode(Redis::get('order:'.auth()->id()));
+        $order_redis    = json_decode(Redis::get('order:'.auth()->id()));
+        $remaining_time = Redis::ttl('order:'.auth()->id());
 
-        if ($order == null || $order->order_amount == 0) {
+        if ($order_redis == null || $order_redis->order_amount == 0) {
             return array(
                 'success' => 0
             );
@@ -120,8 +121,8 @@ class CheckoutController extends Controller
             $validator->validate();
         }
 
-        $event          = $order->event;
-        $order_amount   = $order->order_amount;
+        $event          = $order_redis->event;
+        $order_amount   = $order_redis->order_amount;
         $administration_fee = $payment_fees[$payment_method];
         $payment_amount = $order_amount + $administration_fee;
 
@@ -134,14 +135,14 @@ class CheckoutController extends Controller
             'payment_status' => 0,
             'payment_amount'=> $payment_amount,
             'payment_method' => $payment_method,
-            'first_name'    => ucwords($request->first_name),
-            'last_name'     => ucwords($request->last_name),
+            'first_name'    => $request->first_name,
+            'last_name'     => $request->last_name,
             'email'         => $request->email,
             'phone'         => $request->phone,
         ])->id;
 
         $items = array();
-    	foreach ($order->order_details as $order_detail) {
+    	foreach ($order_redis->order_details as $order_detail) {
     		OrderDetail::create([
 	            'order_id' 			=> $order_id,
 	            'ticket_group_id' 	=> $order_detail->ticket_group->id,
@@ -167,8 +168,9 @@ class CheckoutController extends Controller
 
         $items[] = $item;
 
-        $order->order_id = $order_id;
-        Redis::set('order:'.auth()->id(), json_encode($order));
+        $order_redis->order_id = $order_id;
+        Redis::set('order:'.auth()->id(), json_encode($order_redis));
+        Redis::expire('order:'.auth()->id(), $remaining_time);
 
         $transaction_data = array(
             'enabled_payments' => array($payment_method),
@@ -192,9 +194,6 @@ class CheckoutController extends Controller
             'order_id' => $order_id,
             'token'     => $vt->getSnapToken($transaction_data)
         );
-
-        // $vtweb_url = $vt->vtweb_charge($transaction_data);
-        // return redirect($vtweb_url);
     }
 
     /**
@@ -214,9 +213,9 @@ class CheckoutController extends Controller
             );
         }
 
-        $order = json_decode(Redis::get('order:'.auth()->id()));
+        $order_redis = json_decode(Redis::get('order:'.auth()->id()));
 
-        if ($order == null || $order->order_amount > 0) {
+        if ($order_redis == null || $order_redis->order_amount > 0) {
             return array(
                 'success' => 0
             );
@@ -233,9 +232,9 @@ class CheckoutController extends Controller
             $validator->validate();
         }
 
-        $event          = $order->event;
-        $order_amount   = $order->order_amount;
-        $ticket_ids     = $order->ticket_ids;
+        $event          = $order_redis->event;
+        $order_amount   = $order_redis->order_amount;
+        $ticket_ids     = $order_redis->ticket_ids;
         $administration_fee = 0;
         $payment_amount = $order_amount + $administration_fee;
         $payment_method = 'free';
@@ -249,13 +248,13 @@ class CheckoutController extends Controller
             'payment_status' => 0,
             'payment_amount'=> $payment_amount,
             'payment_method'=> $payment_method,
-            'first_name'    => ucwords($request->first_name),
-            'last_name'     => ucwords($request->last_name),
+            'first_name'    => $request->first_name,
+            'last_name'     => $request->last_name,
             'email'         => $request->email,
             'phone'         => $request->phone,
         ])->id;
 
-        foreach ($order->order_details as $order_detail) {
+        foreach ($order_redis->order_details as $order_detail) {
             OrderDetail::create([
                 'order_id'          => $order_id,
                 'ticket_group_id'   => $order_detail->ticket_group->id,
@@ -286,8 +285,6 @@ class CheckoutController extends Controller
             'success' => 1,
             'order_id' => $order_id
         );
-
-        // return redirect('checkout/success?order_id='.$order_id);
     }
 
     /**

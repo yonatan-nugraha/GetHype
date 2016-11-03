@@ -16,6 +16,39 @@ class Order extends Model
     ];
 
     /**
+     * Set the order's first name.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setFirstNameAttribute($value)
+    {
+        $this->attributes['first_name'] = ucwords(trim(preg_replace('/\s+/', ' ', $value)));
+    }
+
+    /**
+     * Set the order's last name.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setLastNameAttribute($value)
+    {
+        $this->attributes['last_name'] = ucwords(trim(preg_replace('/\s+/', ' ', $value)));
+    }
+
+    /**
+     * Set the order's phone.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setPhoneAttribute($value)
+    {
+        $this->attributes['phone'] = trim(preg_replace('/\s+/', ' ', $value));
+    }
+
+    /**
      * Get the order details for the order.
      */
     public function order_details()

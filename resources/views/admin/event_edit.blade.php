@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group">
                         <label>Category</label>
-                        <select class="form-control" name=category required>
+                        <select class="form-control" name="category" required>
                             @foreach ($categories as $category)
                             <option value="{{ $category->id }}" @if ($event->category->id == $category->id) selected @endif>{{ $category->name }}</option>
                             @endforeach

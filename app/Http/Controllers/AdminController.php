@@ -109,7 +109,7 @@ class AdminController extends Controller {
     public function showUserList(Request $request)
     {
         return view('admin/user_index', [
-            'page_title'    => 'User List',
+            'page_title'    => 'User',
             'users'         => User::all()
         ]);
     }
@@ -123,7 +123,7 @@ class AdminController extends Controller {
     public function editUser(Request $request, User $user) 
     {
         return view('admin/user_edit', [
-            'page_title'   => 'Edit User',
+            'page_title'   => 'User',
             'user'         => $user,
         ]);
     }
@@ -196,7 +196,7 @@ class AdminController extends Controller {
         $events = $events->paginate(10);
 
         return view('admin/event_index', [
-            'page_title'    => 'Event List',
+            'page_title'    => 'Event',
             'events'        => $events,
             'collections'   => Collection::all()
         ]);
@@ -211,7 +211,7 @@ class AdminController extends Controller {
     public function createEvent(Request $request)
     {
         return view('admin/event_create', [
-            'page_title'    => 'Create Event',
+            'page_title'    => 'Event',
             'categories'    => Category::all(),
             'event_types'   => EventType::all()
         ]);
@@ -226,7 +226,7 @@ class AdminController extends Controller {
     public function editEvent(Request $request, Event $event) 
     {
         return view('admin/event_edit', [
-            'page_title'    => 'Edit Event',
+            'page_title'    => 'Event',
             'event'         => $event,
             'categories'    => Category::all(),
             'event_types'   => EventType::all()
@@ -468,7 +468,7 @@ class AdminController extends Controller {
         $collections = $collections->paginate(10);
 
         return view('admin/collection_index', [
-            'page_title'    => 'Collection List',
+            'page_title'    => 'Collection',
             'collections'   => $collections,
         ]);
     }
@@ -482,7 +482,7 @@ class AdminController extends Controller {
     public function createCollection(Request $request)
     {
         return view('admin/collection_create', [
-            'page_title'    => 'Create Collection',
+            'page_title'    => 'Collection',
         ]);
     }
 
@@ -495,7 +495,7 @@ class AdminController extends Controller {
     public function editCollection(Request $request, Collection $collection) 
     {
         return view('admin/collection_edit', [
-            'page_title'    => 'Edit Collection',
+            'page_title'    => 'Collection',
             'collection'    => $collection
         ]);
     }
@@ -599,7 +599,7 @@ class AdminController extends Controller {
         $journals = $journals->paginate(10);
 
         return view('admin/journal_index', [
-            'page_title'    => 'Journal List',
+            'page_title'    => 'Journal',
             'journals'      => $journals,
         ]);
     }
@@ -613,7 +613,7 @@ class AdminController extends Controller {
     public function createJournal(Request $request)
     {
         return view('admin/journal_create', [
-            'page_title'    => 'Create Journal',
+            'page_title'    => 'Journal',
         ]);
     }
 
@@ -626,7 +626,7 @@ class AdminController extends Controller {
     public function editJournal(Request $request, Journal $journal) 
     {
         return view('admin/journal_edit', [
-            'page_title'    => 'Edit Journal',
+            'page_title'    => 'Journal',
             'journal'         => $journal,
         ]);
     }
@@ -700,17 +700,46 @@ class AdminController extends Controller {
      */
     public function showOrderList(Request $request)
     {
-        $orders = Order::orderBy('created_at', 'asc');
+        
 
-        $q = $request->q;
-        if ($q != '') {
-            $orders->where('name', 'like', '%'.$q.'%');
+        $order_id       = $request->order_id;
+        $email          = $request->email;
+        $order_status   = $request->order_status;
+        $payment_status = $request->payment_status;
+
+        $order_date     = $request->order_date;
+        $start_date     = substr($order_date, 0, 10);
+        $end_date       = substr($order_date, 13, 19);
+
+        $orders = Order::join('users', 'users.id', '=', 'orders.user_id')
+            ->select('orders.*', 'users.email')
+            ->orderBy('orders.created_at', 'asc');
+
+        if ($order_id) {
+            $orders->where('orders.id', $order_id);
+        }
+
+        if ($email) {
+            $orders->where('users.email', $email);
+        }
+
+        if ($order_status != '' && $order_status != 'all') {
+            $orders->where('orders.order_status', $order_status);
+        }
+
+        if ($payment_status != '' && $payment_status != 'all') {
+            $orders->where('orders.payment_status', $payment_status);
+        }
+
+        if ($start_date && $end_date) {
+            $orders->whereDate('orders.created_at', '>=', $start_date);
+            $orders->whereDate('orders.created_at', '<=', $end_date);
         }
 
         $orders = $orders->paginate(10);
 
         return view('admin/order_index', [
-            'page_title'    => 'Order List',
+            'page_title'    => 'Order',
             'orders'        => $orders,
         ]);
     }
@@ -733,7 +762,7 @@ class AdminController extends Controller {
         $banners = $banners->paginate(10);
 
         return view('admin/banner_index', [
-            'page_title'    => 'Banner List',
+            'page_title'    => 'Banner',
             'banners'       => $banners
         ]);
     }
@@ -747,7 +776,7 @@ class AdminController extends Controller {
     public function createBanner(Request $request) 
     {
         return view('admin/banner_create', [
-            'page_title'   => 'Create Banner',
+            'page_title'   => 'Banner',
         ]);
     }
 
@@ -760,7 +789,7 @@ class AdminController extends Controller {
     public function editBanner(Request $request, Banner $banner) 
     {
         return view('admin/banner_edit', [
-            'page_title'   => 'Edit Banner',
+            'page_title'   => 'Banner',
             'banner'       => $banner,
         ]);
     }

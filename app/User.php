@@ -42,6 +42,50 @@ class User extends Authenticatable
     }
 
     /**
+     * Set the user's first name.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setFirstNameAttribute($value)
+    {
+        $this->attributes['first_name'] = ucwords(trim(preg_replace('/\s+/', ' ', $value)));
+    }
+
+    /**
+     * Set the user's last name.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setLastNameAttribute($value)
+    {
+        $this->attributes['last_name'] = ucwords(trim(preg_replace('/\s+/', ' ', $value)));
+    }
+
+    /**
+     * Set the user's phone.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setPhoneAttribute($value)
+    {
+        $this->attributes['phone'] = trim(preg_replace('/\s+/', ' ', $value));
+    }
+
+    /**
+     * Set the user's password.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt(trim($value));
+    }
+
+    /**
      * Get the photo for the user.
      */
     public function photo()
