@@ -57,6 +57,12 @@
                 </ul>
             </li>
             <li class="treeview">
+                <a href="#"><i class="fa fa-headphones"></i> <span>Tickets</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url('admin/tickets') }}"><i class="fa fa-circle-o"></i>Ticket List</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
                 <a href="#"><i class="fa fa-fire"></i> <span>Banners</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="{{ url('admin/banners') }}"><i class="fa fa-circle-o"></i>Banner List</a></li>

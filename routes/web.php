@@ -74,6 +74,9 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('banners', 'AdminController@showBannerList');
 	Route::get('banners/create', 'AdminController@createBanner');
 	Route::get('banners/{banner}/edit', 'AdminController@editBanner');
+
+	//tickets
+	Route::get('tickets', 'AdminController@showTicketList');
 });
 
 //accounts

@@ -181,7 +181,7 @@ $(function () {
                 dates.push(start_date_e);
                 sales.push((result.sales[start_date_s]) ? parseInt(result.sales[start_date_s]) : 0);
 
-                start_date.add(3, 'days');
+                start_date.add(1, 'days');
             }
 
             var salesChartCanvas = $("#salesChart").get(0).getContext("2d");

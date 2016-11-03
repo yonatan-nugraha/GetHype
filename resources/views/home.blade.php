@@ -82,6 +82,7 @@
                                 <i class="glyphicon glyphicon-bookmark"></i>
                             </span>
                             <select class="form-control search-type" name="event_type">
+                                <option value="all">All Event Types</option>
                                 @foreach ($event_types as $event_type)
                                 <option value="{{ $event_type->id }}">{{ $event_type->name }}</option>
                                 @endforeach
@@ -160,7 +161,7 @@
                 </div>
                 @endforeach
             </div>
-            @if (count($events) >= 8)
+            @if (count($events) > 8)
             <div class="view-more">
                 <a href="{{ url('events/search') }}">view more</a>
             </div>

@@ -39,12 +39,12 @@ class MessageController extends Controller
             'phone'     	=> 'max:20',
         ])->validate();
 
-        $subject    = trim($request->subject);
-        $description    = trim($request->description);
-        $first_name = trim($request->first_name);
-        $last_name  = trim($request->last_name);
-        $email      = trim($request->email);
-        $phone      = trim($request->phone);
+        $subject    = $request->subject;
+        $description    = $request->description;
+        $first_name = $request->first_name;
+        $last_name  = $request->last_name;
+        $email      = $request->email;
+        $phone      = $request->phone;
 
     	if ($request->cookie('message') == null) {
 	    	Message::create([

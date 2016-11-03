@@ -2,21 +2,58 @@
 
 @section('content')
 <div class="row">
-    <div class="col-xs-12">
+    <div class="col-md-12">
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Order List</h3>
-                <div class="box-tools">
-                    <form action="{{ url('admin/orders') }}" method="GET">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="q" class="form-control pull-right" placeholder="Search">
+                <form action="{{ url('admin/orders') }}" method="GET" class="form-horizontal" style="margin-top: 10px;">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">Order</label>
+                            <div class="col-sm-2">
+                                <input type="number" class="form-control" name="order_id" value="{{ Request::get('order_id') }}" placeholder="Order ID">
+                            </div>
 
-                            <div class="input-group-btn">
-                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            <label class="col-sm-2 control-label">Order Status</label>
+                            <div class="col-sm-2">
+                                <select class="form-control" name="order_status">
+                                    <option value="all" @if (Request::get('order_status') == 'all') selected @endif>All</option>
+                                    <option value="0" @if (Request::get('order_status') == '0') selected @endif>Unprocessed</option>
+                                    <option value="1" @if (Request::get('order_status') == '1') selected @endif>Pending</option>
+                                    <option value="2" @if (Request::get('order_status') == '2') selected @endif>Success</option>
+                                </select>
                             </div>
                         </div>
-                    </form>
-                </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">Email</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" name="email" value="{{ Request::get('email') }}" placeholder="Email">
+                            </div>
+
+                            <label class="col-sm-2 control-label">Payment Status</label>
+                            <div class="col-sm-2">
+                                <select class="form-control" name="payment_status">
+                                    <option value="all" @if (Request::get('payment_status') == 'all') selected @endif>All</option>
+                                    <option value="0" @if (Request::get('payment_status') == '0') selected @endif>Unprocessed</option>
+                                    <option value="1" @if (Request::get('payment_status') == '1') selected @endif>Cancelled</option>
+                                    <option value="2" @if (Request::get('payment_status') == '2') selected @endif>Pending</option>
+                                    <option value="3" @if (Request::get('payment_status') == '3') selected @endif>Challenged</option>
+                                    <option value="4" @if (Request::get('payment_status') == '4') selected @endif>Success</option>
+                                    <option value="5" @if (Request::get('payment_status') == '5') selected @endif>Settled</option>
+                                    <option value="6" @if (Request::get('payment_status') == '6') selected @endif>Expired</option>
+                                    <option value="7" @if (Request::get('payment_status') == '7') selected @endif>Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">Date</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control order-time" name="order_date" value="{{ Request::get('order_date') }}" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
             </div>
             <div class="box-body">
                 <div class="box-body">
@@ -76,7 +113,7 @@
                                         <span class="badge bg-blue">Others</span>
                                         @endif<br>
 
-                                    {{ 'Rp '. number_format($order->order_amount) }}<br>
+                                    {{ 'Rp '. number_format($order->payment_amount) }}<br>
 
                                     @if ($order->payment_method == 'bank_transfer')
                                         Bank Transfer
@@ -110,6 +147,12 @@
 <script>
 $(function () {
     $('.pagination').addClass('pagination-sm no-margin pull-right');
+
+    $('.order-time').daterangepicker({
+        locale: {
+            format: 'YYYY-MM-DD'
+        }
+    });
 });
 </script>
 @endsection

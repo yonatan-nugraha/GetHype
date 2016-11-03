@@ -91,10 +91,10 @@ class AccountController extends Controller
         }
 
         $request->user()->update([
-            'first_name'    => ucwords(trim($request->first_name)),
-            'last_name'     => ucwords(trim($request->last_name)),
-            'email'         => trim($request->email),
-            'phone'         => trim($request->phone),
+            'first_name'    => $request->first_name,
+            'last_name'     => $request->last_name,
+            'email'         => $request->email,
+            'phone'         => $request->phone,
             'gender'        => $request->gender,
             'birthdate'     => $request->birthdate,
         ]);
@@ -131,7 +131,7 @@ class AccountController extends Controller
         }
 
         $request->user()->update([
-            'password'  => bcrypt(trim($request->new_password)),
+            'password'  => $request->new_password,
         ]);
 
         return redirect('/account/settings#change-password');

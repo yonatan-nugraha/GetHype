@@ -21,7 +21,7 @@ use App\EventCollection;
 use App\Guest;
 use App\Banner;
 
-use DB, Carbon\Carbon;
+use DB, Carbon\Carbon, Cache;
 
 class EventController extends Controller
 {
@@ -127,7 +127,7 @@ class EventController extends Controller
         if ($order_details == null) {
             return array(
                 'success'   => 0,
-                'message'   => 'Please select the quantity of the ticket that you would like to buy :)'
+                'message'   => 'Please select the quantity of the ticket that you would like to buy.'
             );
         }
 
@@ -157,7 +157,7 @@ class EventController extends Controller
 
         return array(
             'success'   => 1,
-            'message'   => 'Please select the quantity of the ticket that you would like to buy.'
+            'message'   => 'Please do checkout.'
         );
     }
 
@@ -202,7 +202,7 @@ class EventController extends Controller
 
         if ($price && $price != 'all') {
             if ($price == 'free') {
-                $events->havingRaw('sum(ticket_groups.price) is null');
+                $events->havingRaw('sum(ticket_groups.price) = 0 or sum(ticket_groups.price) is null');
             } 
             else if ($price == 'paid') {
                 $events->havingRaw('sum(ticket_groups.price) > 0');
@@ -212,24 +212,21 @@ class EventController extends Controller
         $events = $events->paginate(2);
         $events->setPath('search?category='.$category.'&event_type='.$event_type.'&location='.$location.'&date='.$date.'&price='.$price);
 
-        $carousel_banners = Banner::where('status', 1)
-            ->where('type', 3)
-            ->where('started_at', '<=', Carbon::now())
-            ->where('ended_at', '>=', Carbon::now())
-            ->orderBy('weight', 'desc')
-            ->take(5)
-            ->get();
+        $carousel_banners = Cache::remember('carousel_banners_search', 24*60, function() {
+            return Banner::where('status', 1)
+                ->where('type', 3)
+                ->where('started_at', '<=', Carbon::now())
+                ->where('ended_at', '>=', Carbon::now())
+                ->orderBy('weight', 'desc')
+                ->take(5)
+                ->get();
+        });
 
         return view('events/search', [
             'events'        => $events,
             'categories'    => Category::all(),
             'event_types'   => EventType::all(),
             'locations'     => ['Jakarta', 'Bandung', 'Surabaya', 'Bali'],
-            'category_id'   => $category,
-            'event_type_id' => $event_type,
-            'location'      => $location,
-            'date'          => $date,
-            'price'         => $price,
             'carousel_banners' => $carousel_banners
         ]);
     }

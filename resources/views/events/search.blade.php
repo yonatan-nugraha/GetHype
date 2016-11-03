@@ -47,28 +47,28 @@
                 <select class="form-control search-category" name="category">
                     <option value="all">All Categories</option>
                     @foreach ($categories as $category)
-                    <option value="{{ $category->id }}" @if ($category_id == $category->id) selected @endif>{{ $category->name }}</option>
+                    <option value="{{ $category->id }}" @if (Request::get('category') == $category->id) selected @endif>{{ $category->name }}</option>
                     @endforeach
                 </select>
                 <select class="form-control search-type" name="event_type">
-                    <option value="all">All Event Type</option>
+                    <option value="all">All Event Types</option>
                     @foreach ($event_types as $event_type)
-                    <option value="{{ $event_type->id }}" @if ($event_type_id == $event_type->id) selected @endif>{{ $event_type->name }}</option>
+                    <option value="{{ $event_type->id }}" @if (Request::get('event_type') == $event_type->id) selected @endif>{{ $event_type->name }}</option>
                     @endforeach
                 </select>
                 <select class="form-control search-location" name="location">
                     <option value="all">All Cities</option>
-                    @foreach ($locations as $loc)
-                    <option value="{{ $loc }}" @if ($location == $loc) selected @endif>{{ $loc }}</option>
+                    @foreach ($locations as $location)
+                    <option value="{{ $location }}" @if (Request::get('location') == $location) selected @endif>{{ $location }}</option>
                     @endforeach
                 </select>
                 <div>
-                    <input type="date" data-date="" data-date-format="DD MMMM YYYY" class="form-control search-date" name="date" value="{{ $date }}">
+                    <input type="date" data-date="" data-date-format="DD MMMM YYYY" class="form-control search-date" name="date" value="{{ Request::get('date') }}">
                 </div>
                 <select class="form-control search-price" name="price">
                     <option value="all">All Price</option>
-                    <option value="free" @if ($price == 'free') selected @endif>Free</option>
-                    <option value="paid" @if ($price == 'paid') selected @endif>Paid</option>
+                    <option value="free" @if (Request::get('price') == 'free') selected @endif>Free</option>
+                    <option value="paid" @if (Request::get('price') == 'paid') selected @endif>Paid</option>
                 </select>
                 <button type="submit" class="btn btn-primary search-submit">Search</button>
             </form>

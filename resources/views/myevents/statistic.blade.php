@@ -1,5 +1,5 @@
 @section('styles')
-<link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css">
+<link rel="stylesheet" href="{{ asset('css/daterangepicker.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/myevent-statistic.css') }}">
 @endsection
 
@@ -22,7 +22,7 @@
 	<p class="filter-title">Filter by:</p>
 	<div class="form-group">
         <div class="input-group">
-          	<button type="button" class="btn btn-default pull-right" id="daterange">
+          	<button type="button" class="btn btn-default" id="daterange">
             	<span>
               		<i class="fa fa-calendar"></i> Date Range
             	</span>
@@ -197,7 +197,7 @@
 
 @section('scripts')
 <script type="text/javascript" src="{{ asset('js/moment.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/daterangepicker.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/daterangepicker.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/highcharts.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/exporting.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/myevent.js') }}"></script>

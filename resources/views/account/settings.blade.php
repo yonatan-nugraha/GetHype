@@ -83,7 +83,7 @@
 					    	</div>
 					    	<div class="row">
 						    	<div class="form-group col-xs-12 col-sm-5 col-md-5">
-						    		<input type="text" class="form-control" name="email" placeholder="Email" value="{{ Auth::user()->email }}">
+						    		<input type="email" class="form-control" name="email" placeholder="Email" value="{{ Auth::user()->email }}">
 						    		@if ($errors->has('email'))
 			                            <span class="help-block">
 			                                <p>{{ $errors->first('email') }}</p>
