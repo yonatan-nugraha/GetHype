@@ -87,14 +87,13 @@ class LoginController extends Controller
      */
     public function redirectToProvider(Request $request, $provider)
     {
+        if ($provider == 'facebook') {
+            return Socialite::driver($provider)->scopes([
+                'user_birthday'
+            ])->redirect();
+        }
         return Socialite::driver($provider)
             ->redirect();
-
-        // return Socialite::driver('facebook')->fields([
-        //     'first_name', 'last_name', 'email', 'gender', 'birthday'
-        // ])->scopes([
-        //     'email', 'user_birthday'
-        // ])->redirect();
     }
 
     /**
@@ -108,7 +107,8 @@ class LoginController extends Controller
         $provider_user;
         $first_name     = '';
         $last_name      = '';
-        $birthdate_format = 'Y-m-d';
+        $birthdate_format = '';
+        $birthdate      = '';
 
         if ($provider == 'facebook') {
             $provider_user = Socialite::with($provider)->fields([
@@ -118,12 +118,15 @@ class LoginController extends Controller
             $first_name = $provider_user->user['first_name'];
             $last_name  = $provider_user->user['last_name'];
             $birthdate_format = 'm/d/Y';
+            $birthdate  = isset($provider_user->user['birthday']) ? $provider_user->user['birthday'] : '01/01/1991';
         }
         else if ($provider == 'google') {
             $provider_user = Socialite::with($provider)->user();
 
             $first_name = $provider_user->user['name']['givenName'];
             $last_name  = $provider_user->user['name']['familyName'];
+            $birthdate_format = 'Y-m-d';
+            $birthdate  = isset($provider_user->user['birthday']) ? $provider_user->user['birthday'] : '1991-01-01';
         }
         else {
             return redirect('');
@@ -132,7 +135,6 @@ class LoginController extends Controller
         $provider_user_id  = $provider_user->id;
         $email      = $provider_user->email;
         $gender     = ($provider_user->user['gender'] == 'male') ? 1 : 2;
-        $birthdate  = $provider_user->user['birthday'];
 
         $valid_date = $birthdate ? Carbon::createFromFormat($birthdate_format, $birthdate) : '';
         if ($valid_date && $valid_date->format($birthdate_format) == $birthdate) {

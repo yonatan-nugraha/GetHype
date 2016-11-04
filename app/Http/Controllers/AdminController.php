@@ -700,8 +700,6 @@ class AdminController extends Controller {
      */
     public function showOrderList(Request $request)
     {
-        
-
         $order_id       = $request->order_id;
         $email          = $request->email;
         $order_status   = $request->order_status;
@@ -741,6 +739,57 @@ class AdminController extends Controller {
         return view('admin/order_index', [
             'page_title'    => 'Order',
             'orders'        => $orders,
+        ]);
+    }
+
+    /**
+     * Display a list of tickets.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function showTicketList(Request $request)
+    {
+        $code       = $request->code;
+        $order_id   = $request->order_id;
+        $email      = $request->email;
+        $status     = $request->status;
+
+        $order_date = $request->order_date;
+        $start_date = substr($order_date, 0, 10);
+        $end_date   = substr($order_date, 13, 19);
+
+        $tickets = Ticket::leftJoin('orders', 'tickets.order_id', '=', 'orders.id')
+            ->leftJoin('users', 'orders.user_id', 'users.id')
+            ->select('tickets.*', 'users.email')
+            ->orderBy('tickets.id', 'asc');
+
+        if ($code) {
+            $tickets->where('tickets.code', $code);
+        }
+
+        if ($order_id) {
+            $tickets->where('tickets.order_id', $order_id);
+        }
+
+        if ($email) {
+            $tickets->where('users.email', $email);
+        }
+
+        if ($status != '' && $status != 'all') {
+            $tickets->where('tickets.status', $status);
+        }
+
+        if ($start_date && $end_date) {
+            $tickets->whereDate('tickets.updated_at', '>=', $start_date);
+            $tickets->whereDate('tickets.updated_at', '<=', $end_date);
+        }
+
+        $tickets = $tickets->paginate(10);
+
+        return view('admin/ticket_index', [
+            'page_title'    => 'Ticket',
+            'tickets'       => $tickets,
         ]);
     }
 

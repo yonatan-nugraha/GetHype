@@ -28,12 +28,8 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
 
         $schedule->command('tickets:unbook')
-        ->everyMinute()
-        ->appendOutputTo('log.txt');
-
-        // $schedule->command('queue:work')
-        // ->everyMinute()
-        // ->appendOutputTo('log.txt');
+            ->everyThirtyMinutes()
+            ->appendOutputTo('logs/unbook_tickets.txt');
     }
 
     /**
