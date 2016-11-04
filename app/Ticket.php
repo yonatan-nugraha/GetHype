@@ -22,4 +22,12 @@ class Ticket extends Model
     {
         return $this->belongsTo(TicketGroup::class);
     }
+
+    /**
+     * Get the order that owns the ticket.
+     */
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }

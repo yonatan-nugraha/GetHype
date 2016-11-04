@@ -51,7 +51,8 @@
                                 <input type="text" class="form-control order-time" name="order_date" value="{{ Request::get('order_date') }}" required>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Search</button>
+                        <a href="{{ url('/admin/orders') }}"><button type="button" class="btn btn-primary">Clear</button></a>
+                        <button type="submit" class="btn btn-success">Search</button>
                     </div>
                 </form>
             </div>

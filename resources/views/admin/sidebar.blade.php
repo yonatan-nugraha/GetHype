@@ -26,8 +26,11 @@
             <li>
                 <a href="{{ url('admin') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
             </li>
-            <li>
-                <a href="{{ url('admin/users') }}"><i class="fa fa-blind"></i> <span>Users</span></a>
+            <li class="treeview">
+                <a href="#"><i class="fa fa-blind"></i> <span>Users</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url('admin/users') }}"><i class="fa fa-circle-o"></i>User List</a></li>
+                </ul>
             </li>
             <li class="treeview">
                 <a href="#"><i class="fa fa-rocket"></i> <span>Events</span> <i class="fa fa-angle-left pull-right"></i></a>
@@ -56,7 +59,7 @@
                     <li><a href="{{ url('admin/orders') }}"><i class="fa fa-circle-o"></i>Order List</a></li>
                 </ul>
             </li>
-            <li class="treeview">
+            <li>
                 <a href="#"><i class="fa fa-headphones"></i> <span>Tickets</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="{{ url('admin/tickets') }}"><i class="fa fa-circle-o"></i>Ticket List</a></li>
