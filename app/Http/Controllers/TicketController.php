@@ -54,7 +54,7 @@ class TicketController extends Controller
 
         $pdf = PDF::loadView('pdfs.invoice', ['order' => $order])->setPaper('a4');
 
-        return $pdf->stream('invoice.pdf');
+        return $pdf->download('invoice.pdf');
     }
 
     /**
