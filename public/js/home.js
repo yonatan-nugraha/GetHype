@@ -112,4 +112,24 @@ $(document).ready(function() {
 	});
 
 	$('input[name="date"').trigger('change');
+
+	//services
+	$('.btn-create').on('click',function(){
+    if($(this).closest('.service-content').hasClass('service-content-right')){
+        $(this).closest('.service-list').find('.service-img').css('margin-left','-30%');
+        $(this).closest('.service-list').find('.service-content').css('width','80%');
+        $(this).closest('.content').find('.content-default').hide();
+        $(this).closest('.content').find('.content-form').show();
+    }
+    else{
+        $(this).closest('.service-list').find('.service-img').css('margin-right','-30%');
+        $(this).closest('.service-list').find('.service-content').css('width','80%');
+        $(this).closest('.content').find('.content-default').hide();
+        $(this).closest('.content').find('.content-form').show();            }
+    });
+
+	//help
+    $('.help-list-button').on('click',function(){
+        $(this).closest('.help-list').find('.help-list-content').slideToggle();
+    });
 });

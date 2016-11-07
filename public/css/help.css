@@ -1,0 +1,40 @@
+.help-list{
+	clear: both;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.help-list-button{
+	background: #0f3844;
+	color: #fff;
+	padding: 8px 10px;
+	cursor: pointer;
+}
+
+.help-list-button .caret{
+	display: inline-block;
+	margin-top: 8px;
+}
+
+.help{
+	margin: 30px auto;
+}
+
+.help-list-content{
+	clear:both;
+	padding:10px;
+	line-height: 24px;
+}
+
+.help-list-content-title{
+	font-weight: bold;
+	margin-bottom: 10px;
+	font-size: 16px;
+}
+
+.help-list-content-text{
+	padding-left: 20px;
+}
+
+.help-list-content-list{
+	margin-bottom: 20px;
+}

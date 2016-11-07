@@ -11,6 +11,7 @@ use App\EventType;
 use App\Collection;
 use App\Journal;
 use App\Banner;
+use App\Order;
 
 use DB, Carbon\Carbon, Cache;
 
@@ -140,10 +141,13 @@ class HomeController extends Controller
     public function email(Request $request)
     {
         $user = User::find(1);
+        $order = Order::find(1);
 
         $q = $request->q;
         if ($q == 'welcome') {
-            return view('emails/welcome');
+            return view('emails/welcome', [
+                'user' => $user,
+            ]);
         }
         else if ($q == 'activate_account') {
             return view('emails/activate_account', [
@@ -160,6 +164,7 @@ class HomeController extends Controller
         else if ($q == 'checkout_success') {
             return view('emails/checkout_success', [
                 'user' => $user,
+                'order'  => $order,
             ]);
         }
         else if ($q == 'email_blast') {

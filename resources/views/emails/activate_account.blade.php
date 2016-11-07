@@ -2,6 +2,18 @@
 <html lang="en">
 <body>
 	<div style="font-family: arial,helvetica neue,helvetica,sans-serif; font-size: 14px; background: #fff; line-height: 1.5; border: 2px solid #eceded; background: #fff; width: 100%; max-width: 600px; margin: 0 auto;">
+
+		<table style="border-spacing: 10px; width: 100%; background-color: #0f3844">
+			<tbody>
+				<tr>
+					<td align="center">
+						<span style="color: #fff; font-size: 16px;"> Gethype
+						</span> 
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
 		<div>
 			<img src="http://gethype.co.id/images/emails/activation.jpg" width="100%" alt="banner">
 		</div>
@@ -20,33 +32,33 @@
 			<tbody>
 				<tr>
 					<td style="margin: 0; padding: 0; width: 45%; text-align: center">
-						<div style="color:#606060; font-size:12px">Ikuti Kami :<br>
+						<div style="margin-bottom: 10px;margin-top: 20px;"><img src="http://gethype.co.id/images/emails/logo-footer-email.png" alt=""></div>
+						<div style="color:#606060; font-size:12px;line-height: 30px;">
+							<a href="http://gethype.co.id/" target="_blank" style="text-decoration: none; color:#0f3844;">Website</a> &nbsp;|&nbsp; <a href="http://gethype.co.id/contact-us" target="_blank" style="text-decoration: none; color:#0f3844;">Contact</a> &nbsp;|&nbsp; <a href="http://gethype.co.id/services" target="_blank" style="text-decoration: none; color:#0f3844;">Service</a><br>
 							<a href="" target="_blank" style="text-decoration:none">
-								<img src="http://gethype.co.id/images/emails/facebook.png" style="margin-top: 5px; width: 25px"> 
+								<img src="http://gethype.co.id/images/emails/facebook.png" style="margin-top: 5px; height: 15px;margin-right: 15px;"> 
 							</a>
 							<a href="" target="_blank" style="text-decoration:none">
-								<img src="http://gethype.co.id/images/emails/twitter.png" style="margin-top: 5px; width: 25px"> 
+								<img src="http://gethype.co.id/images/emails/twitter.png" style="margin-top: 5px; height: 15px;margin-right: 10px;"> 
+							</a>
+							<a href="https://www.instagram.com/gethype.id/" target="_blank" style="text-decoration:none">
+								<img src="http://gethype.co.id/images/emails/instagram.png" style="margin-top: 5px; height: 15px;margin-right: 10px;"> 
 							</a>
 							<a href="" target="_blank" style="text-decoration:none">
-								<img src="http://gethype.co.id/images/emails/instagram.png" style="margin-top: 5px; width: 25px"> 
+								<img src="http://gethype.co.id/images/emails/linkedin.png" style="margin-top:5px; height: 15px;"> 
 							</a>
-							<a href="" target="_blank" style="text-decoration:none">
-								<img src="http://gethype.co.id/images/emails/linkedin.png" style="margin-top:5px; width: 25px"> 
-							</a>
+							<br>
 						</div>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 
-		<table style="border-spacing: 10px; width: 100%; background-color: #f7f7f7">
+		<table style="border-spacing: 10px; width: 100%; background-color: #0f3844">
 			<tbody>
 				<tr>
-					<td>
-						<a href="" target="_blank" style="text-decoration: none">
-							<img src="http://gethype.co.id/images/logo-dark.png" style="width: 20px; vertical-align: middle;">
-						</a>
-						<span style="color: #91908e; font-size: 12px; font-weight: normal; margin: 0; padding-left: 5px"> 2016 © Gethype
+					<td align="center">
+						<span style="color: #fff; font-size: 12px;"> 2016 | Gethype.co.id
 						</span> 
 					</td>
 				</tr>

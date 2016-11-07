@@ -9,7 +9,7 @@
 </head>
 
 <body>
-	@foreach ($order->order_details as $order_detail)
+	@foreach ($tickets as $ticket)
 	<div class="ticket page-break">
 		<div class="left-side">
 			<span class="ticket-corner corner-a"></span>
@@ -18,7 +18,7 @@
             <span class="ticket-corner corner-d"></span>
 
 			<h1>
-				<span class="qty">{{ $order_detail->quantity }}</span>Ticket
+				<span class="qty">1</span>Ticket
 			</h1>
 			<h3>{{ $order->event->name }}</h3>
 			<p>{!! nl2br(e($order->event->location)) !!}</p>
@@ -42,7 +42,7 @@
 
 			<div class="time-order">
 				<small class="label-title">Order Time</small>
-				<p class="value">{{ Carbon\Carbon::parse($order->event->started_at)->format('g.i A') }}</p>
+				<p class="value">{{ Carbon\Carbon::parse($order->created_at)->format('g.i A') }}</p>
 			</div>
 
 			<div class="payment-status">
@@ -54,7 +54,7 @@
 			
 			<div class="ticket-type">
 				<small class="label-title">Ticket Type</small>
-				<p class="value">{{ $order_detail->ticket_group->name }}</p>
+				<p class="value">{{ $ticket->ticket_group->name }}</p>
 			</div>
 
 			<div class="order-code">
@@ -65,8 +65,8 @@
 			<div class="clearfix"></div>
 
 			<div class="barcode">
-				<img src="data:image/png;base64,{{DNS1D::getBarcodePNG('8696-9164-2345-2232', 'C128')}}" alt="barcode" /><br>
-				<p>5389-1649-1927-1235-2587</p>
+				<img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($ticket->code, 'C128') }}" alt="barcode" /><br>
+				<p>{{ $ticket->code }}</p>
 			</div>
 		</div>
 	</div>

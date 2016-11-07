@@ -146,7 +146,7 @@
                                 <div class="event-caption-head">
                                     <span class="event-name">{{ $event->name }}</span>
                                 </div>
-                                <span class="event-time clearfix">{{ Carbon\Carbon::parse($event->started_at)->format('l, M d, Y | g.i A') }}</span>
+                                <span class="event-time clearfix">{{ Carbon\Carbon::parse($event->started_at)->format('l, M d, Y | h.i A') }}</span>
                                 <p class="event-price">
                                     @if ($event->min_price == 0 && $event->max_price == 0) Free
                                     @elseif ($event->min_price == 0 && $event->max_price > 0) IDR {{ $event->max_price/1000 . 'K' }} 
