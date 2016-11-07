@@ -26,9 +26,9 @@
 				<tr>
 					<td width="50%" style="border-right: 1px dashed #0f3844;">
 						<p style="text-transform: uppercase; letter-spacing: 0.1em; font-size: 10px;">Order Summary</p>
-						<h3 style="font-size: 50px; margin-top:30px;margin-bottom: 0;line-height: 25px; color: #ebd58e; ">2<span style="font-size: 16px; margin-left: 5px;">Tickets</span></h3>
+						<h3 style="font-size: 50px; margin-top:30px;margin-bottom: 0;line-height: 25px; color: #ebd58e; ">{{ $quantity }}<span style="font-size: 16px; margin-left: 5px;">Tickets</span></h3>
 						<p style="margin-top: 5px; margin-bottom: 0px; font-size: 22px; line-height: 26px;">{{ $order->event->name }}</p>
-						<p style="margin-top: 0px; font-size: 12px; color: #0f3844;">Order #: {{ $order->id }}</p>
+						<p style="margin-top: 3px; font-size: 12px; color: #0f3844;">Order #: {{ $order->id }}</p>
 						<p style="margin-top: 0px; font-size: 14px; margin-bottom: 0; line-height: 1.3;">{!! nl2br(e($order->event->location)) !!}</p>
 						<p style="margin-top: 10px; font-size: 14px; margin-bottom: 0; line-height: 1.3;">{{ Carbon\Carbon::parse($order->event->started_at)->format('l, M d, Y') }}</p>
 						<p style="margin-top: 0px; font-size: 14px; margin-bottom: 0;">{{ Carbon\Carbon::parse($order->event->started_at)->format('h.i A') }}</p>
@@ -57,7 +57,7 @@
 									Sub Total
 								</td>
 								<td align="right" style="border-bottom: 1px dashed #a8a8a8; padding-bottom: 10px;">
-									{{ 'Rp '.$order->order_amount }}
+									{{ 'Rp '.number_format($order->order_amount) }}
 								</td>
 							</tr>
 
@@ -74,7 +74,7 @@
 									Administration Fee
 								</td>
 								<td align="right" style="">
-									{{ 'Rp '.$order->administration_fee }}
+									{{ 'Rp '.number_format($order->administration_fee) }}
 								</td>
 							</tr>
 							<tr >
@@ -94,7 +94,7 @@
 									Grand Total
 								</td>
 								<td align="right">
-									{{ 'Rp '. $order->payment_amount }}
+									{{ 'Rp '. number_format($order->payment_amount) }}
 								</td>
 							</tr>
 						</table>

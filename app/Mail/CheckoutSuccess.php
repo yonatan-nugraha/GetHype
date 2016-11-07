@@ -60,10 +60,13 @@ class CheckoutSuccess extends Mailable
             'tickets' => $tickets
         ])->setPaper('a4')->output();
 
+        $quantity = array_sum($this->order->order_details->pluck('quantity')->toArray());
+
         return $this->view('emails.checkout_success')
             ->with([
-                'user' => $this->user,
+                'user'   => $this->user,
                 'order'  => $this->order,
+                'quantity' => $quantity
             ])
             ->from('support@gethype.co.id', 'Gethype')
             ->subject('Checkout Success')
