@@ -1,19 +1,117 @@
-.invoice-header, .invoice-contact, .invoice-payment {
+body{
+	width: 650px;
+	margin: 0 auto !important;
+}
+
+.invoice-header {
 	border-bottom: 1px solid black;
-	padding-bottom: 20px;
+	padding-bottom: 0;
 	margin-bottom: 30px;
+}
+
+.invoice-header table {
+	margin-bottom: 20px;
+}
+
+.invoice-header tbody tr td {
+	border: 0;
+}
+
+.logo{
+	padding-left: 0 !important;
+	width: 15%;
 }
 
 .logo img {
-	width: 120px;
+	width: 107px;
+}
+
+.address {
+	width: 35%;
+	padding-top: 80px !important;
+}
+
+.phone {
+	width: 20%;
+	padding-top: 80px !important;
+}
+
+.web {
+	width: 15%;
+	padding-top: 100px !important;
+	text-align: right;
+}
+
+.invoice-contact {
+	border-bottom: 1px solid black;
+	padding-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 .invoice-bottom {
-	margin-top: 100px;
-	margin-bottom: 30px;
+	margin-top: 30px;
 	text-align: center;
+}
+
+.invoice-purchase{
+	margin-top: 20px;
+}
+
+.invoice-payment p.title{
+	padding-left: 10px;
+}
+
+.invoice-purchase p.title{
+	padding-left: 10px;
+
 }
 
 .page-break {
     page-break-after: always;
+}
+
+.table-customer-detail tbody tr td{
+	border:0;
+}
+
+.table-invoice-payment thead tr th{
+	border-top: 1px solid black !important;
+	border-bottom: 1px solid black;
+	padding: 10px;
+}
+
+.table-invoice-payment tbody tr td{
+	border-bottom: 1px solid black;
+	background: #f1f3f3;
+	padding: 15px 10px;
+}
+
+.table-invoice-purchase thead tr th{
+	border-top: 1px solid black !important;
+	border-bottom: 1px solid black;
+	padding: 10px;
+}
+
+.table-invoice-purchase tbody tr td{
+	padding: 15px 10px;
+	border-bottom: 1px solid black;
+}
+
+.table-invoice-purchase tbody tr:nth-child(odd){
+	background: #f3f3f3;
+}
+
+.table-invoice-purchase tbody tr.total.border-top{
+	border-top: 1px solid black;
+}
+.table-invoice-purchase tbody tr.total{
+	background: #fff;
+}
+
+.table-invoice-purchase tbody tr.total td{
+	border-bottom: 1px solid black
+}
+
+.table-invoice-purchase tbody tr.total td.no-border{
+	border:0;
 }

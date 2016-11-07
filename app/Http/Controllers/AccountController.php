@@ -99,7 +99,8 @@ class AccountController extends Controller
             'birthdate'     => $request->birthdate,
         ]);
 
-        return redirect('/account/settings');
+        return redirect('/account/settings')
+            ->with('profile_updated', 1);
     }
 
     /**
@@ -134,7 +135,8 @@ class AccountController extends Controller
             'password'  => $request->new_password,
         ]);
 
-        return redirect('/account/settings#change-password');
+        return redirect('/account/settings#change-password')
+            ->with('password_updated', 1);
     }
 
     /**

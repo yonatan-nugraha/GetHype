@@ -5,8 +5,7 @@
 @endsection
 
 @section('content')
-<div class="col-md-12 no-padding main-banner" >
-    <img src="{{ url('images/journals/banner-journal.jpg') }}">
+<div class="col-md-12 no-padding main-banner" style="background:url('{{ asset('images/journals/banner-journal.jpg') }}') center center no-repeat;">
     <div class="caption-banner">
         <p>We are inspiring one another by stories that we write in our journal.</p>
         <p>We bring you the joy of a blissful events that happen around us.</p>
@@ -20,15 +19,15 @@
             <div class="form-group journal-search">
                 <div class="input-group">
                   	<div class="input-group-btn">
-                    	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Archive <span class="caret"></span></button>
-                		<ul class="dropdown-menu">
-                  			<li><a href="#">Action</a></li>
-                  			<li><a href="#">Another action</a></li>
-                  			<li><a href="#">Something else here</a></li>
-                  			<li role="separator" class="divider"></li>
-                  			<li><a href="#">Separated link</a></li>
-                		</ul>
-                  	</div>
+                    	<div class="select">
+                            <select class="form-control">
+                                <option value="">Archive</option>
+                                <option value="">Archive</option>
+                                <option value="">Archive</option>
+                            </select>
+                            <span class="caret"></span>
+                        </div>
+                    </div>
                   	<input type="text" class="form-control journal-search-input" name="tag">
                   	<button class="btn btn-primary journal-search-button">Search</button>
                 </div>
@@ -58,8 +57,8 @@
         @endforeach
     </div>
     
-    <div class="pull-right">
+    <nav class="paging"> 
         {{ $journals->links() }}
-    </div>
+    </nav>
 </div>
 @endsection

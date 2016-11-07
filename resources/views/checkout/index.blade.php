@@ -29,6 +29,8 @@
 						  	<span class="error-block" id="last-name-error"></span>
 						</div>
 
+						<div class="clearfix"></div>
+
 						<div class="form-group col-xs-12 col-sm-5 col-md-5">
 						  	<label class="control-label">Email</label>
 						  	<input class="form-control" type="email" name="email" value="{{ Auth::user()->email }}">
@@ -51,44 +53,33 @@
 				  	</div>
 				  	<div class="panel-body">
 				    	<div class="thumbnail payment-box @if ($order_amount == 0) payment-disabled @endif" id="bank_transfer">
-				    		<img src="{{ asset('/images/payments/jcb.png') }}">
+				    		<div class="payment-bank">
+                                <i class="icon-payment-bank glyphicon glyphicon-credit-card"></i>
+                                <p>Transfer Bank</p>
+                            </div>
 				    	</div>
 				    	<div class="thumbnail payment-box @if ($order_amount == 0) payment-disabled @endif" id="credit_card">
 				    		<img src="{{ asset('/images/payments/visa.png') }}">
+				    		<img src="{{ asset('/images/payments/mastercard.png') }}">
+				    		<img class="jcb" src="{{ asset('/images/payments/jcb.png') }}">
 				    	</div>
-				    	<div class="thumbnail payment-box @if ($order_amount == 0) payment-disabled @endif" id="bca_klikpay">
-				    		<img src="{{ asset('/images/payments/bca_klikpay.png') }}">
-				    	</div>
-				    	<div class="thumbnail payment-box @if ($order_amount == 0) payment-disabled @endif" id="mandiri_clickpay">
-				    		<img src="{{ asset('/images/payments/mandiri_clickpay.png') }}">
-				    	</div>
-				    	<div class="thumbnail payment-box @if ($order_amount == 0) payment-disabled @endif" id="cimb_clicks">
-				    		<img src="{{ asset('/images/payments/cimb_clicks.png') }}">
-				    	</div>
-				    	<div class="thumbnail payment-box @if ($order_amount == 0) payment-disabled @endif" id="epay_bri">
-				    		<img src="{{ asset('/images/payments/epay_bri.png') }}">
-				    	</div>
-				    	<div class="thumbnail payment-box @if ($order_amount == 0) payment-disabled @endif" id="mandiri_ecash">
-				    		<img src="{{ asset('/images/payments/mandiri_ecash.png') }}">
-				    	</div>
-				    	<div class="thumbnail payment-box @if ($order_amount == 0) payment-disabled @endif" id="indosat_dompetku">
-				    		<img src="{{ asset('/images/payments/indosat_dompetku.png') }}">
-				    	</div>
-				    	<div class="thumbnail payment-box @if ($order_amount == 0) payment-disabled @endif" id="telkomsel_cash">
-				    		<img src="{{ asset('/images/payments/telkomsel_cash.png') }}">
-				    	</div>
-				    	<div class="thumbnail payment-box @if ($order_amount == 0) payment-disabled @endif" id="xl_tunai">
-				    		<img src="{{ asset('/images/payments/xl_tunai.png') }}">
-				    	</div>
+				    	<div class="thumbnail payment-box hidden-xs"></div>
+				    	<div class="thumbnail payment-box hidden-xs"></div>
+				    	<div class="thumbnail payment-box hidden-xs"></div>
 				  	</div>
 				</div>
 				<input type="hidden" id="order-amount" value="{{ $order_amount }}">
-				<button class="btn pull-right" type="button" id="pay-button">@if ($order_amount > 0) Pay @else Proceed @endif</button>
+				<button class="btn pull-right hidden-xs" type="button" id="pay-button">@if ($order_amount > 0) Pay @else Proceed @endif</button>
 			</div>
 			<div class="col-xs-12 col-md-4">
 				<input type="hidden" id="remaining-time" value="{{ $remaining_time }}">
 				<div id="countdown"></div>
 				<div class="order-details">
+					<span class="order-details-corner corner-a"></span>
+                    <span class="order-details-corner corner-b"></span>
+                    <span class="order-details-corner corner-c"></span>
+                    <span class="order-details-corner corner-d"></span>
+
 					<p class="order-summary">Order Summary</p>
 					<p class="ticket-quantity-head">
 						<span class="ticket-quantity-total">{{ $total_quantity }}</span>
@@ -124,6 +115,8 @@
 						<span class="col-xs-8 grandtotal-title">Total</span>
 						<span class="col-xs-4 grandtotal-price">{{ 'Rp '. number_format($order_amount) }}</span>
 					</div>
+
+					<button class="btn pull-right pay-button-mobile" type="button" id="pay-button">@if ($order_amount > 0) Pay @else Proceed @endif</button>
 				</div>
 			</div>
 		</div>

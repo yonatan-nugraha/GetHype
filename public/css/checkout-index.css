@@ -74,7 +74,7 @@ body {
 
 .payment-box {
     width: 20%;
-    border: 1px solid black;
+    border: 1px solid #0f3844;
     float: left;
     height: 130px;
     white-space: nowrap;
@@ -106,7 +106,11 @@ body {
     vertical-align: middle;  /* vertical alignment of the inline element */
     font: 16px/1 Arial sans-serif;
     max-width: 80%;
-    max-width: 100px;
+    max-width: 40px;
+}
+
+.payment-box .jcb {
+	max-height: 20px;
 }
 
 .payment-box:hover {
@@ -129,8 +133,46 @@ body {
 .order-details {
 	background-color: #fff;
 	padding: 15px 15px 0 15px;
+	position: relative;
 }
 
+.order-details-corner{
+	width: 20px;
+	height: 20px;
+	background: #f2f2f2;
+	position: absolute;
+	border-radius: 50%;
+}
+
+.order-details-corner.corner-a{
+	top: -8px;
+	left: -8px;
+}
+
+.order-details-corner.corner-b{
+	top: -8px;
+	right: -8px;
+}
+
+.order-details-corner.corner-c{
+	bottom: -8px;
+	left: -8px;
+}
+
+.order-details-corner.corner-d{
+	bottom: -8px;
+	right: -8px;
+}
+
+.order-details-corner.corder-middle-a{
+	bottom: -10px;
+	left: -8px;
+}
+
+.order-details-corner.corder-middle-b{
+	bottom: -10px;
+	right: -8px;
+}
 
 .order-summary {
 	text-transform: uppercase;
@@ -165,6 +207,7 @@ body {
 }
 
 .event-details {
+	position: relative;
 	padding: 20px 15px;
 	border-bottom: 1px dotted black;
 	letter-spacing: 0.04em;
@@ -234,7 +277,7 @@ body {
 
 .grandtotal {
 	background-color: #ebd38c;
-	padding: 0 15px;
+	padding: 5px 15px;
 }
 
 .grandtotal-title {
@@ -287,4 +330,24 @@ body {
 
 #countdown .countdown-element label{
 	color: #133743;
+}
+
+.icon-payment-bank{
+	font-size: 35px;
+}
+
+.payment-bank{
+	display: inline-block;
+	margin-top: 30px;
+	font-size: 11px;
+}
+
+.pay-button-mobile{
+	margin-top: 20px;
+}
+
+@media(min-width: 767px){
+	.pay-button-mobile{
+		display: none;
+	}
 }

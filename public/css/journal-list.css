@@ -1,10 +1,6 @@
 .main-banner {
+	height: 400px;
 	margin-bottom: 30px;
-}
-
-.main-banner img{
-	width: 100%;
-	max-width: 100%;
 }
 
 .main-banner .caption-banner{
@@ -18,6 +14,17 @@
 	font-size: 16px;
 	margin:5px 0;
 	color: #fff;
+}
+
+@media(max-width: 767px){
+	.main-banner {
+		height: 250px;
+	}
+
+	.main-banner .caption-banner{
+		padding: 0 10px;
+		top: 20%;
+	}
 }
 
 .gethype-line img{
@@ -45,7 +52,7 @@
 	color: #123844;
 	margin-top: 15px;
 	background: #fff;
-	height: 105px;
+	height: 80px;
 }
 
 @media(max-width: 767px){
@@ -70,9 +77,23 @@
 	position: relative;
 }
 
-.journal-search .dropdown-toggle{
+.journal-search .select{
+	position: relative;
+}
+
+.journal-search .select .caret{
+	position: absolute;
+	right: 10px;
+	top: 15px;
+	z-index: 999999;
+
+}
+
+.journal-search .select select{
 	border: 1px solid #0f3844;
 	border-radius:0;
+	width: 120px;
+    -webkit-appearance: none;
 }
 
 .journal-search .journal-search-input{

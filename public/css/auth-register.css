@@ -1,4 +1,5 @@
 .register {
+    background: url('../images/bg_form.jpg') center center no-repeat;
     background-size: cover;
 }
 
@@ -8,11 +9,12 @@
     }
 }
 
+
 .register .panel {
+    max-width: 500px;
     border-radius: 0;
     border-color: #0f3844;
     margin: 50px auto;
-    max-width: 500px;
 }
 
 .register .panel-heading {
@@ -72,7 +74,7 @@
 
 input[name="birthdate"] {
     position: relative;
-    width: 445px; 
+    width: 100%; 
     height: 30px;
     color: white;
 }

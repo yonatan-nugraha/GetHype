@@ -1,25 +1,16 @@
-/**************************************/
-/************ Home Title **************/
-/**************************************/
-
-.home-title {
-    color: #0F3844;
-    margin: 50px 0 15px; 
-    font-weight: 700;
-    font-size: 25px;
-    line-height: 120%;
-}
 
 /**************************************/
 /************* Search Bar *************/
 /**************************************/
 
 .search {
-    background-color: #fff;
+    background-color: #f1f2f2;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .search-bar {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .search-bar select, .search-bar input {
@@ -28,11 +19,11 @@
     border: 2px solid #0f3844;
     border-radius: 0;
     color: #0f3844;
-    background-color: #fff;
+    background-color: #f1f2f2;
 }
 
 .search-category, .search-type {
-    max-width: 19%;
+    max-width: 17%;
 }
 
 .search-location {
@@ -40,11 +31,23 @@
 }
 
 .search-date {
-    max-width: 15%;
+    max-width: 17%;
 }
 
 .search-price {
-    max-width: 15%;
+    max-width: 16%;
+}
+
+.search-category, .search-type,.search-location, .search-date, .search-price{
+    padding-left: 30px;
+}
+
+.search-icon{
+    position: absolute;
+    display: inline-block;
+    margin-top: 7px;
+    margin-left: 10px;
+    z-index: 1;
 }
 
 .search-bar button {
@@ -52,6 +55,19 @@
     border-radius: 0;
     background-color: #d33e40;
     border-color: #d33e40;
+}
+
+@media(max-width: 720px){
+    .search-bar select, .search-bar input{
+        float: none;
+    }
+
+    .search-category, .search-type,.search-location, .search-date, .search-price{
+        max-width: 100%;
+    }
+    .search-bar button{
+        width: 100%;
+    }
 }
 
 .search-bar button:hover {
@@ -77,103 +93,125 @@
     max-height: 5px;
 }
 
-/**************************************/
-/*********** Search Events ************/
-/**************************************/
-
-.search-events {
-    background-color: #fff;
-    padding-bottom: 30px;
+.title {
+    color: #0f3844;
+    margin: 30px 0 10px;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 120%;
 }
 
-.search-events .events {
-    margin-bottom: 20px;
+
+.events-title {
+    color: #0f3844;
+    margin: 0px 0 30px;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 120%;
 }
 
-.search-events .event-box {
+
+
+/**************************************/
+/************* What's New *************/
+/**************************************/
+
+
+ .events {
+    background: #f2f2f2;
+    padding-bottom: 20px;
+}
+
+ .event-box {
     cursor: pointer;
     padding-bottom: 15px;
 }
 
-.search-events .event-box a {
+ .event-box a {
     color: #000;
 }
 
-.search-events .event-box .thumbnail {
+ .event-box .thumbnail {
     padding: 0;
     border-radius: 0;
     border-style: none;
-    background-color: #F1F2F2;
 }
 
-.search-events .event-box a:hover {
+ .event-box a:hover {
     text-decoration: none;
 }
 
-.search-events .event-caption {
+ .event-caption {
     margin: 10px 15px;
-    padding-bottom: 10px;   
+    padding-bottom: 10px;
 }
 
-.search-events .event-caption-head {
-    margin-bottom: 10px;
-    height: 35px;
+ .event-caption-head {
+    height: 40px;
 }
 
-.search-events .event-name {
-    color: #0F3844;
+ .event-name {
+    color: #0f3844;
 }
 
-.search-events .event-price {
-    color: #0F3844;
+ .event-price {
+    color: #0f3844;
     font-size: 12px;
     font-weight: 500;
 }
 
-.search-events .event-time {
+ .event-time {
     margin-top: 10px !important;
     font-weight: 100;
     font-size: 12px;
 }
 
-.search-events .event-tag {
-    background-color: #E6E6E6;
+ .event-tag {
+    background-color: #e6e6e6;
     color: #000000;
     font-weight: 200;
     font-size: 10px;
 }
 
-.gethype-line img {
-    width: 100%;
-    max-height: 5px;
+ .view-more {
+    text-align: center;
 }
 
-/**************************************/
-/*************** Date *****************/
-/**************************************/
-
-input[name="date"] {
-    position: relative;
-    width: 225px; 
-    height: 34px;
-    color: white;
-}
-
-input[name="date"]:before {
-    position: absolute;
-    content: attr(data-date);
-    display: inline-block;
+ .view-more a {
     color: #0f3844;
+    font-weight: 500;
 }
 
-input[name="date"]::-webkit-datetime-edit, input[name="date"]::-webkit-inner-spin-button, input[name="date"]::-webkit-clear-button {
-    display: none;
+
+
+.event-box .thumbnail .event-image{
+    width: 100%;
+    -webkit-transition: all .35s ease-in-out;
+  -moz-transition: all .35s ease-in-out;
+  transition: all .35s ease-in-out;
 }
 
-input[name="date"]::-webkit-calendar-picker-indicator {
-    position: absolute;
-    top: 8px;
-    right: 5px;
-    color: black;
-    opacity: 1;
+.event-box .thumbnail .event-img-wrap{
+    overflow: hidden;
+}
+
+.event-box:hover .thumbnail{
+    -webkit-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.1);
+}
+
+.event-box:hover .thumbnail .event-image{
+    -ms-transform: scale(1.2,1.2); /* IE 9 */
+    -webkit-transform: scale(1.2,1.2); /* Safari */
+    transform: scale(1.2,1.2); /* Standard syntax */
+}
+
+.event-box:hover .event-name, .event-box:hover .event-price{
+    color: #9e904e;
+    text-decoration: none;
+}
+
+.event-box:hover a, .collection-box:hover a{
+    text-decoration: none;
 }

@@ -30,24 +30,24 @@
 					    		<span class="event-share">
 					    			<a href="{{ url('myevents/'.$event->id.'/register') }}">
 						    			<button type="button" class="btn btn-default">
-										  	<i class="fa fa-bomb"></i>
+										  	<img src="{{ url('images/icons/arrow-full.png') }}" alt="" width="18">
 										</button>
 									</a>
 					    			<a href="{{ url('myevents/'.$event->id.'/statistic') }}">
 										<button type="button" class="btn btn-default">
-										  	<i class="fa fa-bar-chart"></i>
+										  	<img src="{{ url('images/icons/chart.png') }}" alt="" width="18">
 										</button>
 									</a>
 						    		<a href="{{ url('events/'.$event->slug) }}">
 						    			<button type="button" class="btn btn-default">
-										  	<i class="fa fa-external-link"></i>
+										  	<img src="{{ url('images/icons/checklist.png') }}" alt="" width="18">
 										</button>
 									</a>
 									<div class="clearfix"></div>
 					    		</span>
 					    	</p>
 					    	<p class="event-time">{{ Carbon\Carbon::parse($event->started_at)->format('l, M d, Y | g.i A') }}</p>
-					    	<p class="event-location">{!! nl2br(e($event->location)) !!}</p>
+					    	<p class="event-location">{{ $event->location }}</p>
 					   </div>
 					   <div class="clearfix"></div>
 					</div>
@@ -65,19 +65,19 @@
 					    	<p class="event-header">
 					    		<span class="event-name">{{ $event->name }}</span>
 					    		<span class="event-share">
-					    			<a class="pull-right" href="{{ url('myevents/'.$event->id.'/register') }}">
+					    			<a href="{{ url('myevents/'.$event->id.'/register') }}">
 						    			<button type="button" class="btn btn-default">
-										  	<i class="fa fa-bomb"></i>
+										  	<img src="{{ url('images/icons/arrow-full.png') }}" alt="" width="18">
 										</button>
 									</a>
-					    			<a class="pull-right" href="{{ url('myevents/'.$event->id.'/statistic') }}">
+					    			<a href="{{ url('myevents/'.$event->id.'/statistic') }}">
 										<button type="button" class="btn btn-default">
-										  	<i class="fa fa-bar-chart"></i>
+										  	<img src="{{ url('images/icons/chart.png') }}" alt="" width="18">
 										</button>
 									</a>
-						    		<a class="pull-right" href="{{ url('events/'.$event->slug) }}">
+						    		<a href="{{ url('events/'.$event->slug) }}">
 						    			<button type="button" class="btn btn-default">
-										  	<i class="fa fa-external-link"></i>
+										  	<img src="{{ url('images/icons/checklist.png') }}" alt="" width="18">
 										</button>
 									</a>
 					    		</span>

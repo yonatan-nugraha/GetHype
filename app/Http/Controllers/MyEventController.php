@@ -319,16 +319,29 @@ class MyEventController extends Controller
 
         $ticket_group_ids = $event->ticket_groups->pluck('id')->toArray();
 
-        $tickets_updated = Ticket::where('code', $code)
+        $ticket = Ticket::where('code', $code)
             ->whereIn('status', [3,4])
             ->whereIn('ticket_group_id', $ticket_group_ids)
-            ->update([
+            ->first();
+
+
+        $register = array();
+        if ($ticket) {
+            $ticket->update([
                 'status' => 4
             ]);
 
-        $success = ($tickets_updated > 0) ? '2' : '1';
+            $register['success']    = 2;
+            $register['code']       = $code;
+            $register['name']       = $ticket->order->user->first_name . ' ' . $ticket->order->user->last_name;
+            $register['order_id']   = $ticket->order_id;
+            $register['ticket_group'] = $ticket->ticket_group->name;
+        } else {
+            $register['success']    = 1;
+            $register['code']       = $code;
+        }
 
         return redirect('myevents/'.$event->id.'/register')
-            ->with('register_success', $success);
+            ->with('register', $register);
     }
 }

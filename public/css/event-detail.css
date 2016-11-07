@@ -41,6 +41,12 @@
 	margin-bottom: 30px;
 }
 
+@media(max-width: 767px){
+	.event-share{
+		margin-top: 20px;
+	}
+}
+
 .event-share a:hover {
 	text-decoration: none;
 }
@@ -90,7 +96,8 @@
 }
 
 .buy-ticket {
-	margin-top: 30px;
+	margin-top: 10px;
+	margin-bottom: 30px;
 }
 
 .buy-ticket button {
@@ -110,7 +117,7 @@
 /**************************************/
 
 .event-subject {
-    height: 450px;
+	padding-bottom: 25px;
     background-blend-mode: multiply;
     color: #fff;
     vertical-align: middle;
@@ -209,6 +216,10 @@
 	min-height: 200px;
 }
 
+#buy-ticket .modal-content{
+	border-radius: 0;
+}
+
 #buy-ticket form {
 	margin: 0;
 }
@@ -221,6 +232,11 @@
 	text-align: center;
 	font-size: 17px;
 	font-weight: 400;
+}
+
+#buy-ticket .ticket-quantity{
+	padding: 0 5px;
+	text-align: center;
 }
 
 #buy-ticket .modal-footer {
@@ -272,4 +288,9 @@
 
 .ticket-message {
 	display: none;
+}
+
+#event-video{
+	width: 100% !important;
+	max-width: 600px;
 }

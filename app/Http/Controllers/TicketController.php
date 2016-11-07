@@ -50,11 +50,11 @@ class TicketController extends Controller
             return redirect('');
         }
 
-        return view('pdfs.invoice', ['order' => $order]);
+        // return view('pdfs.invoice', ['order' => $order]);
 
-        // $pdf = PDF::loadView('pdfs.invoice', ['order' => $order])->setPaper('a4');
+        $pdf = PDF::loadView('pdfs.invoice', ['order' => $order])->setPaper('a4');
 
-        // return $pdf->stream('invoice.pdf');
+        return $pdf->stream('invoice.pdf');
     }
 
     /**
@@ -68,8 +68,10 @@ class TicketController extends Controller
             return redirect('');
         }
 
+        // return view('pdfs.ticket', ['order' => $order]);
+
         $pdf = PDF::loadView('pdfs.ticket', ['order' => $order])->setPaper('a4');
 
-        return $pdf->stream();
+        return $pdf->stream('ticket.pdf');
     }
 }

@@ -63,17 +63,13 @@ body {
 }
 
 .orders-sidebar li.active:after {
-    content: "";
-    display: block;
-    height: 3px;
-    width: 90%;
-    background: #EBD38C;
-    margin: 0 auto;
+
 }
 
 .orders-sidebar li.active a {
 	background-color: #fff !important;
 	color: #0F3844 !important;
+	border-left: 3px solid #EBD38C;
 }
 
 .orders-sidebar li.active a:hover {
@@ -82,6 +78,7 @@ body {
 
 .orders-sidebar .thumbnail {
 	padding: 0;
+	margin-bottom: 0;
 }
 
 
@@ -134,13 +131,12 @@ body {
 }
 
 .payment-method{
-	border-right: 1px dotted black;
 }
 
 @media(max-width: 767px){
 	.ticket-type{
-		border-left: 0;
-		border-top: 1px dotted black;
+		border-bottom: 1px dotted black;
+		border-left: 1px dotted black;
 	}
 
 	.payment-ammount{

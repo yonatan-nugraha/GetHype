@@ -1,0 +1,152 @@
+body{
+	width: 700px;
+	margin: 0 auto;
+	/*background: #f2f3f4;*/
+	padding-top: 30px;
+}
+
+.left-side,.right-side{
+	float: left;
+	width: 50%;
+	padding: 20px;
+	position: relative;
+	overflow: hidden;
+	height: 290px;
+}
+
+.left-side{
+	background: #133743;
+}
+
+.left-side h1,
+.left-side h3{
+	color: #ebd48c;
+}
+
+.left-side h1 {
+	margin: 0;
+	font-size: 24px;
+	font-weight: normal;
+}
+
+.left-side h1 span.qty{
+	font-size: 60px;
+	display: inline-block;
+	margin-right: 5px;
+}
+
+.left-side h3{
+	margin-top: 10px;
+	font-weight: normal;
+	line-height: 40px;
+	font-size: 34px;
+	margin-bottom: 15px;
+}
+
+.left-side p {
+	color:#d1d8da;
+}
+
+.right-side{
+	background: #fff;
+	padding: 0;
+}
+
+.ordered-by{
+	margin-top: 15px;
+	border-top: 1px dashed #133743;
+	border-bottom: 1px dashed #133743;
+	padding: 4px 20px;
+}
+
+small.label-title{
+	color: #b4b5b9;
+	font-size: 11px;
+}
+
+p.value{
+	margin:3px 0 5px;
+}
+
+.date-order{
+	padding: 4px 20px;
+	float: left;
+	width: 35%;
+	border-bottom: 1px dashed #133743;
+	border-right: 1px dashed #133743;
+	
+}
+
+.time-order{
+	padding: 4px 20px;
+	float: left;
+	width: 35%;
+	border-bottom: 1px dashed #133743;
+	border-right: 1px dashed #133743;
+}
+
+.payment-status{
+	padding: 4px 20px;
+	float: left;
+	width: 30%;
+	border-bottom: 1px dashed #133743;
+}
+
+.ticket-type{
+	padding: 4px 20px;
+	float: left;
+	width: 50%;
+	border-bottom: 1px dashed #133743;
+	border-right: 1px dashed #133743;
+	
+}
+
+.order-code{
+	padding: 4px 20px;
+	float: left;
+	width: 50%;
+	border-bottom: 1px dashed #133743;
+	
+}
+
+.barcode {
+	padding: 20px 20px;
+	text-align: center;
+}
+
+.barcode p{
+	margin-bottom: 0;
+}
+
+.ticket-corner{
+	width: 32px;
+	height: 32px;
+	background: #f2f3f4;
+	position: absolute;
+	border-radius: 50%;
+	z-index: 9;
+}
+
+.ticket-corner.corner-a{
+	top: -17px;
+	left: -17px;
+}
+
+.ticket-corner.corner-b{
+	top: -17px;
+	right: -17px;
+}
+
+.ticket-corner.corner-c{
+	bottom: -17px;
+	left: -17px;
+}
+
+.ticket-corner.corner-d{
+	bottom: -17px;
+	right: -17px;
+}
+
+.page-break {
+    page-break-after: always;
+}

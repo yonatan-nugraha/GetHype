@@ -14,14 +14,6 @@ $(document).ready(function() {
 		var payment_fees = {
 			bank_transfer: 4900, 
 			credit_card: 5000, 
-			bca_klikpay: 2000,
-			mandiri_clickpay: 5000,
-			cimb_clicks: 5000,
-			epay_bri: 5000,
-			mandiri_ecash: 4000,
-			indosat_dompetku: 3000,
-			telkomsel_cash: 3000,
-			xl_tunai: 3000,
 		};
 
 		var subtotal = parseInt($('.subtotal-hidden').val());

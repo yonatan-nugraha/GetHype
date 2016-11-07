@@ -70,7 +70,23 @@
 }
 
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
-    background: #d1c58f;
+    background: transparent;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
+    color: #ccc;
+}
+
+ul.dropdown-menu:before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 8px solid transparent;
+    top: -18px;
+    right: 45%;
+    border-bottom: 10px solid #fff;
+    z-index: -1;
 }
 
 @media(max-width: 767px){
@@ -196,8 +212,9 @@
 }
 
 .footer-secondary p {
-    margin-top: 20px;
+    margin-top: 10px;
     font-weight: 100;
+    margin-bottom: 20px;
 }
 
 
@@ -269,4 +286,80 @@
 
 .subscribe ::-ms-input-placeholder {
     color: #fff;
+}
+
+/**************************************/
+/******** Fixed Bottom Footer *********/
+/**************************************/
+
+#content-flex {
+    top: 0;
+    left: 0;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-height: 60vh;
+    width: 100%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+}
+
+.main-content-flex {
+    -webkit-flex: 1 0 auto;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+    width: 100%;
+    -webkit-box-flex: 1;
+}
+
+.footer-noflex {
+    -webkit-flex: none;
+    -ms-flex: none;
+    flex: none;
+    -webkit-box-flex: 0;
+}
+
+/**************************************/
+/************* Pagination *************/
+/**************************************/
+
+.paging{
+    float: right;
+}
+
+.paging .pagination>.active>a, 
+.paging .pagination>.active>a:focus, 
+.paging .pagination>.active>a:hover, 
+.paging .pagination>.active>span, 
+.paging .pagination>.active>span:focus, 
+.paging .pagination>.active>span:hover{
+    background: #133743;
+    border-color: #133743;
+    color: #fff;
+}
+
+.paging .pagination>.disabled>a,
+.paging .pagination>.disabled>a:focus,
+.paging .pagination>.disabled>a:hover,
+.paging .pagination>.disabled>span,
+.paging .pagination>.disabled>span:focus,
+.paging .pagination>.disabled>span:hover {
+    border-color: #133743;
+}
+
+.paging  .pagination>li>a, .paging .pagination>li>span {
+    color: #133743;
+    border: 1px solid #133743;
+    border-radius: 0;
+    margin:0 4px;
+    background: transparent;
+}
+
+@media(max-width: 767px){
+    .paging{
+        float: none;
+    }
 }

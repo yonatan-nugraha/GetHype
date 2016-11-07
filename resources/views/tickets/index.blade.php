@@ -87,6 +87,7 @@
 						    	</div>
 						    </div>
 					   </div>
+					   <div class="clearfix"></div>  
 					</div>
 					@endif
 					@endforeach
