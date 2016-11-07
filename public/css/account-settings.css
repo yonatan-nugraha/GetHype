@@ -130,6 +130,7 @@ body {
 
 .interest .selected {
 	background-color: #ebd38c !important;
+	color: #fff;
 	font-size: 12px;
 	font-weight: 300;
 	border-radius: 0;
@@ -170,7 +171,6 @@ body {
 
 input[name="birthdate"] {
     position: relative;
-    width: 225px; 
     height: 30px;
     color: white;
 }
@@ -192,4 +192,21 @@ input[name="birthdate"]::-webkit-calendar-picker-indicator {
     right: 5px;
     color: black;
     opacity: 1;
+}
+
+.after-effect{
+	position: fixed;
+	display: none;
+	width: 100%;
+	top: 30%;
+	z-index: 9999;
+}
+
+.after-effect-content{
+	background: rgba(15,56,68,0.6);
+	text-align: center;
+	color: #fff;
+	padding:30px;
+	width: 280px;
+	margin: 0 auto;
 }

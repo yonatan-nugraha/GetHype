@@ -31,80 +31,84 @@
     </script>
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
+    <div id="content-flex">
+        <div class="main-content-flex">
+            <nav class="navbar navbar-default navbar-static-top">
+                <div class="container">
+                    <div class="navbar-header">
 
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+                        <!-- Collapsed Hamburger -->
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                            <span class="sr-only">Toggle Navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
 
-                <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('images/logo-gold.png') }}">
-                </a>
-            </div>
+                        <!-- Branding Image -->
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            <img src="{{ asset('images/logo-gold.png') }}">
+                        </a>
+                    </div>
 
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Authentication Links -->
-                    @if (Auth::guest())
-                        <li><a href="{{ url('/register') }}">Sign up</a></li>
-                        <li><a href="{{ url('/login') }}">Log in</a></li>
-                    @else
-                        @if (count(Auth::user()->events) > 0)
-                        <li><a href="{{ url('/myevents') }}">My Events</a></li>
-                        @endif
-
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                <span>{{ Auth::user()->first_name }}</span>
-                                @if (Auth::user()->last_name)
-                                <span> {{ Auth::user()->last_name }}</span>
+                    <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                        <!-- Right Side Of Navbar -->
+                        <ul class="nav navbar-nav navbar-right">
+                            <!-- Authentication Links -->
+                            @if (Auth::guest())
+                                <li><a href="{{ url('/register') }}">Sign up</a></li>
+                                <li><a href="{{ url('/login') }}">Log in</a></li>
+                            @else
+                                @if (count(Auth::user()->events) > 0)
+                                <li><a href="{{ url('/myevents') }}">My Events</a></li>
                                 @endif
-                                <span class="user-image">
-                                    <img src="{{ asset('/images/users/'.Auth::user()->photo()) }}">
-                                </span>
-                            </a>
 
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="{{ url('/tickets') }}">My Tickets</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('/orders') }}">Order History</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('/account/settings') }}">Account Settings</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="{{ url('/logout') }}"
-                                        onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                        Logout
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        <span>{{ Auth::user()->first_name }}</span>
+                                        @if (Auth::user()->last_name)
+                                        <span> {{ Auth::user()->last_name }}</span>
+                                        @endif
+                                        <span class="user-image">
+                                            <img src="{{ asset('/images/users/'.Auth::user()->photo()) }}">
+                                        </span>
                                     </a>
 
-                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a href="{{ url('/tickets') }}">My Tickets</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ url('/orders') }}">Order History</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ url('/account/settings') }}">Account Settings</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="{{ url('/logout') }}"
+                                                onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                                Logout
+                                            </a>
+
+                                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                                {{ csrf_field() }}
+                                            </form>
+                                        </li>
+                                    </ul>
                                 </li>
-                            </ul>
-                        </li>
-                    @endif
-                </ul>
-            </div>
+                            @endif
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            @yield('content')
         </div>
-    </nav>
+    </div>
 
-    @yield('content')
-
-    <footer class="footer">
+    <footer class="footer footer-noflex">
         <div class="container">
             <div class="row footer-main">
                 <div class="col-sm-3">

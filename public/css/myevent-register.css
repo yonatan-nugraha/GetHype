@@ -1,43 +1,72 @@
-.register-head {
-	background-color: #f1f2f2;
+.ticket-code {
+    position: relative;
 }
 
-.register-head .title {
-	font-size: 21px;
-	font-weight: 600;
-	margin-top: 30px;
+.ticket-code .ticket-code-input{
+    border: 1px solid #0f3844;
+    border-radius:0;
+    background: transparent;
+    width: 450px;
 }
 
-.description {
-	font-size: 12px;
-	font-weight: 400;
+@media(max-width: 767px){
+    .ticket-code .ticket-code-input{
+        width: 300px;
+    }
 }
 
-.register-form {
-	margin-bottom: 30px;
+.ticket-code .ticket-code-button{
+    position: absolute;
+    z-index: 3;
+    right: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    background: #d53f40;
+    border-radius: 0;
+    border: 1px solid #b32c2d;
 }
 
-.register-form input {
-	background-color: #f1f2f2;
-	border-color: #0f3844;
-	border-radius: 0;
+.ticket-code .ticket-code-button:hover{
+    background:  #b32c2d;
 }
 
-.register-form button {
-	background-color: #d33e40;
-	color: #fff;
-	border-color: #d33e40;
-	border-radius: 0;
+.register-success{
+    padding:40px 0;
+    background: #f1f2f2;
 }
 
-.register-bottom {
-	background-color: #fff;
-	text-align: center;
-	margin-bottom: 50px;
+.register-success h3, .register-success h4{
+	font-size: 20px;
+    color: #0f3844;
 }
 
-.register-bottom .title {
-	font-size: 40px;
-	font-weight: 600;
-	margin-top: 30px;
+.register-info-status{
+    width: 300px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.register-info{
+    padding-top: 40px;
+    padding-bottom: 20px;
+    background: #fff;
+}
+
+.register-info-table{
+    margin-top: 20px;
+}
+
+.register-info-table table tr td{
+    border:0;
+    font-size: 16px;
+}
+
+.register-info-failed{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.register-info-title{
+    margin-left: 10px;
 }

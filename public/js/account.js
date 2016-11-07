@@ -68,4 +68,14 @@ $(document).ready(function() {
 	});
 
 	$('input[name="birthdate"').trigger('change');
+
+	$('.after-effect.profile').fadeIn();
+    setTimeout(function(){
+        $('.after-effect.profile').fadeOut();
+    }, 3000);
+
+    $('.after-effect.password').fadeIn();
+    setTimeout(function(){
+        $('.after-effect.password').fadeOut();
+    }, 3000);
 });

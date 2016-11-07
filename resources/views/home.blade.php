@@ -133,7 +133,7 @@
             <span>What's <br> New</span>
         </div>
 
-        <div class="row events">
+        <div class="events">
             <div class="row">
                 @foreach ($events as $event)
                 <div class="col-xs-12 col-sm-6 col-md-3 event-box">
@@ -177,7 +177,7 @@
             <span>Event <br> Collection</span>
         </div>
 
-        <div class="row events">
+        <div class="events">
             <div class="row">
                 @foreach ($collections as $collection)
                 <div class="col-grid-5 collection-box">
@@ -200,7 +200,7 @@
 @endif
 
 <div class="col-md-12 banner-bottom no-padding">
-    <div class="no-padding" id="bottomBanner">
+    <div class="no-padding" id="banner-background">
         <div class="first"><img class="banner-additional" src="{{ asset('/images/img-additional-1.png') }}"></div>
         <a href="{{ url('services') }}"><p class="banner-title">Create Your Event with Gethype</p></a>
         <div class="banner-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
@@ -214,7 +214,7 @@
             <span>Gethype <br> Journal</span>
         </div>
 
-        <div class="row events">
+        <div class="events">
             <div class="row">
                 @foreach ($journals as $journal)
                 <div class="col-grid-5 event-box journal-box">

@@ -102,9 +102,9 @@
 		</div>
 	</div>
 
-	<div class="pull-right">
+	<nav class="paging">
         {{ $orders->links() }}
-    </div>
+    </nav>
 
 	<div class="row orders-bottom">
 		<div class="col-xs-12">

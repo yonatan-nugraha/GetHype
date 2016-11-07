@@ -23,9 +23,9 @@
     <img src="{{ asset('/images/events/'.$event->banner()) }}">
 </div>
 
-<div class="row event-main">
+<div class="event-main">
 	<div class="container">
-	    <div class="col-xs-12 col-md-6">
+	    <div class="col-xs-12 col-md-4">
 	    	<div class="event-share">
 		    	<p class="event-share-text">Share with People</p>
 		    	<a class="add-bookmark" id="{{ $event->id }}"><img class="event-sosmed" src="{{ asset('/images/icons/bookmark.png') }}"></a>
@@ -61,7 +61,7 @@
 	    		@endif
 	    	</div>
 	    </div>
-	    <div class="col-xs-12 col-md-6">
+	    <div class="col-xs-12 col-md-7 col-md-offset-1">
 	    	<p class="event-name">{{ $event->name }}</p>
 	    	<p class="event-description">{!! nl2br(e($event->description)) !!}</p>
 	    </div>
@@ -69,7 +69,7 @@
 </div>
 
 @if ($event->subject_discussion)
-<div class="row event-subject" style="background: #D33E40 url({{ '/images/events/'.$event->banner() }});">
+<div class="event-subject" style="background: #d33e40 url({{ '/images/events/'.$event->banner() }});">
 	<div class="container">
 	    <div class="col-xs-12 no-padding">
 	    	<p class="event-title">Subject <br>Discussion</p>
@@ -82,7 +82,7 @@
 @endif
 
 @if (count($event->guests) > 0)
-<div class="row event-guests">
+<div class="event-guests">
 	<div class="container">
 	    <div class="col-xs-12 no-padding">
 	    	<p class="event-title">Guest Speaker</p>
@@ -108,7 +108,7 @@
 @endif
 
 @if (count($event->ticket_groups) > 0)
-<div class="row investments">
+<div class="investments">
 	<div class="container">
 	    <div class="col-xs-12 no-padding">
 	    	<p class="event-title">Ticket Price</p>
@@ -126,10 +126,10 @@
 @endif
 
 @if ($event->video_url)
-<div class="row video">
+<div class="video">
 	<div class="container">
 	    <div class="col-xs-12 no-padding">
-	    	<iframe src="{{ $event->video_url }}"></iframe>
+	    	<iframe id="event-video" height="315" src="{{ $event->video_url }}" frameborder="0" allowfullscreen></iframe>
         </div>	
     </div>
 </div>

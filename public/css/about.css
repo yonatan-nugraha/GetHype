@@ -1,13 +1,43 @@
 #mainBanner img {
-	width: 100%;
+    width: 100%;
 }
 
-#mainBanner h1 {
+#mainBanner {
+    width: 100%;
+    height: 400px;
+}
+
+
+#mainBanner .banner-title {
     color: white;
     position: absolute;
     top: 45%;
     width: 100%;
+}
+
+
+
+#mainBanner .banner-title h1{
+    font-size: 18px;
     text-align: center;
+    width: 80%;
+    margin: 0 auto;
+    line-height: 24px;
+    font-weight: normal;
+}
+
+@media(max-width: 767px){
+    #mainBanner {
+        height: 280px;
+    }
+
+    #mainBanner .banner-title {
+        top: 25%;
+    }
+
+    #mainBanner .banner-title h1{
+        font-size: 14px;
+    }
 }
 
 #mainContent {
@@ -16,9 +46,9 @@
 }
 
 #mainContent h1 {
-	margin-bottom: 40px;
+    margin-bottom: 40px;
 }
 
 #mainContent p {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }

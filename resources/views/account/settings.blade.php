@@ -100,7 +100,7 @@
 						    	</div>
 						    </div>
 						    <div class="row birthdate">
-						    	<div class="form-group col-xs-5">
+						    	<div class="form-group col-xs-12 col-sm-5 col-md-5">
 						    		<label>Your Birthdate</label>
 						    		<input type="date" data-date="" data-date-format="DD MMMM YYYY" class="form-control" name="birthdate" value="{{ Auth::user()->birthdate }}">
 						    		@if ($errors->has('birthdate'))
@@ -183,6 +183,23 @@
 		</div>
 	</div>
 </div>
+
+@if (session('profile_updated'))
+<div class="after-effect profile">
+    <div class="after-effect-content">
+    Your Profile Has Been Changed
+    </div>
+</div>
+@endif
+
+@if (session('password_updated'))
+<div class="after-effect password">
+    <div class="after-effect-content">
+    Password Has Been Changed
+    </div>
+</div>
+@endif
+
 @endsection
 
 @section('scripts')
