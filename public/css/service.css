@@ -1,0 +1,179 @@
+.main-banner {
+	height: 400px;
+}
+
+
+.main-banner .caption-banner{
+	position: absolute;
+	top: 30%;
+	text-align: center;
+	width: 100%;
+}
+
+.main-banner .caption-banner h1{
+	color: #ebd28b;
+}
+
+
+.main-banner .caption-banner p{
+	font-size: 16px;
+	margin:5px 0;
+	color: #fff;
+}
+
+.service-list{
+	clear: both;
+}
+
+.service-img-left{
+	float: left;
+	width: 50%;
+	-webkit-transition: all .35s ease-in-out;
+  -moz-transition: all .35s ease-in-out;
+  transition: all .35s ease-in-out;
+}
+
+.service-img-right{
+	float: right;
+	width: 50%;
+	-webkit-transition: all .35s ease-in-out;
+  -moz-transition: all .35s ease-in-out;
+  transition: all .35s ease-in-out;
+}
+
+.service-default{
+	padding: 30px 0;
+}
+
+.service-content .content{
+	width: 80%;
+	margin:30px auto;
+}
+
+.service-content .content h2{
+	margin-bottom: 20px;
+	color: #0f3844;
+}
+
+.service-content-right{
+	float: left;
+	width: 50%;
+	-webkit-transition: all .35s ease-in-out;
+  -moz-transition: all .35s ease-in-out;
+  transition: all .35s ease-in-out;
+}
+
+.service-content-left{
+	float: right;
+	width: 50%;
+	-webkit-transition: all .35s ease-in-out;
+  -moz-transition: all .35s ease-in-out;
+  transition: all .35s ease-in-out;
+}
+
+.btn-create {
+	color: #0f3844;
+	border-color: #0f3844;
+	border-radius: 0;
+	cursor: pointer;
+	margin-top: 100px;
+}
+
+.btn-create:hover {
+	color: #222;
+	border-color: #222;
+	background: #f7f7f7;
+}
+
+
+.btn-submit {
+	color: #0f3844;
+	border-color: #0f3844;
+	border-radius: 0;
+	cursor: pointer;
+}
+
+.btn-submit:hover {
+	color: #222;
+	border-color: #222;
+	background: #f7f7f7;
+}
+
+.btn-cancel {
+	color: #0f3844;
+	border-color: #0f3844;
+	border-radius: 0;
+	cursor: pointer;
+	margin-left: 10px;
+}
+
+.btn-cancel:hover {
+	color: #222;
+	border-color: #222;
+	background: #f7f7f7;
+}
+
+.content{
+	position: relative;
+}
+
+.content-form .form-group{
+	margin-bottom: 15px;
+}
+
+.content-form .form-control{
+	border-color: #0f3844;
+	border-radius: 0;
+}
+
+.content-form .error-block{
+	color: red;
+	font-size: 12px;
+}
+
+.content-form .description{
+	margin-bottom: 0px;
+}
+
+.content-form{
+	position: absolute;
+	top: 0;
+	display: none;
+}
+
+
+@media(max-width: 767px){
+	.main-banner{
+		height: 300px;
+	}
+
+	.main-banner .caption-banner{
+		top: 20%;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+
+	.btn-create {
+		margin-top: 20px;
+	}
+	.service-img-left{
+		float: none;
+		width: 100%;
+		position: static;
+	}
+	.service-img-right{
+		float: none;
+		width: 100%;
+		position: static;
+	}
+	.service-content-right{
+		float: none;
+		width: 100%;
+		position: static;
+	}
+	.service-content-left{
+		float: none;
+		width: 100%;
+		position: static;
+	}
+}

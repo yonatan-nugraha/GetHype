@@ -19,6 +19,12 @@ class ActivateAccount extends Mailable
      * @var User
      */
     protected $user;
+
+    /**
+     * The key for activating account.
+     *
+     * @var key
+     */
     protected $key;
 
     /**
@@ -44,7 +50,7 @@ class ActivateAccount extends Mailable
                 'user'  => $this->user,
                 'key'   => $this->key,
             ])
-            ->from('admin@gethype.co.id', 'Gethype')
+            ->from('support@gethype.co.id', 'Gethype')
             ->subject('Activate your Gethype Account');
     }
 }

@@ -34,7 +34,7 @@
                                 <th width="8%">Category</th>
                                 <th width="8%">Event Type</th>
                                 <th width="8%">Status</th>
-                                <th width="15%">Action</th>
+                                <th width="20%">Action</th>
                             </tr>
                         </thead>
                         <tbody>

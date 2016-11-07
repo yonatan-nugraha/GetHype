@@ -31,7 +31,9 @@ class TicketController extends Controller
      * @return Response
      */
     public function index() {
-    	$orders = auth()->user()->orders()->get();
+    	$orders = auth()->user()->orders()
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('tickets/index', [
         	'orders' => $orders,
@@ -54,11 +56,11 @@ class TicketController extends Controller
 
         $pdf = PDF::loadView('pdfs.invoice', ['order' => $order])->setPaper('a4');
 
-        return $pdf->download('invoice.pdf');
+        return $pdf->stream('invoice.pdf');
     }
 
     /**
-     * Display order invoice.
+     * Display print tickets.
      *
      * @param  Request  $request
      * @return Response
@@ -68,9 +70,17 @@ class TicketController extends Controller
             return redirect('');
         }
 
-        // return view('pdfs.ticket', ['order' => $order]);
+        $tickets = Ticket::where('order_id', $order->id)->get();
 
-        $pdf = PDF::loadView('pdfs.ticket', ['order' => $order])->setPaper('a4');
+        // return view('pdfs.ticket', [
+        //     'order' => $order,
+        //     'tickets'   => $tickets
+        // ]);
+
+        $pdf = PDF::loadView('pdfs.ticket', [
+            'order'     => $order,
+            'tickets'   => $tickets
+        ])->setPaper('a4');
 
         return $pdf->stream('ticket.pdf');
     }

@@ -1,5 +1,5 @@
 body{
-	width: 700px;
+	width: 750px;
 	margin: 0 auto;
 	/*background: #f2f3f4;*/
 	padding-top: 30px;
@@ -148,5 +148,6 @@ p.value{
 }
 
 .page-break {
+	overflow: hidden;
     page-break-after: always;
 }

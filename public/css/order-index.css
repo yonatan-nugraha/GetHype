@@ -1,5 +1,5 @@
 body {
-	background-color: #F1F2F2 !important;
+	background-color: #f1f2f2 !important;
 }
 
 /**************************************/
@@ -11,24 +11,16 @@ body {
 	margin-bottom: 30px;
 }
 
+.orders-content {
+	color: #0f3844;
+}
+
 .event-name {
 	font-size: 18px;
 }
 
 .event-date {
 	font-size: 11px;
-}
-
-.orders a {
-	text-decoration: none;
-	color: #0F3844;
-	background-color: none;
-}
-
-.orders a:hover {
-	text-decoration: none;
-	color: #0F3844;
-	background-color: none;
 }
 
 .orders-content {
@@ -54,12 +46,21 @@ body {
 	background-color: #fff;
 }
 
+.orders-sidebar a:hover {
+	text-decoration: none;
+	color: #0f3844;
+	background-color: none;
+}
+
 .orders-sidebar a {
-	color: #0F3844;
+	color: #0f3844;
 	background-color: #fff;
 	font-size: 13px;
 	min-height: 100px;
 	padding: 5px 5px 5px 5px !important;
+	text-decoration: none;
+	color: #0f3844;
+	background-color: none;
 }
 
 .orders-sidebar li.active:after {
@@ -68,12 +69,12 @@ body {
 
 .orders-sidebar li.active a {
 	background-color: #fff !important;
-	color: #0F3844 !important;
-	border-left: 3px solid #EBD38C;
+	color: #0f3844 !important;
+	border-left: 3px solid #ebd38c;
 }
 
 .orders-sidebar li.active a:hover {
-    background-color: #F1F2F2 !important;
+    background-color: #f1f2f2 !important;
 }
 
 .orders-sidebar .thumbnail {
@@ -90,6 +91,10 @@ body {
 	background-color: #fff;
 }
 
+.orders-detail a {
+	color: #d33e40;
+}
+
 @media(max-width: 767px){
 	.orders-detail{
 		margin-top: 20px;
@@ -98,36 +103,39 @@ body {
 
 .orders-detail .title {
 	font-size: 10px;
-	font-weight: 200;
 	margin-top: 10px;
 	margin-bottom: 0;
+	color: #949494;
 }
 
 .orders-detail .description {
-	font-size: 17px;
-	font-weight: 400;
+	font-size: 14px;
+}
+
+.orders-detail .info {
+	font-size: 12px;
 }
 
 .row-1, .row-2, .row-3 {
-	border-bottom: 1px dotted black;
+	border-bottom: 1px dotted #0f3844;
 }
 
 .row-1 .col-1, .row-1 .col-2, .row-3 .col-1 {
-	border-right: 1px dotted black;
+	border-right: 1px dotted #0f3844;
 }
 
 .row-2 .col-2 {
-	border-left: 1px dotted black;
-	border-right: 1px dotted black;
+	border-left: 1px dotted #0f3844;
+	border-right: 1px dotted #0f3844;
 }
 
 .border-left{
-	border-left: 1px dotted black;
+	border-left: 1px dotted #0f3844;
 }
 
 .ticket-type{
-	border-left: 1px dotted black;
-	border-right: 1px dotted black;
+	border-left: 1px dotted #0f3844;
+	border-right: 1px dotted #0f3844;
 }
 
 .payment-method{
@@ -135,18 +143,14 @@ body {
 
 @media(max-width: 767px){
 	.ticket-type{
-		border-bottom: 1px dotted black;
-		border-left: 1px dotted black;
+		border-bottom: 1px dotted #0f3844;
+		border-left: 1px dotted #0f3844;
 	}
 
 	.payment-ammount{
-		border-top: 1px dotted black;
+		border-top: 1px dotted #0f3844;
 	}
-
-
 }
-
-
 
 .row-3 {
 	text-align: center;

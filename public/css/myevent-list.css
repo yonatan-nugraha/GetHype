@@ -5,17 +5,18 @@ body {
 .myevents {
 	margin-top: 50px;
 	padding-bottom: 50px !important;
+	color: #0f3844;
 }
 
 .myevents a {
 	text-decoration: none;
-	color: #0F3844;
+	color: #0f3844;
 	background-color: none;
 }
 
 .myevents a:hover {
 	text-decoration: none;
-	color: #0F3844;
+	color: #0f3844;
 	background-color: none;
 }
 
@@ -42,7 +43,7 @@ body {
 }
 
 .myevents-sidebar a {
-	color: #0F3844;
+	color: #0f3844;
 	background-color: #fff;
 	font-size: 13px;
 }
@@ -52,21 +53,21 @@ body {
     display: block;
     height: 3px;
     width: 90%;
-    background: #EBD38C;
+    background: #ebd38c;
     margin: 0 auto;
 }
 
 .myevents-sidebar li.active a {
 	background-color: #fff !important;
-	color: #0F3844 !important;
+	color: #0f3844 !important;
 }
 
 .myevents-sidebar li.active a:hover {
-    background-color: #F1F2F2 !important;
+    background-color: #f1f2f2 !important;
 }
 
 .myevents li a:hover {
-	color: #0F3844 !important;
+	color: #0f3844 !important;
 }
 
 /**************************************/
@@ -83,7 +84,7 @@ body {
 }
 
 .myevents-list-row {
-	border-left: 4px solid #EBD38C;
+	border-left: 4px solid #ebd38c;
 	background-color: #fff;
 	margin-bottom: 10px;
 	cursor: pointer;

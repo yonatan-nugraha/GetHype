@@ -161,6 +161,7 @@ ul.dropdown-menu:before {
 .footer a:hover {
     cursor: pointer;
     text-decoration: none;
+    color: #b1b1b1;
 }
 
 .footer-main {

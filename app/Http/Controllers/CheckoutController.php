@@ -13,8 +13,6 @@ use App\TicketGroup;
 use App\Order;
 use App\OrderDetail;
 
-use App\Mail\Welcome;
-use App\Mail\ActivateAccount;
 use App\Mail\CheckoutSuccess;
 
 use Mail, PDF;
@@ -277,7 +275,8 @@ class CheckoutController extends Controller
                 'payment_status' => 5,
             ]);
 
-            Mail::to(auth()->user()->email)->queue(new CheckoutSuccess($order));
+            $user = User::find(auth()->id());
+            Mail::to(auth()->user()->email)->queue(new CheckoutSuccess($user, $order));
             Redis::del('order:'.auth()->id());
         }        
 
@@ -366,7 +365,8 @@ class CheckoutController extends Controller
             if ($tickets_updated > 0) {
                 $order_status = 2;
 
-                Mail::to($order->user->email)->queue(new CheckoutSuccess($order));
+                $user = User::find($order->user_id);
+                Mail::to($order->user->email)->queue(new CheckoutSuccess($user, $order));
 
                 Redis::del('order:'.$order->user_id);
             }
