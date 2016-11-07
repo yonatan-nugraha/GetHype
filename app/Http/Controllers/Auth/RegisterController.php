@@ -137,7 +137,7 @@ class RegisterController extends Controller
                 ]);
             }
 
-            Mail::to($user->email)->queue(new Welcome);
+            Mail::to($user->email)->queue(new Welcome($user));
 
             return redirect('login')
                 ->withErrors([ 'error' => 'Your account has been activated. Please login.' ])

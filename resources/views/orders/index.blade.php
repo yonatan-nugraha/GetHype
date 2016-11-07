@@ -66,26 +66,21 @@
 						<div class="col-xs-6 col-1">
 							@if (in_array($order->payment_status, [4,5]))
 							<img class="status-icon" src="{{ asset('/images/icons/success.png') }}">
-							<p class="">Payment Success</p>
+							<p class="info">Payment Success</p>
 							@else
 							<img class="status-icon" src="{{ asset('/images/icons/failed.png') }}">
-							<p class="">Payment Failed</p>
+							<p class="info">Payment Failed</p>
 							@endif
 						</div>
 						<div class="col-xs-6 col-2">
-							@if ($order->order_status == 2)
 							<img class="status-icon" src="{{ asset('/images/icons/success.png') }}">
-							<p class="">Order Success</p>
-							@else
-							<img class="status-icon" src="{{ asset('/images/icons/success.png') }}">
-							<p class="">Order Success</p>
-							@endif
+							<p class="info">Order Success</p>
 						</div>
 					</div>
 					<div class="row row-4">
 						<div class="col-xs-12 col-1">
 							<p class="title">Notes:</p>
-							<p class="">
+							<p class="description">
 							@if (in_array($order->payment_status, [4,5]) && $order->order_status != 2)
 							Your order failed. The transaction amount will be refunded to your bank account.
 							@elseif (in_array($order->payment_status, [4,5]) && $order->order_status == 2)

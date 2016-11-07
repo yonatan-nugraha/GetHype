@@ -13,8 +13,6 @@ use App\TicketGroup;
 use App\Order;
 use App\OrderDetail;
 
-use App\Mail\Welcome;
-use App\Mail\ActivateAccount;
 use App\Mail\CheckoutSuccess;
 
 use Mail, PDF;

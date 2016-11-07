@@ -15,28 +15,27 @@
 		</table>
 
 		<div style="text-decoration: none; padding: 0 20px">
-			<div style="color:#505050">
+			<div style="color: #0f3844">
 				<p><b>Hai, {{ $user->first_name }} @if ($user->last_name) {{ $user->last_name }}@endif!</b></p>
 				<p>This is your order confirmation for {{ $order->event->name }}</p>
 			</div>
 		</div>
 
-
 		<div style="padding:0 15px;">
-			<table style="padding:20px; background: #fff; width: 100%">
+			<table style="padding:20px; background: #fff; width: 100%; color: #0f3844">
 				<tr>
 					<td width="50%" style="border-right: 1px dashed #0f3844;">
-						<small style="text-transform: uppercase; letter-spacing: 0.1em; font-size: 10px;">Order Summary</small>
+						<p style="text-transform: uppercase; letter-spacing: 0.1em; font-size: 10px;">Order Summary</p>
 						<h3 style="font-size: 50px; margin-top:30px;margin-bottom: 0;line-height: 25px; color: #ebd58e; ">2<span style="font-size: 16px; margin-left: 5px;">Tickets</span></h3>
-						<p style="margin-top: 5px; margin-bottom: 0px; font-size: 22px; line-height: 26px; color: #0f3844;">{{ $order->event->name }}</p>
+						<p style="margin-top: 5px; margin-bottom: 0px; font-size: 22px; line-height: 26px;">{{ $order->event->name }}</p>
 						<p style="margin-top: 0px; font-size: 12px; color: #0f3844;">Order #: {{ $order->id }}</p>
-						<p style="margin-top: 0px; font-size: 14px; margin-bottom: 0; line-height: 1.3; color: #0f3844;">{!! nl2br(e($order->event->location)) !!}</p>
-						<p style="margin-top: 10px; font-size: 14px; margin-bottom: 0; line-height: 1.3; color: #0f3844;">{{ Carbon\Carbon::parse($order->event->started_at)->format('l, M d, Y') }}</p>
-						<p style="margin-top: 0px; font-size: 14px; margin-bottom: 0; color: #0f3844;">{{ Carbon\Carbon::parse($order->event->started_at)->format('h.i A') }}</p>
+						<p style="margin-top: 0px; font-size: 14px; margin-bottom: 0; line-height: 1.3;">{!! nl2br(e($order->event->location)) !!}</p>
+						<p style="margin-top: 10px; font-size: 14px; margin-bottom: 0; line-height: 1.3;">{{ Carbon\Carbon::parse($order->event->started_at)->format('l, M d, Y') }}</p>
+						<p style="margin-top: 0px; font-size: 14px; margin-bottom: 0;">{{ Carbon\Carbon::parse($order->event->started_at)->format('h.i A') }}</p>
 					</td>
 
 					<td width="50%">
-						<table style="font-size: 12px;  padding-bottom: 10px; width: 100%; color: #0f3844;">
+						<table style="font-size: 12px;  padding-bottom: 10px; width: 100%;">
 							@foreach ($order->order_details as $order_detail)
 							<tr>
 								<td style="padding-left: 15px;">
@@ -109,10 +108,10 @@
 		<div style="padding:0 20px;">
 			<h4 style="margin-bottom: 0; color: #0f3844;">The invoice and tickets are attached on this email, however, you can also check them on:</h4>
 			<p style="margin-bottom: 0; color: #0f3844;">
-				Invoice: <a href="http://gethype.co.id/tickets/{{ $order->id }}/invoice" target="_blank">here</a>
+				Invoice: <a href="http://gethype.co.id/tickets/{{ $order->id }}/invoice" target="_blank" style="color: #d33e40">here</a>
 			</p>
-			<p style="margin-top: 10px; color: #0f3844;">
-				Tickets: <a href="http://gethype.co.id/tickets/{{ $order->id }}/ticket" target="_blank">here</a>
+			<p style="margin-top: 5px; color: #0f3844;">
+				Tickets: <a href="http://gethype.co.id/tickets/{{ $order->id }}/ticket" target="_blank" style="color: #d33e40">here</a>
 			</p>
 		</div>
 
@@ -120,20 +119,22 @@
 			<tbody>
 				<tr>
 					<td style="margin: 0; padding: 0; width: 45%; text-align: center">
-						<div style="margin-bottom: 10px;margin-top: 20px;"><img src="http://gethype.co.id/images/emails/logo-footer-email.png" alt=""></div>
+						<div style="margin-bottom: 10px;margin-top: 20px;">
+							<img src="{{ $message->embed(asset('images/emails/logo-footer-email.png')) }}">
+						</div>
 						<div style="color:#606060; font-size:12px;line-height: 30px;">
 							<a href="http://gethype.co.id/" target="_blank" style="text-decoration: none; color:#0f3844;">Website</a> &nbsp;|&nbsp; <a href="http://gethype.co.id/contact-us" target="_blank" style="text-decoration: none; color:#0f3844;">Contact</a> &nbsp;|&nbsp; <a href="http://gethype.co.id/services" target="_blank" style="text-decoration: none; color:#0f3844;">Service</a><br>
 							<a href="" target="_blank" style="text-decoration:none">
-								<img src="http://gethype.co.id/images/emails/facebook.png" style="margin-top: 5px; height: 15px;margin-right: 15px;"> 
+								<img src="{{ $message->embed(asset('images/emails/facebook.png')) }}" style="margin-top: 5px; height: 15px;margin-right: 15px;"> 
 							</a>
 							<a href="" target="_blank" style="text-decoration:none">
-								<img src="http://gethype.co.id/images/emails/twitter.png" style="margin-top: 5px; height: 15px;margin-right: 10px;"> 
+								<img src="{{ $message->embed(asset('images/emails/twitter.png')) }}" style="margin-top: 5px; height: 15px;margin-right: 10px;"> 
 							</a>
 							<a href="https://www.instagram.com/gethype.id/" target="_blank" style="text-decoration:none">
-								<img src="http://gethype.co.id/images/emails/instagram.png" style="margin-top: 5px; height: 15px;margin-right: 10px;"> 
+								<img src="{{ $message->embed(asset('images/emails/instagram.png')) }}" style="margin-top: 5px; height: 15px;margin-right: 10px;"> 
 							</a>
 							<a href="" target="_blank" style="text-decoration:none">
-								<img src="http://gethype.co.id/images/emails/linkedin.png" style="margin-top:5px; height: 15px;"> 
+								<img src="{{ $message->embed(asset('images/emails/linkedin.png')) }}" style="margin-top:5px; height: 15px;"> 
 							</a>
 							<br>
 						</div>

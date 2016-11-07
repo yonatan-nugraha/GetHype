@@ -31,7 +31,9 @@ class TicketController extends Controller
      * @return Response
      */
     public function index() {
-    	$orders = auth()->user()->orders()->get();
+    	$orders = auth()->user()->orders()
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('tickets/index', [
         	'orders' => $orders,

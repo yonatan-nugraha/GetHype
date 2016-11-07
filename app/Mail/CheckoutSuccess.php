@@ -7,7 +7,9 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
+use App\User;
 use App\Order;
+use App\Ticket;
 
 use PDF;
 
@@ -20,6 +22,13 @@ class CheckoutSuccess extends Mailable
      *
      * @var User
      */
+    protected $user;
+
+    /**
+     * The order instance.
+     *
+     * @var Order
+     */
     protected $order;
 
     /**
@@ -27,8 +36,9 @@ class CheckoutSuccess extends Mailable
      *
      * @return void
      */
-    public function __construct(Order $order)
+    public function __construct(User $user, Order $order)
     {
+        $this->user = $user;
         $this->order = $order;
     }
 
@@ -39,11 +49,25 @@ class CheckoutSuccess extends Mailable
      */
     public function build()
     {
-        $pdf = PDF::loadView('pdfs.invoice', ['order' => $this->order])->setPaper('a4');
+        $invoice_pdf = PDF::loadView('pdfs.invoice', [
+            'order' => $this->order
+        ])->setPaper('a4')->output();
 
-        return $this->view('emails.send')
+        $tickets = Ticket::where('order_id', $this->order->id)->get();
+
+        $tickets_pdf = PDF::loadView('pdfs.ticket', [
+            'order' => $this->order,
+            'tickets' => $tickets
+        ])->setPaper('a4')->output();
+
+        return $this->view('emails.checkout_success')
+            ->with([
+                'user' => $this->user,
+                'order'  => $this->order,
+            ])
             ->from('support@gethype.co.id', 'Gethype')
             ->subject('Checkout Success')
-            ->attachData($pdf->output(), 'invoice.pdf');
+            ->attachData($tickets_pdf, 'tickets.pdf')
+            ->attachData($invoice_pdf, 'invoice.pdf');
     }
 }

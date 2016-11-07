@@ -19,7 +19,7 @@
 		</div>
 
 		<div style="text-decoration: none; padding: 0 20px">
-			<div style="color:#505050">
+			<div style="color: #0f3844">
 				<p><b>Hai, Gethypers!</b></p>
 				<p style="margin-top:10px">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
 

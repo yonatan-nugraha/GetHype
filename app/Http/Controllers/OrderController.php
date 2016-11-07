@@ -29,8 +29,7 @@ class OrderController extends Controller
     	$orders = auth()->user()->orders()
             ->whereIn('payment_status', [4,5])
             ->orderBy('created_at', 'desc')
-            ->paginate(1);
-            // ->get();
+            ->paginate(10);
 
         return view('orders/index', [
         	'orders' => $orders,

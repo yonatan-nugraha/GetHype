@@ -13,7 +13,9 @@ use App\Journal;
 use App\Banner;
 use App\Order;
 
-use DB, Carbon\Carbon, Cache;
+use DB, Carbon\Carbon, Cache, Mail;
+
+use App\Mail\CheckoutSuccess;
 
 class HomeController extends Controller
 {
@@ -141,7 +143,7 @@ class HomeController extends Controller
     public function email(Request $request)
     {
         $user = User::find(1);
-        $order = Order::find(1);
+        $order = Order::find(21);
 
         $q = $request->q;
         if ($q == 'welcome') {
