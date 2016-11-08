@@ -10,12 +10,12 @@
 		<div class="row">
             <div class="col-sm-12">
 
-				<h3>Event Register !!</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<h3>Register for the Event</h3>
+				<p>Hi, let's register your ticket now. Make sure to re-check your ticket code before entering the code below.</p>
 
 				<div class="form-group ticket-code">
 					<div class="input-group">
-	                    <h4>Ticket Code</h4>
+	                    <h3>Ticket Code</h3>
 	                    <form action="{{ url('myevents/'.$event->id.'/register') }}" method="POST">
 						{!! csrf_field() !!}
 		                    <input type="text" class="form-control ticket-code-input" name="code" value="{{ session('register')['code'] }}">
@@ -42,7 +42,7 @@
 		<div class="row">
 			<div class="col-sm-12">
                 <div class="register-info-failed">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, veniam vero. Esse facilis, ex totam quae. Nobis asperiores, a facilis consequuntur consectetur? Nisi, voluptate. Assumenda dignissimos mollitia repudiandae nulla. Sequi.
+					Sorry, your registration is failed. Please re-check your ticket code.<br> If there’s still some issues going on with your registration process, kindly contac us at 021-xxx. Thank you.
 				</div>
 			</div>
 		</div>

@@ -1,3 +1,7 @@
+body {
+     background: #f1f2f2 !important;
+}
+
 .ticket-code {
     position: relative;
 }
@@ -31,11 +35,11 @@
 }
 
 .register-success{
-    padding:40px 0;
+    padding: 30px 0;
     background: #f1f2f2;
 }
 
-.register-success h3, .register-success h4{
+.register-success h3{
 	font-size: 20px;
     color: #0f3844;
 }

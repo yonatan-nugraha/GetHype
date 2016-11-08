@@ -115,7 +115,13 @@
 
             <ul>
             	@foreach ($event->ticket_groups as $ticket_group)
-                <li>Untuk tiket {{ $ticket_group->name }} dikenakan biaya {{ 'Rp '. number_format($ticket_group->price) }} per orang</li>
+                <li>The price for {{ $ticket_group->name }} ticket is 
+                @if ($ticket_group->price > 0)
+                {{ 'Rp '. number_format($ticket_group->price) }}
+                @else
+                Free
+                @endif
+                </li>
                 @endforeach
             </ul>
 

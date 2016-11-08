@@ -132,7 +132,7 @@ class AccountController extends Controller
         }
 
         $request->user()->update([
-            'password'  => $request->new_password,
+            'password'  => bcrypt(trim($request->new_password)),
         ]);
 
         return redirect('/account/settings#change-password')

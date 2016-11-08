@@ -1,72 +1,80 @@
-.banner {
+.contact {
+	background-color: #fff;
+	color: #0f3844;
+}
+
+.contact .left-side img {
 	width: 100%;
 }
 
-@media(max-width: 767px){
-	.banner{
-
-	}
+.contact .right-side {
+    padding-top: 20px;
+    padding-left: 30px;
 }
 
-.banner-contact{}
-
-#description{
+.contact .description {
     margin-top: 4em;
     margin-bottom: 1em;
 }
 
-#firstContent {
-    padding-top: 20px;
-}
-
-.singleLine {
-	padding-left: 15px;
-	padding-right: 15px;
-	margin-bottom: 20px;
-}
-
-.singleLine input {
-	width: 50%
-}
-
-.singleLine input, textarea {
+.contact input, .contact textarea {
     border-radius: 0 !important;
     border-color: #092D33 !important;
     margin-bottom: 0;
+    font-size: 11px;
+    letter-spacing: 0.05em;
 }
 
-#secondContent {
-	padding-top: 25px;
-	padding-left: 90px;
+.contact ::-webkit-input-placeholder {
+    color: #0f3844;
 }
 
-.contact {
-	background-color: #F2F1F0
+.contact :-moz-placeholder {
+    color: #0f3844;
+}
+
+.contact ::-moz-placeholder {
+    color: #0f3844;
+}
+
+.contact ::-ms-input-placeholder {
+    color: #0f3844;
 }
 
 .contact-error {
 	font-size: 12px;
 	margin-top: 5px;
 	color: red;
-	margin-bottom: 15px;
+	margin: 5px 0;
 }
 
-.contact-error{
-	color: red;
-	margin:5px 0;
-}
-
-.message-submit{
+.message-submit {
 	border: 1px solid #b32c2d;
 	border-radius: 0;
 	padding-left: 20px;
 	padding-right: 20px;
 	background: #d53f40;
-	margin-bottom: 20px;
 	color: #fff;
 }
 
-.message-submit:hover{
+.message-submit:hover {
 	background:  #b32c2d;
 	color: #fff;
+}
+
+.after-effect {
+	position: fixed;
+	display: none;
+	width: 100%;
+	top: 30%;
+	z-index: 9999;
+}
+
+.after-effect-content {
+	background: rgba(15,56,68,0.6);
+	text-align: center;
+	color: #fff;
+	padding:30px;
+	width: 280px;
+	margin: 0 auto;
 }

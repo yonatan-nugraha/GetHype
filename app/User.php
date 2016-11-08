@@ -75,17 +75,6 @@ class User extends Authenticatable
     }
 
     /**
-     * Set the user's password.
-     *
-     * @param  string  $value
-     * @return void
-     */
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = bcrypt(trim($value));
-    }
-
-    /**
      * Get the photo for the user.
      */
     public function photo()
@@ -111,7 +100,8 @@ class User extends Authenticatable
      */
     public function orders()
     {
-        return $this->hasMany(Order::class)->where('order_status', 2);
+        return $this->hasMany(Order::class)
+            ->where('order_status', 2);
     }
 
     /**

@@ -135,7 +135,7 @@
                 </div>
                 <div class="col-sm-5 col-xs-12 subscribe">
                     <p class="subscribe-title">Subscribe Now</p>
-                    <span class="subscribe-description">Let us provide you the latest info about what’s happening on Gethype and keep you up to date with our best offering for your needs.</span>
+                    <span class="subscribe-description">Providing you the latest info about Gethype & best offering for your needs.</span>
 
                     <p class="subscribe-form">
                         <div class="input-group">

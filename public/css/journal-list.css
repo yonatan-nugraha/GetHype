@@ -1,6 +1,6 @@
 .main-banner {
 	height: 400px;
-	margin-bottom: 30px;
+	margin-bottom: 40px;
 }
 
 .main-banner .caption-banner{
@@ -11,9 +11,10 @@
 }
 
 .main-banner .caption-banner p{
-	font-size: 16px;
+	font-size: 22px;
 	margin:5px 0;
 	color: #fff;
+	line-height: 1.1;
 }
 
 @media(max-width: 767px){
@@ -27,11 +28,19 @@
 	}
 }
 
+.gethype-line {
+	margin: 15px 0 20px 0;
+}
+
 .gethype-line img{
 	width: 100%;
 	max-height: 5px;
 	margin-top: 10px;
 	margin-bottom: 10px;
+}
+
+.journals {
+	padding-bottom: 50px;
 }
 
 .list-journal{
@@ -52,7 +61,7 @@
 	color: #123844;
 	margin-top: 15px;
 	background: #fff;
-	height: 80px;
+	height: 45px;
 }
 
 @media(max-width: 767px){
@@ -61,16 +70,23 @@
 	}
 }
 
+.list-journal p{
+	font-size: 12px;
+	font-weight: 500;
+	letter-spacing: 0.01em;
+	margin-bottom: 0;
+	color: #0f3844;
+}
+
 .list-journal .desc .title{
 	color: #d53f41;
+	font-size: 10px;
 }
 
 .list-journal .desc .date{
-
-}
-
-.list-journal p{
-
+	color: #8c8c8c;
+	font-size: 10px;
+	font-weight: 300;
 }
 
 .journal-search {
@@ -93,7 +109,9 @@
 	border: 1px solid #0f3844;
 	border-radius:0;
 	width: 120px;
+	height: 30px;
     -webkit-appearance: none;
+	font-size: 12px;
 }
 
 .journal-search .journal-search-input{
@@ -101,6 +119,7 @@
 	border-radius:0;
 	border-left: 0;
 	padding-left: 120px;
+	height: 30px;
 }
 
 .journal-search .journal-search-button{
@@ -112,6 +131,8 @@
 	background: #d53f40;
 	border-radius: 0;
 	border: 1px solid #b32c2d;
+	height: 30px;
+	font-size: 12px;
 }
 
 .journal-search .journal-search-button:hover{

@@ -66,27 +66,41 @@
 						<div class="col-xs-6 col-1">
 							@if (in_array($order->payment_status, [4,5]))
 							<img class="status-icon" src="{{ asset('/images/icons/success.png') }}">
-							<p class="info">Payment Success</p>
+							<p class="description">Payment Success</p>
 							@else
 							<img class="status-icon" src="{{ asset('/images/icons/failed.png') }}">
-							<p class="info">Payment Failed</p>
+							<p class="description">Payment Failed</p>
 							@endif
 						</div>
 						<div class="col-xs-6 col-2">
+							@if ($order->order_status == 2)
 							<img class="status-icon" src="{{ asset('/images/icons/success.png') }}">
-							<p class="info">Order Success</p>
+							<p class="description">Order Success</p>
+							@else
+							<img class="status-icon" src="{{ asset('/images/icons/success.png') }}">
+							<p class="description">Order Failed</p>
+							@endif
 						</div>
 					</div>
 					<div class="row row-4">
 						<div class="col-xs-12 col-1">
 							<p class="title">Notes:</p>
 							<p class="description">
-							@if (in_array($order->payment_status, [4,5]) && $order->order_status != 2)
-							Your order failed. The transaction amount will be refunded to your bank account.
-							@elseif (in_array($order->payment_status, [4,5]) && $order->order_status == 2)
-							The transaction is success. You can check your ticket <a href="{{ url('tickets') }}">here</a>
-							@elseif ($order->payment_status == 6 && $order->order_status == 2)
-							Your transaction has been refunded.
+							@if ($order->order_status == 1)
+								@if (in_array($order->payment_status, [4,5]))
+								Your order is failed. 
+									@if ($order->refund_status == 0)
+									The payment amount will be refunded to your account.
+									@else
+									The payment amount is already refunded to your account.
+									@endif
+								@elseif ($order->payment_status == 1)
+								Please do transfer
+								@elseif (in_array($order->payment_status, [2,3,6]))
+								Your order is failed.
+								@endif
+							@elseif ($order->order_status == 2 && in_array($order->payment_status, [4,5]))
+							Your order is successful. You can check your ticket <a href="{{ url('tickets') }}">here</a>
 							@endif
 							</p>
 						</div>
@@ -103,7 +117,7 @@
 
 	<div class="row orders-bottom">
 		<div class="col-xs-12">
-			<p>For any question, please email us at support@gethype.co.id, or you can call us at +62891238116</p>
+			<p class="notes">For any question, please email us at support@gethype.co.id, or you can call us at +62891238116</p>
 		</div>
 	</div>
 

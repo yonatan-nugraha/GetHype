@@ -282,6 +282,7 @@ class AdminController extends Controller {
                     'ticket_group_id' => $ticket_group_id,
                     'code'      => sprintf('8%s-%s-%s-%s', mt_rand(100, 999), mt_rand(1000, 9999), mt_rand(1000, 9999), mt_rand(1000, 9999)),
                     'status'    => 1,
+                    'is_registered' => 0,
                 ]);
             }
         }
@@ -350,6 +351,7 @@ class AdminController extends Controller {
                         'ticket_group_id' => $ticket_group->id,
                         'code'      => sprintf('8%s-%s-%s-%s', mt_rand(100, 999), mt_rand(1000, 9999), mt_rand(1000, 9999), mt_rand(1000, 9999)),
                         'status'    => 1,
+                        'is_registered' => 0,
                     ]);
                 }
             }
@@ -371,6 +373,7 @@ class AdminController extends Controller {
                     'ticket_group_id' => $ticket_group_id,
                     'code'      => sprintf('8%s-%s-%s-%s', mt_rand(100, 999), mt_rand(1000, 9999), mt_rand(1000, 9999), mt_rand(1000, 9999)),
                     'status'    => 1,
+                    'is_registered' => 0,
                 ]);
             }
         }

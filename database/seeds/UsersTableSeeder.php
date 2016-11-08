@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
             'phone'      => '081932058111',
             'gender'     => 1,
             'birthdate'  => '1993-05-22',
-            'password'   => '123456',
+            'password'   => bcrypt('123456'),
             'status'     => 1,
         ]);
 
@@ -31,7 +31,7 @@ class UsersTableSeeder extends Seeder
             'phone'      => '081273627555',
             'gender'     => 2,
             'birthdate'  => '1997-11-7',
-            'password'   => '123456',
+            'password'   => bcrypt('123456'),
             'status'     => 1,
         ]);
     }

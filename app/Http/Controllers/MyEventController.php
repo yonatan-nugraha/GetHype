@@ -320,7 +320,7 @@ class MyEventController extends Controller
         $ticket_group_ids = $event->ticket_groups->pluck('id')->toArray();
 
         $ticket = Ticket::where('code', $code)
-            ->whereIn('status', [3,4])
+            ->where('status', 3)
             ->whereIn('ticket_group_id', $ticket_group_ids)
             ->first();
 
@@ -328,12 +328,12 @@ class MyEventController extends Controller
         $register = array();
         if ($ticket) {
             $ticket->update([
-                'status' => 4
+                'is_registered' => 1
             ]);
 
             $register['success']    = 2;
             $register['code']       = $code;
-            $register['name']       = $ticket->order->user->first_name . ' ' . $ticket->order->user->last_name;
+            $register['name']       = $ticket->order->first_name . ' ' . $ticket->order->last_name;
             $register['order_id']   = $ticket->order_id;
             $register['ticket_group'] = $ticket->ticket_group->name;
         } else {

@@ -2,11 +2,17 @@ section.journal-detail{
 	background: #f2f3f4;
 	padding-top: 40px;
 	padding-bottom: 40px;
+	color: #0f3844;
+}
+
+.feature-img img {
+	width: 100%;
 }
 
 .detail-content{
 	background: #fff;
-	padding: 15px;
+	padding: 5px 25px 20px; 
+	margin-bottom: 20px;
 }
 
 .detail-content .cate-date {
@@ -23,25 +29,25 @@ section.journal-detail{
 .detail-content .cate-date .date{
 	display: inline-block;
 	margin-left: 10px;
+	color: #999;
+	font-weight: 300;
 }
 
-.detail-content .point {
+.detail-content img {
+	width: 100%;
+}
+
+.detail-content h4 {
 	font-size: 16px;
 	margin:35px 0 20px;
-}
-
-.detail-content .point .number{
 	display: inline-block;
 	margin-right: 10px;
-}
-
-.detail-content .point .subtitle{
 	display: inline-block;
 	color: #d53f40;
 }
 
 
-.detail-content .img-desc{
+.detail-content h5 {
 	color: #999;
 	font-style: italic;
 	text-align: center;
@@ -67,7 +73,7 @@ section.journal-detail{
 }
 
 .journal-detail .related-article{
-	padding: 15px;
+	padding: 15px 15px 5px 15px;
 	background: #fff;
 	margin-top: 30px;
 }
@@ -75,6 +81,8 @@ section.journal-detail{
 .journal-detail .related-article h3, .journal-detail .box-subscribe h3{
 	margin: 10px 0;
 	color: #0f3844;
+	font-size: 18px;
+	margin-top: 5px;
 }
 
 .journal-detail .related-article .list-related-article {
@@ -92,15 +100,21 @@ section.journal-detail{
 }
 
 .journal-detail .related-article .list-related-article a.title{
-	margin-bottom: 5px;
+	margin-bottom: 10px;
 	display: inline-block;
 	color: #d53f40;
+	line-height: 1.2;
 }
 
 .journal-detail .related-article .list-related-article p.date{
-	font-size: 12px;
+	font-size: 11px;
 	color: #999;
 	margin: 0;
+	font-weight: 300;
+}
+
+.journal-detail .caption {
+	padding-left: 5px;
 }
 
 .box-subscribe{
@@ -126,4 +140,24 @@ section.journal-detail{
 .btn-subscribe:hover{
 	background:  #b32c2d;
 	color: #fff;
+}
+
+.journal-detail input, .journal-detail button {
+	font-size: 12px;
+}
+
+.journal-detail ::-webkit-input-placeholder {
+    color: #0f3844;
+}
+
+.journal-detail :-moz-placeholder {
+    color: #0f3844;
+}
+
+.journal-detail ::-moz-placeholder {
+    color: #0f3844;
+}
+
+.journal-detail ::-ms-input-placeholder {
+    color: #0f3844;
 }

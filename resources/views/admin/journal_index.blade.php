@@ -36,7 +36,7 @@
                             <tr>
                                 <td>{{ $journal->id }}</td>
                                 <td>{{ $journal->title }}</td>
-                                <td style="text-overflow: ellipsis; max-width: 800px; overflow: hidden; white-space: nowrap;">{{ strip_tags($journal->content) }}</td>
+                                <td style="text-overflow: ellipsis; max-width: 500px; overflow: hidden; white-space: nowrap;">{{ strip_tags($journal->content) }}</td>
                                 <td>{{ $journal->tag }}</td>
                                 <td>
                                     <form action="{{ url('journals/'.$journal->id.'/update-status-journal') }}" method="POST">

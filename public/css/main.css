@@ -329,6 +329,7 @@ ul.dropdown-menu:before {
 
 .paging{
     float: right;
+    font-size: 12px;
 }
 
 .paging .pagination>.active>a, 

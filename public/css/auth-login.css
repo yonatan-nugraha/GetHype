@@ -49,6 +49,11 @@
     padding: 10px 30px;
 }
 
+.login button:hover {
+    background: #b32c2d;
+    border-color: #b32c2d;
+}
+
 .login hr {
     height: 2px;
     border-top: 1px solid #0f3844;
@@ -80,6 +85,11 @@
     border-color: #3b5998;
     border-style: none;
     margin-bottom: 10px;
+}
+
+.login-facebook button:hover {
+    background: #193f8e;
+    border-color: #193f8e;
 }
 
 .login-google button {

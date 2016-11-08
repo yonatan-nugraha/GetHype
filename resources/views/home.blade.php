@@ -203,7 +203,7 @@
     <div class="no-padding" id="banner-background">
         <div class="first"><img class="banner-additional" src="{{ asset('/images/img-additional-1.png') }}"></div>
         <a href="{{ url('services') }}"><p class="banner-title">Create Your Event with Gethype</p></a>
-        <div class="banner-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+        <div class="banner-description">Let the hype begin and make your event be unforgettable with us. Sit back and relax, enjoy the hype and be ready to have the most anticipating event with Gethype.</div>
     </div>
 </div>
 

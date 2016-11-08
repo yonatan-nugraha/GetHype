@@ -12,7 +12,7 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
-    	'user_id', 'event_id', 'contact_id', 'order_status', 'order_amount', 'administration_fee', 'payment_status', 'payment_method', 'payment_amount', 'first_name', 'last_name', 'email', 'phone'
+    	'user_id', 'event_id', 'contact_id', 'order_status', 'order_amount', 'administration_fee', 'payment_status', 'payment_method', 'payment_amount', 'refund_status', 'first_name', 'last_name', 'email', 'phone'
     ];
 
     /**

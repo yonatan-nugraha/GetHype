@@ -33,7 +33,6 @@
                                     <option value="1" @if (Request::get('status') == '1') selected @endif>Available</option>
                                     <option value="2" @if (Request::get('status') == '2') selected @endif>Booked</option>
                                     <option value="3" @if (Request::get('status') == '3') selected @endif>Sold</option>
-                                    <option value="4" @if (Request::get('status') == '4') selected @endif>Registered</option>
                                 </select>
                             </div>
                         </div>
@@ -79,9 +78,11 @@
                                     <span class="badge bg-yellow">Booked</span>
                                     @elseif ($ticket->status == 3)
                                     <span class="badge bg-blue">Sold</span>
-                                    @else
-                                    <span class="badge bg-purple">Registered</span>
                                     @endif<br>
+
+                                    @if ($ticket->status == 3 && $ticket->is_registered)
+                                    <span class="badge bg-purple">Registered</span>
+                                    @endif
                                 </td>
                                 <td>
                                     @if (in_array($ticket->status, [3,4]))

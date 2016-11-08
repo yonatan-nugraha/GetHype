@@ -23,6 +23,7 @@ class CreateOrdersTable extends Migration
             $table->integer('payment_status');
             $table->string('payment_method');
             $table->double('payment_amount');
+            $table->integer('refund_status');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email');
