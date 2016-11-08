@@ -56,7 +56,7 @@ body{
 	margin-top: 15px;
 	border-top: 1px dashed #133743;
 	border-bottom: 1px dashed #133743;
-	padding: 4px 20px;
+	padding: 4px 15px;
 }
 
 small.label-title{
@@ -69,7 +69,7 @@ p.value{
 }
 
 .date-order{
-	padding: 4px 20px;
+	padding: 4px 15px;
 	float: left;
 	width: 35%;
 	border-bottom: 1px dashed #133743;
@@ -78,7 +78,7 @@ p.value{
 }
 
 .time-order{
-	padding: 4px 20px;
+	padding: 4px 15px;
 	float: left;
 	width: 35%;
 	border-bottom: 1px dashed #133743;
@@ -86,14 +86,14 @@ p.value{
 }
 
 .payment-status{
-	padding: 4px 20px;
+	padding: 4px 15px;
 	float: left;
 	width: 30%;
 	border-bottom: 1px dashed #133743;
 }
 
 .ticket-type{
-	padding: 4px 20px;
+	padding: 4px 15px;
 	float: left;
 	width: 50%;
 	border-bottom: 1px dashed #133743;
@@ -102,7 +102,7 @@ p.value{
 }
 
 .order-code{
-	padding: 4px 20px;
+	padding: 4px 15px;
 	float: left;
 	width: 50%;
 	border-bottom: 1px dashed #133743;
@@ -110,7 +110,7 @@ p.value{
 }
 
 .barcode {
-	padding: 20px 20px;
+	padding: 20px 15px;
 	text-align: center;
 }
 

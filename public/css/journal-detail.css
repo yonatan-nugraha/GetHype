@@ -39,13 +39,12 @@ section.journal-detail{
 
 .detail-content h4 {
 	font-size: 16px;
-	margin:35px 0 20px;
+	margin: 15px 0 10px;
 	display: inline-block;
 	margin-right: 10px;
 	display: inline-block;
 	color: #d53f40;
 }
-
 
 .detail-content h5 {
 	color: #999;
@@ -54,6 +53,7 @@ section.journal-detail{
 	margin: 10px;
 	font-size: 12px;
 	margin-bottom: 15px;
+	margin-top: 0;
 }
 
 .journal-detail .box-share{
