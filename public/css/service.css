@@ -12,13 +12,17 @@
 
 .main-banner .caption-banner h1{
 	color: #ebd28b;
+	font-size: 45px;
+	margin-bottom: 20px;
 }
 
 
 .main-banner .caption-banner p{
-	font-size: 16px;
-	margin:5px 0;
+	font-size: 25px;
+	margin: 0 0;
 	color: #fff;
+	font-weight: 300;
+	line-height: 1.2;
 }
 
 .service-list{
@@ -37,8 +41,8 @@
 	float: right;
 	width: 50%;
 	-webkit-transition: all .35s ease-in-out;
-  -moz-transition: all .35s ease-in-out;
-  transition: all .35s ease-in-out;
+    -moz-transition: all .35s ease-in-out;
+    transition: all .35s ease-in-out;
 }
 
 .service-default{
@@ -53,14 +57,22 @@
 .service-content .content h2{
 	margin-bottom: 20px;
 	color: #0f3844;
+	font-size: 44px;
+	font-weight: 300;
+}
+
+.service-content .content p {
+	color: #0f3844;
+	font-size: 14px;
+	font-weight: 300;
 }
 
 .service-content-right{
 	float: left;
 	width: 50%;
 	-webkit-transition: all .35s ease-in-out;
-  -moz-transition: all .35s ease-in-out;
-  transition: all .35s ease-in-out;
+    -moz-transition: all .35s ease-in-out;
+  	transition: all .35s ease-in-out;
 }
 
 .service-content-left{
@@ -77,6 +89,7 @@
 	border-radius: 0;
 	cursor: pointer;
 	margin-top: 100px;
+	font-size: 20px;
 }
 
 .btn-create:hover {
@@ -176,4 +189,43 @@
 		width: 100%;
 		position: static;
 	}
+}
+
+.service-list input, .service-list textarea {
+    border-color: #0f3844;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+}
+
+.service-list ::-webkit-input-placeholder {
+    color: #0f3844;
+}
+
+.service-list :-moz-placeholder {
+    color: #0f3844;
+}
+
+.service-list ::-moz-placeholder {
+    color: #0f3844;
+}
+
+.service-list ::-ms-input-placeholder {
+    color: #0f3844;
+}
+
+.after-effect {
+	position: fixed;
+	display: none;
+	width: 100%;
+	top: 30%;
+	z-index: 9999;
+}
+
+.after-effect-content {
+	background: rgba(15,56,68,0.6);
+	text-align: center;
+	color: #fff;
+	padding:30px;
+	width: 280px;
+	margin: 0 auto;
 }

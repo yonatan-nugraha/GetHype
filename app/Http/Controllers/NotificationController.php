@@ -62,7 +62,7 @@ class NotificationController extends Controller
             }
 
             $order  = Order::find($notif->order_id);
-            if (count($order) == 0 || (count($order) > 0 && $order->order_status == 2)) {
+            if (count($order) == 0) {
                 return;
             }
 
@@ -70,7 +70,7 @@ class NotificationController extends Controller
             $payment_type       = $notif->payment_type;
             $fraud_status       = $notif->fraud_status;
 
-            $order_status   = 1;
+            $order_status   = ($order->order_status == 2) ? 2 : 1;
             $payment_status = 0;
 
             if ($transaction_status == 'cancel') {
@@ -99,7 +99,7 @@ class NotificationController extends Controller
                 $payment_status = 7;
             }
 
-            if (in_array($payment_status, [4,5])) {
+            if (in_array($payment_status, [4,5]) && $order->order_status != 2) {
                 $order_redis    = json_decode(Redis::get('order:'.$order->user_id));
                 
                 if ($order_redis && $order_redis->order_id == $order->id) {

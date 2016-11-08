@@ -69,7 +69,7 @@
 					    		<p>Order Information</p>
 					    	</div>
 					    	<div class="row order-detail-body">
-						    	<div class="col-xs-4">
+						    	<div class="col-xs-4 ticket-details">
 						    		@foreach ($order->order_details as $order_detail)
 						    		<p class="ticket-detail-row">
 						    			<span class="ticket-quantity">{{ $order_detail->quantity }}</span>

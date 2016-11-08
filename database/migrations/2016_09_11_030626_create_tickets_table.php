@@ -19,6 +19,7 @@ class CreateTicketsTable extends Migration
             $table->integer('order_id')->nullable();
             $table->string('code');
             $table->integer('status');
+            $table->integer('is_registered');
             $table->integer('booked_by')->nullable();
             $table->timestamps();
         });

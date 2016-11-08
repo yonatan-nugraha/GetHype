@@ -12,10 +12,10 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container journals">
 
     <div class="row">
-        <div class="col-sm-12 col-md-6">
+        <div class="col-sm-12 col-md-8">
             <div class="form-group journal-search">
                 <div class="input-group">
                   	<div class="input-group-btn">
@@ -48,7 +48,7 @@
                         <img src="{{ url('images/journals/'.$journal->image()) }}" class="img-responsive">
                     </div>
                     <div class="desc">
-                        <p><span class="title">{{ $journal->tag }}</span> | <span class="date">Oct 3 2017</span></p>
+                        <p><span class="title">{{ $journal->tag }}</span> <span class="date">| {{ Carbon\Carbon::parse($journal->created_at)->format('M d, Y') }}</span></p>
                         <p>{{ $journal->title }}</p>
                     </div>
                 </a>

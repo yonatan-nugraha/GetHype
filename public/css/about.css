@@ -1,54 +1,58 @@
-#mainBanner img {
-    width: 100%;
+.about-us {
+    color: #0f3844;
 }
 
-#mainBanner {
+.about-us h4 {
+    margin-bottom: 5px;
+}
+
+.about-us h2 {
+    margin-bottom: 0;
+    font-size: 22px;
+}
+
+.about-us p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.about-us .banner {
     width: 100%;
     height: 400px;
 }
 
-
-#mainBanner .banner-title {
+.about-us .banner-title {
     color: white;
     position: absolute;
     top: 45%;
     width: 100%;
 }
 
-
-
-#mainBanner .banner-title h1{
-    font-size: 18px;
+.about-us .banner-title h1 {
+    font-size: 22px;
     text-align: center;
     width: 80%;
     margin: 0 auto;
     line-height: 24px;
-    font-weight: normal;
+    font-weight: 300;
 }
 
 @media(max-width: 767px){
-    #mainBanner {
+    .about-us .banner {
         height: 280px;
     }
 
-    #mainBanner .banner-title {
+    .about-us .banner-title {
         top: 25%;
     }
 
-    #mainBanner .banner-title h1{
+    .about-us .banner-title h1{
         font-size: 14px;
     }
 }
 
-#mainContent {
+.about-us .content {
     padding-top: 20px;
     padding-bottom: 90px;
-}
-
-#mainContent h1 {
-    margin-bottom: 40px;
-}
-
-#mainContent p {
-    margin-bottom: 20px;
 }

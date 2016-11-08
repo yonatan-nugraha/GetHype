@@ -25,7 +25,7 @@
 }
 
 .event-name {
-	color: #d33e40;
+	color: #f43636;
 	font-size: 30px;
 	font-weight: 500;
 	line-height: 120%;
@@ -62,13 +62,13 @@
 }
 
 .event-time-venue {
-	color: red;
+	color: #f43636;
 	font-size: 20px;
 	font-weight: 200;
 }
 
 .event-date-line {
-    border-color: red;
+    border-color: #f43636;
     border-width: thin;
     width: 30px;
     margin: 10px 0;
@@ -185,9 +185,9 @@
 .investments button {
 	background-color: white;
 	border-radius: 5px;
-	border-color: red;
+	border-color: #f43636;
 	padding: 5px 10px;
-	color: red;
+	color: #f43636;
 	min-width: 100px;
 }
 

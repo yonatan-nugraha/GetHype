@@ -64,8 +64,12 @@ $(document).ready(function() {
     		type: 'POST',
     		data: data,
     		success: function(result) {
+    			console.log(result);
     			if (result.success == 1) {
-	    			$('#'+id+'-message').text(result.message);
+	    			$('.after-effect.message').fadeIn();
+				    setTimeout(function(){
+				        $('.after-effect.message').fadeOut();
+				    }, 3000);
 	    		} else {
 	    			$('#'+id+'-error').text(result.message);
 	    		}
@@ -73,22 +77,22 @@ $(document).ready(function() {
 	    	error: function (result) {
         		var errors = $.parseJSON(result.responseText);
         		if (errors.first_name) {
-	        		$('#'+id+'-first-name').text(errors.first_name[0]);
+	        		$('#'+id+'-first-name-error').text(errors.first_name[0]);
 	        	}
 	        	if (errors.last_name) {
-	        		$('#'+id+'-last-name').text(errors.last_name[0]);
+	        		$('#'+id+'-last-name-error').text(errors.last_name[0]);
 	        	}
         		if (errors.email) {
-	        		$('#'+id+'-email').text(errors.email[0]);
+	        		$('#'+id+'-email-error').text(errors.email[0]);
 	        	}
 	        	if (errors.phone) {
-	        		$('#'+id+'-phone').text(errors.phone[0]);
+	        		$('#'+id+'-phone-error').text(errors.phone[0]);
 	        	}
 	        	if (errors.subject) {
-	        		$('#'+id+'-subject').text(errors.subject[0]);
+	        		$('#'+id+'-subject-error').text(errors.subject[0]);
 	        	}
 	        	if (errors.description) {
-	        		$('#'+id+'-description').text(errors.description[0]);
+	        		$('#'+id+'-description-error').text(errors.description[0]);
 	        	}
 	    	},
 	    	beforeSend: function () {

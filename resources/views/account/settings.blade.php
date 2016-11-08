@@ -187,7 +187,7 @@
 @if (session('profile_updated'))
 <div class="after-effect profile">
     <div class="after-effect-content">
-    Your Profile Has Been Changed
+    Your profile has been changed
     </div>
 </div>
 @endif
@@ -195,7 +195,7 @@
 @if (session('password_updated'))
 <div class="after-effect password">
     <div class="after-effect-content">
-    Password Has Been Changed
+    Password has been changed
     </div>
 </div>
 @endif
