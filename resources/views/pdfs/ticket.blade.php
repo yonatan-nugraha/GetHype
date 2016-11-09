@@ -42,12 +42,12 @@
 
 			<div class="time-order">
 				<small class="label-title">Order Time</small>
-				<p class="value">{{ Carbon\Carbon::parse($order->created_at)->format('g.i A') }}</p>
+				<p class="value">{{ Carbon\Carbon::parse($order->created_at)->format('h.i A') }}</p>
 			</div>
 
 			<div class="payment-status">
-				<small class="label-title">Payment</small>
-				<p class="value">PAID</p>
+				<small class="label-title">Payment Status</small>
+				<p class="value">Paid</p>
 			</div>
 
 			<div class="clearfix"></div>
