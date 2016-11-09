@@ -1,6 +1,9 @@
+@import url(//fonts.googleapis.com/css?family=Open+Sans);
+
 body{
 	width: 650px;
 	margin: 0 auto !important;
+	font-family: 'Open-Sans' !important;
 }
 
 .invoice-header {
