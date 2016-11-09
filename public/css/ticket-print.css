@@ -1,8 +1,13 @@
+@font-face {
+  font-family: 'helveticaneue';
+  src: url('../fonts/helveticaneue.woff') format('truetype');
+}
+
 body{
-	width: 750px;
+	width: 720px;
 	margin: 0 auto;
-	/*background: #f2f3f4;*/
 	padding-top: 30px;
+	font-family: 'helveticaneue' !important;
 }
 
 .left-side,.right-side{

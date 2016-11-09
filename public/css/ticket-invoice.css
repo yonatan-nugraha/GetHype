@@ -1,12 +1,12 @@
 @font-face {
-  font-family: 'MyWebFont';
+  font-family: 'helveticaneue';
   src: url('../fonts/helveticaneue.woff') format('truetype');
 }
 
 body{
 	width: 650px;
 	margin: 0 auto !important;
-	font-family: 'MyWebFont' !important;
+	font-family: 'helveticaneue' !important;
 }
 
 .invoice-header {
