@@ -12,6 +12,7 @@
 
 .main-banner .caption-banner p{
 	font-size: 22px;
+	font-weight: 300;
 	margin:5px 0;
 	color: #fff;
 	line-height: 1.1;
@@ -137,4 +138,8 @@
 
 .journal-search .journal-search-button:hover{
 	background:  #b32c2d;
+}
+
+.journal-search input {
+	font-size: 12px;
 }

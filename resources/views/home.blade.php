@@ -161,7 +161,7 @@
                 </div>
                 @endforeach
             </div>
-            @if (count($events) > 8)
+            @if (count($events) >= 8)
             <div class="view-more">
                 <a href="{{ url('events/search') }}">view more</a>
             </div>

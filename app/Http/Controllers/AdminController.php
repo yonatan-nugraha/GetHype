@@ -585,6 +585,20 @@ class AdminController extends Controller {
     }
 
     /**
+     * Remove an event from the collection.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function removeEventCollection(Request $request)
+    {
+        EventCollection::find($request->event_collection_id)
+            ->delete();
+
+        return redirect('admin/collections');
+    }
+
+    /**
      * Display a list of journals.
      *
      * @param  Request  $request

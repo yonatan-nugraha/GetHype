@@ -12,13 +12,13 @@
 
 .main-banner .caption-banner h1{
 	color: #ebd28b;
-	font-size: 45px;
+	font-size: 43px;
 	margin-bottom: 20px;
 }
 
 
 .main-banner .caption-banner p{
-	font-size: 25px;
+	font-size: 20px;
 	margin: 0 0;
 	color: #fff;
 	font-weight: 300;
@@ -154,6 +154,13 @@
 	display: none;
 }
 
+a.cancel-form{
+	color: #0f3844;
+	float: right;
+	margin-top: 10px;
+	cursor: pointer;
+	font-size: 20px;
+}
 
 @media(max-width: 767px){
 	.main-banner{
@@ -188,6 +195,19 @@
 		float: none;
 		width: 100%;
 		position: static;
+	}
+	.content-form{
+		position: static;
+	}
+}
+
+@media(max-width: 480px) { 
+	.main-banner .caption-banner h1{
+		font-size: 30px;
+	}
+
+	.main-banner .caption-banner p{
+		font-size: 15px;
 	}
 }
 

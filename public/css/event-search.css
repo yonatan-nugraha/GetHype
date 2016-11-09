@@ -1,3 +1,18 @@
+/**************************************/
+/************* Banner Top *************/
+/**************************************/
+
+.banner-slider{
+    width: 100%;
+    height: 400px;
+    background-size: cover;
+}
+
+@media(max-width: 768px){
+    .banner-slider{
+        height: 250px;
+    }
+}
 
 /**************************************/
 /************* Search Bar *************/
@@ -55,6 +70,16 @@
     border-radius: 0;
     background-color: #d33e40;
     border-color: #d33e40;
+}
+
+.search-bar button:hover {
+    background-color: #b32c2d;
+    border-color: #b32c2d;
+}
+
+.search-bar button:active {
+    background-color: #b32c2d !important;
+    border-color: #b32c2d !important;
 }
 
 @media(max-width: 720px){
@@ -214,4 +239,40 @@
 
 .event-box:hover a, .collection-box:hover a{
     text-decoration: none;
+}
+
+/**************************************/
+/*************** Date *****************/
+/**************************************/
+
+input[name="date"] {
+    position: relative;
+    width: 225px; 
+    height: 34px;
+    color: white;
+}
+
+@media(max-width: 720px){
+    input[name="date"] {
+        width: 100%;
+    }
+}
+
+input[name="date"]:before {
+    position: absolute;
+    content: attr(data-date);
+    display: inline-block;
+    color: #0f3844;
+}
+
+input[name="date"]::-webkit-datetime-edit, input[name="date"]::-webkit-inner-spin-button, input[name="date"]::-webkit-clear-button {
+    display: none;
+}
+
+input[name="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 8px;
+    right: 5px;
+    color: black;
+    opacity: 1;
 }

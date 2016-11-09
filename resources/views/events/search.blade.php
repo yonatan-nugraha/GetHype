@@ -18,7 +18,7 @@
                 @foreach($carousel_banners as $carousel_banner)
                 <div class="item @if ($loop->index == 0) active @endif">
                     <a href="{{ $carousel_banner->link_url }}">
-                        <img src="{{ asset('images/banners/'.$carousel_banner->image()) }}" alt="...">
+                        <div class="banner-slider" style="background: url('{{ asset('images/banners/'.$carousel_banner->image()) }}') center center;"></div>
                     </a>
                 </div>
                 @endforeach
@@ -133,7 +133,7 @@
                             <div class="event-caption-head">
                                 <span class="event-name">{{ $event->name }}</span>
                             </div>
-                            <span class="event-time clearfix">{{ Carbon\Carbon::parse($event->started_at)->format('l, M d, Y | g.i A') }}</span>
+                            <span class="event-time clearfix">{{ Carbon\Carbon::parse($event->started_at)->format('l, M d, Y | h.i A') }}</span>
                             <p class="event-price">
                                 @if ($event->min_price == 0 && $event->max_price == 0) Free
                                 @elseif ($event->min_price == 0 && $event->max_price > 0) IDR {{ $event->max_price/1000 . 'K' }} 

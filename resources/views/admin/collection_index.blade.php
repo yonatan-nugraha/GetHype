@@ -38,7 +38,9 @@
                                 <td>
                                     <ul>
                                         @foreach ($collection->event_collections as $event_collection)
-                                        <li>{{ $event_collection->event->name }}</li>
+                                        <li>{{ $event_collection->event->name }}
+                                            <a href="{{ url('collections/remove-event?event_collection_id='.$event_collection->id) }}"><button type="button" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove text-red"></i></button></a>
+                                        </li>
                                         @endforeach
                                     </ul>
                                 </td>

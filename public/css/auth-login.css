@@ -54,6 +54,11 @@
     border-color: #b32c2d;
 }
 
+.login button:active {
+    background-color: #b32c2d !important;
+    border-color: #b32c2d !important;
+}
+
 .login hr {
     height: 2px;
     border-top: 1px solid #0f3844;

@@ -2,9 +2,18 @@
 	width: 100%;
 }
 
+.image-right h3 {
+	font-weight: 300;
+	padding: 0 20px;
+}
+
 .image-right-list{
 	float: left;
 	width: 50%;
+	position: relative;
+	-webkit-transition: all .35s ease-in-out;
+  	-moz-transition: all .35s ease-in-out;
+	transition: all .35s ease-in-out;
 }
 
 .collection-content{
@@ -14,13 +23,66 @@
 
 .collection-content h1{
 	font-size: 50px;
-	line-height: 65px;
+	line-height: 1.2;
 	margin-bottom: 30px;
 	color: #0f3844;
+}
+
+.image-right-list:hover .hover-button{
+	opacity: 1;
+}
+
+.hover-button{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	z-index: 9;
+	top: 0;
+	padding-top: 30px;
+	color: #fff;
+	text-align: center;
+	background: rgba(0,0,0,0.3);
+	-webkit-transition: all .35s ease-in-out;
+  	-moz-transition: all .35s ease-in-out;
+	transition: all .35s ease-in-out;
+}
+
+.hover-button .btn-hover{
+	border:1px solid #fff;
+	color: #fff;
+	border-radius: 0;
+}
+
+.hover-button .btn-hover:hover{
+	background: rgba(0,0,0,0.5);
+	-webkit-transition: all .35s ease-in-out;
+  	-moz-transition: all .35s ease-in-out;
+	transition: all .35s ease-in-out;
 }
 
 @media(max-width: 767px){
 	.collection-content{
 		margin-top: 20px;
+	}
+}
+
+@media(max-width: 480px){
+	.collection-content{
+		margin-top: 20px;
+	}
+
+	.image-right h3 {
+		margin-top: 0;
+		font-size: 12px;
+		padding: 0 0;
+	}
+
+	.image-right p {
+		font-size: 10px;
+	}
+
+	.btn-hover {
+		font-size: 10px;
 	}
 }

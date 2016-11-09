@@ -1,38 +1,4 @@
 $(document).ready(function() {
-	//subscribe
-	$('.subscribe-submit').click(function() {
-		var email = $('.subscribe-email').val();
-		
-		$.ajaxSetup({
-		    headers: {
-		        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('description')
-		    }
-		});
-
-    	$.ajax({
-    		url: '/subscribers/subscribe', 
-    		type: 'POST',
-    		data: { email: email },
-    		success: function(result) {
-    			if (result.success == 1) {
-	    			$('.subscribe-message').text(result.message);
-	    		}
-	    	},
-	    	error: function (result) {
-        		var errors = $.parseJSON(result.responseText);
-        		if (errors.email) {
-	        		$('.subscribe-message').text(errors.email[0]);
-	        	}
-	    	},
-	    	beforeSend: function () {
-	    		$('.subscribe-submit').addClass('disabled');
-	    	},
-	    	complete: function () {
-	    		$('.subscribe-submit').removeClass('disabled');
-	    	}
-	    });
-	});
-
 	//message
 	$('.message-submit').click(function() {
 		var id = $(this).attr('id');
@@ -119,17 +85,46 @@ $(document).ready(function() {
 
 	//services
 	$('.btn-create').on('click',function(){
-    if($(this).closest('.service-content').hasClass('service-content-right')){
-        $(this).closest('.service-list').find('.service-img').css('margin-left','-30%');
-        $(this).closest('.service-list').find('.service-content').css('width','80%');
-        $(this).closest('.content').find('.content-default').hide();
-        $(this).closest('.content').find('.content-form').show();
-    }
-    else{
-        $(this).closest('.service-list').find('.service-img').css('margin-right','-30%');
-        $(this).closest('.service-list').find('.service-content').css('width','80%');
-        $(this).closest('.content').find('.content-default').hide();
-        $(this).closest('.content').find('.content-form').show();            }
+        if($(window).width() > 767){
+            if($(this).closest('.service-content').hasClass('service-content-right')){
+                $(this).closest('.service-list').find('.service-img').css('margin-left','-30%');
+                $(this).closest('.service-list').find('.service-content').css('width','80%');
+                $(this).closest('.content').find('.content-default').hide();
+                $(this).closest('.content').find('.content-form').show();
+            }
+            else{
+                $(this).closest('.service-list').find('.service-img').css('margin-right','-30%');
+                $(this).closest('.service-list').find('.service-content').css('width','80%');
+                $(this).closest('.content').find('.content-default').hide();
+                $(this).closest('.content').find('.content-form').show();
+            }
+        }
+        else{
+            $(this).closest('.content').find('.content-default').hide();
+            $(this).closest('.content').find('.content-form').show();
+        }
+    });
+
+
+    $('.cancel-form').on('click',function(){
+        if($(window).width() > 767){
+            if($(this).closest('.service-content').hasClass('service-content-right')){
+                $(this).closest('.service-list').find('.service-img').css('margin-left','auto');
+                $(this).closest('.service-list').find('.service-content').css('width','50%');
+                $(this).closest('.content').find('.content-default').show();
+                $(this).closest('.content').find('.content-form').hide();
+            }
+            else{
+                $(this).closest('.service-list').find('.service-img').css('margin-right','auto');
+                $(this).closest('.service-list').find('.service-content').css('width','50%');
+                $(this).closest('.content').find('.content-default').show();
+                $(this).closest('.content').find('.content-form').hide();
+            }
+        }
+        else{
+            $(this).closest('.content').find('.content-default').show();
+            $(this).closest('.content').find('.content-form').hide();
+        }
     });
 
 	//help

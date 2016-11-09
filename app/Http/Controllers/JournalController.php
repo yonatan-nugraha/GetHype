@@ -20,9 +20,23 @@ class JournalController extends Controller
         // $this->middleware('auth');
     }
 
-    public function showList() 
+    public function showList(Request $request) 
     {
-        $journals = Journal::paginate(12);
+        $archive = $request->archive;
+        $tag     = $request->tag;
+
+        $journals = Journal::where('status', 1)
+            ->orderBy('created_at', 'desc');
+
+        if ($archive && $archive != 'all') {
+            $journals->whereRaw('month(created_at) = ?', [$archive]);
+        }
+
+        if ($tag) {
+            $journals->where('tag', 'like', '%'.$tag.'%');
+        }
+
+        $journals = $journals->paginate(12);
 
     	return view('journals.list', [
             'journals' => $journals
