@@ -1,9 +1,12 @@
-@import url(//fonts.googleapis.com/css?family=Open+Sans);
+@font-face {
+  font-family: 'MyWebFont';
+  src: url('../fonts/helveticaneue.woff') format('truetype');
+}
 
 body{
 	width: 650px;
 	margin: 0 auto !important;
-	font-family: 'Open-Sans' !important;
+	font-family: 'MyWebFont' !important;
 }
 
 .invoice-header {
