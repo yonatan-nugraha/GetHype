@@ -30,6 +30,7 @@
                 </div>
 
                 <div class="content-form">
+                    <a class="cancel-form" ><i class="glyphicon glyphicon-remove"></i></a>
                     <h2>Advertise your events with us</h2>
                     <div class="row">
                         <div class="form-group col-xs-12 col-sm-5 col-md-5">
@@ -82,6 +83,7 @@
                 </div>
 
                 <div class="content-form">
+                    <a class="cancel-form" ><i class="glyphicon glyphicon-remove"></i></a>
                     <h2>Free event posting & integrate a ticketing system</h2>
                     <div class="row">
                         <div class="form-group col-xs-12 col-sm-5 col-md-5">
@@ -133,7 +135,8 @@
                     </div>
                 </div>
 
-                <div class="content-form">
+                <div class="content-form"> 
+                    <a class="cancel-form" ><i class="glyphicon glyphicon-remove"></i></a>
                     <h2>How to collaborate with our event planner?</h2>
                     <div class="row">
                         <div class="form-group col-xs-12 col-sm-5 col-md-5">
@@ -186,6 +189,7 @@
                 </div>
 
                 <div class="content-form">
+                    <a class="cancel-form" ><i class="glyphicon glyphicon-remove"></i></a>
                     <h2>Write a journal</h2>
                     <div class="row">
                         <div class="form-group col-xs-12 col-sm-5 col-md-5">

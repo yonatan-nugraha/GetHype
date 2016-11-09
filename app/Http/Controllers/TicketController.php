@@ -32,6 +32,7 @@ class TicketController extends Controller
      */
     public function index() {
     	$orders = auth()->user()->orders()
+            ->where('order_status', 2)
             ->orderBy('created_at', 'desc')
             ->get();
 

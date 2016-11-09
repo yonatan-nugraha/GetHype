@@ -79,8 +79,9 @@
 
                 <div class="box-subscribe">
                     <h3>Subscribe</h3>
-                    <input type="text" class="form-control" placeholder="Email Address">
-                    <button class="btn btn-subscribe">Submit</button>
+                    <input type="text" class="form-control" id="journal-subscribe-email" placeholder="Email Address">
+                    <button class="btn btn-subscribe" id="journal-subscribe-submit">Submit</button>
+                    <p id="journal-subscribe-message"></p>
                     <div class="clearfix"></div>
                 </div>
             </div>
@@ -88,4 +89,8 @@
         
     </div>
 </section>
+@endsection
+
+@section('scripts')
+<script type="text/javascript" src="{{ asset('js/journal.js') }}"></script>
 @endsection

@@ -209,7 +209,7 @@ class EventController extends Controller
             }
         }
 
-        $events = $events->paginate(2);
+        $events = $events->paginate(16);
         $events->setPath('search?category='.$category.'&event_type='.$event_type.'&location='.$location.'&date='.$date.'&price='.$price);
 
         $carousel_banners = Cache::remember('carousel_banners_search', 24*60, function() {
@@ -222,10 +222,22 @@ class EventController extends Controller
                 ->get();
         });
 
+        $categories = Cache::remember('categories', 24*60, function() {
+            return Category::where('status', 1)
+                ->orderBy('weight', 'desc')
+                ->get();
+        });
+
+        $event_types = Cache::remember('event_types', 24*60, function() {
+            return EventType::where('status', 1)
+                ->orderBy('weight', 'desc')
+                ->get();
+        });
+
         return view('events/search', [
             'events'        => $events,
-            'categories'    => Category::all(),
-            'event_types'   => EventType::all(),
+            'categories'    => $categories,
+            'event_types'   => $event_types,
             'locations'     => ['Jakarta', 'Bandung', 'Surabaya', 'Bali'],
             'carousel_banners' => $carousel_banners
         ]);

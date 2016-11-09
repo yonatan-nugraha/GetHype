@@ -116,6 +116,16 @@
     border-color: #d33e40;
 }
 
+.search-bar button:hover {
+    background-color: #b32c2d;
+    border-color: #b32c2d;
+}
+
+.search-bar button:active {
+    background-color: #b32c2d !important;
+    border-color: #b32c2d !important;
+}
+
 @media(max-width: 720px){
     .search-bar select, .search-bar input{
         float: none;
@@ -135,11 +145,6 @@
     font-weight: 700;
     font-size: 25px;
     line-height: 120%;
-}
-
-.search-bar button:hover {
-    background-color: #d33e40;
-    border-color: #d33e40;
 }
 
 ::-webkit-input-placeholder {

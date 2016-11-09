@@ -100,8 +100,7 @@ class User extends Authenticatable
      */
     public function orders()
     {
-        return $this->hasMany(Order::class)
-            ->where('order_status', 2);
+        return $this->hasMany(Order::class);
     }
 
     /**

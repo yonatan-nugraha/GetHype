@@ -112,6 +112,7 @@ Route::group(['prefix' => 'events'], function () {
 //collections
 Route::group(['prefix' => 'collections'], function () {
 	Route::get('add-event', 'AdminController@addEventCollection');
+	Route::get('remove-event', 'AdminController@removeEventCollection');
 	Route::post('', 'AdminController@storeCollection');
 	Route::patch('{collection}', 'AdminController@updateCollection');
 	Route::patch('{collection}/update-status-collection', 'AdminController@updateStatusCollection');

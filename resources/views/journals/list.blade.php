@@ -16,22 +16,34 @@
 
     <div class="row">
         <div class="col-sm-12 col-md-8">
-            <div class="form-group journal-search">
-                <div class="input-group">
-                  	<div class="input-group-btn">
-                    	<div class="select">
-                            <select class="form-control">
-                                <option value="">Archive</option>
-                                <option value="">Archive</option>
-                                <option value="">Archive</option>
-                            </select>
-                            <span class="caret"></span>
+            <form action="{{ url('journals') }}" method="GET">
+                <div class="form-group journal-search">
+                    <div class="input-group">
+                      	<div class="input-group-btn">
+                        	<div class="select">
+                                <select class="form-control" name="archive">
+                                    <option value="all">Archive</option>
+                                    <option value="12">December</option>
+                                    <option value="11">November</option>
+                                    <option value="10">October</option>
+                                    <option value="9">September</option>
+                                    <option value="8">August</option>
+                                    <option value="7">July</option>
+                                    <option value="6">June</option>
+                                    <option value="5">May</option>
+                                    <option value="4">April</option>
+                                    <option value="3">March</option>
+                                    <option value="2">February</option>
+                                    <option value="1">January</option>
+                                </select>
+                                <span class="caret"></span>
+                            </div>
                         </div>
+                      	<input type="text" class="form-control journal-search-input" name="tag">
+                      	<button class="btn btn-primary journal-search-button">Search</button>
                     </div>
-                  	<input type="text" class="form-control journal-search-input" name="tag">
-                  	<button class="btn btn-primary journal-search-button">Search</button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 

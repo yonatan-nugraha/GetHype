@@ -161,3 +161,9 @@ section.journal-detail{
 .journal-detail ::-ms-input-placeholder {
     color: #0f3844;
 }
+
+#journal-subscribe-message {
+	margin-top: 5px;
+	color: red;
+	font-size: 12px;
+}

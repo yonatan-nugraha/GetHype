@@ -64,6 +64,11 @@
     border-color: #b32c2d;
 }
 
+.register button:active {
+    background-color: #b32c2d !important;
+    border-color: #b32c2d !important;
+}
+
 .register hr {
     height: 2px;
     border-top: 1px solid #0f3844;
