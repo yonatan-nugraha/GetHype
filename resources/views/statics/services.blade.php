@@ -21,17 +21,17 @@
         <div class="service-content service-content-right">
             <div class="content">
                 <div class="content-default">
-                    <h2>Advertise your events with us</h2>
-                    <p>Advertise your Events in Gethype, and grab a chance for having a bigger and better market with us.</p>
+                    <h2>Advertise your event with us</h2>
+                    <p>Advertise your Event in Gethype, by posting them just for free here. You can also design your own ticketing system at ease. Grab a chance for having a bigger and better market with us!</p>
                 
                     <div class="content-button">
-                        <a class="btn-create btn btn-default">Create Event</a>
+                        <a class="btn-create btn btn-default">Start Now</a>
                     </div>
                 </div>
 
                 <div class="content-form">
                     <a class="cancel-form" ><i class="glyphicon glyphicon-remove"></i></a>
-                    <h2>Advertise your events with us</h2>
+                    <h2>Advertise your event with us</h2>
                     <div class="row">
                         <div class="form-group col-xs-12 col-sm-5 col-md-5">
                             <input class="form-control" type="text" name="advertise_first_name" placeholder="First name">
@@ -74,17 +74,17 @@
         <div class="service-content service-content-left">
             <div class="content">
                 <div class="content-default">
-                    <h2>Free event posting & integrate a ticketing system</h2>
-                    <p>What are you waiting for? Promote your Event with Gethype and let the hype begin as soon as possible in your hand.</p>
+                    <h2>Promote your event</h2>
+                    <p>Double your chance to attract more traffic and awareness by getting featured on our front banner and social media. What are you waiting for?</p>
                 
                     <div class="content-button">
-                        <a class="btn-create btn btn-default">Create Event</a>
+                        <a class="btn-create btn btn-default">Start Now</a>
                     </div>
                 </div>
 
                 <div class="content-form">
                     <a class="cancel-form" ><i class="glyphicon glyphicon-remove"></i></a>
-                    <h2>Free event posting & integrate a ticketing system</h2>
+                    <h2>Promote your event</h2>
                     <div class="row">
                         <div class="form-group col-xs-12 col-sm-5 col-md-5">
                             <input class="form-control" type="text" name="posting_first_name" placeholder="First name">
@@ -127,17 +127,17 @@
         <div class="service-content service-content-right">
             <div class="content">
                 <div class="content-default">
-                    <h2>How to collaborate with our event planner?</h2>
-                    <p>Let our event expert make your event to be more professional, efficient, and exciting in once. Our event expert in Gethype will help you to plan & organize your event in a more professional and efficient way.</p>
+                    <h2>Consult with our event planner</h2>
+                    <p>The key of success of an event lies on how well you prepare for it. Let our expert help you to plan & organize your event to be more professional, efficient, and exciting at once.</p>
                 
                     <div class="content-button">
-                        <a class="btn-create btn btn-default">Create Event</a>
+                        <a class="btn-create btn btn-default">Start Now</a>
                     </div>
                 </div>
 
                 <div class="content-form"> 
                     <a class="cancel-form" ><i class="glyphicon glyphicon-remove"></i></a>
-                    <h2>How to collaborate with our event planner?</h2>
+                    <h2>Consult with our event planner</h2>
                     <div class="row">
                         <div class="form-group col-xs-12 col-sm-5 col-md-5">
                             <input class="form-control" type="text" name="planner_first_name" placeholder="First name">
@@ -180,17 +180,17 @@
         <div class="service-content service-content-left">
             <div class="content">
                 <div class="content-default">
-                    <h2>Write a journal</h2>
-                    <p>Have something in mind about some fun and exiciting events? Write a journal in Gethype and tell the world about the hype.</p>
+                    <h2>Write a journal of your event</h2>
+                    <p>Ready to make your event to be more memorable? We will write a journal and publish it on our website.</p>
                 
                     <div class="content-button">
-                        <a class="btn-create btn btn-default">Create Event</a>
+                        <a class="btn-create btn btn-default">Start Now</a>
                     </div>
                 </div>
 
                 <div class="content-form">
                     <a class="cancel-form" ><i class="glyphicon glyphicon-remove"></i></a>
-                    <h2>Write a journal</h2>
+                    <h2>Write a journal of your event</h2>
                     <div class="row">
                         <div class="form-group col-xs-12 col-sm-5 col-md-5">
                             <input class="form-control" type="text" name="journal_first_name" value="" placeholder="First name">

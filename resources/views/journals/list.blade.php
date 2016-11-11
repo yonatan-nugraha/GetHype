@@ -7,7 +7,7 @@
 @section('content')
 <div class="col-md-12 no-padding main-banner" style="background:url('{{ asset('images/journals/banner-journal.jpg') }}') center center no-repeat;">
     <div class="caption-banner">
-        <p>We are inspiring one another by stories that we write in our journal.</p>
+        <p>We inspire one another by stories that we write in our journal.</p>
         <p>We bring you the joy of a blissful events that happen around us.</p>
     </div>
 </div>
