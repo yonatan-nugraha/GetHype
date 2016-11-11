@@ -10,13 +10,13 @@
         <div class="col-xs-12">
             <div class="help-list">
                 <div class="col-sm-5 help-list-button">
-                    I want to buy ticket <span class="caret pull-right"></span>
+                    I want to buy a ticket <span class="caret pull-right"></span>
                     <div class="clearfix"></div>
                 </div>
                 <div class="help-list-content">
                     <div class="help-list-content-list">
                         <h4 class="help-list-content-title">
-                            1. How to buy event tickets in Gethype?
+                            1. How to buy a ticket in Gethype?
                         </h4>
                         <div class="help-list-content-text">
                             <ul>
